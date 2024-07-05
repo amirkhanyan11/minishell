@@ -54,7 +54,7 @@ push :
 	make fclean
 	git add .
 	git commit -m "."
-	git push origin master
+	git push master
 
 
 .PHONY : all clean fclean re
