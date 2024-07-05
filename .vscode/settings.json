@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"iterator": "cpp",
+		"__split_buffer": "c",
+		"list": "c",
+		"list.h": "c"
+	}
+}
