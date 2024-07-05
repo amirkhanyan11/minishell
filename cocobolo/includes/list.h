@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/05 22:26:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/05 22:44:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,10 @@
 
 #include <cocobolo.h>
 typedef struct s_node   t_node;
-typedef e_dir t_dir;
 typedef struct s_list   t_list;
 typedef int 			t_list_value;
 typedef void (*t_list_Upredicate) (t_node * const);
 
-enum e_dir
-{
-	forward,
-	reverse
-};
 
 struct s_list
 {
@@ -41,9 +35,12 @@ struct s_node
 
 void 	push_front(t_list *const list, const t_list_value x);
 void 	push_back(t_list *const list, const t_list_value x);
+void 	pop_front(t_list *const list);
+void 	pop_back(t_list *const list);
 t_list  *make_list();
 t_node  *make_node(const t_list_value x);
 void 	print_list(t_list *list);
+void 	list_clear(t_list *list);
 
 //traverse
 void 	preorder_traverse (t_node *head, t_list_Upredicate f);

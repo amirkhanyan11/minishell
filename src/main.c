@@ -8,14 +8,9 @@ int main()
 
 	for (int i = 1; i <= 10; i++)
 	{
-		push_front(list, i);
+		push_back(list, i);
 	}
-
-	// push_front(list, 1);
-	// push_front(list, 2);
-	// push_front(list, 3);
-
 	print_list(list);
-
+	list_clear(list);
 	return 0;
 }
