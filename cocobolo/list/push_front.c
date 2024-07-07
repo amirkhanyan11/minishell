@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:01:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/05 22:23:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 14:27:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void push_front(t_list *const list, const t_list_value x)
+void __single__push_front__(t_list *const list, const t_list_value x)
 {
 	if (!list) return;
 

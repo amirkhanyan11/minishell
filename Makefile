@@ -3,7 +3,7 @@ COCOBOLO = ./cocobolo/
 COCOBOLOLIB = $(COCOBOLO)cocobolo.a
 
 SRCSPATH = ./src/
-INCPATH = ./includes/ $(COCOBOLO)includes/
+INCPATH = ./includes/ $(COCOBOLO)cocobolo_includes/
 OBJSPATH = ./objs/
 
 SRCS = $(wildcard $(SRCSPATH)*.c)
@@ -56,6 +56,8 @@ push :
 	git commit -m "."
 	git push master
 
+leaks : $(NAME)
+	valgrind --leak-check=yes ./$(NAME)
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re leaks
 

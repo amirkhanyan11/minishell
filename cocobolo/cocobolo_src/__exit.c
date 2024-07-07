@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_list.c                                        :+:      :+:    :+:   */
+/*   __exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:12:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/04/27 18:02:29 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 13:42:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include <cocobolo.h>
 
-t_list * __attribute__((malloc)) make_list()
+void	__attribute__((noreturn))	__exit(const char *const err)
 {
-	t_list *list = __malloc(sizeof(t_list));
-
-	list->head = NULL;
-	list->tail = NULL;
-
-	return list;
+	if (NULL != err)
+	{
+		printf(RED);
+		printf("\n./minishell: %s\n\n", err);
+		printf(RESET);
+	}
+	exit(EXIT_FAILURE);
 }

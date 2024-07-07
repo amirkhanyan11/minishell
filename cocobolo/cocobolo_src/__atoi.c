@@ -33,11 +33,13 @@ static long long	_process(long long res, char const c)
 	return ((10 * res) + (c - '0'));
 }
 
-t_optional	__atoi(char const *str)
+t_optional	__attribute__((nonnull)) __atoi(char const *str)
 {
 	long long	num;
 	short		sign;
 	t_optional	res;
+
+	if (NULL == str) __exit("nullptr passed to __atoi");
 
 	num = 0;
 	sign = 1;

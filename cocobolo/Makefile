@@ -1,8 +1,8 @@
 NAME = cocobolo.a
 ROOT = ./
 OBJSPATH = ./objs/
-SRCSPATH = ./src/
-INCPATH = ./includes/
+SRCSPATH = ./cocobolo_src/
+INCPATH = ./cocobolo_includes/
 
 END = \x1b[0m
 GREEN = \x1b[33;1m

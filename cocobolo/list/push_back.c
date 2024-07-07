@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:58:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/05 22:20:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 14:28:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void push_back(t_list *const list, const t_list_value x)
+void __single__push_back__(t_list *const list, const t_list_value x)
 {
 	if (!list) return;
 
@@ -26,3 +26,15 @@ void push_back(t_list *const list, const t_list_value x)
 	
 	list->tail = node;
 }
+
+// void push_back(t_list *const list, const t_list_value x, ...)
+// {
+// 	if (NULL == list) __exit("nullptr passed to push_back");
+	
+// 	va_list args;
+// 	va_start(args, x);
+
+// 	__va__push_back__(list, x, args, NULL);
+
+// 	va_end(args);
+// }

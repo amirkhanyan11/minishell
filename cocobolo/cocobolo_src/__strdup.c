@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_list.c                                        :+:      :+:    :+:   */
+/*   __strdup.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:12:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 13:15:52 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 14:11:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include <cocobolo.h>
 
-t_list * __attribute__((malloc)) make_list()
+char	* __attribute__((nonnull)) __strdup(const char *src)
 {
-	t_list *list = __malloc(sizeof(t_list));
+	char	*dest;
+	size_t	i;
 
-	list->head = NULL;
-	list->tail = NULL;
+	// if (NULL == src) __exit("nullptr passed to __strdup");
 
-	return list;
+	dest = __malloc(__strlen(src) + 1);
+
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

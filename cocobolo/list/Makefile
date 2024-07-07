@@ -1,6 +1,6 @@
 ROOT = ./
 OBJSPATH = ../objs/
-INCPATH = ../includes/
+INCPATH = ../cocobolo_includes/
 
 
 SRCS = $(wildcard $(ROOT)*.c)

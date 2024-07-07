@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_list.c                                        :+:      :+:    :+:   */
+/*   va_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:12:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 14:28:18 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 14:31:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list * __attribute__((malloc)) make_list()
+void __attribute__((sentinel))  __va_push__(f_push f, t_list *const list, ...)
 {
-	t_list *list = __malloc(sizeof(t_list));
+	va_list args;
+	va_start(args, list);
 
-	list->head = NULL;
-	list->tail = NULL;
+	char *arg = va_arg(args, char *);
 
-	return list;
+	while (NULL != arg)
+	{
+		f(list, arg);
+		arg = va_arg(args, char *);
+	}
+
+	va_end(args);
 }

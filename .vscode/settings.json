@@ -3,6 +3,7 @@
 		"iterator": "cpp",
 		"__split_buffer": "c",
 		"list": "c",
-		"list.h": "c"
+		"list.h": "c",
+		"cocobolo.h": "c"
 	}
 }
