@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 13:51:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 14:44:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 void		__exit(char const *const err) __attribute__((noreturn));
 t_optional	__atoi(char const *str) __attribute__((nonnull));
 void		*__malloc(size_t n) __attribute__((malloc));
-size_t	    __strlen(const char *str) __attribute__((nonnull));
-char	    *__strdup(const char *src) __attribute__((nonnull));
+size_t	    __strlen(const char *str);
+char	    *__strdup(const char *src);
 
 #endif // COCOBOLO_H

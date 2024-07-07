@@ -48,7 +48,7 @@ push :
 	make fclean
 	git add .
 	git commit -m "updated cocobolo library"
-	git push master
+	git push
 
 .PHONY : all clean fclean re push
 

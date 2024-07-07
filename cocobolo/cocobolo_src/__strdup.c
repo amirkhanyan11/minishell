@@ -6,18 +6,18 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:15:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:11:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 14:46:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-char	* __attribute__((nonnull)) __strdup(const char *src)
+char	*__strdup(const char *src)
 {
 	char	*dest;
 	size_t	i;
 
-	// if (NULL == src) __exit("nullptr passed to __strdup");
+	if (NULL == src) __exit("nullptr passed to __strdup");
 
 	dest = __malloc(__strlen(src) + 1);
 
