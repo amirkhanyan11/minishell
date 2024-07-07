@@ -54,7 +54,7 @@ push :
 	make fclean
 	git add .
 	git commit -m "."
-	git push master
+	git push
 
 leaks : $(NAME)
 	valgrind --leak-check=yes ./$(NAME)
