@@ -21,7 +21,7 @@ SRCS = $(foreach L, ${SRCSPATH}, $(wildcard ${L}*.c))
 OBJS =  $(foreach L, ${SRCSPATH}, $(patsubst ${L}%.c, ${OBJSPATH}%.o, ${SRCS})) 
 
 CC = gcc
-CFLAGS = $(foreach H, ${INCPATH}, -I${H}) -Wall -Wextra -Werror
+CFLAGS = $(foreach H, ${INCPATH}, -I${H}) #-Wall -Wextra -Werror
 
 all : ${OBJSPATH} ${NAME}
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 23:06:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/08 00:42:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_node   t_node;
 typedef struct s_list   t_list;
 typedef char * 		 	t_list_value;
 typedef void (*t_list_Upredicate) (t_node * const);
+typedef bool (*t_list_Bpredicate_val)(t_list_value, t_list_value);
 typedef void (*f_push) (t_list *const, const t_list_value);
 
 
@@ -34,8 +35,8 @@ struct s_node
 	t_node *prev;
 };
 
-#define push_back(list, ...)  __unwrapped_push__(__single__push_back__, list, __VA_ARGS__, NULL)
-#define push_front(list, ...)  __unwrapped_push__(__single__push_front__, list, __VA_ARGS__, NULL)
+# define push_back(list, ...)  __unwrapped_push__(__single__push_back__, list, __VA_ARGS__, NULL)
+# define push_front(list, ...)  __unwrapped_push__(__single__push_front__, list, __VA_ARGS__, NULL)
 void __attribute__((sentinel))  __unwrapped_push__(f_push f, t_list *const list, ...);
 
 void __single__push_back__(t_list *const list, const t_list_value x);
@@ -55,6 +56,8 @@ t_node  *make_node(const t_list_value x) __attribute__((malloc));
 void 	print_list(t_list *list);
 void 	print_list_enumerate(t_list *list);
 
+t_node *find(t_list *list, t_list_value target, t_list_Bpredicate_val cmp);
+
 // assumes each node's value is a malloced string
 void 	list_clear(t_list **list);
 
@@ -64,5 +67,9 @@ void 	reverse_preorder_traverse (t_node *head, t_list_Upredicate f);
 
 void 	postorder_traverse (t_node *head, t_list_Upredicate f);
 void 	reverse_postorder_traverse (t_node *head, t_list_Upredicate f);
+
+// predicates
+bool list_value_same(t_list_value lhv, t_list_value rhv);
+bool list_value_contains(t_list_value lhv, t_list_value rhv);
 
 #endif // LIST_H
