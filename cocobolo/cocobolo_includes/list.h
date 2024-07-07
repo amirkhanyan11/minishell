@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:33:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 16:50:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ struct s_node
 	t_node *prev;
 };
 
-#define push_back(list, ...)  __va_push__(__single__push_back__, list, __VA_ARGS__, NULL)
-#define push_front(list, ...)  __va_push__(__single__push_front__, list, __VA_ARGS__, NULL)
-void __attribute__((sentinel))  __va_push__(f_push f, t_list *const list, ...);
+#define push_back(list, ...)  __unwrapped_push__(__single__push_back__, list, __VA_ARGS__, NULL)
+#define push_front(list, ...)  __unwrapped_push__(__single__push_front__, list, __VA_ARGS__, NULL)
+void __attribute__((sentinel))  __unwrapped_push__(f_push f, t_list *const list, ...);
 
 void __single__push_back__(t_list *const list, const t_list_value x);
 void __single__push_front__(t_list *const list, const t_list_value x);
@@ -49,8 +49,11 @@ void 	pop_front(t_list *const list);
 void 	pop_back(t_list *const list);
 t_list  *make_list() __attribute__((malloc));
 t_node  *make_node(const t_list_value x) __attribute__((malloc));
-void 	print_list(t_list *list) __attribute__((nonnull));
-void 	list_clear(t_list **list) __attribute__((nonnull));
+void 	print_list(t_list *list);
+void 	print_list_enumerate(t_list *list);
+
+// assumes each node's value is a malloced string
+void 	list_clear(t_list **list);
 
 //traverse
 void 	preorder_traverse (t_node *head, t_list_Upredicate f);

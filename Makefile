@@ -22,7 +22,8 @@ RED = \x1b[1;31m
 CC = gcc
 DEBUG = -fsanitize=thread
 WFLAGS = -Wall -Wextra -Werror
-CFLAGS =  $(foreach H,$(INCPATH),-I$(H)) #$(WFLAGS) #$(DEBUG)
+CFLAGS = $(foreach H,$(INCPATH),-I$(H)) #$(WFLAGS) #$(DEBUG)
+READLINELIB = -L/usr/lib -lreadline
 
 all : $(OBJSPATH) $(NAME)
 
@@ -30,7 +31,7 @@ $(OBJSPATH) :
 	@mkdir -p objs
 
 $(NAME) : $(COCOBOLOLIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(COCOBOLOLIB)  -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(COCOBOLOLIB) $(READLINELIB)  -o $@
 	@echo "$(GREEN) program compiled! $(END)"
 
 $(OBJSPATH)%.o : $(SRCSPATH)%.c Makefile

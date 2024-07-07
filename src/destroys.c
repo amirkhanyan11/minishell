@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:42:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:33:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 16:34:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "minishell.h"
 
-static void __pop__(t_node * const head)
+void __t_shell__(t_shell **shellptr)
 {
-	free(head->val);
-	free (head);
-}
+    if (NULL == shellptr) return;
+    
+    t_shell *shell = *shellptr;
+    
+    if (NULL == shell) return;
 
-void list_clear(t_list **list)
-{
-	if (!list || !(*list)) return;
-	
-	postorder_traverse((*list)->head, __pop__);
-	free(*list);
-	*list = NULL;
+    list_clear(&shell->history);
+
+    free(shell);
+
+    *shellptr = NULL;
 }

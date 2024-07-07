@@ -1,5 +1,5 @@
 ROOT = ./
-OBJSPATH = ../objs/
+OBJSPATH = ../cocobolo_objs/
 INCPATH = ../cocobolo_includes/
 
 

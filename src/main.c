@@ -1,19 +1,23 @@
 #include <stdio.h>
-#include <cocobolo.h>
+#include "minishell.h"
 
 int main()
 {
-	t_list *list = make_list();
+	t_shell *shell = make_shell();
+
+	while (true)
+	{
+		display_prompt();
+		char * line = readline(NULL);
+
+		if (__strcmp(line, "pwd")) pwd(shell);
+
+		else if (__strcmp(line, "history")) display_history(shell);
+
+		push_back(shell->history, line);
+	}
 	
-	size_t size = pathconf(".", _PC_PATH_MAX);
 
-	char some[size];
-
-	getcwd(some, size);
-
-	push_back(list, some);
-
-	print_list(list);
-	list_clear(&list);
+	__t_shell__(&shell);
 	return 0;
 }

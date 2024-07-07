@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:42:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:33:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 15:11:19 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 15:58:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "minishell.h"
 
-static void __pop__(t_node * const head)
-{
-	free(head->val);
-	free (head);
-}
 
-void list_clear(t_list **list)
+void display_prompt()
 {
-	if (!list || !(*list)) return;
-	
-	postorder_traverse((*list)->head, __pop__);
-	free(*list);
-	*list = NULL;
+    // printf(ITALIC_ON PURPLE"minishell"GREEN  " $ > " RESET ITALIC_OFF);
+    printc("minishell", __italic__, __purple__);
+    printc(" $ > ", __italic__, __green__);
 }

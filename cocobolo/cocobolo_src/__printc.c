@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   __printc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:42:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:33:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 15:53:22 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 15:53:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include <cocobolo.h>
 
-static void __pop__(t_node * const head)
+void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...)
 {
-	free(head->val);
-	free (head);
-}
+	va_list args;
+	va_start(args, message);
 
-void list_clear(t_list **list)
-{
-	if (!list || !(*list)) return;
-	
-	postorder_traverse((*list)->head, __pop__);
-	free(*list);
-	*list = NULL;
+	t_printf_option function = va_arg(args, t_printf_option);
+
+	while (NULL != function)
+	{
+		function(NULL);
+		function = va_arg(args, t_printf_option);
+	}
+    
+    printf(message);
+    __reset__(NULL);
+    
+	va_end(args);
 }

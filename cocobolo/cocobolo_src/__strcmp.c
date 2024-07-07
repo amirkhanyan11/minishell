@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   __strcmp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:42:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:33:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 16:16:08 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 16:22:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include <cocobolo.h>
 
-static void __pop__(t_node * const head)
+bool __strcmp(const char *lhv, const char *rhv)
 {
-	free(head->val);
-	free (head);
-}
+    if (!lhv || !rhv) return (!lhv && !rhv);
+    
+    while (*lhv || *rhv)
+    {
+        if (*lhv != *rhv) break;
+        
+        lhv++;
+        rhv++;
+    }
 
-void list_clear(t_list **list)
-{
-	if (!list || !(*list)) return;
-	
-	postorder_traverse((*list)->head, __pop__);
-	free(*list);
-	*list = NULL;
+    return (*lhv == *rhv);
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:44:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 16:39:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,34 @@
 # define GREEN "\033[1;32m"
 # define RED "\033[1;31m"
 # define RESET "\033[0m"
-# define P(a) printf(a)
+#define ITALIC_ON "\e[3m"
+#define ITALIC_OFF "\e[23m"
+
+#define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
+
+typedef void (*t_printf_option)(const char * const);
+
 
 void		__exit(char const *const err) __attribute__((noreturn));
 t_optional	__atoi(char const *str) __attribute__((nonnull));
 void		*__malloc(size_t n) __attribute__((malloc));
+
+// string
 size_t	    __strlen(const char *str);
 char	    *__strdup(const char *src);
+// returns true if lhv == rhv
+bool __strcmp(const char *lhv, const char *rhv);
+
+
+// colors
+void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...);
+void __italic__(const char * const message);
+void __purple__(const char * const message);
+void __cyan__(const char * const message);
+void __blue__(const char * const message);
+void __yellow__(const char * const message);
+void __green__(const char * const message);
+void __red__(const char * const message);
+void __reset__(const char * const message);
 
 #endif // COCOBOLO_H

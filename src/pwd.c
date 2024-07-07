@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:42:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:33:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 16:40:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "minishell.h"
+#define SIZE 4096
 
-static void __pop__(t_node * const head)
+void pwd(t_shell *shell __attribute__((unused)))
 {
-	free(head->val);
-	free (head);
-}
+    char *path = __malloc(SIZE + 1);
+    
+    getcwd(path, SIZE);
 
-void list_clear(t_list **list)
-{
-	if (!list || !(*list)) return;
-	
-	postorder_traverse((*list)->head, __pop__);
-	free(*list);
-	*list = NULL;
+    printf ("%s\n", path);
+    
+    free(path);
 }

@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   va_push.c                                          :+:      :+:    :+:   */
+/*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 14:28:18 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:31:03 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 16:29:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "minishell.h"
 
-void __attribute__((sentinel))  __va_push__(f_push f, t_list *const list, ...)
+t_shell *make_shell()
 {
-	va_list args;
-	va_start(args, list);
+    t_shell *shell = __malloc(sizeof(t_shell));
 
-	char *arg = va_arg(args, char *);
+    shell->history = make_list();
 
-	while (NULL != arg)
-	{
-		f(list, arg);
-		arg = va_arg(args, char *);
-	}
-
-	va_end(args);
+    return shell;
 }

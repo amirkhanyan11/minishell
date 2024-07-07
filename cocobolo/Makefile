@@ -1,6 +1,6 @@
 NAME = cocobolo.a
 ROOT = ./
-OBJSPATH = ./objs/
+OBJSPATH = ./cocobolo_objs/
 SRCSPATH = ./cocobolo_src/
 INCPATH = ./cocobolo_includes/
 
@@ -26,7 +26,7 @@ CFLAGS = $(foreach H,$(INCPATH),-I$(H)) -Wall -Wextra -Werror
 all : $(OBJSPATH) $(NAME)
 
 $(OBJSPATH) :
-	@mkdir -p objs
+	@mkdir -p cocobolo_objs
 
 $(NAME) : $(OBJS)
 	@make -C $(OPTIONAL) all

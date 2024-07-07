@@ -4,6 +4,7 @@
 		"__split_buffer": "c",
 		"list": "c",
 		"list.h": "c",
-		"cocobolo.h": "c"
+		"cocobolo.h": "c",
+		"minishell.h": "c"
 	}
 }

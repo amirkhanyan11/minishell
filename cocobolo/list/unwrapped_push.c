@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   unwrapped_push.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:42:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:33:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/07 14:28:18 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/07 15:39:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-static void __pop__(t_node * const head)
+void __attribute__((sentinel))  __unwrapped_push__(f_push f, t_list *const list, ...)
 {
-	free(head->val);
-	free (head);
-}
+	va_list args;
+	va_start(args, list);
 
-void list_clear(t_list **list)
-{
-	if (!list || !(*list)) return;
-	
-	postorder_traverse((*list)->head, __pop__);
-	free(*list);
-	*list = NULL;
+	char *arg = va_arg(args, char *);
+
+	while (NULL != arg)
+	{
+		f(list, arg);
+		arg = va_arg(args, char *);
+	}
+
+	va_end(args);
 }
