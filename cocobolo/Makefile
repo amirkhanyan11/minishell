@@ -1,8 +1,9 @@
-NAME = cocobolo.a
 ROOT = ./
-OBJSPATH = ./cocobolo_objs/
-SRCSPATH = ./cocobolo_src/
-INCPATH = ./cocobolo_includes/
+NAME = cocobolo.a
+
+SRCSPATH = ${ROOT}cocobolo_src/ ${ROOT}optional/ ${ROOT}list/ ${ROOT}get_next_line/
+OBJSPATH = ${ROOT}cocobolo_objs/
+INCPATH = ${ROOT}cocobolo_includes/
 
 END = \x1b[0m
 GREEN = \x1b[33;1m
@@ -14,33 +15,30 @@ YELLOW = \x1b[1;33m
 GREEN = \x1b[1;32m
 RED = \x1b[1;31m
 
-SRCS = $(wildcard $(SRCSPATH)*.c)
-OBJS = $(patsubst $(SRCSPATH)%.c, $(OBJSPATH)%.o, $(SRCS))
+vpath %.c ${SRCSPATH}
 
-OPTIONAL = ./optional/
-LIST = ./list
+SRCS = $(foreach L, ${SRCSPATH}, $(wildcard ${L}*.c))
+OBJS =  $(foreach L, ${SRCSPATH}, $(patsubst ${L}%.c, ${OBJSPATH}%.o, ${SRCS})) 
 
 CC = gcc
-CFLAGS = $(foreach H,$(INCPATH),-I$(H)) -Wall -Wextra -Werror
+CFLAGS = $(foreach H, ${INCPATH}, -I${H}) -Wall -Wextra -Werror
 
-all : $(OBJSPATH) $(NAME)
+all : ${OBJSPATH} ${NAME}
 
-$(OBJSPATH) :
+${OBJSPATH} :
 	@mkdir -p cocobolo_objs
 
-$(NAME) : $(OBJS)
-	@make -C $(OPTIONAL) all
-	@make -C $(LIST) all
-	@ar -rcs $(NAME) $(OBJSPATH)*.o
+${NAME} : ${OBJS}
+	@ar -rcs ${NAME} ${OBJSPATH}*.o
 
-$(OBJSPATH)%.o : $(SRCSPATH)%.c Makefile
-	@$(CC) $(CFLAGS) -c $< -o $@
+${OBJSPATH}%.o : %.c Makefile
+	@${CC} ${CFLAGS} -c $< -o $@	
 
 clean :
-	@rm -rf $(OBJSPATH)
+	@rm -rf ${OBJSPATH}
 
 fclean : clean
-	@rm -f $(NAME)
+	@rm -f ${NAME}
 
 re : fclean all
 

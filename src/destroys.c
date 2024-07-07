@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:34:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:06:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void __t_shell__(t_shell **shellptr)
     if (NULL == shell) return;
 
     list_clear(&shell->history);
+    list_clear(&shell->env);
 
     free(shell);
 

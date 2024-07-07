@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "minishell.h"
 
-int main()
+int main(int ac, char **av, char **env)
 {
-	t_shell *shell = make_shell();
+	t_shell *shell = make_shell(env);
 
 	while (true)
 	{
@@ -18,6 +18,8 @@ int main()
 
 		push_back(shell->history, line);
 	}
+
+	print_list(shell->env);
 	
 	__t_shell__(&shell);
 	return 0;

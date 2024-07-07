@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:52:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:02:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		*__malloc(size_t n) __attribute__((malloc));
 // string
 size_t	    __strlen(const char *str);
 char	    *__strdup(const char *src);
-size_t __strcmp(const char *lhv, const char *rhv);
+size_t      __strcmp(const char *lhv, const char *rhv);
 
 
 // colors

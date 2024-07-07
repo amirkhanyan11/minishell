@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 16:40:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:07:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef struct s_shell t_shell;
 
 struct s_shell
 {
-    t_list *history;  
+    t_list  *history;  
+    t_list  *env;
 };
 
 
@@ -32,7 +33,7 @@ void display_history(t_shell * shell);
 
 
 // shell lifecycle
-t_shell *make_shell();
+t_shell *make_shell(char **env);
 void __t_shell__(t_shell **shellptr);
 
 
