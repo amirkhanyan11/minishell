@@ -10,14 +10,15 @@ int main()
 		display_prompt();
 		char * line = readline(NULL);
 
-		if (__strcmp(line, "pwd")) pwd(shell);
+		if (0 == __strcmp(line, "pwd")) pwd(shell);
 
-		else if (__strcmp(line, "history")) display_history(shell);
+		else if (0 == __strcmp(line, "history")) display_history(shell);
+
+		else if (0 == __strcmp(line, "exit")) break;
 
 		push_back(shell->history, line);
 	}
 	
-
 	__t_shell__(&shell);
 	return 0;
 }

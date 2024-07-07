@@ -1,4 +1,4 @@
-NAME = a.out
+NAME = minishell
 COCOBOLO = ./cocobolo/
 COCOBOLOLIB = $(COCOBOLO)cocobolo.a
 
@@ -57,8 +57,8 @@ push :
 	git commit -m "."
 	git push
 
-leaks : $(NAME)
-	valgrind --leak-check=yes ./$(NAME)
+leaks : re
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 .PHONY : all clean fclean re leaks
 
