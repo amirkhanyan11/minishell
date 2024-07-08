@@ -1,13 +1,19 @@
 NAME = minishell
-COCOBOLO = ./cocobolo/
-COCOBOLOLIB = $(COCOBOLO)cocobolo.a
 
-SRCSPATH = ./src/
-INCPATH = ./includes/ $(COCOBOLO)cocobolo_includes/
+COCOBOLOPATH = ./cocobolo/
+COCOBOLO = ${COCOBOLOPATH}cocobolo.a
+
+SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/
+INCPATH = ./includes/ ${COCOBOLOPATH}cocobolo_includes/
 OBJSPATH = ./objs/
 
-SRCS = $(wildcard $(SRCSPATH)*.c)
-OBJS = $(patsubst $(SRCSPATH)%.c, $(OBJSPATH)%.o, $(SRCS))
+# SRCS = $(wildcard $(SRCSPATH)*.c)
+# OBJS = $(patsubst $(SRCSPATH)%.c, $(OBJSPATH)%.o, $(SRCS))
+
+vpath %.c ${SRCSPATH}
+
+SRCS = $(foreach D, ${SRCSPATH}, $(wildcard ${D}*.c))
+OBJS =  $(foreach D, ${SRCSPATH}, $(patsubst ${D}%.c, ${OBJSPATH}%.o, ${SRCS}))
 
 END = \x1b[0m
 GREEN = \x1b[33;1m
@@ -20,33 +26,33 @@ GREEN = \x1b[1;32m
 RED = \x1b[1;31m
 
 CC = gcc
-DEBUG = -fsanitize=thread
+DEBUG = -fsanitize=address
 WFLAGS = -Wall -Wextra -Werror
-CFLAGS = $(foreach H,$(INCPATH),-I$(H)) #$(WFLAGS) #$(DEBUG)
-READLINELIB = -L/usr/lib -lreadline
+CFLAGS = $(foreach H, $(INCPATH), -I$(H)) #$(WFLAGS) #$(DEBUG)
+LREADLINE = -L/usr/lib -lreadline
 
-all : $(OBJSPATH) $(NAME)
+all : ${OBJSPATH} ${NAME}
 
-$(OBJSPATH) :
+${OBJSPATH} :
 	@mkdir -p objs
 
-$(NAME) : $(COCOBOLOLIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(COCOBOLOLIB) $(READLINELIB)  -o $@
-	@echo "$(GREEN) program compiled! $(END)"
+${NAME} : ${COCOBOLO} ${OBJS}
+	${CC} ${CFLAGS} ${OBJSPATH}*.o ${COCOBOLO} ${LREADLINE} -o $@
+	@echo "${GREEN} program compiled! ${END}"
 
-$(OBJSPATH)%.o : $(SRCSPATH)%.c Makefile
-	@$(CC) $(CFLAGS) -c $< -o $@
+${OBJSPATH}%.o : %.c Makefile
+	@${CC} ${CFLAGS} -c $< -o $@
 
-$(COCOBOLOLIB) :
-	@make -C $(COCOBOLO) all
+${COCOBOLO} :
+	@make -C ${COCOBOLOPATH} all
 
 clean :
-	@make -C $(COCOBOLO) clean
-	@rm -rf $(OBJSPATH) $(OPTIONALOBJS)
+	@make -C ${COCOBOLOPATH} clean
+	@rm -rf ${OBJSPATH} ${OPTIONALOBJS}
 
 fclean : clean
-	@make -C $(COCOBOLO) fclean
-	@rm -f $(NAME)
+	@make -C ${COCOBOLOPATH} fclean
+	@rm -f ${NAME}
 
 re : fclean all
 
@@ -59,7 +65,7 @@ push :
 
 leaks : re
 
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
 
 .PHONY : all clean fclean re leaks
 
