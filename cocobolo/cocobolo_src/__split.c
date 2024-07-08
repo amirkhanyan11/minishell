@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 21:21:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 01:28:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:13:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static size_t	_count_words(char const *s, char const c);
 static size_t	_current_len(char const **str, char const c);
 static t_matrix _allocate(char const *str, char const c, size_t const SIZE);
 static void		_skip_(char const **str, char const c);
-    
+
 t_matrix    __split(char const *s, char c)
 {
 	if (!s)
-		return (NULL);
+		__exit("nullptr passed to __split");
 	return (_allocate(s, c, _count_words(s, c)));
 }
 
@@ -84,7 +84,7 @@ static	t_matrix    _allocate(char const *str, char const c, size_t const SIZE)
 		current_len = _current_len(&str, c);
 		arr[i] = (char *)__malloc(current_len + 1);
         arr[i][current_len] = '\0';
-		
+
         int j = 0;
         while (j < current_len)
         {

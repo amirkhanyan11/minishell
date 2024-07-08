@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __printc.c                                         :+:      :+:    :+:   */
+/*   make_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:53:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 14:48:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/08 22:35:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "minishell.h"
 
-void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...)
+// move to separate dir
+t_matrix make_matrix_from_string(char *s, char c)
 {
-	va_list args;
-	va_start(args, message);
+	return __split(s, c);
+}
 
-	t_printf_option function = va_arg(args, t_printf_option);
+t_matrix make_matrix_copy(t_matrix other)
+{
+	if (!other) return NULL;
 
-	while (NULL != function)
+	size_t i = 0;
+	while (other[i]) i++;
+
+	t_matrix res = malloc(i + 1);
+	res[i] = NULL;
+
+	i = 0;
+	while(other[i])
 	{
-		function(NULL);
-		function = va_arg(args, t_printf_option);
+		res[i] = __strdup(other[i]);
+		i++;
 	}
-
-    printf("%s", message);
-    __reset__(NULL);
-
-	va_end(args);
+	return res;
 }

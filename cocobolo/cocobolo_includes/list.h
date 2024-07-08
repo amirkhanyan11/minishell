@@ -6,19 +6,27 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 00:42:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:28:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIST_H
 #define LIST_H
 
-#include <cocobolo.h>
+# include <cocobolo.h>
+# include <limits.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
 typedef struct s_node   t_node;
 typedef struct s_list   t_list;
 typedef char * 		 	t_list_value;
 typedef void (*t_list_Upredicate) (t_node * const);
+typedef bool (*t_list_Countpredicate) (t_list_value);
 typedef bool (*t_list_Bpredicate_val)(t_list_value, t_list_value);
+typedef void (*t_list_Apredicate_val)(size_t *, t_list_value);
 typedef void (*f_push) (t_list *const, const t_list_value);
 
 
@@ -56,12 +64,18 @@ t_node  *make_node(const t_list_value x) __attribute__((malloc));
 void 	print_list(t_list *list);
 void 	print_list_enumerate(t_list *list);
 
+//	algorithms
+size_t size(t_list *list);
 t_node *find(t_list *list, t_list_value target, t_list_Bpredicate_val cmp);
+t_node *find_strict(t_list *list, t_list_value target, t_list_Bpredicate_val cmp);
+size_t count(t_list *list, t_list_value val);
+size_t count_if(t_list *list, t_list_Countpredicate p);
+size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p);
 
-// assumes each node's value is a malloced string
+//	assumes each node's value is a malloced string
 void 	list_clear(t_list **list);
 
-//traverse
+//	traverse
 void 	preorder_traverse (t_node *head, t_list_Upredicate f);
 void 	reverse_preorder_traverse (t_node *head, t_list_Upredicate f);
 

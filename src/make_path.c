@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __printc.c                                         :+:      :+:    :+:   */
+/*   make_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:53:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 14:48:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/08 22:30:16 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/08 22:41:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
-
-void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...)
+t_list *make_path(t_shell *shell)
 {
-	va_list args;
-	va_start(args, message);
+	if (!shell) return NULL;
 
-	t_printf_option function = va_arg(args, t_printf_option);
+	t_list *path = NULL;
 
-	while (NULL != function)
-	{
-		function(NULL);
-		function = va_arg(args, t_printf_option);
-	}
+	t_list_value raw_path = find_strict(shell->env)->val;
 
-    printf("%s", message);
-    __reset__(NULL);
+	t_matrix arr = __split(raw_path);
 
-	va_end(args);
+	// char *first = __strdup(arr[0]);
+
 }

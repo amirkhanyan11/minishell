@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __printc.c                                         :+:      :+:    :+:   */
+/*   make_desciptors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:53:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 14:48:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/08 22:09:13 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/08 22:12:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "minishell.h"
 
-void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...)
+t_descriptor *make_descriptors()
 {
-	va_list args;
-	va_start(args, message);
+	t_descriptor *descriptor = __malloc(sizeof(t_descriptor));
+	dup2(STDOUT_FILENO, descriptor->stdout);
+	dup2(STDIN_FILENO, descriptor->stdin);
+	dup2(STDERR_FILENO, descriptor->stderr);
 
-	t_printf_option function = va_arg(args, t_printf_option);
-
-	while (NULL != function)
-	{
-		function(NULL);
-		function = va_arg(args, t_printf_option);
-	}
-
-    printf("%s", message);
-    __reset__(NULL);
-
-	va_end(args);
+	return descriptor;
 }

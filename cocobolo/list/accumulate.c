@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __printc.c                                         :+:      :+:    :+:   */
+/*   accumulate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:53:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 14:48:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/08 16:37:22 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/08 16:55:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "list.h"
 
-void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...)
+static size_t __accumulate__(t_node *head, size_t sum_so_far, t_list_Apredicate_val p)
 {
-	va_list args;
-	va_start(args, message);
+	if (!head) return sum_so_far;
 
-	t_printf_option function = va_arg(args, t_printf_option);
+	p(&sum_so_far, head->val);
 
-	while (NULL != function)
-	{
-		function(NULL);
-		function = va_arg(args, t_printf_option);
-	}
+	return __accumulate__(head->next, sum_so_far, p);
+}
 
-    printf("%s", message);
-    __reset__(NULL);
+size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p)
+{
+	if (!list || !p) return sum_so_far;
 
-	va_end(args);
+	return __accumulate__(list->head, sum_so_far, p);
 }

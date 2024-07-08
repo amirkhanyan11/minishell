@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 01:40:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:31:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef char ** t_matrix;
 
 
 void		__exit(char const *const err) __attribute__((noreturn));
-t_optional	__atoi(char const *str) __attribute__((nonnull));
+t_optional	__atoi(char const *str);
 void		*__malloc(size_t n) __attribute__((malloc));
 
 // string

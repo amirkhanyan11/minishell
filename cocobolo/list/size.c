@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __printc.c                                         :+:      :+:    :+:   */
+/*   size.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:53:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 14:48:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/08 17:01:43 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/08 17:03:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "list.h"
 
-void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...)
+size_t __size__(t_node *head)
 {
-	va_list args;
-	va_start(args, message);
+	if (!head) return 0;
+	return 1 + (__size__(head->next));
+}
 
-	t_printf_option function = va_arg(args, t_printf_option);
+size_t size(t_list *list)
+{
+	if (!list) return 0;
 
-	while (NULL != function)
-	{
-		function(NULL);
-		function = va_arg(args, t_printf_option);
-	}
-
-    printf("%s", message);
-    __reset__(NULL);
-
-	va_end(args);
+	return __size__(list->head);
 }
