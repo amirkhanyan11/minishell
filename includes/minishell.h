@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 23:40:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:30:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct s_command
     t_shell *shell;
 	char 	*name;
 	t_list  *options;
-    t_matrix args;
+    t_list 	*args;
 };
 
 // displays

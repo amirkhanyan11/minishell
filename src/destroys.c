@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 23:36:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:33:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void __t_command__(t_command **cmdptr)
 
 	if (NULL == cmd) return;
 
-	__matrix_clear(&cmd->args);
-
+	list_clear(&cmd->args);
+	list_clear(&cmd->options);
+	free(cmd->name);
+	
 	free(cmd);
 
 	*cmdptr = NULL;

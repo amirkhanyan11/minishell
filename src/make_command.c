@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 23:46:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 00:38:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@ t_command *make_command(char * raw_cmd)
 {
 	t_command *cmd = __malloc(sizeof(t_command));
 
-	cmd->args = make_matrix_from_string(raw_cmd, ' ');
+	t_matrix arr = make_matrix_from_string(raw_cmd, ' ');
+
+	if (!arr || !*arr) __exit("empty command");
+	
 	cmd->options = make_list();
+	cmd->args = make_list();
+	cmd->name = __strdup(arr[0]);
 
-	cmd->name = cmd->args[0];
-
-	while (*cmd->args)
+	size_t i = 1;
+	while (arr[i])
 	{
-		if (**cmd->args == '-')
+		if (arr[i][0] == '-')
 		{
-			char *tmp = *cmd->args;
-			push_back(cmd->options, tmp);
-			free(tmp);
+			push_back(cmd->options, arr[i]);
 		}
-		cmd->args++;
+		else push_back(cmd->args, arr[i]);
+		i++;
 	}
-	printf("%s\n", cmd->name);
-	print_list(cmd->options);
+	__matrix_clear(&arr);
 }
