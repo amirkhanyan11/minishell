@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 22:35:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:40:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ struct s_command
 {
     t_shell *shell;
 	char 	*name;
+	t_list  *options;
     t_matrix args;
 };
 
@@ -63,6 +64,7 @@ void 	 	 __t_shell__(t_shell **shellptr);
 t_matrix 	 make_matrix_from_string(char *s, char c);
 t_matrix 	 make_matrix_copy(t_matrix other);
 t_command 	 *make_command(char * raw_cmd);
+t_list 		 *make_path(t_shell *shell);
 void 		 __t_command__(t_command **cmdptr);
 t_descriptor *make_descriptors();
 

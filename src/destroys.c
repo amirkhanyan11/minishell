@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 22:13:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:36:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void __t_shell__(t_shell **shellptr)
 
     list_clear(&shell->history);
     list_clear(&shell->env);
+    list_clear(&shell->path);
 	free(shell->sysdescriptors);
 	free(shell->descriptors);
 

@@ -6,19 +6,22 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 22:40:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/05 22:40:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:26:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void	pop_front(t_list *const list)
+void pop_back(t_list *const list)
 {
-	t_node	*to_remove;
+	if (NULL == list || NULL == list->tail) return;
 
-	if (NULL == list || NULL == list->head)
-		return ;
-	to_remove = list->head;
-	list->head = list->head->next;
+	t_node *to_remove = list->tail;
+
+	list->tail = list->tail->prev;
+
+	list->tail->next = NULL;
+
+	free(to_remove->val);
 	free(to_remove);
 }
