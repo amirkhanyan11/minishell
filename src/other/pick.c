@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_export.c                                      :+:      :+:    :+:   */
+/*   pick.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 19:40:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:17:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/09 20:22:38 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/09 20:37:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char *add_declarex(char *s);
-
-t_list * __attribute__((warn_unused_result)) make_export(t_shell *shell)
+// if successes returns malloced string
+char * __attribute__((warn_unused_result)) pick(t_list *list, char *target)
 {
-	if (!shell) return NULL;
+	if (!list || !target) return NULL;
 
-    return make_list_copy(shell->env, add_declarex);
-}
+	t_node *node = find(list, target, list_value_contains);
 
-static char *add_declarex(char *s)
-{
-	if (!s) return NULL;
+	if (!node) return NULL;
 
-	return __strappend(__make_string_empty(), "declare -x ", s);
+	char * res = NULL;
+
+	while (*res && *res != '=') res++;
+
+	if (*res == '\0') return NULL;
+
+	return res + 1;
 }

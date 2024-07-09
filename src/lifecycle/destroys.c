@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 00:33:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:06:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void __t_shell__(t_shell **shellptr)
 
     list_clear(&shell->history);
     list_clear(&shell->env);
+    list_clear(&shell->export);
     list_clear(&shell->path);
 	free(shell->sysdescriptors);
 	free(shell->descriptors);
@@ -42,7 +43,7 @@ void __t_command__(t_command **cmdptr)
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
 	free(cmd->name);
-	
+
 	free(cmd);
 
 	*cmdptr = NULL;

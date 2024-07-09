@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:18:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_shell * __attribute__((warn_unused_result)) make_shell(char **env)
 
 	shell->sysdescriptors = make_descriptors();
 	shell->descriptors =    make_descriptors();
+
+	shell->status = 0;
 
     return shell;
 }

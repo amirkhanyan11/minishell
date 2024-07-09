@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_export.c                                      :+:      :+:    :+:   */
+/*   reslove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 19:40:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:17:33 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/09 20:38:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char *add_declarex(char *s);
-
-t_list * __attribute__((warn_unused_result)) make_export(t_shell *shell)
+void resolve(t_node *token, t_shell *shell)
 {
-	if (!shell) return NULL;
+	char *val = pick(shell->export, token->val + 1);
 
-    return make_list_copy(shell->env, add_declarex);
-}
+	if (!val) __exit("bad token resolve");
 
-static char *add_declarex(char *s)
-{
-	if (!s) return NULL;
+	free(token->val);
 
-	return __strappend(__make_string_empty(), "declare -x ", s);
+	token->val = val;
 }

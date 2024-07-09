@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:35:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ struct s_shell
 
 	t_descriptor *sysdescriptors;
 	t_descriptor *descriptors;
+
+	int			 status;
 };
 
 struct s_descriptor
@@ -59,15 +61,23 @@ void display_history(t_shell * shell);
 //	reading input
 char	*read_line(void);
 
+// execution
+t_list 		 *tokenize(char * raw_cmd) __attribute__((warn_unused_result));
+t_list 		 *preprocess(t_list *tokens, t_shell * shell) __attribute__((warn_unused_result)) ;
+
+// execution helpers
+char 		*pick(t_list *list, char *target) __attribute__((warn_unused_result));
+void 		resolve(t_node *token, t_shell *shell);
+
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __attribute__((warn_unused_result));
 t_shell 	 *make_shell(char **env) __attribute__((warn_unused_result));
-void 	 	 __t_shell__(t_shell **shellptr);
 t_matrix 	 make_matrix_from_string(char *s, char c) __attribute__((warn_unused_result));
 t_matrix 	 make_matrix_copy(t_matrix other) __attribute__((warn_unused_result));
 t_command 	 *make_command(char * raw_cmd) __attribute__((warn_unused_result));
 t_list 		 *make_path(t_shell *shell) __attribute__((warn_unused_result));
 t_descriptor *make_descriptors() __attribute__((warn_unused_result));
+void 	 	 __t_shell__(t_shell **shellptr);
 void 		 __t_command__(t_command **cmdptr);
 
 // builtins
