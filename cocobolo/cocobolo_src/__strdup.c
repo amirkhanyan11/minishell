@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:15:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:46:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:49:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-char	*__strdup(const char *src)
+char	* __attribute__((warn_unused_result)) __strdup(const char *src)
 {
 	char	*dest;
 	size_t	i;

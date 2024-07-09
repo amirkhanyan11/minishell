@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_shell.c                                       :+:      :+:    :+:   */
+/*   __make_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:49 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/09 19:58:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <cocobolo.h>
 
-t_shell * __attribute__((warn_unused_result)) make_shell(char **env)
+char * __attribute__((warn_unused_result)) __make_string_empty()
 {
-    t_shell *shell = __malloc(sizeof(t_shell));
-
-    shell->env = make_list_from_matrix(env);
-
-	shell->export = make_export(shell);
-
-	shell->path = make_path(shell);
-
-    shell->history = make_list();
-
-	shell->sysdescriptors = make_descriptors();
-	shell->descriptors =    make_descriptors();
-
-    return shell;
+	char *s = __malloc(1);
+	*s = '\0';
+	return s;
 }

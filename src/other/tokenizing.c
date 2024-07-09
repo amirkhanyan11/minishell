@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_shell.c                                       :+:      :+:    :+:   */
+/*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:49 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/08 22:19:00 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/09 18:46:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell * __attribute__((warn_unused_result)) make_shell(char **env)
+t_list *tokenize(char * raw_cmd)
 {
-    t_shell *shell = __malloc(sizeof(t_shell));
+	if (!raw_cmd) __exit("empty command");
 
-    shell->env = make_list_from_matrix(env);
-
-	shell->export = make_export(shell);
-
-	shell->path = make_path(shell);
-
-    shell->history = make_list();
-
-	shell->sysdescriptors = make_descriptors();
-	shell->descriptors =    make_descriptors();
-
-    return shell;
+	return make_list_from_string(raw_cmd, ' ');
 }

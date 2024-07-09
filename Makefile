@@ -37,8 +37,8 @@ ${OBJSPATH} :
 	@mkdir -p objs
 
 ${NAME} : ${COCOBOLO} ${OBJS}
-	${CC} ${CFLAGS} ${OBJSPATH}*.o ${COCOBOLO} ${LREADLINE} -o $@
-	@echo "${GREEN} program compiled! ${END}"
+	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${COCOBOLO} ${LREADLINE} -o $@
+	@echo "${GREEN} minishell compiled! ${END}"
 
 ${OBJSPATH}%.o : %.c Makefile
 	@${CC} ${CFLAGS} -c $< -o $@

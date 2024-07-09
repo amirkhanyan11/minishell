@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_shell.c                                       :+:      :+:    :+:   */
+/*   make_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:49 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/09 19:40:07 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/09 19:59:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell * __attribute__((warn_unused_result)) make_shell(char **env)
+static char *add_declarex(char *s);
+
+t_list * __attribute__((warn_unused_result)) make_export(t_shell *shell)
 {
-    t_shell *shell = __malloc(sizeof(t_shell));
+	if (!shell) return NULL;
 
-    shell->env = make_list_from_matrix(env);
+    return make_list_copy(shell->env, add_declarex);
+}
 
-	shell->export = make_export(shell);
+static char *add_declarex(char *s)
+{
+	if (!s) return NULL;
 
-	shell->path = make_path(shell);
-
-    shell->history = make_list();
-
-	shell->sysdescriptors = make_descriptors();
-	shell->descriptors =    make_descriptors();
-
-    return shell;
+	return __strappend(__make_string_empty(), "declare -x ", s);
 }

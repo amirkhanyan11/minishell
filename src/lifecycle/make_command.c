@@ -6,20 +6,20 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 00:46:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:00:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command *make_command(char * raw_cmd)
+t_command * __attribute__((warn_unused_result)) make_command(char * raw_cmd)
 {
 	t_command *cmd = __malloc(sizeof(t_command));
 
 	t_matrix arr = make_matrix_from_string(raw_cmd, ' ');
 
 	if (!arr || !*arr) __exit("empty command");
-	
+
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->name = __strdup(arr[0]);

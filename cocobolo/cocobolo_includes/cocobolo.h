@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 15:31:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:54:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,27 @@
 #define ITALIC_ON "\e[3m"
 #define ITALIC_OFF "\e[23m"
 
-#define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
+// usage : str = __strappend(str, s1, s2, ...)
+# define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
+# define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
 
 typedef void (*t_printf_option)(const char * const);
 typedef char ** t_matrix;
 
-
 void		__exit(char const *const err) __attribute__((noreturn));
 t_optional	__atoi(char const *str);
-void		*__malloc(size_t n) __attribute__((malloc));
+void		*__malloc(size_t n) __attribute__((malloc)) __attribute__((warn_unused_result));
 
 // string
+char 		*__make_string_empty() __attribute__((warn_unused_result));
+char 		*__attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrapped_strappend__(char *s, ...);
+char		*__single_strappend__(char *lhv, char *rhv) __attribute__((warn_unused_result));
 size_t	    __strlen(const char *str);
-char	    *__strdup(const char *src);
+char	    *__strdup(const char *src) __attribute__((warn_unused_result));
 char	    *__strstr(char *haystack, char *needle);
 size_t      __strcmp(const char *lhv, const char *rhv);
 bool        __strcmp_weak__(const char *lhv, const char *rhv);
-t_matrix    __split(char const *s, char c);
+t_matrix    __split(char const *s, char c) __attribute__((warn_unused_result));
 void        __matrix_clear(t_matrix *arrptr);
 
 // colors

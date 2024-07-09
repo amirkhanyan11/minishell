@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:09:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/05 19:55:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:41:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ typedef int				t_optional_value;
 
 struct						s_optional
 {
-	t_optional_value					value;
+	t_optional_value		value;
 	bool					has_value;
 };
 
 t_optional					make_optional(void);
 void						set_optional(t_optional *optional, t_optional_value val);
 bool						has_value(const t_optional *optional);
-t_optional_value						value(const t_optional *optional);
-t_optional_value						value_or(const t_optional *optional, t_optional_value val);
+t_optional_value			value(const t_optional *optional);
+t_optional_value			value_or(const t_optional *optional, t_optional_value val);
 bool						any_of(t_optional_predicate unary_predicate,
 								...) __attribute__((sentinel));
 

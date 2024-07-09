@@ -5,6 +5,8 @@
 		"list": "c",
 		"list.h": "c",
 		"cocobolo.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"ios": "c",
+		"complex": "c"
 	}
 }

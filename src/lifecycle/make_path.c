@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:30:16 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 23:32:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:00:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list *make_path(t_shell *shell)
+t_list * __attribute__((warn_unused_result)) make_path(t_shell *shell)
 {
 	if (!shell) return NULL;
 
@@ -24,7 +24,7 @@ t_list *make_path(t_shell *shell)
 
 	char *ptr = arr[0];
 	while (*ptr && *ptr != '=') ptr++;
-	
+
 	ptr = __strdup(ptr + 1);
 	free(arr[0]);
 	arr[0] = ptr;
