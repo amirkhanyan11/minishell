@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pick.c                                             :+:      :+:    :+:   */
+/*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:22:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 21:51:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:54:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool __contains_as_key__(char *line, char *target);
 
 // if successes returns malloced string
-char * __attribute__((warn_unused_result)) pick(t_list *list, char *target)
+char * __attribute__((warn_unused_result)) get_value(t_list *list, char *target)
 {
 	if (!list || !target) return NULL;
 

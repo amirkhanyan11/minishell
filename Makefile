@@ -3,7 +3,7 @@ NAME = minishell
 COCOBOLOPATH = ./cocobolo/
 COCOBOLO = ${COCOBOLOPATH}cocobolo.a
 
-SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/
+SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/
 INCPATH = ./includes/ ${COCOBOLOPATH}cocobolo_includes/
 OBJSPATH = ./objs/
 
