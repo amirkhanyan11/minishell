@@ -7,6 +7,7 @@
 		"cocobolo.h": "c",
 		"minishell.h": "c",
 		"ios": "c",
-		"complex": "c"
+		"complex": "c",
+		"__node_handle": "c"
 	}
 }

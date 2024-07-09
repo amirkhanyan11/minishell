@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 19:54:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:29:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char 		*__attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrappe
 char		*__single_strappend__(char *lhv, char *rhv) __attribute__((warn_unused_result));
 size_t	    __strlen(const char *str);
 char	    *__strdup(const char *src) __attribute__((warn_unused_result));
+char		*__strdup_until(const char *src, const char end) __attribute__((warn_unused_result));
 char	    *__strstr(char *haystack, char *needle);
 size_t      __strcmp(const char *lhv, const char *rhv);
 bool        __strcmp_weak__(const char *lhv, const char *rhv);

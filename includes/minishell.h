@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 21:04:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:50:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ t_list 		 *preprocess(t_list *tokens, t_shell * shell) __attribute__((warn_unuse
 // execution helpers
 char 		*pick(t_list *list, char *target) __attribute__((warn_unused_result));
 void 		resolve(t_node *token, t_shell *shell);
+char 		*get_key(t_list_value line)  __attribute__((warn_unused_result));
+
 
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __attribute__((warn_unused_result));

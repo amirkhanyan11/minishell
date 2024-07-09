@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   get_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 21:39:25 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/09 21:44:02 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/09 21:49:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void echo(t_command *cmd)
+char * __attribute__((warn_unused_result)) get_key(t_list_value line)
 {
-	if (!cmd) __exit("nullptr passed to echo");
+	size_t offset = __strlen("declare -x ");
 
-	t_node *node = cmd->args->head;
-
-	while (node)
-	{
-		printf("%s", node->val);
-		node = node->next;
-	}
-	printf("\n");
+	return __strdup_until(line + offset, '=');
 }

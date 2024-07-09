@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 21:00:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:39:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 t_command * __attribute__((warn_unused_result)) make_command(char * raw_cmd, t_shell *shell)
 {
-	t_command *cmd = __malloc(sizeof(t_command));
+	if (!raw_cmd || !shell) return NULL;
 
 	t_list *tokens = preprocess(tokenize(raw_cmd), shell);
 
-	if (empty(tokens)) __exit("empty input");
+	if (empty(tokens)) return NULL;
+
+	t_command *cmd = __malloc(sizeof(t_command));
 
 	cmd->options = make_list();
 	cmd->args = make_list();
@@ -27,11 +29,14 @@ t_command * __attribute__((warn_unused_result)) make_command(char * raw_cmd, t_s
 	t_node *node = tokens->head->next;
 	while (node)
 	{
-		if (node->val[0] == '-')
+		if (node->val)
 		{
-			push_back(cmd->options, node->val);
+			if (node->val[0] == '-')
+			{
+				push_back(cmd->options, node->val);
+			}
+			else push_back(cmd->args, node->val);
 		}
-		else push_back(cmd->args, node->val);
 
 		node = node->next;
 	}
