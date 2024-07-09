@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 19:01:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:55:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_node *find_strict(t_list *list, t_list_value target, t_list_Bpredicate_val cmp
 size_t count(t_list *list, t_list_value val);
 size_t count_if(t_list *list, t_list_Countpredicate p);
 size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p);
+bool __attribute__((always_inline)) empty(t_list *list);
+
 
 //	assumes each node's value is a malloced string
 void 	list_clear(t_list **list);

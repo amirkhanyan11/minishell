@@ -6,35 +6,37 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:00:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command * __attribute__((warn_unused_result)) make_command(char * raw_cmd)
+t_command * __attribute__((warn_unused_result)) make_command(char * raw_cmd, t_shell *shell)
 {
 	t_command *cmd = __malloc(sizeof(t_command));
 
-	t_matrix arr = make_matrix_from_string(raw_cmd, ' ');
+	t_list *tokens = preprocess(tokenize(raw_cmd), shell);
 
-	if (!arr || !*arr) __exit("empty command");
+	if (empty(tokens)) __exit("empty input");
 
 	cmd->options = make_list();
 	cmd->args = make_list();
-	cmd->name = __strdup(arr[0]);
+	cmd->name = __strdup(tokens->head->val);
 
-	size_t i = 1;
-	while (arr[i])
+	t_node *node = tokens->head->next;
+	while (node)
 	{
-		if (arr[i][0] == '-')
+		if (node->val[0] == '-')
 		{
-			push_back(cmd->options, arr[i]);
+			push_back(cmd->options, node->val);
 		}
-		else push_back(cmd->args, arr[i]);
-		i++;
+		else push_back(cmd->args, node->val);
+
+		node = node->next;
 	}
-	__matrix_clear(&arr);
+
+	list_clear(&tokens);
 
 	return cmd;
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:49:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 15:22:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:56:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static void __print_listnode__(t_node *const head)
 {
 	if (NULL == head)
+	{
+		printf("\n");
 		return;
+	}
 
 	printf("%s\n", head->val);
 }

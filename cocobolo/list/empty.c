@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pick.c                                             :+:      :+:    :+:   */
+/*   empty.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 20:22:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:59:36 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/09 20:41:38 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/09 20:42:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "list.h"
 
-// if successes returns malloced string
-char * __attribute__((warn_unused_result)) pick(t_list *list, char *target)
+bool __attribute__((always_inline)) empty(t_list *list)
 {
-	if (!list || !target) return NULL;
-
-	t_node *node = find(list, target, list_value_contains);
-
-	if (!node) return NULL;
-
-	char *res = node->val;
-
-	while (*res && *res != '=') res++;
-
-	if (*res == '\0') return NULL;
-
-	return __strdup(res + 1);
+	return (!list || !list->head);
 }
