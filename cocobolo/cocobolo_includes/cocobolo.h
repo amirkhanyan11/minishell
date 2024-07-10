@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 17:49:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:52:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 #define ITALIC_OFF "\e[23m"
 
 typedef struct s_list t_list;
+
+# define $dtor(x) __attribute__((cleanup(x)))
 
 // usage : str = __strappend(str, s1, s2, ...)
 # define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
