@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:40:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:17:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char *add_declarex(char *s);
 
-t_list * __attribute__((warn_unused_result)) make_export(t_shell *shell)
+t_list * __result_use_check make_export(t_shell *shell)
 {
 	if (!shell) return NULL;
 

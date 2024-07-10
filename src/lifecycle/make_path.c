@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:30:16 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list * __attribute__((warn_unused_result)) make_path(t_shell *shell)
+t_list * __result_use_check make_path(t_shell *shell)
 {
 	if (!shell) return NULL;
 

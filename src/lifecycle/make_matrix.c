@@ -6,19 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 17:35:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // move to separate dir
-t_matrix __attribute__((warn_unused_result))  make_matrix_from_string(char *s, char c)
+t_matrix __result_use_check  make_matrix_from_string(char *s, char c)
 {
 	return __split(s, c);
 }
 
-t_matrix  __attribute__((warn_unused_result)) make_matrix_copy(t_matrix other)
+t_matrix  __result_use_check make_matrix_copy(t_matrix other)
 {
 	if (!other) return NULL;
 
@@ -37,7 +37,7 @@ t_matrix  __attribute__((warn_unused_result)) make_matrix_copy(t_matrix other)
 	return res;
 }
 
-t_matrix  __attribute__((warn_unused_result)) make_matrix_from_list(t_list *list)
+t_matrix  __result_use_check make_matrix_from_list(t_list *list)
 {
 	if (!list) return NULL;
 

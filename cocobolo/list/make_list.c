@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 18:09:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list * __attribute__((malloc)) __attribute__((warn_unused_result)) make_list()
+t_list * __attribute__((malloc)) __result_use_check make_list()
 {
 	t_list *list = __malloc(sizeof(t_list));
 
@@ -22,7 +22,7 @@ t_list * __attribute__((malloc)) __attribute__((warn_unused_result)) make_list()
 	return list;
 }
 
-t_list *__attribute__((malloc)) __attribute__((warn_unused_result)) make_list_from_matrix(char **arr)
+t_list *__attribute__((malloc)) __result_use_check make_list_from_matrix(char **arr)
 {
 	if (NULL == arr) __exit("nullptr passed to make_list_from_matrix");
 
@@ -37,7 +37,7 @@ t_list *__attribute__((malloc)) __attribute__((warn_unused_result)) make_list_fr
 	return list;
 }
 
-t_list * __attribute__((malloc)) __attribute__((warn_unused_result)) make_list_from_string(char *s, const char c)
+t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *s, const char c)
 {
 	char **arr = __split(s, c);
 
@@ -48,7 +48,7 @@ t_list * __attribute__((malloc)) __attribute__((warn_unused_result)) make_list_f
 	return list;
 }
 
-t_list * __attribute__((malloc)) __attribute__((warn_unused_result)) make_list_copy(t_list *other, t_value_mutate f)
+t_list * __attribute__((malloc)) __result_use_check make_list_copy(t_list *other, t_value_mutate f)
 {
 	if (!other) return NULL;
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 19:53:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:05:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av, char **env)
 	{
 		char * line = read_line();
 
-		t_command * $dtor(__t_command__) cmd = make_command(line, shell);
+		t_command * __dtor(__t_command__) cmd = make_command(line, shell);
 
 		if (NULL == cmd) continue;
 

@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:21:05 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 19:53:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-static char	* __attribute__((warn_unused_result)) __single_append__(char *lhv, char *rhv)
+static char	* __result_use_check __single_append__(char *lhv, char *rhv)
 {
 	if (!lhv || !rhv) return lhv;
 
@@ -40,7 +40,7 @@ static char	* __attribute__((warn_unused_result)) __single_append__(char *lhv, c
 }
 
 
-char * __attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrapped_strappend__(char *s, ...)
+char * __attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...)
 {
 	va_list args;
 	va_start(args, s);

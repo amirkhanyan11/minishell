@@ -6,20 +6,20 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 17:48:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-char * __attribute__((malloc)) __attribute__((warn_unused_result)) __make_string_empty()
+char * __attribute__((malloc)) __result_use_check __make_string_empty()
 {
 	char *s = __malloc(1);
 	*s = '\0';
 	return s;
 }
 
-char * __attribute__((malloc)) __attribute__((warn_unused_result)) __make_string_from_list(t_list *list)
+char * __attribute__((malloc)) __result_use_check __make_string_from_list(t_list *list)
 {
 	if (!list) return NULL;
 

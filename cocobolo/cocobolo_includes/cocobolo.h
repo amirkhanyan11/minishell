@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 19:52:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:12:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+// # include <cdefs.h>
 
 # define PURPLE "\033[1;35m"
 # define CYAN "\033[1;36m"
@@ -36,7 +36,17 @@
 
 typedef struct s_list t_list;
 
-# define $dtor(x) __attribute__((cleanup(x)))
+# if __has_attribute(cleanup)
+#define __dtor(f) __attribute__((cleanup(f)))
+#else
+#define __dtor(f)
+#endif
+
+#if __has_attribute(warn_unused_result)
+#define __result_use_check __attribute__((__warn_unused_result__))
+#else
+#define __result_use_check
+#endif
 
 // usage : str = __strappend(str, s1, s2, ...)
 # define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
@@ -45,23 +55,23 @@ typedef struct s_list t_list;
 typedef void (*t_printf_option)(const char * const);
 typedef char ** t_matrix;
 
-void		__exit(char const *const err) __attribute__((noreturn));
+void		__exit(char const *const err) __dead2;
 t_optional	__atoi(char const *str);
-void		*__malloc(size_t n) __attribute__((malloc)) __attribute__((warn_unused_result));
+void		*__malloc(size_t n) __attribute__((malloc)) __result_use_check;
 pid_t 		__fork(void);
 
 // string
-char 		*__make_string_empty() __attribute__((malloc)) __attribute__((warn_unused_result));
-char 		*__make_string_from_list(t_list *list) __attribute__((malloc)) __attribute__((warn_unused_result)) ;
-char 		*__attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrapped_strappend__(char *s, ...);
-char		*__single_strappend__(char *lhv, char *rhv) __attribute__((warn_unused_result));
+char 		*__make_string_empty() __attribute__((malloc)) __result_use_check;
+char 		*__make_string_from_list(t_list *list) __attribute__((malloc)) __result_use_check ;
+char 		*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...);
+char		*__single_strappend__(char *lhv, char *rhv) __result_use_check;
 size_t	    __strlen(const char *str);
-char	    *__strdup(const char *src) __attribute__((warn_unused_result));
-char		*__strdup_until(const char *src, const char end) __attribute__((warn_unused_result));
+char	    *__strdup(const char *src) __result_use_check;
+char		*__strdup_until(const char *src, const char end) __result_use_check;
 char	    *__strstr(char *haystack, char *needle);
 size_t      __strcmp(const char *lhv, const char *rhv);
 bool        __strcmp_weak__(const char *lhv, const char *rhv);
-t_matrix    __split(char const *s, char c) __attribute__((warn_unused_result));
+t_matrix    __split(char const *s, char c) __result_use_check;
 void        __matrix_clear(t_matrix *arrptr);
 
 // colors

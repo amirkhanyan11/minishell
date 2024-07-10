@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 19:52:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-
 
 typedef struct s_shell t_shell;
 typedef struct s_command t_command;
@@ -67,24 +66,26 @@ char	*read_line(void);
 
 // execution
 void 	     eval(t_command *cmd, char **env);
-t_list 		 *tokenize(char * raw_cmd) __attribute__((warn_unused_result));
-t_list 		 *preprocess(t_list *tokens, t_shell * shell) __attribute__((warn_unused_result)) ;
 
 // execution helpers
-char 		*get_value(t_list *list, char *target) __attribute__((warn_unused_result));
+char 		*get_value(t_list *list, char *target) __result_use_check;
 void 		resolve(t_node *token, t_shell *shell);
-char 		*get_key(t_list_value line)  __attribute__((warn_unused_result));
+char 		*get_key(t_list_value line)  __result_use_check;
+void 		cmd_lookup(t_command *cmd);
 
+// parsing
+t_list 		 *tokenize(char * raw_cmd) __result_use_check;
+t_list 		 *preprocess(t_list *tokens, t_shell * shell) __result_use_check ;
 
 // lifecycle
-t_list 		 *make_export(t_shell *shell) __attribute__((warn_unused_result));
-t_shell 	 *make_shell(char **env) __attribute__((warn_unused_result));
-t_matrix 	 make_matrix_from_string(char *s, char c) __attribute__((warn_unused_result));
-t_matrix 	 make_matrix_copy(t_matrix other) __attribute__((warn_unused_result));
-t_matrix  	 make_matrix_from_list(t_list *list)  __attribute__((warn_unused_result));
-t_command 	 *make_command(char * raw_cmd, t_shell * shell) __attribute__((warn_unused_result));
-t_list 		 *make_path(t_shell *shell) __attribute__((warn_unused_result));
-t_descriptor *make_descriptors() __attribute__((warn_unused_result));
+t_list 		 *make_export(t_shell *shell) __result_use_check;
+t_shell 	 *make_shell(char **env) __result_use_check;
+t_matrix 	 make_matrix_from_string(char *s, char c) __result_use_check;
+t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
+t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
+t_command 	 *make_command(char * raw_cmd, t_shell * shell) __result_use_check;
+t_list 		 *make_path(t_shell *shell) __result_use_check;
+t_descriptor *make_descriptors() __result_use_check;
 void 	 	 __t_shell__(t_shell **shellptr)  __attribute__((destructor));
 void 		 __t_command__(t_command **cmdptr);
 

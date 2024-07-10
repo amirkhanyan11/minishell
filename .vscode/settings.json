@@ -19,6 +19,10 @@
 		"unordered_map": "c",
 		"utility": "c",
 		"vector": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"stdlib.h": "c",
+		"_malloc.h": "c",
+		"unistd.h": "c",
+		"cdefs.h": "c"
 	}
 }
