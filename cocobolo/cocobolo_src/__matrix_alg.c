@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:59:12 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 21:15:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:55:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,4 @@ void __print_matrix(t_matrix arr)
 		printf("%s\n", arr[i]);
 		i++;
 	}
-
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:05:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 22:05:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ extern t_shell *shell;
 
 void eval(t_command *cmd, char **env)
 {
+	// dup2(shell->descriptors->stdin, STDIN_FILENO);
 	cmd_lookup(cmd);
 
 	pid_t pid = __fork();
@@ -32,7 +33,6 @@ void eval(t_command *cmd, char **env)
 
 		t_matrix  __dtor(__matrix_clear) _args = make_matrix_from_list(options_copy);
 		t_matrix  __dtor(__matrix_clear) _env  = make_matrix_from_list(shell->env);
-
 
 		execve(cmd->name, _args, _env);
 		__exit(strerror(errno));
