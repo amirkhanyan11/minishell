@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:05:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 23:26:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 extern t_shell *shell;
 
-void eval(t_command *cmd, char **env)
+void eval(t_command *cmd)
 {
-	// dup2(shell->descriptors->stdin, STDIN_FILENO);
 	cmd_lookup(cmd);
 
 	pid_t pid = __fork();
 
 	if (0 == pid)
 	{
+		dup2(shell->descriptors->stdin, STDIN_FILENO);
+		dup2(shell->descriptors->stdout, STDOUT_FILENO);
+
 		t_list * __dtor(list_clear) options_copy = make_list_copy(cmd->options, NULL);
 
 		push_front(options_copy, cmd->name);
@@ -38,7 +40,8 @@ void eval(t_command *cmd, char **env)
 		__exit(strerror(errno));
 	}
 
+	// dup2(shell->sysdescriptors->stdin, shell->descriptors->stdin);
+	// dup2(shell->sysdescriptors->stdout, shell->descriptors->stdout);
+
 	wait(NULL);
 }
-
-

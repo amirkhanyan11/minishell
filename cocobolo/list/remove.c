@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop_front.c                                        :+:      :+:    :+:   */
+/*   remove.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:36:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:35:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/10 22:31:20 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/10 22:43:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void	pop_front(t_list *const list)
+void list_remove(t_list *list, t_node *node)
 {
-	t_node	*to_remove;
+	if (!list || !node) return;
 
-	if (NULL == list || NULL == list->head)
-		return ;
+	if (node == list->head) pop_front(list);
 
-	to_remove = list->head;
+	else if (node == list->tail) pop_back(list);
 
-	list->head = list->head->next;
+	else
+	{
+		node->prev->next = node->next;
+		node->next->prev = node->prev;
 
-	if (list->head)
-		list->head->prev = NULL;
+		free(node->val);
+		free(node);
+	}
 
-	free(to_remove->val);
-	free(to_remove);
 }
-

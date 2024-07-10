@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop_front.c                                        :+:      :+:    :+:   */
+/*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:36:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:35:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/10 22:07:59 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/10 22:50:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "minishell.h"
 
-void	pop_front(t_list *const list)
+#define PERMISSIONS 0644
+
+t_file open_file(char *filename, int option)
 {
-	t_node	*to_remove;
+	t_file fd = -1;
 
-	if (NULL == list || NULL == list->head)
-		return ;
+	if (O_RDONLY == option)
+		fd = open(filename, O_RDONLY);
+	else
+		fd = open(filename, option, PERMISSIONS);
 
-	to_remove = list->head;
+	if (-1 == fd) perror("minishell: no such file or directory");
 
-	list->head = list->head->next;
-
-	if (list->head)
-		list->head->prev = NULL;
-
-	free(to_remove->val);
-	free(to_remove);
+	return fd;
 }
-

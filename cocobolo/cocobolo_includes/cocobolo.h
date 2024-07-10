@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 21:13:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 22:57:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void		*__malloc(size_t n) __attribute__((malloc)) __result_use_check;
 pid_t 		__fork(void);
 
 // string
+void 		__delete_string(char **s);
 char 		*__make_string_empty() __attribute__((malloc)) __result_use_check;
 char 		*__make_string_from_list(t_list *list) __attribute__((malloc)) __result_use_check ;
 char 		*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...);

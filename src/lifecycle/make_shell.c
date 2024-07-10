@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 22:22:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ t_shell * __result_use_check make_shell(char **env)
 	shell->descriptors =    make_descriptors();
 
 	shell->status = 0;
+
+	shell->infile = -1;
+	shell->outfile = -1;
 
     return shell;
 }
