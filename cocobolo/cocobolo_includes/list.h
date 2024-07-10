@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:15:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+
 typedef struct s_node   t_node;
 typedef struct s_list   t_list;
 typedef char * 		 	t_list_value;
@@ -29,6 +30,15 @@ typedef bool (*t_list_Bpredicate_val)(t_list_value, t_list_value);
 typedef void (*t_list_Apredicate_val)(size_t *, t_list_value);
 typedef void (*f_push) (t_list *const, const t_list_value);
 typedef t_list_value (*t_value_mutate)(t_list_value);
+
+
+typedef enum e_opcode t_opcode;
+
+enum e_opcode
+{
+	words_only,
+	all
+};
 
 struct s_list
 {
@@ -60,7 +70,7 @@ void 	pop_back(t_list *const list);
 t_list  *make_list() __attribute__((malloc)) __result_use_check;
 t_list 	*make_list_copy(t_list *other, t_value_mutate f) __attribute__((malloc)) __result_use_check;
 t_list  *make_list_from_matrix(char **arr) __attribute__((malloc)) __result_use_check;
-t_list  *make_list_from_string(char *s, const char c) __attribute__((malloc)) __result_use_check;
+t_list  *make_list_from_string(char *s, const char c, t_opcode opcode) __attribute__((malloc)) __result_use_check;
 t_node  *make_node(const t_list_value x) __attribute__((malloc)) __result_use_check;
 void 	list_move_back(t_list *lhv, t_list *rhv);
 

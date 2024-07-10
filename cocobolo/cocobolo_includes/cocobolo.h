@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:12:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:13:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ char	    *__strstr(char *haystack, char *needle);
 size_t      __strcmp(const char *lhv, const char *rhv);
 bool        __strcmp_weak__(const char *lhv, const char *rhv);
 t_matrix    __split(char const *s, char c) __result_use_check;
+t_matrix    __split_include_delimiters(char const *s, char c) __result_use_check;
+// matrix
+void 		__print_matrix(t_matrix arr);
 void        __matrix_clear(t_matrix *arrptr);
+size_t 		__matrix_size(t_matrix arr);
 
 // colors
 void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...);

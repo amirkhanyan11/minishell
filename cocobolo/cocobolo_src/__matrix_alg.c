@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   __matrix_alg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 22:19:00 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 21:14:41 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/10 20:59:12 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/10 21:15:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <cocobolo.h>
 
-t_list * __result_use_check tokenize(char * raw_cmd)
+size_t __matrix_size(t_matrix arr)
 {
-	if (!raw_cmd) __exit("empty command");
+	if (!arr) return 0;
 
-	return make_list_from_string(raw_cmd, ' ', all);
+	size_t i = 0;
+	while (arr[i]) i++;
+
+	return i;
+}
+
+void __print_matrix(t_matrix arr)
+{
+	if (!arr) return ;
+
+	size_t i = 0;
+	while (arr[i])
+	{
+		printf("%s\n", arr[i]);
+		i++;
+	}
+
 }
