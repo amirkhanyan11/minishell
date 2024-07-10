@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 16:15:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:09:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ void __single__push_front__(t_list *const list, const t_list_value x);
 void 	pop_front(t_list *const list);
 void 	pop_back(t_list *const list);
 
-t_list  *make_list() __attribute__((malloc));
-t_list 	*make_list_copy(t_list *other, t_value_mutate f) __attribute__((malloc));
-t_list  *make_list_from_matrix(char **arr) __attribute__((malloc));
-t_list  *make_list_from_string(char *s, const char c) __attribute__((malloc));
-t_node  *make_node(const t_list_value x) __attribute__((malloc));
+t_list  *make_list() __attribute__((malloc)) __attribute__((warn_unused_result));
+t_list 	*make_list_copy(t_list *other, t_value_mutate f) __attribute__((malloc)) __attribute__((warn_unused_result));
+t_list  *make_list_from_matrix(char **arr) __attribute__((malloc)) __attribute__((warn_unused_result));
+t_list  *make_list_from_string(char *s, const char c) __attribute__((malloc)) __attribute__((warn_unused_result));
+t_node  *make_node(const t_list_value x) __attribute__((malloc)) __attribute__((warn_unused_result));
+void 	list_move_back(t_list *lhv, t_list *rhv);
+
 
 void 	print_list(t_list *list);
 void 	print_list_enumerate(t_list *list);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 16:08:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:38:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <cocobolo.h>
 # include <stdio.h>
+# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
@@ -52,6 +53,8 @@ struct s_command
 	char 	*name;
 	t_list  *options;
     t_list 	*args;
+
+	bool resolved;
 };
 
 // displays
@@ -62,6 +65,7 @@ void display_history();
 char	*read_line(void);
 
 // execution
+void 	     eval(t_command *cmd, char **env);
 t_list 		 *tokenize(char * raw_cmd) __attribute__((warn_unused_result));
 t_list 		 *preprocess(t_list *tokens, t_shell * shell) __attribute__((warn_unused_result)) ;
 

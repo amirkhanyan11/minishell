@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 16:03:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:49:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 #define ITALIC_ON "\e[3m"
 #define ITALIC_OFF "\e[23m"
 
+typedef struct s_list t_list;
+
 // usage : str = __strappend(str, s1, s2, ...)
 # define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
 # define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
@@ -47,7 +49,8 @@ void		*__malloc(size_t n) __attribute__((malloc)) __attribute__((warn_unused_res
 pid_t 		__fork(void);
 
 // string
-char 		*__make_string_empty() __attribute__((warn_unused_result));
+char 		*__make_string_empty() __attribute__((malloc)) __attribute__((warn_unused_result));
+char 		*__make_string_from_list(t_list *list) __attribute__((malloc)) __attribute__((warn_unused_result)) ;
 char 		*__attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrapped_strappend__(char *s, ...);
 char		*__single_strappend__(char *lhv, char *rhv) __attribute__((warn_unused_result));
 size_t	    __strlen(const char *str);

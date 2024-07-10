@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 21:39:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:39:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_command * __attribute__((warn_unused_result)) make_command(char * raw_cmd, t_s
 	}
 
 	list_clear(&tokens);
+
+	cmd->resolved = false;
 
 	return cmd;
 }

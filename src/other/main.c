@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 15:57:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:10:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int main(int ac, char **av, char **env)
 		if (0 == __strcmp(cmd->name, "pwd")) pwd();
 
 		else if (0 == __strcmp(cmd->name, "history")) display_history();
+
+		else if (0 == __strcmp(cmd->name, "ls")) eval(cmd, env);
 
 		else if (0 == __strcmp(cmd->name, "export")) export();
 
