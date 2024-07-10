@@ -6,31 +6,33 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 21:18:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:57:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "minishell.h"
 
+t_shell *shell = NULL;
+
 int main(int ac, char **av, char **env)
 {
-	t_shell *shell = make_shell(env);
-	t_command *cmd = NULL;
+	shell = make_shell(env);
 
+	// fetch -> decode -> execute
 	while (true)
 	{
 		char * line = read_line();
 
-		cmd = make_command(line, shell);
+		t_command *cmd __attribute__((cleanup(__t_command__))) = make_command(line, shell);
 
 		if (NULL == cmd) continue;
 
-		if (0 == __strcmp(cmd->name, "pwd")) pwd(shell);
+		if (0 == __strcmp(cmd->name, "pwd")) pwd();
 
-		else if (0 == __strcmp(cmd->name, "history")) display_history(shell);
+		else if (0 == __strcmp(cmd->name, "history")) display_history();
 
-		else if (0 == __strcmp(cmd->name, "export")) print_list(shell->export);
+		else if (0 == __strcmp(cmd->name, "export")) export();
 
 		else if (0 == __strcmp(cmd->name, "echo")) echo(cmd);
 
@@ -39,12 +41,8 @@ int main(int ac, char **av, char **env)
 		else if (0 == __strcmp(cmd->name, "exit")) break;
 
 		push_back(shell->history, line);
-
-		__t_command__(&cmd);
+		add_history(line);
 	}
-
-	__t_command__(&cmd);
-	__t_shell__(&shell);
 
 	return 0;
 }

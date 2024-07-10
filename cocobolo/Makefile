@@ -18,10 +18,11 @@ RED = \x1b[1;31m
 vpath %.c ${SRCSPATH}
 
 SRCS = $(foreach L, ${SRCSPATH}, $(wildcard ${L}*.c))
-OBJS =  $(foreach L, ${SRCSPATH}, $(patsubst ${L}%.c, ${OBJSPATH}%.o, ${SRCS})) 
+OBJS =  $(foreach L, ${SRCSPATH}, $(patsubst ${L}%.c, ${OBJSPATH}%.o, ${SRCS}))
 
 CC = gcc
-CFLAGS = $(foreach H, ${INCPATH}, -I${H}) #-Wall -Wextra -Werror
+DEBUG = -fsanitize=address
+CFLAGS = $(foreach H, ${INCPATH}, -I${H}) ${DEBUG} #-Wall -Wextra -Werror
 
 all : ${OBJSPATH} ${NAME}
 
@@ -32,7 +33,7 @@ ${NAME} : ${OBJS}
 	@ar -rcs ${NAME} ${OBJSPATH}*.o
 
 ${OBJSPATH}%.o : %.c Makefile
-	@${CC} ${CFLAGS} -c $< -o $@	
+	@${CC} ${CFLAGS} -c $< -o $@
 
 clean :
 	@rm -rf ${OBJSPATH}

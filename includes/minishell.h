@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 21:54:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:47:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ struct s_command
 
 // displays
 void display_prompt();
-void display_history(t_shell * shell);
+void display_history();
 
 //	reading input
 char	*read_line(void);
@@ -79,12 +79,12 @@ t_matrix 	 make_matrix_copy(t_matrix other) __attribute__((warn_unused_result));
 t_command 	 *make_command(char * raw_cmd, t_shell * shell) __attribute__((warn_unused_result));
 t_list 		 *make_path(t_shell *shell) __attribute__((warn_unused_result));
 t_descriptor *make_descriptors() __attribute__((warn_unused_result));
-void 	 	 __t_shell__(t_shell **shellptr);
+void 	 	 __t_shell__(t_shell **shellptr)  __attribute__((destructor));
 void 		 __t_command__(t_command **cmdptr);
 
 // builtins
-void pwd(t_shell *shell __attribute__((unused)));
-void export(t_shell *shell);
+void pwd();
+void export();
 void echo(t_command *cmd);
 
 
