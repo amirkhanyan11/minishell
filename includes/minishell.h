@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 15:47:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:08:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_list 		 *make_export(t_shell *shell) __attribute__((warn_unused_result));
 t_shell 	 *make_shell(char **env) __attribute__((warn_unused_result));
 t_matrix 	 make_matrix_from_string(char *s, char c) __attribute__((warn_unused_result));
 t_matrix 	 make_matrix_copy(t_matrix other) __attribute__((warn_unused_result));
+t_matrix  	 make_matrix_from_list(t_list *list)  __attribute__((warn_unused_result));
 t_command 	 *make_command(char * raw_cmd, t_shell * shell) __attribute__((warn_unused_result));
 t_list 		 *make_path(t_shell *shell) __attribute__((warn_unused_result));
 t_descriptor *make_descriptors() __attribute__((warn_unused_result));

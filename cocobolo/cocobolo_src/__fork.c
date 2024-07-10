@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eval.c                                             :+:      :+:    :+:   */
+/*   __fork.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 16:14:53 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/10 16:01:36 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/10 16:02:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <cocobolo.h>
 
-extern t_shell *shell;
+pid_t __fork(void)
+{
+	pid_t pid = fork();
 
-// void eval(t_command *cmd)
-// {
-// 	pid_t pid = __fork();
+	if (-1 == pid) __exit("fork error");
 
-// 	push_front(cmd->args, NULL);
-
-// 	t_matrix _args __attribute__((cleanup(__matrix_clear))) = make_matrix_from_list(cmd->args);
-
-// 	if (0 == pid)
-// 	{
-
-// 	}
-
-// 	wait(NULL);
-// }
+	return pid;
+}

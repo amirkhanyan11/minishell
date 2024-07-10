@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:00:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:16:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,25 @@ t_matrix  __attribute__((warn_unused_result)) make_matrix_copy(t_matrix other)
 		i++;
 	}
 	return res;
+}
+
+t_matrix  __attribute__((warn_unused_result)) make_matrix_from_list(t_list *list)
+{
+	if (!list) return NULL;
+
+	size_t lstsize = size(list);
+
+	t_matrix arr = __malloc(lstsize + 1);
+
+	arr[lstsize] = NULL;
+
+	t_node *node = list->head;
+	size_t i = 0;
+	while (node)
+	{
+		arr[i++] = __strdup(node->val);
+		node = node->next;
+	}
+
+	return arr;
 }
