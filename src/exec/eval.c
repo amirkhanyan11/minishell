@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 23:26:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:05:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ extern t_shell *shell;
 
 void eval(t_command *cmd)
 {
-	cmd_lookup(cmd);
+	int lookup = cmd_lookup(cmd);
+
+	if (lookup == -1) return;
 
 	pid_t pid = __fork();
 
@@ -40,8 +42,7 @@ void eval(t_command *cmd)
 		__exit(strerror(errno));
 	}
 
-	// dup2(shell->sysdescriptors->stdin, shell->descriptors->stdin);
-	// dup2(shell->sysdescriptors->stdout, shell->descriptors->stdout);
+	reset_descriptors();
 
 	wait(NULL);
 }

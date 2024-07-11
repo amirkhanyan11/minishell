@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:17:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:07:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void echo(t_command *cmd)
 
 	while (node)
 	{
-		printf("%s", node->val);
+		printf("%s ", node->val);
 		node = node->next;
 	}
 	printf("\n");

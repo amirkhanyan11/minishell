@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 18:48:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:54:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,26 @@ extern t_shell *shell;
 
 static bool __cmd_exists__(t_list_value path, t_list_value name);
 
-void cmd_lookup(t_command *cmd)
+int cmd_lookup(t_command *cmd)
 {
-	if (!cmd || cmd->resolved) return ;
+	if (!cmd) return -1;
 
-	t_node *node = find_strict(shell->path, cmd->name, __cmd_exists__);
+	if (cmd->resolved) return 0;
+
+	t_node *node = find(shell->path, cmd->name, __cmd_exists__);
+
+	if (!node)
+	{
+		perror("./minishell: command not found");
+		return -1;
+	}
+
 	char *resolved_name = __strappend(__make_string_empty(), node->val, "/", cmd->name);
 	free(cmd->name);
 	cmd->name = resolved_name;
 	cmd->resolved = true;
+
+	return 0;
 }
 
 // leak

@@ -24,6 +24,7 @@
 		"_malloc.h": "c",
 		"unistd.h": "c",
 		"cdefs.h": "c",
-		"algorithm": "c"
+		"algorithm": "c",
+		"locale": "c"
 	}
 }

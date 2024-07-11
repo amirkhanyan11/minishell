@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 23:19:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:13:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ t_command * __result_use_check make_command(char * raw_cmd, t_shell *shell)
 	cmd->name = __strdup(tokens->head->val); // assume the name of the command goes always first in the input
 
 	t_node *node = tokens->head->next;
+
 	while (node)
 	{
-		if (node->val) // varables that couldn't reslove turn into null pointers, maybe better pop them
-		{
-			if (node->val[0] == '-')
-				push_back(cmd->options, node->val);
-			else
-				push_back(cmd->args, node->val);
-		}
+		if (node->val[0] == '-')
+			push_back(cmd->options, node->val);
+		else
+			push_back(cmd->args, node->val);
 		node = node->next;
 	}
 

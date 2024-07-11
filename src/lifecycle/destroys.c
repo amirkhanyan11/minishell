@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:23:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:59:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void  __attribute__((destructor)) __t_shell__()
 	free(shell->sysdescriptors);
 	free(shell->descriptors);
 
-	close(shell->infile);
-	close(shell->outfile);
+	reset_descriptors();
 
     free(shell);
 

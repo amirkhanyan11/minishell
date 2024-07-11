@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 23:10:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:12:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ struct s_shell
 	t_descriptor *descriptors;
 
 	int			 status;
-	t_file		 infile;
-	t_file		 outfile;
 };
 
 struct s_descriptor
@@ -68,12 +66,13 @@ char	*read_line(void);
 
 // execution
 void 	     eval(t_command *cmd);
+void 		 reset_descriptors();
 
 // execution helpers
 char 		*get_value(t_list *list, char *target) __result_use_check;
-void 		resolve(t_node *token, t_shell *shell);
+void 		resolve(t_node *t, t_list *tokens);
 char 		*get_key(t_list_value line)  __result_use_check;
-void 		cmd_lookup(t_command *cmd);
+int 		cmd_lookup(t_command *cmd);
 t_file 		open_file(char *filenae, int options);
 int 		redirect(t_node *token);
 

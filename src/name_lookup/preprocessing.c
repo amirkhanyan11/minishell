@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 23:12:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:13:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_list * __result_use_check preprocess(t_list *tokens, t_shell * shell)
 	{
 		if (token->val[0] == '$')
 		{
-			resolve(token, shell);
+			t_node *next = token->next;
+			resolve(token, tokens);
+			token = next;
+			continue;
 		}
 		if (0 == __strcmp(token->val, "<") || 0 == __strcmp(token->val, ">"))
 		{

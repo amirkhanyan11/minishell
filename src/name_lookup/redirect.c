@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 23:23:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:03:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,13 @@ int redirect(t_node *token)
 	{
 		fd = open_file(token->next->val, O_RDONLY);
 		if (fd == -1) return -1;
-		close(shell->infile);
 		shell->descriptors->stdin = fd;
-		shell->infile = fd;
-		// dup2(shell->infile, STDIN_FILENO);
 	}
 	else
 	{
 		fd = open_file(token->next->val, O_WRONLY | O_CREAT | O_TRUNC);
 		if (fd == -1) return -1;
-		close(shell->outfile);
-	shell->descriptors->stdout = fd;
-		shell->outfile = fd;
-		// dup2(shell->outfile, STDOUT_FILENO);
+		shell->descriptors->stdout = fd;
 	}
 	return 0;
 }
