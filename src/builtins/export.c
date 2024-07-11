@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:26:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:35:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 extern t_shell *shell;
 
 static void __print_export__(t_node *head);
-
 
 static int __export_arg_resolver__(t_node *arg)
 {
@@ -27,11 +26,16 @@ static int __export_arg_resolver__(t_node *arg)
 
 	dollar_sign_resolver(tokens);
 
+
+	if (tokens->head->val[0] >= '0' && '9' >= tokens->head->val[0])
+	{
+		__perror("./minishell: export: not a valid identifier");
+		return -1;
+	}
+
 	__unset__(tokens->head);
 
 	char * __dtor(__delete_string) res = __make_string_from_list(tokens);
-
-	// printf("%s\n", str_var);
 
 	push_back(shell->export, res);
 
