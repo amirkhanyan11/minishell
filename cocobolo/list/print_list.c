@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:49:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:56:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:17:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void print_list(t_list *list)
 	if (NULL == list)
 		return;
 	preorder_traverse(list->head, __print_listnode__);
+}
+
+void print_list_custom(t_list *list, t_list_Upredicate p)
+{
+	if (NULL == list || NULL == p)
+		return;
+	preorder_traverse(list->head, p);
 }
 
 void print_list_enumerate(t_list *list)

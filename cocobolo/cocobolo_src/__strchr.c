@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reslove.c                                          :+:      :+:    :+:   */
+/*   __strchr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 20:46:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/11 20:33:49 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/11 20:34:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <cocobolo.h>
 
-extern t_shell *shell;
-
-void resolve(t_node *t, t_list *tokens)
+bool __strchr(char *s, const char c)
 {
-	char *val = get_value(shell->export, t->val + 1);
-
-	if (val == NULL)
+	while(*s)
 	{
-		list_remove(tokens, t);
-		return;
+		if (*s == c) return true;
+		++s;
 	}
-
-	free(t->val);
-
-	t->val = val;
+	return false;
 }

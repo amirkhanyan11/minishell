@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:44:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:18:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void 	list_move_back(t_list *lhv, t_list *rhv);
 void 	list_remove(t_list *list, t_node *node);
 
 void 	print_list(t_list *list);
+void 	print_list_custom(t_list *list, t_list_Upredicate p);
 void 	print_list_enumerate(t_list *list);
 
 //	algorithms

@@ -25,6 +25,11 @@
 		"unistd.h": "c",
 		"cdefs.h": "c",
 		"algorithm": "c",
-		"locale": "c"
+		"locale": "c",
+		"__functional_03": "c",
+		"functional": "c",
+		"wait.h": "c",
+		"__bit_reference": "c",
+		"__string": "c"
 	}
 }

@@ -6,13 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:22:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:13:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static bool __contains_as_key__(char *line, char *target);
 
 // if successes returns malloced string
 char * __result_use_check get_value(t_list *list, char *target)
@@ -29,10 +27,11 @@ char * __result_use_check get_value(t_list *list, char *target)
 
 	if (*res == '\0') return NULL;
 
+	// return __strtrim(res + 1, "\"");
 	return __strdup(res + 1);
 }
 
-static bool __contains_as_key__(char *line, char *target)
+bool __contains_as_key__(char *line, char *target)
 {
 	char * key = get_key(line);
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:52:49 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 21:09:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 18:30:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 t_matrix  __result_use_check  __split_include_delimiters(char const *s, char c)
 {
+	if (!s) return NULL;
+
 	t_matrix __dtor(__matrix_clear) arr = __split(s, c);
 
 	size_t SIZE = __matrix_size(arr) * 2 - 1;
+
+	if (s[__strlen(s) - 1] == c) SIZE++;
 
 	t_matrix res = malloc(sizeof(char *) * (SIZE + 1));
 
@@ -25,7 +29,7 @@ t_matrix  __result_use_check  __split_include_delimiters(char const *s, char c)
 	size_t i = 0;
 	size_t j = 0;
 
-	while (i < SIZE)
+	while (arr[j])
 	{
 		res[i] = __strdup(arr[j]);
 		if (i + 1 < SIZE)

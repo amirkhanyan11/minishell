@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:55:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:21:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int main(int ac, char **av, char **env)
 
 		else if (0 == __strcmp(cmd->name, "history")) display_history();
 
-		else if (0 == __strcmp(cmd->name, "export")) export();
+		else if (0 == __strcmp(cmd->name, "export")) export(cmd);
 
 		else if (0 == __strcmp(cmd->name, "echo")) echo(cmd);
+
+		else if (0 == __strcmp(cmd->name, "unset")) unset(cmd);
 
 		else if (0 == __strcmp(cmd->name, "env")) print_list(shell->env);
 

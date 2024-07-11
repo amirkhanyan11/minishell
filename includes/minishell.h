@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:59:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:20:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+
+# define declarex "declare -x "
 
 typedef struct s_shell t_shell;
 typedef struct s_command t_command;
@@ -79,6 +81,11 @@ int 		redirect(t_node *token);
 // parsing
 t_list 		 *tokenize(char * raw_cmd) __result_use_check;
 t_list 		 *preprocess(t_list *tokens) __result_use_check ;
+void 		 dollar_sign_resolver(t_list *tokens);
+
+
+// find predicates
+bool __contains_as_key__(char *line, char *target);
 
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __result_use_check;
@@ -94,9 +101,12 @@ void 	 	 __t_shell__()  __attribute__((destructor));
 
 // builtins
 void pwd();
-void export();
+void unset(t_command *cmd);
+void export(t_command *cmd);
 void echo(t_command *cmd);
 
+// other
+void __unset__(t_node *token);
 
 
 #endif // MINISHELL_H

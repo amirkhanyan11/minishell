@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reslove.c                                          :+:      :+:    :+:   */
+/*   dollar_sign_resolver.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 20:46:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/11 18:16:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 extern t_shell *shell;
 
-void resolve(t_node *t, t_list *tokens)
+void dollar_sign_resolver(t_list *tokens)
 {
-	char *val = get_value(shell->export, t->val + 1);
+	if (!tokens) return;
 
-	if (val == NULL)
+	t_node *token = tokens->head;
+
+	while (token)
 	{
-		list_remove(tokens, t);
-		return;
+		t_node *next = token->next;
+
+		if (token->val[0] == '$')
+			resolve(token, tokens);
+
+		token = next;
 	}
-
-	free(t->val);
-
-	t->val = val;
 }

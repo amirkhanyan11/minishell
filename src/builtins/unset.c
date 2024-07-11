@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reslove.c                                          :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 20:46:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/11 21:21:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 extern t_shell *shell;
 
-void resolve(t_node *t, t_list *tokens)
+void __unset__(t_node *token)
 {
-	char *val = get_value(shell->export, t->val + 1);
+	if (!token || !token->val) return;
 
-	if (val == NULL)
-	{
-		list_remove(tokens, t);
-		return;
-	}
+	t_node *guess = find(shell->export, token->val, __contains_as_key__);
+	t_node *guess2 = find(shell->env, token->val, __contains_as_key__);
 
-	free(t->val);
+	if (guess) list_remove(shell->export, guess);
+	if (guess2) list_remove(shell->env, guess2);
+}
 
-	t->val = val;
+void unset(t_command *cmd)
+{
+	if (!cmd || !cmd->args) return;
+
+	preorder_traverse(cmd->args->head, __unset__);
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:57:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:43:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ pid_t 		__fork(void);
 // string
 void 		__delete_string(char **s);
 char 		*__make_string_empty() __attribute__((malloc)) __result_use_check;
+char		*__strtrim(char *s1, char *set) __attribute__((malloc)) __result_use_check;
 char 		*__make_string_from_list(t_list *list) __attribute__((malloc)) __result_use_check ;
 char 		*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...);
 char		*__single_strappend__(char *lhv, char *rhv) __result_use_check;
@@ -72,6 +73,7 @@ char	    *__strdup(const char *src) __result_use_check;
 char		*__strdup_until(const char *src, const char end) __result_use_check;
 char	    *__strstr(char *haystack, char *needle);
 size_t      __strcmp(const char *lhv, const char *rhv);
+bool 		__strchr(char *s, const char c);
 bool        __strcmp_weak__(const char *lhv, const char *rhv);
 t_matrix    __split(char const *s, char c) __result_use_check;
 t_matrix    __split_include_delimiters(char const *s, char c) __result_use_check;
