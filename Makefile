@@ -4,7 +4,7 @@ COCOBOLOPATH = ./cocobolo/
 COCOBOLO = ${COCOBOLOPATH}cocobolo.a
 
 SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./src/exec/
-INCPATH = ./includes/ ${COCOBOLOPATH}cocobolo_includes/
+INCPATH = ./includes/ ${COCOBOLOPATH}cocobolo_includes/ ./readline_lib/include/
 OBJSPATH = ./objs/
 
 # SRCS = $(wildcard $(SRCSPATH)*.c)
@@ -29,6 +29,7 @@ CC = gcc
 DEBUG = -fsanitize=address
 WFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(foreach H, $(INCPATH), -I$(H)) $(DEBUG) #$(WFLAGS)
+
 LREADLINE = -L/usr/lib -lreadline
 
 all : ${OBJSPATH} ${NAME}
@@ -56,6 +57,9 @@ fclean : clean
 
 re : fclean all
 
+config :
+	./readline_config.sh readline_lib
+
 push :
 
 	make fclean
@@ -67,5 +71,5 @@ leaks : re
 
 	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
 
-.PHONY : all clean fclean re leaks
+.PHONY : all clean fclean re leaks config
 

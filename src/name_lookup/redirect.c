@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:58:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:56:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int redirect(t_node *token)
 {
 	if (!token || !token->next)
 	{
-		__exit ("bad redirections parse");
+		__perror("./minishell: ambiguous redirect");
+		return -1;
 	}
 
 	// if (access(token->next->val, F_OK | R_OK) == -1)

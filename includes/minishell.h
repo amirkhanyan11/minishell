@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:20:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:53:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+# include <signal.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <termios.h>
 
 # define declarex "declare -x "
 
@@ -108,5 +110,8 @@ void echo(t_command *cmd);
 // other
 void __unset__(t_node *token);
 
+// signals
+// void	set_signals_interactive(void);
+// void	set_signals_noninteractive(void);
 
 #endif // MINISHELL_H

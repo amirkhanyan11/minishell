@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 18:14:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:55:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ t_list * __result_use_check preprocess(t_list *tokens)
 	{
 		t_node *next = token->next;
 
-
 		if (0 == __strcmp(token->val, "<") || 0 == __strcmp(token->val, ">")) // better make a separate function line the dollar_sign_resolver()
 		{
 			int redir = redirect(token);
+
 			if (-1 == redir) return NULL;
+
 			t_node *next = token->next->next;
 			list_remove(tokens, token->next);
 			list_remove(tokens, token);

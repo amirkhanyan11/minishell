@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:21:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 23:01:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,31 @@ int main(int ac, char **av, char **env)
 
 		t_command * __dtor(__t_command__) cmd = make_command(line);
 
-		if (NULL == cmd) continue;
+		if (NULL != cmd)
+		{
+			if (0 == __strcmp(cmd->name, "pwd")) pwd();
 
-		if (0 == __strcmp(cmd->name, "pwd")) pwd();
+			else if (0 == __strcmp(cmd->name, "history")) display_history();
 
-		else if (0 == __strcmp(cmd->name, "history")) display_history();
+			else if (0 == __strcmp(cmd->name, "export")) export(cmd);
 
-		else if (0 == __strcmp(cmd->name, "export")) export(cmd);
+			else if (0 == __strcmp(cmd->name, "echo")) echo(cmd);
 
-		else if (0 == __strcmp(cmd->name, "echo")) echo(cmd);
+			else if (0 == __strcmp(cmd->name, "unset")) unset(cmd);
 
-		else if (0 == __strcmp(cmd->name, "unset")) unset(cmd);
+			else if (0 == __strcmp(cmd->name, "env")) print_list(shell->env);
 
-		else if (0 == __strcmp(cmd->name, "env")) print_list(shell->env);
+			else if (0 == __strcmp(cmd->name, "exit")) break;
 
-		else if (0 == __strcmp(cmd->name, "exit")) break;
+			else eval(cmd);
+		}
 
-		else eval(cmd);
+		if (line && *line && __strcmp(line, "\n"))
+		{
+			push_back(shell->history, line);
 
-		push_back(shell->history, line);
-
-		add_history(line);
+			add_history(line);
+		}
 	}
 
 	return 0;

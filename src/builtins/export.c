@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:35:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:35:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int __export_arg_resolver__(t_node *arg)
 	t_list * __dtor(list_clear) tokens = make_list_from_matrix(arr);
 
 	dollar_sign_resolver(tokens);
-
 
 	if (tokens->head->val[0] >= '0' && '9' >= tokens->head->val[0])
 	{
