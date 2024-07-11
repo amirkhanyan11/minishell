@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:18:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:26:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int __export_arg_resolver__(t_node *arg)
 	// printf("%s\n", str_var);
 
 	push_back(shell->export, res);
+
+	if (NULL != find(tokens, "=", list_value_same)) push_back(shell->env, res);
 
 	return 0;
 }
