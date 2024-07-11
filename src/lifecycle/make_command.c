@@ -6,17 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:13:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:49:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command * __result_use_check make_command(char * raw_cmd, t_shell *shell)
+extern t_shell *shell;
+
+t_command * __result_use_check make_command(char * raw_cmd)
 {
 	if (!raw_cmd || !shell) return NULL;
 
-	t_list *tokens = preprocess(tokenize(raw_cmd), shell);
+	t_list *tokens = preprocess(tokenize(raw_cmd));
 
 	if (empty(tokens)) return NULL;
 

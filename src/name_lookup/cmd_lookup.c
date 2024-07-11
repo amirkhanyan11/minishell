@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 16:54:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:58:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int cmd_lookup(t_command *cmd)
 
 	if (!node)
 	{
-		perror("./minishell: command not found");
+		__perror("./minishell: command not found");
 		return -1;
 	}
 

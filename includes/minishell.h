@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:12:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:59:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int 		redirect(t_node *token);
 
 // parsing
 t_list 		 *tokenize(char * raw_cmd) __result_use_check;
-t_list 		 *preprocess(t_list *tokens, t_shell * shell) __result_use_check ;
+t_list 		 *preprocess(t_list *tokens) __result_use_check ;
 
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __result_use_check;
@@ -86,11 +86,11 @@ t_shell 	 *make_shell(char **env) __result_use_check;
 t_matrix 	 make_matrix_from_string(char *s, char c) __result_use_check;
 t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
 t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
-t_command 	 *make_command(char * raw_cmd, t_shell * shell) __result_use_check;
+t_command 	 *make_command(char * raw_cmd) __result_use_check;
 t_list 		 *make_path(t_shell *shell) __result_use_check;
 t_descriptor *make_descriptors() __result_use_check;
-void 	 	 __t_shell__(t_shell **shellptr)  __attribute__((destructor));
 void 		 __t_command__(t_command **cmdptr);
+void 	 	 __t_shell__()  __attribute__((destructor));
 
 // builtins
 void pwd();

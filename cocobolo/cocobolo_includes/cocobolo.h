@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 16:45:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:57:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_list t_list;
 typedef void (*t_printf_option)(const char * const);
 typedef char ** t_matrix;
 
+void 		__perror(char * err);
 void		__exit(char const *const err) __dead2;
 t_optional	__atoi(char const *str);
 void		*__malloc(size_t n) __attribute__((malloc)) __result_use_check;
