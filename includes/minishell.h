@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:43:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:35:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void 		 __t_command__(t_command **cmdptr);
 void 	 	 __t_shell__()  __attribute__((destructor));
 
 // builtins
+void cd(t_command *cmd);
 void pwd();
 void _env(char *name);
 void unset(t_command *cmd);
