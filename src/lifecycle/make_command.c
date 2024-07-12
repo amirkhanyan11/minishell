@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 23:06:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:38:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ extern t_shell *shell;
 t_command * __result_use_check make_command(char * raw_cmd)
 {
 	if (!raw_cmd || !shell) return NULL;
+
+	reset_descriptors(); // probably a bad choice considering pipes
 
 	t_list *tokens = preprocess(tokenize(raw_cmd));
 
