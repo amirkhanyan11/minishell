@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:46:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:22:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int redirect(t_node *token)
 		if (fd == -1)
 		 	return -1;
 		shell->descriptors->stdout = fd;
+
 	}
 	else
 	{

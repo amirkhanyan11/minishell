@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:05:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:24:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void eval(t_command *cmd)
 
 	if (0 == pid)
 	{
-		dup2(shell->descriptors->stdin, STDIN_FILENO);
-		dup2(shell->descriptors->stdout, STDOUT_FILENO);
+
+		if (shell->descriptors->stdin != shell->sysdescriptors->stdin)
+			dup2(shell->descriptors->stdin, STDIN_FILENO);
+		if (shell->descriptors->stdout != shell->sysdescriptors->stdout)
+			dup2(shell->descriptors->stdout, STDOUT_FILENO);
 
 		t_list * __dtor(list_clear) options_copy = make_list_copy(cmd->options, NULL);
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:43:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:27:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int main(int ac, char **av, char **env)
 			else if (0 == __strcmp(cmd->name, "unset")) unset(cmd);
 
 			else if (0 == __strcmp(cmd->name, "env") || 0 == __strcmp(cmd->name, "printenv")) _env(cmd->name);
+
+			else if (0 == __strcmp(cmd->name, "cd"))
+			{
+				chdir(cmd->args->head->val);
+			}
 
 			else if (0 == __strcmp(cmd->name, "exit")) break;
 
