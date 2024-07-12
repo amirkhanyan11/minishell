@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:08:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:59:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,6 @@
 extern t_shell *shell;
 
 static void __print_export__(t_node *head);
-
-static int __export_arg_resolver__(t_node *arg)
-{
-	if (!arg || !arg->val) return -1;
-
-	t_matrix __dtor(__matrix_clear) arr = __split_include_delimiters(arg->val, '=');
-
-	t_list * __dtor(list_clear) tokens = make_list_from_matrix(arr);
-
-	dollar_sign_resolver(tokens);
-
-	if (tokens->head->val[0] >= '0' && '9' >= tokens->head->val[0])
-	{
-		__perror("export: not a valid identifier");
-		return -1;
-	}
-
-	__unset__(tokens->head);
-
-	char * __dtor(__delete_string) res = __make_string_from_list(tokens);
-
-	push_back(shell->export, res);
-
-	if (NULL != find(tokens, "=", list_value_same))
-	{
-		push_back(shell->env, res);
-
-		if (0 == __strcmp(tokens->head->val, "PATH") && size(tokens) >= 3) shell->path = make_path(shell);
-	}
-
-	return 0;
-}
 
 void export(t_command *cmd)
 {
@@ -61,11 +29,44 @@ void export(t_command *cmd)
 
 	while (arg)
 	{
-		__export_arg_resolver__(arg);
+		__export_from_string__(arg->val);
 		arg = arg->next;
 	}
 
 }
+
+int __export_from_string__(char *val)
+{
+	if (!val) return -1;
+
+	t_matrix __dtor(__matrix_clear) arr = __split_include_delimiters(val, '=');
+
+	t_list * __dtor(list_clear) tokens = make_list_from_matrix(arr);
+
+	dollar_sign_resolver(tokens);
+
+	if (tokens->head->val[0] >= '0' && '9' >= tokens->head->val[0])
+	{
+		__perror("export: not a valid identifier");
+		return -1;
+	}
+
+	__unset__(tokens->head);
+
+	string res = __make_string_from_list(tokens);
+
+	push_back(shell->export, res);
+
+	if (NULL != find(tokens, "=", list_value_same))
+	{
+		push_back(shell->env, res);
+
+		if (0 == __strcmp(tokens->head->val, "PATH") && size(tokens) >= 3) shell->path = make_path(shell);
+	}
+
+	return 0;
+}
+
 
 static void __print_export__(t_node *head)
 {

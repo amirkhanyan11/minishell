@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 20:43:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:45:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_list t_list;
 // usage : str = __strappend(str, s1, s2, ...)
 # define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
 # define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
+
+#define string char * __dtor(__delete_string)
 
 typedef void (*t_printf_option)(const char * const);
 typedef char ** t_matrix;

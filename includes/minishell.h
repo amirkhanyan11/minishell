@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:35:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:59:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void export(t_command *cmd);
 void echo(t_command *cmd);
 
 // other
+int __export_from_string__(char *val);
+char *  __pwd__() __result_use_check;
 void __unset__(t_node *token);
 
 // signals

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:35:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:00:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,33 @@ void cd(t_command *cmd)
 {
 	if (!cmd) return;
 
-	if (empty(cmd->args))
-	{
-		char * __dtor(__delete_string) home = get_value(shell->export, "HOME");
-		chdir(home);
-		return ;
-	}
-
-	if (size(cmd->args) != 1)
+	if (!empty(cmd->args) && size(cmd->args) != 1)
 	{
 		__perror("cd : wrong arguments");
 		return;
 	}
-	chdir(cmd->args->head->val);
+
+	string wd = get_value(shell->export, "PWD");
+
+	if (empty(cmd->args))
+	{
+		string home = get_value(shell->export, "HOME");
+		chdir(home);
+	}
+
+	else if (size(cmd->args) == 1)
+	{
+		chdir(cmd->args->head->val);
+	}
+
+	if (wd)
+	{
+		string oldpwd = __strappend(__make_string_empty(), "OLDPWD", "=", wd);
+		string cwd = __pwd__();
+		string pwd = __strappend(__make_string_empty(), "PWD", "=", cwd);
+
+		__export_from_string__(oldpwd);
+		__export_from_string__(pwd);
+	}
+
 }

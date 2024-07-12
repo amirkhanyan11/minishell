@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:19:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:44:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int cmd_lookup(t_command *cmd)
 
 bool __cmd_exists__(t_list_value path, t_list_value name)
 {
-	char * __dtor(__delete_string) guess = __strappend(__make_string_empty(), path, "/", name);
+	string guess = __strappend(__make_string_empty(), path, "/", name);
 
 	bool res = (0 == access(guess, F_OK));
 
