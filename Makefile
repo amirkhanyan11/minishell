@@ -13,7 +13,7 @@ OBJSPATH = ./objs/
 vpath %.c ${SRCSPATH}
 
 SRCS = $(foreach D, ${SRCSPATH}, $(wildcard ${D}*.c))
-OBJS =  $(foreach D, ${SRCSPATH}, $(patsubst ${D}%.c, ${OBJSPATH}%.o, ${SRCS}))
+OBJS = $(foreach D, ${SRCSPATH}, $(patsubst ${D}%.c, ${OBJSPATH}%.o, ${SRCS}))
 
 END = \x1b[0m
 GREEN = \x1b[33;1m
