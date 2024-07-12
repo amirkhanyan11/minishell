@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:44:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:06:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int cmd_lookup(t_command *cmd)
 	if (!node)
 	{
 		__perror("command not found");
+		shell->status = 127;
 		return -1;
 	}
 
