@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:24:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:22:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ void eval(t_command *cmd)
 
 	reset_descriptors();
 
-	wait(NULL);
+	int x = 0;
+	waitpid(pid, &x, 0);
+	shell->status = WEXITSTATUS(x);
 }

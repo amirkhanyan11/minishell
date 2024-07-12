@@ -6,13 +6,12 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:07:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:18:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// change the function so that it takest the raw string or something and prints out with the whitespace characters
 void echo(t_command *cmd)
 {
 	if (!cmd) __exit("nullptr passed to echo");
@@ -24,5 +23,7 @@ void echo(t_command *cmd)
 		printf("%s ", node->val);
 		node = node->next;
 	}
-	printf("\n");
+
+	if (NULL == find(cmd->options, "-n", list_value_same))
+		printf("\n");
 }

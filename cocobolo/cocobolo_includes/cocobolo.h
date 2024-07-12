@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:45:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 20:26:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	    *__strstr(char *haystack, char *needle);
 size_t      __strcmp(const char *lhv, const char *rhv);
 bool 		__strchr(char *s, const char c);
 bool        __strcmp_weak__(const char *lhv, const char *rhv);
+char		*__itoa(int n);
 t_matrix    __split(char const *s, char c) __result_use_check;
 t_matrix    __split_include_delimiters(char const *s, char c) __result_use_check;
 
