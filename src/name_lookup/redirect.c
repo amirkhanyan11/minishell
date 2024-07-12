@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:32:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:46:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,9 @@ int redirect(t_node *token)
 {
 	if (!token || !token->next)
 	{
-		__perror("ambiguous redirect");
+		__perror("ambiguous redirect"); // also shows up with empty filename, needs fix
 		return -1;
 	}
-
-	// if (access(token->next->val, F_OK | R_OK) == -1)
-	// {
-	// 	__perror("redirection error");
-	// 	return -1;
-	// }
 
 	t_file fd = -1;
 
