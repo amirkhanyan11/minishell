@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 20:18:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:17:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void echo(t_command *cmd)
 		node = node->next;
 	}
 
-	if (NULL == find(cmd->options, "-n", list_value_same))
+	if (NULL == find(cmd->options, "-n", NULL))
 		printf("\n");
 }

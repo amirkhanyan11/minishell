@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 00:18:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:43:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:11:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static t_node *__find(t_node *head, t_list_value target, t_list_Bpredicate_val c
 t_node *find(t_list *list, t_list_value target, t_list_Bpredicate_val cmp)
 {
     if (!list) return NULL;
+
+	if (!cmp) cmp = list_value_same;
 
     return __find(list->head, target, cmp);
 }
