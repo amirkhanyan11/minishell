@@ -22,7 +22,7 @@ OBJS =  $(foreach L, ${SRCSPATH}, $(patsubst ${L}%.c, ${OBJSPATH}%.o, ${SRCS}))
 
 CC = gcc
 DEBUG = -fsanitize=address
-CFLAGS = $(foreach H, ${INCPATH}, -I${H}) ${DEBUG} #-Wall -Wextra -Werror
+CFLAGS = $(foreach H, ${INCPATH}, -I${H}) #${DEBUG} #-Wall -Wextra -Werror
 
 all : ${OBJSPATH} ${NAME}
 

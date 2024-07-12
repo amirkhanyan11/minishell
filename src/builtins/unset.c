@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:21:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:09:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void __unset__(t_node *token)
 
 	t_node *guess = find(shell->export, token->val, __contains_as_key__);
 	t_node *guess2 = find(shell->env, token->val, __contains_as_key__);
+
+	if (0 == __strcmp(token->val, "PATH")) list_clear(&shell->path); // path is a special case, since I keep it as a separate list
 
 	if (guess) list_remove(shell->export, guess);
 	if (guess2) list_remove(shell->env, guess2);

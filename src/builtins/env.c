@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_export.c                                      :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 19:40:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:07:53 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/12 16:17:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+extern t_shell *shell;
 
-static char *add_declarex(char *s);
-
-t_list * __result_use_check make_export(t_shell *shell)
+void _env()
 {
-	if (!shell) return NULL;
-
-    return make_list_copy(shell->env, NULL);
-}
-
-static char *add_declarex(char *s)
-{
-	if (!s) return NULL;
-
-	return __strappend(__make_string_empty(), declarex, s);
+	if (NULL != find(shell->path, "env", __cmd_exists__))
+	{
+		print_list(shell->env);
+	}
 }

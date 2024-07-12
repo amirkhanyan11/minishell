@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:58:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:26:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_file open_file(char *filename, int option)
 	else
 		fd = open(filename, option, PERMISSIONS);
 
-	if (-1 == fd) __perror("./minishell: no such file or directory");
+	if (-1 == fd) __perror("no such file or directory");
 
 	return fd;
 }

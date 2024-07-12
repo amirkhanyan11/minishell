@@ -30,6 +30,7 @@
 		"functional": "c",
 		"wait.h": "c",
 		"__bit_reference": "c",
-		"__string": "c"
+		"__string": "c",
+		"ostream": "c"
 	}
 }

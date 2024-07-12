@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:58:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:19:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 extern t_shell *shell;
 
-static bool __cmd_exists__(t_list_value path, t_list_value name);
-
 int cmd_lookup(t_command *cmd)
 {
-	if (!cmd) return -1;
+	if (!cmd || empty(shell->path)) return -1;
 
 	if (cmd->resolved) return 0;
 
@@ -26,7 +24,7 @@ int cmd_lookup(t_command *cmd)
 
 	if (!node)
 	{
-		__perror("./minishell: command not found");
+		__perror("command not found");
 		return -1;
 	}
 
@@ -38,14 +36,11 @@ int cmd_lookup(t_command *cmd)
 	return 0;
 }
 
-// leak
-static bool __cmd_exists__(t_list_value path, t_list_value name)
+bool __cmd_exists__(t_list_value path, t_list_value name)
 {
-	char *guess = __strappend(__make_string_empty(), path, "/", name);
+	char * __dtor(__delete_string) guess = __strappend(__make_string_empty(), path, "/", name);
 
 	bool res = (0 == access(guess, F_OK));
-
-	free(guess);
 
 	return res;
 }

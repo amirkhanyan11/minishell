@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:35:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:08:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int __export_arg_resolver__(t_node *arg)
 
 	if (tokens->head->val[0] >= '0' && '9' >= tokens->head->val[0])
 	{
-		__perror("./minishell: export: not a valid identifier");
+		__perror("export: not a valid identifier");
 		return -1;
 	}
 
@@ -38,7 +38,12 @@ static int __export_arg_resolver__(t_node *arg)
 
 	push_back(shell->export, res);
 
-	if (NULL != find(tokens, "=", list_value_same)) push_back(shell->env, res);
+	if (NULL != find(tokens, "=", list_value_same))
+	{
+		push_back(shell->env, res);
+
+		if (0 == __strcmp(tokens->head->val, "PATH") && size(tokens) >= 3) shell->path = make_path(shell);
+	}
 
 	return 0;
 }
