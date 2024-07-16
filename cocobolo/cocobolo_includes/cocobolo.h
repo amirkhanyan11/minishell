@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 20:26:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:49:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_list t_list;
 # define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
 
 #define string char * __dtor(__delete_string)
+#define a_list t_list * __dtor(list_clear)
+#define a_matrix t_matrix  __dtor(__matrix_clear)
 
 typedef void (*t_printf_option)(const char * const);
 typedef char ** t_matrix;
@@ -66,6 +68,7 @@ pid_t 		__fork(void);
 // string
 void 		__delete_string(char **s);
 char 		*__make_string_empty() __attribute__((malloc)) __result_use_check;
+char 		*__make_string_from_char(const char c) __attribute__((malloc)) __result_use_check;
 char		*__strtrim(char *s1, char *set) __attribute__((malloc)) __result_use_check;
 char 		*__make_string_from_list(t_list *list) __attribute__((malloc)) __result_use_check ;
 char 		*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...);

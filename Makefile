@@ -28,7 +28,7 @@ RED = \x1b[1;31m
 CC = gcc
 DEBUG = -fsanitize=address
 WFLAGS = -Wall -Wextra -Werror
-CFLAGS = $(foreach H, $(INCPATH), -I$(H)) #${DEBUG} #${WFLAGS}
+CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 
 LREADLINE = -L/usr/lib -lreadline
 
