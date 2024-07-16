@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 20:22:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 19:03:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void eval(t_command *cmd)
 
 	if (0 == pid)
 	{
-
 		if (shell->descriptors->stdin != shell->sysdescriptors->stdin)
 			dup2(shell->descriptors->stdin, STDIN_FILENO);
 		if (shell->descriptors->stdout != shell->sysdescriptors->stdout)

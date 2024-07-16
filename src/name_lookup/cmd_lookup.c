@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:22:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 19:03:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,22 @@ int cmd_lookup(t_command *cmd)
 
 	if (cmd->resolved) return 0;
 
-	t_node *node = find_range(shell->path, cmd->name, __cmd_exists__);
-
-	if (!node)
+	if (__strchr(cmd->name, '/') == false)
 	{
-		__perror("command not found");
-		shell->status = 127;
-		return -1;
+		t_node *node = find_range(shell->path, cmd->name, __cmd_exists__);
+
+		if (!node)
+		{
+			__perror("command not found");
+			shell->status = 127;
+			return -1;
+		}
+
+		char *resolved_name = __strappend(__make_string_empty(), node->val, "/", cmd->name);
+		free(cmd->name);
+		cmd->name = resolved_name;
 	}
 
-	char *resolved_name = __strappend(__make_string_empty(), node->val, "/", cmd->name);
-	free(cmd->name);
-	cmd->name = resolved_name;
 	cmd->resolved = true;
 
 	return 0;
