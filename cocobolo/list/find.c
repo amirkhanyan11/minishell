@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 00:18:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:26:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:33:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_node *__find(t_node *first, t_node *last, t_list_value target, t_list_Bpredicate_val cmp)
 {
-    if (!first || (first->prev == last && last != NULL)) return NULL;
+    if (!first || first->prev == last) return NULL;
 
     if (cmp(first->val, target) == true) return first;
 
@@ -24,7 +24,7 @@ static t_node *__find(t_node *first, t_node *last, t_list_value target, t_list_B
 // find an element in range [first, last]
 t_node *find(t_node *first, t_node *last, t_list_value target, t_list_Bpredicate_val cmp)
 {
-    if (!first) return NULL;
+    if (!first || !last) return NULL;
 
 	if (!cmp) cmp = list_value_same;
 
