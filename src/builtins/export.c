@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:59:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:22:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int __export_from_string__(char *val)
 
 	push_back(shell->export, res);
 
-	if (NULL != find(tokens, "=", list_value_same))
+	if (NULL != find_range(tokens, "=", list_value_same))
 	{
 		push_back(shell->env, res);
 

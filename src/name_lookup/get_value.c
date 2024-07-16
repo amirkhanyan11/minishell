@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:22:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 21:13:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:22:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char * __result_use_check get_value(t_list *list, char *target)
 {
 	if (!list || !target) return NULL;
 
-	t_node *node = find(list, target, __contains_as_key__);
+	t_node *node = find_range(list, target, __contains_as_key__);
 
 	if (!node) return NULL;
 

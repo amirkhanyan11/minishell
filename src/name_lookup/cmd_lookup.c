@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 21:06:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:22:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int cmd_lookup(t_command *cmd)
 
 	if (cmd->resolved) return 0;
 
-	t_node *node = find(shell->path, cmd->name, __cmd_exists__);
+	t_node *node = find_range(shell->path, cmd->name, __cmd_exists__);
 
 	if (!node)
 	{

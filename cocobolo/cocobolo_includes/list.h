@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 20:18:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:21:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ void 	print_list_enumerate(t_list *list);
 
 //	algorithms
 size_t size(t_list *list);
-t_node *find(t_list *list, t_list_value target, t_list_Bpredicate_val cmp);
-t_node *find_strict(t_list *list, t_list_value target, t_list_Bpredicate_val cmp);
+t_node *find(t_node *first, t_node *last, t_list_value target, t_list_Bpredicate_val cmp);
+t_node *find_range(t_list *list, t_list_value target, t_list_Bpredicate_val cmp);
+t_node *find_strict(t_node *first, t_node *last, t_list_value target, t_list_Bpredicate_val cmp);
 size_t count(t_list *list, t_list_value val);
 size_t count_if(t_list *list, t_list_Countpredicate p);
 size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p);

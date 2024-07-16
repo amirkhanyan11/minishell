@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 21:38:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 18:11:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_command * __result_use_check make_command(char * raw_cmd)
 	reset_descriptors(); // probably a bad choice considering pipes
 
 	t_list *tokens = preprocess(tokenize(raw_cmd));
-
 	if (empty(tokens)) return NULL;
 
 	t_command *cmd = __malloc(sizeof(t_command));
