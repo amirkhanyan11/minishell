@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:19:00 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 22:17:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 22:42:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int quote_validator(const char c, size_t *count, size_t n, t_list *stack)
 	return 0;
 }
 
-
+// wrong 
 int quote_parser(t_list *tokens)
 {
 	if (!tokens) return -1;
