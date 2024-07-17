@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 22:40:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:35:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 22:05:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void pop_back(t_list *const list)
 {
 	if (NULL == list || NULL == list->tail) return;
+
+	if (list->head == list->tail) list->head = NULL;
 
 	t_node *to_remove = list->tail;
 
@@ -25,4 +27,5 @@ void pop_back(t_list *const list)
 
 	free(to_remove->val);
 	free(to_remove);
+
 }

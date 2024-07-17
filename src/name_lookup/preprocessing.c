@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:27:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:23:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern t_shell * shell;
 // handles redirections and $variables
 t_list * __result_use_check preprocess(t_list *tokens)
 {
-	if (!tokens || !shell) __exit("bad preprocessor values");
+	if (!tokens || !shell) return NULL;
 
 	t_node *token = tokens->head;
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/16 20:49:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ char * __attribute__((malloc)) __result_use_check __make_string_empty()
 {
 	char *s = __malloc(1);
 	*s = '\0';
+	return s;
+}
+
+char * __attribute__((malloc)) __result_use_check __make_string_from_char(const char c)
+{
+	char *s = __malloc(2);
+	s[0] = c;
+	s[1] = '\0';
 	return s;
 }
 
