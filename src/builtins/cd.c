@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 20:06:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:31:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void cd(t_command *cmd)
 
 	string wd = get_value(shell->export, "PWD");
 
-	if (empty(cmd->args))
+	if (empty(cmd->args) || find_range(cmd->args, "~", NULL))
 	{
 		string home = get_value(shell->export, "HOME");
 		chdir(home);
