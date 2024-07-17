@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:37:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:13:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void 	pop_back(t_list *const list);
 t_list  *make_list() __attribute__((malloc)) __result_use_check;
 t_list 	*make_list_copy(t_list *other, t_value_mutate f) __attribute__((malloc)) __result_use_check;
 t_list  *make_list_from_matrix(char **arr) __attribute__((malloc)) __result_use_check;
-t_list  *make_list_from_string(char *s, const char c, t_opcode opcode) __attribute__((malloc)) __result_use_check;
+t_list  *make_list_from_string(char *s, char *set, t_opcode opcode) __attribute__((malloc)) __result_use_check;
 t_node  *make_node(const t_list_value x) __attribute__((malloc)) __result_use_check;
 void 	list_move_back(t_list *lhv, t_list *rhv);
 void 	list_remove(t_list *list, t_node *node);

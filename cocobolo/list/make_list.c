@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 21:13:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:12:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ t_list *__attribute__((malloc)) __result_use_check make_list_from_matrix(char **
 	return list;
 }
 
-t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *s, const char c, t_opcode opcode)
+t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *s, char *set, t_opcode opcode)
 {
 	char **arr = NULL;
 
 	if (words_only == opcode)
-		arr = __split(s, c);
+		arr = __split(s, set);
 	else if (all == opcode)
-		arr = __split_include_delimiters(s, c);
+		arr = __split_include_delimiters(s, *set);
 
 	t_list *list = make_list_from_matrix(arr);
 

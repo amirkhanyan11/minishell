@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:30:16 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:54:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:12:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_list * __result_use_check make_path(t_shell *shell)
 
 	t_list_value raw_path = find_range(shell->env, "PATH", list_value_contains)->val;
 
-	t_matrix __dtor(__matrix_clear) arr = __split(raw_path, ':');
+	t_matrix __dtor(__matrix_clear) arr = __split(raw_path, ":");
 
 	char *ptr = arr[0];
 	while (*ptr && *ptr != '=') ptr++;

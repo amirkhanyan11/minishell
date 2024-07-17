@@ -6,37 +6,37 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 21:21:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:08:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-static size_t	_count_words(char const *s, char const c);
-static size_t	_current_len(char const **str, char const c);
-static t_matrix _allocate(char const *str, char const c, size_t const SIZE);
-static void		_skip_(char const **str, char const c);
+static size_t	_count_words(char const *s, char *set);
+static size_t	_current_len(char const **str, char *set);
+static t_matrix _allocate(char const *str, char *set, size_t const SIZE);
+static void		_skip_(char const **str, char *set);
 
-t_matrix  __result_use_check  __split(char const *s, char c)
+t_matrix  __result_use_check  __split(char const *s, char * set)
 {
 	if (!s)
 		__exit("nullptr passed to __split");
-	return (_allocate(s, c, _count_words(s, c)));
+	return (_allocate(s, set, _count_words(s, set)));
 }
 
-static	size_t	_count_words(char const *s, char const c)
+static	size_t	_count_words(char const *s, char * set)
 {
 	size_t	words;
 	short	flag;
 
 	words = 0;
 	flag = 0;
-	_skip_(&s, c);
+	_skip_(&s, set);
 	while (*s)
 	{
-		if (*s != c)
+		if (__strchr(set, *s) == false)
 			flag = 1;
-		else if (*s == c && flag)
+		else if (flag)
 		{
 			words++;
 			flag = 0;
@@ -46,12 +46,12 @@ static	size_t	_count_words(char const *s, char const c)
 	return (flag + words);
 }
 
-static	size_t	_current_len(char const **str, char const c)
+static	size_t	_current_len(char const **str, char * set)
 {
 	size_t	len;
 
 	len = 0;
-	while (**str && **str != c)
+	while (**str && __strchr(set, **str) == false)
 	{
 		len++;
 		(*str)++;
@@ -59,13 +59,13 @@ static	size_t	_current_len(char const **str, char const c)
 	return (len);
 }
 
-static void	_skip_(char const **str, char const c)
+static void	_skip_(char const **str, char * set)
 {
-	while (**str && **str == c)
+	while (**str && __strchr(set, **str) == true)
 		(*str)++;
 }
 
-static	t_matrix    _allocate(char const *str, char const c, size_t const SIZE)
+static	t_matrix    _allocate(char const *str, char * set, size_t const SIZE)
 {
 	t_matrix    arr;
 	char	*tmp;
@@ -79,9 +79,9 @@ static	t_matrix    _allocate(char const *str, char const c, size_t const SIZE)
 	i = 0;
 	while (i < SIZE)
 	{
-		_skip_(&str, c);
+		_skip_(&str, set);
 		tmp = (char *)str;
-		current_len = _current_len(&str, c);
+		current_len = _current_len(&str, set);
 		arr[i] = (char *)__malloc(current_len + 1);
         arr[i][current_len] = '\0';
 

@@ -6,16 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:14:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // move to separate dir
-t_matrix __result_use_check  make_matrix_from_string(char *s, char c)
+t_matrix __result_use_check  make_matrix_from_string(char *s, char *set)
 {
-	return __split(s, c);
+	return __split(s, set);
 }
 
 t_matrix  __result_use_check make_matrix_copy(t_matrix other)
