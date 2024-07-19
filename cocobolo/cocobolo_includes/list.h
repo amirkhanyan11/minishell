@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/17 19:13:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:07:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ t_list  *make_list_from_matrix(char **arr) __attribute__((malloc)) __result_use_
 t_list  *make_list_from_string(char *s, char *set, t_opcode opcode) __attribute__((malloc)) __result_use_check;
 t_node  *make_node(const t_list_value x) __attribute__((malloc)) __result_use_check;
 void 	list_move_back(t_list *lhv, t_list *rhv);
-void 	list_remove(t_list *list, t_node *node);
 
 void 	print_list(t_list *list);
 void 	print_list_custom(t_list *list, t_list_Upredicate p);
@@ -88,6 +87,9 @@ size_t count(t_node *first, t_node *last, t_list_value val);
 size_t count_range(t_list *list, t_list_value val);
 size_t count_if(t_node *first, t_node *last, t_list_Countpredicate p);
 size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p);
+void 	pop(t_list *list, t_node *node);
+size_t list_remove(t_list *list, t_list_value val);
+size_t list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p);
 bool   empty(t_list *list) __attribute__((always_inline)) ;
 
 

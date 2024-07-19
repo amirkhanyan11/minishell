@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 20:28:39 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:10:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void resolve(t_node *t, t_list *tokens)
 
 		if (val == NULL)
 		{
-			list_remove(tokens, t);
+			pop(tokens, t);
 			return;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:11:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:42:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_command * __result_use_check make_command(char * raw_cmd)
 
 	reset_descriptors(); // probably a bad choice considering pipes
 
-	t_list *tokens = preprocess(tokenize(raw_cmd));
+	t_list * __dtor(list_clear) tokens = preprocess(tokenize(raw_cmd));
+
 	if (empty(tokens)) return NULL;
 
 	t_command *cmd = __malloc(sizeof(t_command));
@@ -39,8 +40,6 @@ t_command * __result_use_check make_command(char * raw_cmd)
 			push_back(cmd->args, node->val);
 		node = node->next;
 	}
-
-	list_clear(&tokens);
 
 	cmd->resolved = false;
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 20:23:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:12:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_list * __result_use_check preprocess(t_list *tokens)
 {
 	if (!tokens || !shell) return NULL;
 
-	t_node *token = tokens->head;
-
 	dollar_sign_resolver(tokens);
+
+	t_node *token = tokens->head;
 
 	while (token)
 	{
@@ -34,8 +34,8 @@ t_list * __result_use_check preprocess(t_list *tokens)
 			if (-1 == redir) return NULL;
 
 			t_node *next = token->next->next;
-			list_remove(tokens, token->next);
-			list_remove(tokens, token);
+			pop(tokens, token->next);
+			pop(tokens, token);
 			token = next;
 			continue;
 		}

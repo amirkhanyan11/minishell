@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 22:06:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:18:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 
 t_shell *shell = NULL;
 
+
 int main(int ac, char **av, char **env)
 {
 	shell = make_shell(env);
+
+	// printf("before  :\n");
+	// print_list(shell->env);
+
+	// list_remove_if(shell->env, "PATH", list_value_contains);
+	// printf("after  :\n");
+	// print_list(shell->env);
 
 	// fetch -> decode -> execute
 	while (true)
@@ -28,6 +36,7 @@ int main(int ac, char **av, char **env)
 
 		if (NULL != cmd)
 		{
+
 			if (0 == __strcmp(cmd->name, "pwd")) pwd();
 
 			else if (0 == __strcmp(cmd->name, "history")) display_history();

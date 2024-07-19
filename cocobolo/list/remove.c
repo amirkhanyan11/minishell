@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:31:20 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:43:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:10:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void list_remove(t_list *list, t_node *node)
+void pop(t_list *list, t_node *node)
 {
 	if (!list || !node) return;
 
@@ -28,5 +28,30 @@ void list_remove(t_list *list, t_node *node)
 		free(node->val);
 		free(node);
 	}
+}
 
+size_t list_remove(t_list *list, t_list_value val)
+{
+	return list_remove_if(list, val, list_value_same);
+}
+
+size_t list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p)
+{
+	if (!list || empty(list) || !val) return 0;
+
+	size_t removed = 0;
+
+	t_node *node = list->head;
+
+	while (node)
+	{
+		t_node *next = node->next;
+		if (p(node->val, val) == true)
+		{
+			pop(list, node);
+			removed++;
+		}
+		node = next;
+	}
+	return removed;
 }

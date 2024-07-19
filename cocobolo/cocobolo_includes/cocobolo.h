@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/17 19:10:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 17:58:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ typedef char ** t_matrix;
 
 void 		__perror(char * err);
 void		__exit(char const *const err) __dead2;
-t_optional	__atoi(char const *str);
 void		*__malloc(size_t n) __attribute__((malloc)) __result_use_check;
 pid_t 		__fork(void);
 
 // string
 void 		__delete_string(char **s);
+t_optional	__atoi(char const *str);
 char 		*__make_string_empty() __attribute__((malloc)) __result_use_check;
 char 		*__make_string_from_char(const char c) __attribute__((malloc)) __result_use_check;
 char		*__strtrim(char *s1, char *set) __attribute__((malloc)) __result_use_check;
