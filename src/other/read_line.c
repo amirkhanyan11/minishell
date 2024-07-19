@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:43:01 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 22:53:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/20 00:27:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define prompt PURPLE ITALIC_ON"minishell" GREEN " > $ " RESET
 
-char *read_line(void)
+char * read_line(void)
 {
 	// set_signals_interactive();
 	char *line = readline(prompt);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 18:07:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 23:10:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ struct s_node
 	t_node *prev;
 };
 
+
+#ifdef __linux__
+#if __has_attribute(warn_unused_result)
+#define __result_use_check __attribute__((__warn_unused_result__))
+#else
+#define __result_use_check
+#endif //  __has_attribute(warn_unused_result)
+#endif // __linux__
+
 # define push_back(list, ...)  __unwrapped_push__(__single__push_back__, list, __VA_ARGS__, NULL)
 # define push_front(list, ...)  __unwrapped_push__(__single__push_front__, list, __VA_ARGS__, NULL)
 void __attribute__((sentinel))  __unwrapped_push__(f_push f, t_list *const list, ...);
@@ -90,7 +99,7 @@ size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p);
 void 	pop(t_list *list, t_node *node);
 size_t list_remove(t_list *list, t_list_value val);
 size_t list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p);
-bool   empty(t_list *list) __attribute__((always_inline)) ;
+bool   empty(t_list *list);
 
 
 //	assumes each node's value is a malloced string

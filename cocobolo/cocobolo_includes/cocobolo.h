@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 17:58:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 23:09:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@
 #define ITALIC_OFF "\e[23m"
 
 typedef struct s_list t_list;
+
+#ifdef __linux__
+#if __has_attribute(noreturn)
+#define __dead2 __attribute__((__noreturn__))
+#else
+#define __dead2
+#endif //  __has_attribute(noreturn)
+#endif // __linux__
 
 # if __has_attribute(cleanup)
 #define __dtor(f) __attribute__((cleanup(f)))

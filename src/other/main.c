@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 19:01:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/20 00:27:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
 	// fetch -> decode -> execute
 	while (true)
 	{
-		char * line = read_line();
+		string line = read_line();
 
 		t_command * __dtor(__t_command__) cmd = make_command(line);
 

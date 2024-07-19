@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:22:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/20 00:33:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 extern t_shell *shell;
 
-// bug : if written to a file, can't read from it using cat :(((
 int redirect(t_node *token)
 {
 	if (!token || !token->next)

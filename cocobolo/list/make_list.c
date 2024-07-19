@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 19:00:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/20 00:03:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list *__attribute__((malloc)) __result_use_check make_list_from_matrix(char **
 
 t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *s, char *set, t_opcode opcode)
 {
-	char **arr = NULL;
+	a_matrix arr = NULL;
 
 	if (words_only == opcode)
 	{
@@ -53,7 +53,8 @@ t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *
 	{
 		if (__strchr(set, *s) == true)
 		{
-			push_back(list, __make_string_from_char(*s));
+			string val = __make_string_from_char(*s);
+			push_back(list, val);
 			++s;
 		}
 
@@ -61,8 +62,8 @@ t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *
 		{
 			char *tmp = s + 1;
 			while (*tmp && __strchr(set, *tmp) == false) tmp++;
-			string p = __strdup_until(s, *tmp);
-			push_back(list, p);
+			string val = __strdup_until(s, *tmp);
+			push_back(list, val);
 			s = tmp;
 		}
 

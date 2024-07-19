@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:41:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 20:42:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 23:10:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-bool __attribute__((always_inline)) empty(t_list *list)
+bool empty(t_list *list)
 {
 	return (!list || !list->head);
 }

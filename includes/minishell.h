@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 21:46:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/20 00:43:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int 		redirect(t_node *token);
 t_list 		 *tokenize(char * raw_cmd) __result_use_check;
 t_list 		 *preprocess(t_list *tokens) __result_use_check ;
 void 		 dollar_sign_resolver(t_list *tokens);
+int 		 redirection_resolver(t_list *tokens);
+
 void 		 merge_tokens(t_list *tokens);
 
 
