@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 18:58:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 22:02:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ extern t_shell * shell;
 // handles redirections and $variables
 t_list * __result_use_check preprocess(t_list *tokens)
 {
-	if (!tokens || !shell) return NULL;
+	if (empty(tokens) || !shell) return NULL;
+
+	// merge_tokens(tokens); // segfault
+
+	list_remove(tokens, " ");
+
+	dollar_sign_resolver(tokens);
 
 	print_list(tokens);
 	return NULL;
-
-	dollar_sign_resolver(tokens);
 
 	t_node *token = tokens->head;
 
