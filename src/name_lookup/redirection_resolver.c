@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:32:15 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/20 00:34:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/20 00:50:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 int redirection_resolver(t_list *tokens)
 {
     t_node *token = tokens->head;
-
+	bool dquote_open = false;
+	bool squote_open = false;
+    
 	while (token)
 	{
 		t_node *next = token->next;
 
-		if (0 == __strcmp(token->val, "<") || 0 == __strcmp(token->val, ">") || 0 == __strcmp(token->val, ">>")) 
+		if (list_value_same(token->val, "\"")) dquote_open = !dquote_open;
+
+		if (list_value_same(token->val, "\'")) squote_open = !squote_open;
+
+		if ((!squote_open && !dquote_open) && list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>")) 
 		{
 			int redir = redirect(token);
 
