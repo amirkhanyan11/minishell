@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 18:12:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:58:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ extern t_shell * shell;
 t_list * __result_use_check preprocess(t_list *tokens)
 {
 	if (!tokens || !shell) return NULL;
+
+	print_list(tokens);
+	return NULL;
 
 	dollar_sign_resolver(tokens);
 
