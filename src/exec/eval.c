@@ -6,47 +6,33 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 19:58:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/22 22:38:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
+extern t_shell * shell;
 
 void eval(t_command *cmd)
 {
-	int lookup = cmd_lookup(cmd);
+	set_descriptors();
 
-	if (lookup == -1) return;
+	if (0 == __strcmp(cmd->name, "pwd")) pwd();
 
-	pid_t pid = __fork();
+	else if (0 == __strcmp(cmd->name, "history")) display_history();
 
-	if (0 == pid)
-	{
-		if (shell->descriptors->stdin != shell->sysdescriptors->stdin)
-			dup2(shell->descriptors->stdin, STDIN_FILENO);
-		if (shell->descriptors->stdout != shell->sysdescriptors->stdout)
-			dup2(shell->descriptors->stdout, STDOUT_FILENO);
+	else if (0 == __strcmp(cmd->name, "export")) export(cmd);
 
-		a_list options_copy = make_list_copy(cmd->options, NULL);
+	else if (0 == __strcmp(cmd->name, "echo")) echo(cmd);
 
-		push_front(options_copy, cmd->name);
+	else if (0 == __strcmp(cmd->name, "unset")) unset(cmd);
 
-		a_list args_copy = make_list_copy(cmd->args, NULL);
+	else if (0 == __strcmp(cmd->name, "env") || 0 == __strcmp(cmd->name, "printenv")) _env(cmd->name);
 
-		list_move_back(args_copy, options_copy);
+	else if (0 == __strcmp(cmd->name, "cd")) cd(cmd);
 
-		a_matrix _args = make_matrix_from_list(options_copy);
-		a_matrix _env  = make_matrix_from_list(shell->env);
-
-		execve(cmd->name, _args, _env);
-		__exit(strerror(errno));
-	}
+	else eval_prog(cmd);
 
 	reset_descriptors();
-
-	int x = 0;
-	waitpid(pid, &x, 0);
-	shell->status = WEXITSTATUS(x);
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/20 00:27:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/22 22:38:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,9 @@ int main(int ac, char **av, char **env)
 
 		if (NULL != cmd)
 		{
-			// printf("name : %s\n\n", cmd->name);
-			// printf("args : %zu\n", size(cmd->args));
-			// printf("options : %zu\n", size(cmd->options));
+			if (0 == __strcmp(cmd->name, "exit")) break;
 
-			if (0 == __strcmp(cmd->name, "pwd")) pwd();
-
-			else if (0 == __strcmp(cmd->name, "history")) display_history();
-
-			else if (0 == __strcmp(cmd->name, "export")) export(cmd);
-
-			else if (0 == __strcmp(cmd->name, "echo")) echo(cmd);
-
-			else if (0 == __strcmp(cmd->name, "unset")) unset(cmd);
-
-			else if (0 == __strcmp(cmd->name, "env") || 0 == __strcmp(cmd->name, "printenv")) _env(cmd->name);
-
-			else if (0 == __strcmp(cmd->name, "cd")) cd(cmd);
-
-			else if (0 == __strcmp(cmd->name, "exit")) break;
-
-			else eval(cmd);
+			eval(cmd);
 		}
 
 		if (line && *line && __strcmp(line, "\n"))

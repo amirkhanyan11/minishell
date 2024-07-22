@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 23:09:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:23:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef struct s_list t_list;
 #define __result_use_check
 #endif
 
+#if __has_attribute(__malloc__)
+#define __allocs __attribute__((malloc))
+#else
+#define __allocs
+#endif // __allocs
+
 // usage : str = __strappend(str, s1, s2, ...)
 # define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
 # define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
@@ -69,16 +75,16 @@ typedef char ** t_matrix;
 
 void 		__perror(char * err);
 void		__exit(char const *const err) __dead2;
-void		*__malloc(size_t n) __attribute__((malloc)) __result_use_check;
+void		*__malloc(size_t n) __allocs __result_use_check;
 pid_t 		__fork(void);
 
 // string
 void 		__delete_string(char **s);
 t_optional	__atoi(char const *str);
-char 		*__make_string_empty() __attribute__((malloc)) __result_use_check;
-char 		*__make_string_from_char(const char c) __attribute__((malloc)) __result_use_check;
-char		*__strtrim(char *s1, char *set) __attribute__((malloc)) __result_use_check;
-char 		*__make_string_from_list(t_list *list) __attribute__((malloc)) __result_use_check ;
+char 		*__make_string_empty() __allocs __result_use_check;
+char 		*__make_string_from_char(const char c) __allocs __result_use_check;
+char		*__strtrim(char *s1, char *set) __allocs __result_use_check;
+char 		*__make_string_from_list(t_list *list) __allocs __result_use_check ;
 char 		*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...);
 char		*__single_strappend__(char *lhv, char *rhv) __result_use_check;
 size_t	    __strlen(const char *str);
