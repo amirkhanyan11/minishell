@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 22:38:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/22 23:31:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern t_shell * shell;
 
+// needs refactoring for pipes
 void eval(t_command *cmd)
 {
 	set_descriptors();
