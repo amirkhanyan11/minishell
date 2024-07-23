@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 22:37:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:12:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ char	*read_line(void);
 // execution
 void 	     eval(t_command *cmd);
 void 	     eval_prog(t_command *cmd);
-void 		 set_descriptors();
-void 		 reset_descriptors();
+void 		 set_descriptors(t_shell * shell);
+void 		 reset_descriptors(t_shell * shell);
 
 // execution helpers
 char 		*get_value(t_list *list, char *target) __result_use_check;
