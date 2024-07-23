@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/23 18:29:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:56:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ void eval(t_command *cmd)
 
 		else eval_prog(cmd);
 
-		reset_descriptors(cmd->shell);
+		exit(EXIT_SUCCESS);
 	}
+	reset_descriptors(cmd->shell);
 	int x = 0;
 	waitpid(pid, &x, 0);
 	cmd->shell->status = WEXITSTATUS(x);

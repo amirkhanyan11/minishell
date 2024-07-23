@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/23 18:12:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:46:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ t_command 	 *make_command(char * raw_cmd) __result_use_check;
 t_list 		 *make_path(t_shell *shell) __result_use_check;
 t_descriptor *make_descriptors() __result_use_check;
 void 		 __t_command__(t_command **cmdptr);
-void 	 	 __t_shell__()  __attribute__((destructor));
+void 	 	 __t_shell__(t_shell * shell);
 
 // builtins
 void cd(t_command *cmd);

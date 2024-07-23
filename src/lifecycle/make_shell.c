@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:07:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:52:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ t_shell * __result_use_check make_shell(char **env)
 
     shell->history = make_list();
 
-	shell->sysdescriptors = make_descriptors();
 	shell->descriptors = make_descriptors();
+	shell->sysdescriptors = make_descriptors();
+	dup2(STDOUT_FILENO, shell->sysdescriptors->stdout);
+	dup2(STDIN_FILENO, shell->sysdescriptors->stdin);
+	dup2(STDERR_FILENO, shell->sysdescriptors->stderr);
 
 	shell->status = 0;
 
