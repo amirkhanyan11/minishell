@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 18:10:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:39:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,39 @@ extern t_shell *shell;
 
 void resolve(t_node *t, t_list *tokens)
 {
-	char *val = NULL;
+	size_t i = 0;
+	char *s = __strdup(t->val);
 
-	if (0 == __strcmp(t->val, "$?"))
-	{
-		val = __itoa(shell->status);
-	}
-
-	else
-	{
-		val = get_value(shell->export, t->val + 1);
-
-		if (val == NULL)
+	while (s[i] && s[i + 1])
+	{	
+		if (s[i] == '$')
 		{
-			pop(tokens, t);
-			return;
+			size_t k = __strlen(s);
+			while (i < k)
+			{
+				char c = s[k];
+				s[k] = '\0';
+					
+				string val = get_value(shell->export, s + i + 1);								
+				s[k] = c;
+				
+				if (val)
+				{
+					char * prefix = __strdup(s);
+					prefix[i] = '\0';
+					i += __strlen(val) - 1;
+					char *tmp = __strappend(prefix, val, s + k);
+					free(s);
+					s = tmp;
+					break;
+				}
+				
+				k--;
+			}	
 		}
+		i++;
 	}
 
 	free(t->val);
-	t->val = val;
+	t->val = s;
 }

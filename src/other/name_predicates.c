@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing.c                                    :+:      :+:    :+:   */
+/*   name_predicates.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:44:47 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/24 17:41:51 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/24 18:08:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell * shell;
-
-// handles redirections and $variables
-t_list * __result_use_check preprocess(t_list *tokens)
+bool is_alpha(const char c)
 {
-	if (empty(tokens) || !shell) return NULL;
-
-	dollar_sign_resolver(tokens);
-
-	merge_tokens(tokens);
-	
-	// print_list(tokens);
-	// return NULL;
-
-	list_remove(tokens, " ");
-	list_remove(tokens, "\'");
-	list_remove(tokens, "\"");
-
-
-	if (redirection_resolver(tokens) == -1) list_clear(&tokens);
-
-	return tokens;
+    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
+
+bool is_digit(const char c)
+{
+    return (c >= '0' && c <= '9');
+}
+
+// bool is_var()
