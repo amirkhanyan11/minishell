@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __strstr.c                                         :+:      :+:    :+:   */
+/*   pair.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 01:30:29 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:04:39 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/24 18:02:59 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/24 18:04:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PAIR_H
+#define PAIR_H
+
+
 #include <cocobolo.h>
 
-char	*__strstr(char *haystack, char *needle)
-{
-    size_t i = 0;
-    
-    if (!haystack || !needle) return (NULL);
+typedef struct s_pair t_pair;
 
-    while (haystack[i])
-    {
-        if (__strcmp_weak__(haystack + i, needle) == true) return haystack + i;
-        i++;
-    }
-    return NULL;
-}
+struct s_pair
+{
+    char * first;
+    char * second;  
+};
+
+
+
+
+#endif // PAIR_H

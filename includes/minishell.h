@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 22:37:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:51:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ char	*read_line(void);
 // execution
 void 	     eval(t_command *cmd);
 void 	     eval_prog(t_command *cmd);
-void 		 set_descriptors();
-void 		 reset_descriptors();
+void 		 set_descriptors(t_shell * shell);
+void 		 reset_descriptors(t_shell * shell);
 
 // execution helpers
 char 		*get_value(t_list *list, char *target) __result_use_check;
@@ -95,6 +95,10 @@ void 		 merge_tokens(t_list *tokens);
 bool __contains_as_key__(char *line, char *target);
 bool __cmd_exists__(t_list_value path, t_list_value name);
 
+// name predicates
+bool is_alpha(const char c);
+bool is_digit(const char c);
+bool is_name(const char c);
 
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __result_use_check;
@@ -104,9 +108,9 @@ t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
 t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
 t_command 	 *make_command(char * raw_cmd) __result_use_check;
 t_list 		 *make_path(t_shell *shell) __result_use_check;
-t_descriptor *make_descriptors() __result_use_check;
+t_descriptor *make_descriptors(int x, int y, int z) __result_use_check;
 void 		 __t_command__(t_command **cmdptr);
-void 	 	 __t_shell__()  __attribute__((destructor));
+void 	 	 __t_shell__(t_shell * shell);
 
 // builtins
 void cd(t_command *cmd);

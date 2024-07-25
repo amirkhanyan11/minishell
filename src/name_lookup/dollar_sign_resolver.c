@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/20 00:47:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:26:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void dollar_sign_resolver(t_list *tokens)
 
 		if (list_value_same(token->val, "\'")) squote_open = !squote_open;
 		
-		if ((!squote_open || dquote_open) && token->val[0] == '$')
+		if ((!squote_open || dquote_open))
 			resolve(token, tokens);
 
 		token = next;

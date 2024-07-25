@@ -6,18 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 23:31:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:53:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell * shell;
-
 // needs refactoring for pipes
 void eval(t_command *cmd)
 {
-	set_descriptors();
+	set_descriptors(cmd->shell);
 
 	if (0 == __strcmp(cmd->name, "pwd")) pwd();
 
@@ -33,7 +31,16 @@ void eval(t_command *cmd)
 
 	else if (0 == __strcmp(cmd->name, "cd")) cd(cmd);
 
-	else eval_prog(cmd);
-
-	reset_descriptors();
+	else
+	{
+		pid_t pid = __fork();
+		if (0 == pid)
+		{
+			eval_prog(cmd);
+		}
+		int x = 0;
+		waitpid(pid, &x, 0);
+		cmd->shell->status = WEXITSTATUS(x);	
+	}
+	reset_descriptors(cmd->shell);
 }

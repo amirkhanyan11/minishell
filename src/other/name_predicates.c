@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __strstr.c                                         :+:      :+:    :+:   */
+/*   name_predicates.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 01:30:29 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:04:39 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/24 17:41:51 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/25 18:51:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "minishell.h"
 
-char	*__strstr(char *haystack, char *needle)
+bool is_alpha(const char c)
 {
-    size_t i = 0;
-    
-    if (!haystack || !needle) return (NULL);
+    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
 
-    while (haystack[i])
-    {
-        if (__strcmp_weak__(haystack + i, needle) == true) return haystack + i;
-        i++;
-    }
-    return NULL;
+bool is_digit(const char c)
+{
+    return (c >= '0' && c <= '9');
+}
+
+bool is_name(const char c)
+{
+    return (c == '_' || is_alpha(c) || is_digit(c));
 }

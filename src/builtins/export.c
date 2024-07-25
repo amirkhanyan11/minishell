@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:22:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:41:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 extern t_shell *shell;
 
 static void __print_export__(t_node *head);
+
 
 void export(t_command *cmd)
 {

@@ -6,16 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:24:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 23:24:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:11:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell * shell;
-
-void reset_descriptors()
+void reset_descriptors(t_shell * shell)
 {
+	if (!shell) return;
+
 	if (shell->descriptors->stdin != shell->sysdescriptors->stdin)
 	{
 		close(shell->descriptors->stdin);

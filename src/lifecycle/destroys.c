@@ -6,15 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 17:47:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:46:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
-
-void  __attribute__((destructor)) __t_shell__()
+void __t_shell__(t_shell * shell)
 {
     if (NULL == shell) return;
 
@@ -23,12 +21,10 @@ void  __attribute__((destructor)) __t_shell__()
     list_clear(&shell->export);
     list_clear(&shell->path);
 
-	reset_descriptors();
-
+	reset_descriptors(shell);
 
 	free(shell->sysdescriptors);
-	free(shell->descriptors);
-
+	// free(shell->descriptors);
 
     free(shell);
 

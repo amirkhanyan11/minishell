@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 18:10:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:24:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,60 @@
 
 extern t_shell *shell;
 
-void resolve(t_node *t, t_list *tokens)
+static bool p(char c)
 {
-	char *val = NULL;
+	return !is_name(c);
+}
 
-	if (0 == __strcmp(t->val, "$?"))
-	{
-		val = __itoa(shell->status);
-	}
+void resolve(t_node *t, t_list *tokens) // add $?
+{
+	size_t i = 0;
+	char *s = __strdup(t->val);
 
-	else
-	{
-		val = get_value(shell->export, t->val + 1);
-
-		if (val == NULL)
+	while (s[i] && s[i + 1])
+	{	
+		if (s[i] == '$')
 		{
-			pop(tokens, t);
-			return;
+			bool resolved = false;
+			size_t k = __strchr_p(s + i + 1, p) - s;
+			char *prefix = __strdup(s);
+			char *postfix = __strdup(s + k);
+			prefix[i] = '\0';
+
+			while (i < k)
+			{
+				char c = s[k];
+				s[k] = '\0';
+				
+				string val = get_value(shell->export, s + i + 1);								
+				s[k] = c;
+				
+				if (val)
+				{
+					i += __strlen(val) - 1;
+					prefix = __strappend(prefix, val, s + k);
+					free(s);
+					s = prefix;
+					resolved = true;
+					break;
+				}
+				
+				k--;
+			}		
+			
+			if (!resolved)
+			{
+				i = __strlen(prefix) - 1;
+				prefix = __strappend(prefix, postfix);
+				free(s);
+				free(postfix);
+				s = prefix;
+			}
+			
 		}
+		i++;
 	}
 
 	free(t->val);
-	t->val = val;
+	t->val = s;
 }

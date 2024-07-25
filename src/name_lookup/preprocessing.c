@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 22:24:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:53:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_list * __result_use_check preprocess(t_list *tokens)
 	dollar_sign_resolver(tokens);
 
 	merge_tokens(tokens);
+	
 	// print_list(tokens);
 	// return NULL;
 
