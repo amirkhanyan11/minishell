@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 18:24:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:21:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ void merge_tokens(t_list *tokens)
 
 	merge_inside_quotes(tokens);
 	
-	// t_node *token = tokens->head->next;
+	t_node *token = tokens->head->next;
 	
-	// while (token && token->next)
-	// {
-	// 	t_node *next = token->next;
+	while (token && token->next)
+	{
+		t_node *next = token->next;
 
-	// 	if (list_value_same(token, " "))
-	// 	{
-	// 		next = token->next->next;
-	// 		token->prev->val = __strappend(token->prev->val, token->next->val);
-	// 		pop(token->next);
-	// 		pop(token);
-	// 	}
-	// 	token = next;
-	// }
+		if (__is_quote__(token->val))
+		{
+			next = token->next->next;
+			token->prev->val = __strappend(token->prev->val, token->next->val);
+			pop(tokens, token->next);
+			pop(tokens, token);
+		}
+		token = next;
+	}
 }
 
 void merge_inside_quotes(t_list *tokens)

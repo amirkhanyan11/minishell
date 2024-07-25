@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 19:12:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:24:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool p(char c)
 	return !is_name(c);
 }
 
-void resolve(t_node *t, t_list *tokens)
+void resolve(t_node *t, t_list *tokens) // add $?
 {
 	size_t i = 0;
 	char *s = __strdup(t->val);
