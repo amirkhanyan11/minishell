@@ -6,25 +6,43 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 22:27:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:24:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static bool __is_quote__(char *s);
-static void merge_consequtive_quotes(t_list *tokens);
+void merge_inside_quotes(t_list *tokens);
 
 void merge_tokens(t_list *tokens)
 {
 	if (!tokens || empty(tokens)) return;
 
+	merge_inside_quotes(tokens);
+	
+	// t_node *token = tokens->head->next;
+	
+	// while (token && token->next)
+	// {
+	// 	t_node *next = token->next;
+
+	// 	if (list_value_same(token, " "))
+	// 	{
+	// 		next = token->next->next;
+	// 		token->prev->val = __strappend(token->prev->val, token->next->val);
+	// 		pop(token->next);
+	// 		pop(token);
+	// 	}
+	// 	token = next;
+	// }
+}
+
+void merge_inside_quotes(t_list *tokens)
+{
+	if (!tokens || empty(tokens)) return;
+
 	bool open = false;
-
-	// merge_consequtive_quotes(tokens);
-
-	// print_list(tokens);
-	// return;
 
 	t_node *token = tokens->head;
 	while (token)

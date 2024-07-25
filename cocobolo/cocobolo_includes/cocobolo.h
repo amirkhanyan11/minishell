@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/22 17:23:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:41:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ char	    *__strdup(const char *src) __result_use_check;
 char		*__strdup_until(const char *src, const char end) __result_use_check;
 char	    *__strstr(char *haystack, char *needle);
 size_t      __strcmp(const char *lhv, const char *rhv);
-bool 		__strchr(char *s, const char c);
+bool        __strchr(char *s, const char c);
+char 		*__strchr_p(char *s, bool (*p) (char));
 bool        __strcmp_weak__(const char *lhv, const char *rhv);
 char		*__itoa(int n);
 t_matrix    __split(char const *s, char *set) __result_use_check;

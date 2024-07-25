@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:41:51 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/24 18:08:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:51:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,7 @@ bool is_digit(const char c)
     return (c >= '0' && c <= '9');
 }
 
-// bool is_var()
+bool is_name(const char c)
+{
+    return (c == '_' || is_alpha(c) || is_digit(c));
+}

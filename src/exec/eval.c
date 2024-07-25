@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:52:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:53:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 // needs refactoring for pipes
 void eval(t_command *cmd)
 {
-	
 	set_descriptors(cmd->shell);
+
 	if (0 == __strcmp(cmd->name, "pwd")) pwd();
 
 	else if (0 == __strcmp(cmd->name, "history")) display_history();

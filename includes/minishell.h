@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:50:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:51:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ bool __cmd_exists__(t_list_value path, t_list_value name);
 // name predicates
 bool is_alpha(const char c);
 bool is_digit(const char c);
+bool is_name(const char c);
 
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __result_use_check;
