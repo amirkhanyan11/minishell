@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/23 18:46:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 20:02:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void __t_shell__(t_shell * shell)
 	reset_descriptors(shell);
 
 	free(shell->sysdescriptors);
-	// free(shell->descriptors);
+	free(shell->descriptors);
 
     free(shell);
 

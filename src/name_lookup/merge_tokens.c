@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 19:21:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 20:34:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,23 @@ void merge_tokens(t_list *tokens)
 	while (token && token->next)
 	{
 		t_node *next = token->next;
-
-		if (__is_quote__(token->val))
+		
+		if (__is_quote__(token->val) && !list_value_same(token->prev->val, " "))
 		{
-			next = token->next->next;
-			token->prev->val = __strappend(token->prev->val, token->next->val);
-			pop(tokens, token->next);
-			pop(tokens, token);
+			while (next && __is_quote__(next->val))
+			{
+				next = next->next;
+			}
+			
+			if (next)
+			{	
+				if (!list_value_same(next->val, " "))
+					token->prev->val = __strappend(token->prev->val, next->val);
+				t_node *end = next;
+				next = next->next;
+				erase(tokens, token, end);
+			}
+			else break;
 		}
 		token = next;
 	}

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 23:10:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/25 20:28:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ size_t count_range(t_list *list, t_list_value val);
 size_t count_if(t_node *first, t_node *last, t_list_Countpredicate p);
 size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p);
 void 	pop(t_list *list, t_node *node);
+size_t erase(t_list *list, t_node *first, t_node *last);
 size_t list_remove(t_list *list, t_list_value val);
 size_t list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p);
 bool   empty(t_list *list);
