@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 02:10:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 02:12:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,5 @@ bool __cmd_exists__(t_list_value path, t_list_value name)
 {
 	string guess = __strappend(__make_string_empty(), path, "/", name);
 
-	bool res = (0 == access(guess, F_OK));
-
-	return res;
+	return (0 == access(guess, F_OK));
 }
