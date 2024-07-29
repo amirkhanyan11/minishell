@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 17:19:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:25:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,23 @@
 
 extern t_shell *shell;
 
+static void __eval_prog__(t_command *cmd);
+
 void eval_prog(t_command *cmd)
+{
+	if (!cmd) return;
+	
+	pid_t pid = __fork();
+	if (0 == pid)
+	{
+		__eval_prog__(cmd);
+	}
+	int x = 0;
+	waitpid(pid, &x, 0);
+	cmd->shell->status = WEXITSTATUS(x);
+}
+
+static void __eval_prog__(t_command *cmd)
 {
 	int lookup = cmd_lookup(cmd);
 

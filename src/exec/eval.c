@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 17:15:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:25:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,7 @@ void eval(t_command *cmd)
 
 	else if (list_value_same(cmd->name, "cd")) cd(cmd);
 
-	else
-	{
-		pid_t pid = __fork();
-		if (0 == pid)
-		{
-			eval_prog(cmd);
-		}
-		int x = 0;
-		waitpid(pid, &x, 0);
-		cmd->shell->status = WEXITSTATUS(x);	
-	}
+	else eval_prog(cmd);
+		
 	reset_descriptors(cmd);
 }
