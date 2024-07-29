@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 18:51:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:42:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ struct s_shell
     t_list  	  *export;
 	t_list		  *path;
 
-	t_descriptor *sysdescriptors;
+	t_descriptor *stddesc;
 	t_descriptor *descriptors;
 
 	int			 status;
@@ -108,7 +108,8 @@ t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
 t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
 t_command 	 *make_command(char * raw_cmd) __result_use_check;
 t_list 		 *make_path(t_shell *shell) __result_use_check;
-t_descriptor *make_descriptors(int x, int y, int z) __result_use_check;
+t_descriptor *make_descriptors() __result_use_check;
+t_descriptor *make_stddesc() __result_use_check;
 void 		 __t_command__(t_command **cmdptr);
 void 	 	 __t_shell__(t_shell * shell);
 
