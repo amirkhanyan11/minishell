@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 21:30:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 00:13:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ extern t_shell *shell;
 
 int redirect(t_node *token, t_command *cmd)
 {
-	if (!token || !token->next)
+	if (!token || !token->next || list_value_same(token->next->val, ""))
 	{
-		__perror("ambiguous redirect"); // also shows up with empty filename, needs fix
+		__perror((token->next) ? "ambiguous redirect" : "syntax error");
 		return -1;
 	}
 

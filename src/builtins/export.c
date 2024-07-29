@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 16:59:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 00:56:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,17 @@ void export(t_command *cmd)
 
 }
 
-int __export_from_string__(char *val)
+int __export_from_string__(char *expr)
 {
-	if (!val) return -1;
+	if (!expr) return -1;
 
-	a_matrix arr = __split_include_delimiters(val, '=');
+	a_matrix arr = __split_include_delimiters(expr, '=');
 
 	a_list tokens = make_list_from_matrix(arr);
 
-	dollar_sign_resolver(tokens);
+	// a_list tokens = make_list_from_string(expr, "=", all);
+
+	if (empty(tokens)) return -1;
 
 	if (!is_name(tokens->head->val))
 	{
@@ -52,19 +54,44 @@ int __export_from_string__(char *val)
 		return -1;
 	}
 
-	__unset__(tokens->head);
-
-	string res = __make_string_from_list(tokens);
-
-	push_back(shell->export, res);
-
-	if (NULL != find_range(tokens, "=", list_value_same))
+	if (size(tokens) >= 2) 
 	{
-		push_back(shell->env, res);
-
-		if (0 == __strcmp(tokens->head->val, "PATH") && size(tokens) >= 3) shell->path = make_path(shell);
+		char *val = (tokens->head->next->next) ? tokens->head->next->next->val : "\0";
+		return export_update(shell, tokens->head->val, val);
 	}
 
+	else
+	{
+		__unset__(tokens->head->val);
+		push_back(shell->export, tokens->head->val);
+	}
+
+	return 0;
+}
+
+int export_update(t_shell *shell, t_list_value key, t_list_value val)
+{
+	if (!shell || !key) return -1;
+	
+	if (!is_name(key))
+	{
+		__perror("export: not a valid identifier");
+		return -1;
+	}
+
+	__unset__(key);
+	
+	string res = __strappend(__make_string_empty(), key, "=", val);
+
+	push_back(shell->export, res);
+	
+	if (val)
+	{
+		push_back(shell->env, res);
+		
+		if (list_value_same(key, "PATH")) shell->path = make_path(shell);
+	}
+	
 	return 0;
 }
 

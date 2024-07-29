@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 21:38:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 00:48:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void 		 set_descriptors(t_command * cmd);
 void 		 reset_descriptors(t_command * cmd);
 
 // execution helpers
+int		    export_update(t_shell *shell, t_list_value key, t_list_value val);
 char 		*get_value(t_list *list, char *target) __result_use_check;
 void 		resolve(t_node *t, t_list *tokens);
 char 		*get_key(t_list_value line)  __result_use_check;
@@ -146,7 +147,7 @@ void echo(t_command *cmd);
 // other
 int __export_from_string__(char *val);
 char *  __pwd__() __result_use_check;
-void __unset__(t_node *token);
+void __unset__(t_list_value val);
 
 // signals
 void	set_signals_interactive(void);

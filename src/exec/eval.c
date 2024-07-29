@@ -6,33 +6,22 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 21:31:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 00:58:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-			// if (i > 0)
-			// 	{
-			// 		dup2(cmds->arr[i - 1]->descriptors->stdout, cmds->arr[i]->descriptors->stdin);
-			// 	}
-			// 	if (i < cmds->size - 1)
-			// 	{
-					
-			// 	}
-
-// needs refactoring for pipes
 void eval(t_cmd_container *cmds, size_t i)
 {
-	if (NULL == cmds || i >= cmds->size) return;
+	if (NULL == cmds || i >= cmds->size || !cmds->arr[i]) return;
+	
+	t_command *cmd = cmds->arr[i];
 
 	t_file		pipe[2];
 
 	__pipe(pipe);
-
-	t_command *cmd = cmds->arr[i];
-
-
+	
 	if (i < cmds->size - 1)
 	{
 		dup2(pipe[out], STDOUT_FILENO);
@@ -63,5 +52,7 @@ void eval(t_cmd_container *cmds, size_t i)
 	close(pipe[in]);
 	close(pipe[out]);
 
+
+	export_update(cmds->arr[i]->shell, "_", cmds->arr[i]->name);
 	// reset_descriptors(cmd);
 }
