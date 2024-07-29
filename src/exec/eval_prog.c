@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/23 19:00:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:19:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void eval_prog(t_command *cmd)
 {
 	int lookup = cmd_lookup(cmd);
 
-	if (lookup == -1) return;
+	if (lookup == -1) __exit(NULL);
 
 	a_list options_copy = make_list_copy(cmd->options, NULL);
 	push_front(options_copy, cmd->name);
@@ -30,5 +30,5 @@ void eval_prog(t_command *cmd)
 	a_matrix _env  = make_matrix_from_list(shell->env);
 	
 	execve(cmd->name, _args, _env);
-	__exit(strerror(errno));
+	__exit(NULL);
 }

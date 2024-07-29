@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 20:28:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:05:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 extern t_shell * shell;
 
 // handles redirections and $variables
-t_list * __result_use_check preprocess(t_list *tokens)
+t_list * __result_use_check preprocess(t_list *tokens, t_command *cmd)
 {
 	if (empty(tokens) || !shell) return NULL;
 
@@ -30,8 +30,7 @@ t_list * __result_use_check preprocess(t_list *tokens)
 	list_remove(tokens, "\'");
 	list_remove(tokens, "\"");
 
-
-	if (redirection_resolver(tokens) == -1) list_clear(&tokens);
+	if (redirection_resolver(tokens, cmd) == -1) list_clear(&tokens);
 
 	return tokens;
 }

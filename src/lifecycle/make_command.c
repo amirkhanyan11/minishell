@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/23 18:15:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:05:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ t_command * __result_use_check make_command(char * raw_cmd)
 	if (!raw_cmd || !shell) return NULL;
 
 	// reset_descriptors(); // probably a bad choice considering pipes
+	t_command *cmd = __malloc(sizeof(t_command));
+	cmd->descriptors = make_descriptors();
 
-	t_list * __dtor(list_clear) tokens = preprocess(tokenize(raw_cmd));
+	a_list tokens = preprocess(tokenize(raw_cmd), cmd);
 
 	if (empty(tokens)) return NULL;
 
-	t_command *cmd = __malloc(sizeof(t_command));
 
 	cmd->shell = shell;
 	cmd->options = make_list();

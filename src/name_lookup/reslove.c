@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/28 21:34:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:55:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern t_shell *shell;
 
 static bool p(char c)
 {
-	return !is_name(c);
+	return !is_name_part(c);
 }
 
 void resolve(t_node *t, t_list *tokens) // add $?
