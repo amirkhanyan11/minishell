@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:32:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/23 18:11:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:36:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void set_descriptors(t_shell * shell)
 {
 	if (!shell) return ;
 
-	if (shell->descriptors->stdin != shell->sysdescriptors->stdin)
+	if (shell->descriptors->stdin != shell->stddesc->stdin)
 		dup2(shell->descriptors->stdin, STDIN_FILENO);
-	if (shell->descriptors->stdout != shell->sysdescriptors->stdout)
+	if (shell->descriptors->stdout != shell->stddesc->stdout)
 		dup2(shell->descriptors->stdout, STDOUT_FILENO);
-	if (shell->descriptors->stderr != shell->sysdescriptors->stderr)
+	if (shell->descriptors->stderr != shell->stddesc->stderr)
 		dup2(shell->descriptors->stderr, STDERR_FILENO);
 }
