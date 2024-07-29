@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 00:13:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 03:18:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ int redirect(t_node *token, t_command *cmd)
 		 	return -1;
 		cmd->descriptors->stdin = fd;
 		cmd->redirection |= redirect_in;
+	}
+	else if (list_value_same(token->val, "<<"))
+	{
+		fd = make_heredoc(token->next->val);
+		if (fd == -1)
+		 	return -1;
+		cmd->descriptors->stdin = fd;
+		cmd->redirection |= redirect_in | redirect_heredoc;
 	}
 	else if (list_value_same(token->val, ">"))
 	{

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 00:09:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 03:04:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_command * __result_use_check make_command(t_list *tokens)
 	{
 		t_node *next = token->next;
         
-		if (list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>")) 
+		if (list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>") || list_value_same(token->val, "<<")) 
 		{
 			if (-1 == redirect(token, cmd))
 			{

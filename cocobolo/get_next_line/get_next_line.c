@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:48:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/04/22 20:40:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 03:21:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ char	*get_next_line(int fd)
 	char		*newline;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
-		return (NULL);
+	{
+		free(memory);
+		memory = NULL;
+		return NULL;
+	}
 	if (!memory)
 	{
 		memory = malloc(1);
@@ -39,4 +43,14 @@ char	*get_next_line(int fd)
 	}
 	ft_read(fd, &memory);
 	return (ft_fetch(&memory));
+}
+
+char	*get_next_line_no_nl(int fd)
+{
+	char *	line = get_next_line(fd);
+	if (line)
+	{
+		line[__strlen(line) - 1] = '\0';
+	}
+	return line;
 }

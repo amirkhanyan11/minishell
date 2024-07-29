@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:41:51 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 16:58:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 02:38:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ bool is_digit(const char c)
 bool is_name_part(const char c)
 {
     return (c == '_' || is_alpha(c) || is_digit(c));
+}
+
+bool is_redirection(char * val)
+{
+    return (list_value_same(val, "<") || list_value_same(val, ">"));
 }
 
 bool is_name(char *s)
