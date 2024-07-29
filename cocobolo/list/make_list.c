@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 18:11:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 19:14:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ t_list * __attribute__((malloc)) __result_use_check make_list_copy_range(t_list 
 
 t_list * __attribute__((malloc)) __result_use_check make_list_copy(t_node *first, t_node *last, t_value_mutate f)
 {
-	if (!first || !last) return NULL;
-
 	t_list *list = make_list();
 
 	while (first && first->prev != last)

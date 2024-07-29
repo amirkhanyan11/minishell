@@ -27,18 +27,18 @@ RED = \x1b[1;31m
 
 CC = gcc
 # DEBUG = -fsanitize=address
-# DEBUG = -g
+DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 
 LREADLINE = -L/usr/lib -lreadline
 
-all : ${OBJSPATH} ${NAME}
+all : ${COCOBOLO} ${OBJSPATH} ${NAME}
 
 ${OBJSPATH} :
 	@mkdir -p objs
 
-${NAME} : ${COCOBOLO} ${OBJS}
+${NAME} : ${OBJS}
 	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${COCOBOLO} ${LREADLINE} -o $@
 	@echo "${GREEN} minishell compiled! ${END}"
 

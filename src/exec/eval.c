@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 18:10:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 19:05:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void eval(t_command *cmd)
 {
 	if (NULL == cmd) return;
-	
+
 	set_descriptors(cmd);
 
 	if (list_value_same(cmd->name, "pwd")) pwd();
