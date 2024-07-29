@@ -61,12 +61,14 @@ re : fclean all
 config :
 	./readline_config.sh readline_lib
 
-push :
 
+BRANCH = pipe 
+
+push :
 	make fclean
 	git add .
 	git commit -m "."
-	git push
+	git push ${BRANCH}
 
 leaks : re
 

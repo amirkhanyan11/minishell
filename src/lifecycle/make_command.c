@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 19:24:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 19:31:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_command * __result_use_check make_command(t_list *tokens)
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->name = __strdup(tokens->head->val); // assume the name of the command goes always first in the input
+	cmd->resolved = false;
 
 	t_node *token = tokens->head->next;
 
 	while (token)
 	{
-
 		t_node *next = token->next;
         
 		if (list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>")) 
@@ -42,17 +42,14 @@ t_command * __result_use_check make_command(t_list *tokens)
 			if (-1 == redirect(token, cmd))
 			{
 				__t_command__(&cmd);
-				return NULL;
+				break;
 			}
 
-			t_node *next = token->next->next;
-			pop(tokens, token->next);
-			pop(tokens, token); // erase
-			token = next;
-			continue;
+			next = token->next->next;
+			erase(tokens, token, token->next);
 		}
 		
-		if (token->val[0] == '-')
+		else if (token->val[0] == '-')
 			push_back(cmd->options, token->val);
 		
 		else
@@ -61,8 +58,6 @@ t_command * __result_use_check make_command(t_list *tokens)
 		token = next;
 
 	}
-
-	cmd->resolved = false;
 
 	return cmd;
 }
