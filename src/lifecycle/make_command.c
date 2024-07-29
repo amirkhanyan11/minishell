@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 20:21:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:32:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_command * __result_use_check make_command(t_list *tokens)
 	cmd->args = make_list();
 	cmd->name = __strdup(tokens->head->val); // assume the name of the command goes always first in the input
 	cmd->resolved = false;
+	cmd->redirection = 0;
 
 	t_node *token = tokens->head->next;
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 20:44:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:29:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ typedef int	   t_file;
 
 enum e_
 {
-	in,
-	out	
+	in = 0,
+	out = 1,
+	redirect_in = 2,
+	redirect_out = 4
 };
 
 struct s_shell
@@ -66,6 +68,7 @@ struct s_command
 	t_list  *options;
     t_list 	*args;
 	
+	int 	redirection;
 	t_descriptor *descriptors;
 
 	bool resolved;

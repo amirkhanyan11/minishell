@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 21:24:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:31:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ void eval(t_cmd_container *cmds, size_t i)
 
 	t_command *cmd = cmds->arr[i];
 
-	// set_descriptors(cmd);
 
 	if (i < cmds->size - 1)
 	{
 		dup2(pipe[out], STDOUT_FILENO);
 	}
+	
+	set_descriptors(cmd);
 	
 	if (list_value_same(cmd->name, "pwd")) pwd();
 
@@ -55,11 +56,7 @@ void eval(t_cmd_container *cmds, size_t i)
 
 	else eval_prog(pipe, cmds, i);
 	
-	if (i < cmds->size - 1)
-	{
-		// dup2(pipe[in], cmds->arr[i + 1]->descriptors->stdin);
-		dup2(pipe[in], STDIN_FILENO);
-	}
+	dup2(pipe[in], STDIN_FILENO);
 	
 	dup2(cmd->shell->stddesc->stdout, STDOUT_FILENO);
 	
