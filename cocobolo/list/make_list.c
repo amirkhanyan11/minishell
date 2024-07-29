@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/20 00:03:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:11:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,32 @@ t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *
 
 }
 
-t_list * __attribute__((malloc)) __result_use_check make_list_copy(t_list *other, t_value_mutate f)
+t_list * __attribute__((malloc)) __result_use_check make_list_copy_range(t_list *other, t_value_mutate f)
 {
 	if (!other) return NULL;
 
-	t_node *node = other->head;
+	return (make_list_copy(other->head, other->tail, f));
+}
+
+t_list * __attribute__((malloc)) __result_use_check make_list_copy(t_node *first, t_node *last, t_value_mutate f)
+{
+	if (!first || !last) return NULL;
+
 	t_list *list = make_list();
 
-	while (node)
+	while (first && first->prev != last)
 	{
 		if (f == NULL)
 		{
-			push_back(list, node->val);
+			push_back(list, first->val);
 		}
 		else
 		{
-			t_list_value val = f(node->val);
+			t_list_value val = f(first->val);
 			push_back(list, val);
 			free(val);
 		}
-		node = node->next;
+		first = first->next;
 	}
 
 	return list;

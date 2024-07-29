@@ -21,7 +21,8 @@ SRCS = $(foreach L, ${SRCSPATH}, $(wildcard ${L}*.c))
 OBJS =  $(foreach L, ${SRCSPATH}, $(patsubst ${L}%.c, ${OBJSPATH}%.o, ${SRCS}))
 
 CC = gcc
-DEBUG = -g #-fsanitize=address
+# DEBUG = -fsanitize=address
+# DEBUG = -g
 CFLAGS = $(foreach H, ${INCPATH}, -I${H}) ${DEBUG} #-Wall -Wextra -Werror
 
 all : ${OBJSPATH} ${NAME}

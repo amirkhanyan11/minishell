@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:40:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 16:07:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:52:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list * __result_use_check make_export(t_shell *shell)
 {
 	if (!shell) return NULL;
 
-    return make_list_copy(shell->env, NULL);
+    return make_list_copy_range(shell->env, NULL);
 }
 
 static char *add_declarex(char *s)

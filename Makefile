@@ -26,7 +26,8 @@ GREEN = \x1b[1;32m
 RED = \x1b[1;31m
 
 CC = gcc
-DEBUG = -g #-fsanitize=address
+# DEBUG = -fsanitize=address
+# DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 
