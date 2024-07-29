@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 19:24:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/28 21:34:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,29 @@ void resolve(t_node *t, t_list *tokens) // add $?
 	char *s = __strdup(t->val);
 
 	while (s[i] && s[i + 1])
-	{	
+	{
 		if (s[i] == '$')
 		{
-			bool resolved = false;
 			size_t k = __strchr_p(s + i + 1, p) - s;
 			char *prefix = __strdup(s);
 			char *postfix = __strdup(s + k);
 			prefix[i] = '\0';
 
-			while (i < k)
+			char c = s[k];
+			s[k] = '\0';
+
+			string val = get_value(shell->export, s + i + 1);
+			s[k] = c;
+
+			if (val)
 			{
-				char c = s[k];
-				s[k] = '\0';
-				
-				string val = get_value(shell->export, s + i + 1);								
-				s[k] = c;
-				
-				if (val)
-				{
-					i += __strlen(val) - 1;
-					prefix = __strappend(prefix, val, s + k);
-					free(s);
-					s = prefix;
-					resolved = true;
-					break;
-				}
-				
-				k--;
-			}		
-			
-			if (!resolved)
+				i += __strlen(val) - 1;
+				prefix = __strappend(prefix, val, s + k);
+				free(s);
+				s = prefix;
+			}
+
+			else
 			{
 				i = __strlen(prefix) - 1;
 				prefix = __strappend(prefix, postfix);
@@ -63,7 +55,7 @@ void resolve(t_node *t, t_list *tokens) // add $?
 				free(postfix);
 				s = prefix;
 			}
-			
+
 		}
 		i++;
 	}
