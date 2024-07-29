@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 17:05:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:32:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,51 @@
 
 extern t_shell *shell;
 
-t_command * __result_use_check make_command(char * raw_cmd)
+// if (redirection_resolver(tokens, cmd) == -1) list_clear(&tokens);
+
+
+t_command * __result_use_check make_command(t_list *tokens)
 {
-	if (!raw_cmd || !shell) return NULL;
+	if (empty(tokens) || !shell) return NULL;
 
 	// reset_descriptors(); // probably a bad choice considering pipes
 	t_command *cmd = __malloc(sizeof(t_command));
-	cmd->descriptors = make_descriptors();
-
-	a_list tokens = preprocess(tokenize(raw_cmd), cmd);
-
-	if (empty(tokens)) return NULL;
-
+	cmd->descriptors = make_stddesc();
 
 	cmd->shell = shell;
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->name = __strdup(tokens->head->val); // assume the name of the command goes always first in the input
-
-	t_node *node = tokens->head->next;
-
-	while (node)
-	{
-		if (node->val[0] == '-')
-			push_back(cmd->options, node->val);
-		else
-			push_back(cmd->args, node->val);
-		node = node->next;
-	}
-
 	cmd->resolved = false;
+	cmd->redirection = 0;
+
+	t_node *token = tokens->head->next;
+
+	while (token)
+	{
+		t_node *next = token->next;
+        
+		if (list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>")) 
+		{
+			if (-1 == redirect(token, cmd))
+			{
+				__t_command__(&cmd);
+				break;
+			}
+
+			next = token->next->next;
+			erase(tokens, token, token->next);
+		}
+		
+		else if (token->val[0] == '-')
+			push_back(cmd->options, token->val);
+		
+		else
+			push_back(cmd->args, token->val);
+		
+		token = next;
+
+	}
 
 	return cmd;
 }

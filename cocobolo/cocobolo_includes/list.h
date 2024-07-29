@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 20:28:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:51:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void 	pop_front(t_list *const list);
 void 	pop_back(t_list *const list);
 
 t_list  *make_list() __attribute__((malloc)) __result_use_check;
-t_list 	*make_list_copy(t_list *other, t_value_mutate f) __attribute__((malloc)) __result_use_check;
+t_list 	*make_list_copy(t_node *first, t_node *last, t_value_mutate f) __attribute__((malloc)) __result_use_check;
+t_list 	*make_list_copy_range(t_list *other, t_value_mutate f) __attribute__((malloc)) __result_use_check;
 t_list  *make_list_from_matrix(char **arr) __attribute__((malloc)) __result_use_check;
 t_list  *make_list_from_string(char *s, char *set, t_opcode opcode) __attribute__((malloc)) __result_use_check;
 t_node  *make_node(const t_list_value x) __attribute__((malloc)) __result_use_check;

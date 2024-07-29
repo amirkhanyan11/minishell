@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 17:07:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:30:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int redirect(t_node *token, t_command *cmd)
 		if (fd == -1)
 		 	return -1;
 		cmd->descriptors->stdin = fd;
+		cmd->redirection |= redirect_in;
 	}
 	else if (list_value_same(token->val, ">"))
 	{
@@ -37,6 +38,7 @@ int redirect(t_node *token, t_command *cmd)
 		if (fd == -1)
 		 	return -1;
 		cmd->descriptors->stdout = fd;
+		cmd->redirection |= redirect_out;
 	}
 	else
 	{
@@ -44,6 +46,7 @@ int redirect(t_node *token, t_command *cmd)
 		if (fd == -1)
 		 	return -1;
 		cmd->descriptors->stdout = fd;
+		cmd->redirection |= redirect_out;
 	}
 	return 0;
 }
