@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 00:56:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 01:38:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int __export_from_string__(char *expr)
 
 	else
 	{
-		__unset__(tokens->head->val);
+		__unset__(shell, tokens->head->val);
 		push_back(shell->export, tokens->head->val);
 	}
 
@@ -79,7 +79,7 @@ int export_update(t_shell *shell, t_list_value key, t_list_value val)
 		return -1;
 	}
 
-	__unset__(key);
+	__unset__(shell, key);
 	
 	string res = __strappend(__make_string_empty(), key, "=", val);
 

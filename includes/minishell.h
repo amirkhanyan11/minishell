@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 00:48:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 01:41:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ bool is_name_part(const char c);
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __result_use_check;
 t_shell 	 *make_shell(char **env) __result_use_check;
+void		 make_shlvl(t_shell *shell);
 t_matrix 	 make_matrix_from_string(char *s, char *set) __result_use_check;
 t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
 t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
@@ -147,7 +148,7 @@ void echo(t_command *cmd);
 // other
 int __export_from_string__(char *val);
 char *  __pwd__() __result_use_check;
-void __unset__(t_list_value val);
+void __unset__(t_shell *shell, t_list_value val);
 
 // signals
 void	set_signals_interactive(void);

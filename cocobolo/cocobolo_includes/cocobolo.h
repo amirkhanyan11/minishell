@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 20:17:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 01:11:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ size_t      __strcmp(const char *lhv, const char *rhv);
 bool        __strchr(char *s, const char c);
 char 		*__strchr_p(char *s, bool (*p) (char));
 bool        __strcmp_weak__(const char *lhv, const char *rhv);
-char		*__itoa(int n);
+char		*__itoa(int n) __result_use_check;
 t_matrix    __split(char const *s, char *set) __result_use_check;
 t_matrix    __split_include_delimiters(char const *s, char c) __result_use_check;
 

@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_shell.c                                       :+:      :+:    :+:   */
+/*   make_shlvl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 01:57:22 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/30 01:40:09 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/07/30 01:51:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell * __result_use_check make_shell(char **env)
+void make_shlvl(t_shell *shell)
 {
-    t_shell *shell = __malloc(sizeof(t_shell));
+    string shlvl_old = get_value(shell->export, "SHLVL");
 
-    shell->env = make_list_from_matrix(env);
+	t_optional lvl = __atoi(shlvl_old);
 
-	shell->export = make_export(shell);
+	string shlvl = __itoa(value_or(&lvl, 0) + 1);
 
-	shell->path = make_path(shell);
-
-    shell->history = make_list();
-
-	shell->stddesc = make_stddesc();
-	// shell->descriptors = make_descriptors();
-
-	make_shlvl(shell);
-
-	export_update(shell, "SHELL", "minishell");
-	shell->status = 0;
-
-    return shell;
+	export_update(shell, "SHLVL", shlvl);
 }
