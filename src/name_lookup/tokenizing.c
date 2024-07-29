@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:19:00 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 17:37:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:44:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void __dquote_counter__(size_t *sum, char *s);
 
 t_list * __result_use_check tokenize(char * raw_cmd)
 {
-	if (!raw_cmd) __exit("empty command");
+	if (!raw_cmd) return NULL;
 
 	t_list *tokens = make_list_from_string(raw_cmd, "| \'\"", all);
 
