@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 18:14:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:44:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct s_descriptor t_descriptor;
 typedef int	   t_file;
 
 # define a_cmd_container t_cmd_container * __dtor(__t_cmd_container__)
+
+enum e_
+{
+	in,
+	out	
+};
 
 struct s_shell
 {
@@ -79,8 +85,8 @@ void display_history();
 char	*read_line(void);
 
 // execution
-void 	     eval(t_command *cmd);
-void 	     eval_prog(t_command *cmd);
+void 		 eval(t_cmd_container *cmds, size_t i);
+void 		 eval_prog(t_file *pipe, t_cmd_container *cmds, size_t i);
 void 		 set_descriptors(t_command * cmd);
 void 		 reset_descriptors(t_command * cmd);
 

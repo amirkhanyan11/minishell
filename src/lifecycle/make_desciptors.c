@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:09:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 16:45:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:21:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_descriptor * __result_use_check make_descriptors()
 t_descriptor * __result_use_check make_stddesc()
 {
 	t_descriptor *res = make_descriptors();
+	
 	res->stdout = dup(STDOUT_FILENO);
 	res->stdin =  dup(STDIN_FILENO);
 	res->stderr = dup(STDERR_FILENO);
