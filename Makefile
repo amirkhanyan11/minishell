@@ -62,7 +62,7 @@ config :
 	./readline_config.sh readline_lib
 
 
-BRANCH = master
+# BRANCH = master
 
 push :
 	make fclean
