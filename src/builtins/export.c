@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:41:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:59:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int __export_from_string__(char *val)
 {
 	if (!val) return -1;
 
-	t_matrix __dtor(__matrix_clear) arr = __split_include_delimiters(val, '=');
+	a_matrix arr = __split_include_delimiters(val, '=');
 
-	t_list * __dtor(list_clear) tokens = make_list_from_matrix(arr);
+	a_list tokens = make_list_from_matrix(arr);
 
 	dollar_sign_resolver(tokens);
 
-	if (tokens->head->val[0] >= '0' && '9' >= tokens->head->val[0])
+	if (!is_name(tokens->head->val))
 	{
 		__perror("export: not a valid identifier");
 		return -1;

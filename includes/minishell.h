@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 16:42:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:14:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ struct s_shell
 	t_list		  *path;
 
 	t_descriptor *stddesc;
-	t_descriptor *descriptors;
 
 	int			 status;
 };
@@ -57,6 +56,8 @@ struct s_command
 	char 	*name;
 	t_list  *options;
     t_list 	*args;
+	
+	t_descriptor *descriptors;
 
 	bool resolved;
 };
@@ -71,8 +72,8 @@ char	*read_line(void);
 // execution
 void 	     eval(t_command *cmd);
 void 	     eval_prog(t_command *cmd);
-void 		 set_descriptors(t_shell * shell);
-void 		 reset_descriptors(t_shell * shell);
+void 		 set_descriptors(t_command * cmd);
+void 		 reset_descriptors(t_command * cmd);
 
 // execution helpers
 char 		*get_value(t_list *list, char *target) __result_use_check;
@@ -80,13 +81,13 @@ void 		resolve(t_node *t, t_list *tokens);
 char 		*get_key(t_list_value line)  __result_use_check;
 int 		cmd_lookup(t_command *cmd);
 t_file 		open_file(char *filenae, int options);
-int 		redirect(t_node *token);
+int 		redirect(t_node *token, t_command *cmd);
 
 // parsing
 t_list 		 *tokenize(char * raw_cmd) __result_use_check;
-t_list 		 *preprocess(t_list *tokens) __result_use_check ;
+t_list 		 *preprocess(t_list *tokens, t_command *cmd) __result_use_check ;
 void 		 dollar_sign_resolver(t_list *tokens);
-int 		 redirection_resolver(t_list *tokens);
+int 		 redirection_resolver(t_list *tokens, t_command *cmd);
 
 void 		 merge_tokens(t_list *tokens);
 
@@ -96,9 +97,10 @@ bool __contains_as_key__(char *line, char *target);
 bool __cmd_exists__(t_list_value path, t_list_value name);
 
 // name predicates
+bool is_name(char *s);
 bool is_alpha(const char c);
 bool is_digit(const char c);
-bool is_name(const char c);
+bool is_name_part(const char c);
 
 // lifecycle
 t_list 		 *make_export(t_shell *shell) __result_use_check;
