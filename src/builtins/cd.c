@@ -6,13 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/17 20:11:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:38:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_shell *shell;
+
+static void _chdir(const char *path)
+{
+	if (chdir(path) == -1)
+		__perror(strerror(errno));
+}
 
 void cd(t_command *cmd)
 {
@@ -29,12 +35,12 @@ void cd(t_command *cmd)
 	if (empty(cmd->args) || find_range(cmd->args, "~", NULL))
 	{
 		string home = get_value(shell->export, "HOME");
-		chdir(home);
+		_chdir(home);
 	}
 
 	else if (size(cmd->args) == 1)
 	{
-		chdir(cmd->args->head->val);
+		_chdir(cmd->args->head->val);
 	}
 
 	if (wd)
@@ -46,5 +52,4 @@ void cd(t_command *cmd)
 		__export_from_string__(oldpwd);
 		__export_from_string__(pwd);
 	}
-
 }
