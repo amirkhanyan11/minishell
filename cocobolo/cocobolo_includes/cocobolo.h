@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 02:56:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:47:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void 		__perror(char * err);
 void		__exit(char const *const err) __dead2;
 void		*__malloc(size_t n) __allocs __result_use_check;
 pid_t 		__fork(void);
-int         __pipe(int *p);
+void         __pipe(int *p);
 void	    __putstr_fd(char *s, int fd);
 
 // string

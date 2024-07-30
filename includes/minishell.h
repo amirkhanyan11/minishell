@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 14:35:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:48:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ struct s_command
 	char 	*name;
 	t_list  *options;
     t_list 	*args;
-	
+
 	int 	redirection;
 	t_descriptor *descriptors;
 
@@ -79,7 +79,7 @@ struct s_command
 struct s_cmd_container
 {
 	t_command **arr;
-	size_t size;	
+	size_t size;
 };
 
 // displays
@@ -129,7 +129,7 @@ bool is_name_part(const char c);
 t_list 		 *make_export(t_shell *shell) __result_use_check;
 t_shell 	 *make_shell(char **env) __result_use_check;
 void		 make_shlvl(t_shell *shell);
-t_file		 make_heredoc(char *eof);		
+t_file		 make_heredoc(char *eof);
 t_matrix 	 make_matrix_from_string(char *s, char *set) __result_use_check;
 t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
 t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
@@ -145,7 +145,7 @@ void 		 __t_cmd_container__(t_cmd_container ** cmdsptr);
 // builtins
 void cd(t_command *cmd);
 void pwd();
-void _env(char *name);
+void env();
 void unset(t_command *cmd);
 void export(t_command *cmd);
 void echo(t_command *cmd);

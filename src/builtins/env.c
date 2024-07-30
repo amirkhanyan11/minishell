@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:22:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:48:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 extern t_shell *shell;
 
-void _env(char *name)
+void env()
 {
-	if (NULL != find_range(shell->path, name, __cmd_exists__))
-	{
-		print_list(shell->env);
-	}
+	print_list(shell->env);
 }
