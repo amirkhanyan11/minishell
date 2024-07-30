@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:43:01 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 21:37:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:35:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 char * read_line(void)
 {
-	set_signals_interactive();
+	// set_signals_interactive();
 	char *line = readline(prompt);
-	set_signals_noninteractive();
+	// set_signals_noninteractive();
 
 	return line;
 }
