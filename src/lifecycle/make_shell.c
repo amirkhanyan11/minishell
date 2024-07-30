@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigpetro <tigpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 01:57:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:31:51 by tigpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_shell * __result_use_check make_shell(char **env)
 	make_shlvl(shell);
 
 	export_update(shell, "SHELL", "minishell");
+	export_update(shell, "OLDPWD", "");
 	shell->status = 0;
 
     return shell;
