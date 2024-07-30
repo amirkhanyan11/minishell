@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 18:47:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 19:58:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void		*__malloc(size_t n) __allocs __result_use_check;
 pid_t 		__fork(void);
 void         __pipe(int *p);
 void	    __putstr_fd(char *s, int fd);
+void		*__memset(void *b, int c, size_t len);
 
 // string
 void 		__delete_string(char **s);

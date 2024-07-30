@@ -4,7 +4,7 @@ COCOBOLOPATH = ./cocobolo/
 COCOBOLO = ${COCOBOLOPATH}cocobolo.a
 
 SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./src/exec/
-INCPATH = ./includes/ ${COCOBOLOPATH}cocobolo_includes/ ./readline_lib/include/
+INCPATH = ./includes/ ${COCOBOLOPATH}cocobolo_includes/ ./readline_juju/include/
 OBJSPATH = ./objs/
 
 # SRCS = $(wildcard $(SRCSPATH)*.c)
@@ -31,7 +31,14 @@ DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 
-LREADLINE = -L/usr/lib -lreadline
+UNAME = $(shell uname -s)
+ifeq ($(UNAME), Darwin)
+	LREADLINE =  -Lreadline_juju/lib -lreadline
+else
+	LREADLINE = -lreadline
+endif
+
+# LREADLINE = -L/usr/lib -lreadline
 
 all : ${COCOBOLO} ${OBJSPATH} ${NAME}
 
@@ -39,7 +46,7 @@ ${OBJSPATH} :
 	@mkdir -p objs
 
 ${NAME} : ${OBJS}
-	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${COCOBOLO} ${LREADLINE} -o $@
+	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${LREADLINE} ${COCOBOLO} -o $@
 	@echo "${GREEN} minishell compiled! ${END}"
 
 ${OBJSPATH}%.o : %.c Makefile
@@ -58,10 +65,6 @@ fclean : clean
 
 re : fclean all
 
-config :
-	./readline_config.sh readline_lib
-
-
 # BRANCH = master
 
 push :
@@ -73,6 +76,10 @@ push :
 leaks : re
 
 	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
+
+config:
+	mkdir -p readline_juju
+	./readline_config.sh readline_juju
 
 .PHONY : all clean fclean re leaks config
 

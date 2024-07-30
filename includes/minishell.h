@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 18:48:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:12:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ char *  __pwd__() __result_use_check;
 void __unset__(t_shell *shell, t_list_value val);
 
 // signals
-// void	set_signals_interactive(void);
-// void	set_signals_noninteractive(void);
+void	set_signals_interactive(void);
+void	set_signals_noninteractive(void);
 
 #endif // MINISHELL_H
