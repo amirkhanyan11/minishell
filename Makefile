@@ -3,7 +3,7 @@ NAME = minishell
 SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./src/exec/ \
 			./cocobolo/cocobolo_src/ ./cocobolo/optional/ ./cocobolo/list/ ./cocobolo/get_next_line/
 
-INCPATH = ./includes/ ./cocobolo/cocobolo_includes/ ./readline_juju/include/
+INCPATH = ./includes/ ./cocobolo/cocobolo_includes/ ./readline_local/include/
 OBJSPATH = ./objs/
 
 # SRCS = $(wildcard $(SRCSPATH)*.c)
@@ -49,7 +49,7 @@ CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Darwin)
-	LREADLINE =  -Lreadline_juju/lib -lreadline
+	LREADLINE =  -Lreadline_local/lib -lreadline
 else
 	LREADLINE = -lreadline
 endif
@@ -59,12 +59,12 @@ SRC_COUNT := 0
 SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
 
 
-all : print_info ${OBJSPATH} ${NAME}
+all : ${OBJSPATH} ${NAME}
 
 ${OBJSPATH} :
 	@mkdir -p objs
 
-${NAME} : ${OBJS}
+${NAME} : print_info ${OBJS}
 	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${LREADLINE} -o $@
 	@echo "\n\n${GREEN}            minishell compiled! ${END}\n"
 
@@ -94,8 +94,8 @@ leaks : re
 	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
 
 config:
-	mkdir -p readline_juju
-	./readline_config.sh readline_juju
+	mkdir -p readline_local
+	./readline_config.sh readline_local
 
 print_info:
 	@printf "%b" "\n$(PURPLE)                $(NAME)$(RESET)\n\n"
