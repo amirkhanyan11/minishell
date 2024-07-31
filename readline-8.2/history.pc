@@ -1,4 +1,4 @@
-prefix=/Users/tigpetro/Desktop/42cursus/tyomishell/readline_juju
+prefix=/Users/aamirkha/Desktop/minishell_latest/readline_juju
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
