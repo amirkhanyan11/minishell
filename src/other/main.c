@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/31 20:59:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:04:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,17 @@ int main(int ac, char **av, char **env)
 			break;
 		}
 
-		size_t i = 0;
-
-		while (i < cmds->size)
+		if (NULL != cmds)
 		{
-			eval(cmds, i++);
-		}
+			size_t i = 0;
 
-		while (-1 != wait(NULL));
+			while (i < cmds->size)
+			{
+				eval(cmds, i++);
+			}
+
+			while (-1 != wait(NULL));
+		}
 
 		if (__strcmp(line, "\n"))
 		{

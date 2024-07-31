@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/31 21:01:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:16:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static bool __is_quote__(char *s);
 void merge_inside_quotes(t_list *tokens);
 
-
-// echo '"' segfault
 void merge_tokens(t_list *tokens)
 {
 	if (!tokens || empty(tokens)) return;
