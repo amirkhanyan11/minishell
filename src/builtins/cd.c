@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 20:38:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:59:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void cd(t_command *cmd)
 		_chdir(cmd->args->head->val);
 	}
 
+	// replace with export_update()
 	if (wd)
 	{
 		string oldpwd = __strappend(__make_string_empty(), "OLDPWD", "=", wd);
