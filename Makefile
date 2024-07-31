@@ -99,7 +99,7 @@ config:
 
 print_info:
 	@printf "%b" "\n$(PURPLE)                $(NAME)$(RESET)\n\n"
-	@printf "%b" "$(WHITE)  Authors :  aamirkha, marikhac $(RESET)\n"
+	@printf "%b" "$(WHITE)      Authors : aamirkha, marikhac $(RESET)\n"
 	@printf "\n"
 
 
