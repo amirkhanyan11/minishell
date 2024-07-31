@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/31 18:45:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/31 20:59:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,29 @@ int main(int ac, char **av, char **env)
 
 		a_cmd_container cmds = make_cmd_container(line);
 
-		if (NULL != cmds)
+		if (!line || (cmds && cmds->size == 1 && cmds->arr[0] && list_value_same(cmds->arr[0]->name, "exit")))
 		{
-			if (cmds->size == 1 && cmds->arr[0] && list_value_same(cmds->arr[0]->name, "exit"))
-			{
-				printf("exit\n");
-				break;
-			}
-
-			size_t i = 0;
-
-			while (i < cmds->size)
-			{
-				eval(cmds, i++);
-			}
-			while (-1 != wait(NULL));
+			printf("exit\n");
+			break;
 		}
 
-		if (line && *line && __strcmp(line, "\n"))
+		size_t i = 0;
+
+		while (i < cmds->size)
+		{
+			eval(cmds, i++);
+		}
+
+		while (-1 != wait(NULL));
+
+		if (__strcmp(line, "\n"))
 		{
 			push_back(shell->history, line);
 
 			add_history(line);
 		}
-	}
 
+	}
 	__t_shell__(shell);
 
 	return 0;
