@@ -6,11 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:22:24 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 17:28:44 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:48:38 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "tree.h"
 
 tree_node *__find_max__(tree_node *root)
 {

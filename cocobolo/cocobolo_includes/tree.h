@@ -22,8 +22,8 @@ void						inorder(t_tree *tree, fptr foo);
 void						postorder(t_tree *tree, fptr foo);
 void						insert_node(t_tree *tree, int val);
 void 						node_clear(t_tree *tree, const int val);
-bool						empty(t_tree *tree);
-tree_node					*make_node(const int val);
+bool						tree_empty(t_tree *tree);
+tree_node					*make_tree_node(const int val);
 tree_node					*search(t_tree *tree, int val);
 t_tree						*make_tree(void);
 t_tree						*make_tree_from_array(int *arr, const int size);
@@ -37,6 +37,9 @@ tree_node					*__find_min__(tree_node *root);
 void 						print_preorder(t_tree *tree);
 void 						print_inorder(t_tree *tree);
 void 						print_postorder(t_tree *tree);
+bool 						less(t_val a, t_val b);
+bool 						greater(t_val a, t_val b);
+bool 						equal(t_val a, t_val b);
 
 
 struct						tree_node
