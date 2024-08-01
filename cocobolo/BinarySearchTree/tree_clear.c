@@ -17,5 +17,4 @@ void tree_clear(t_tree **treeptr)
 	tree->root = NULL;
 	free(tree);
 	*treeptr = NULL;
-
 }
