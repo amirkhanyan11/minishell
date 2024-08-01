@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:08:03 by kali              #+#    #+#             */
-/*   Updated: 2024/07/12 20:26:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 01:11:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		_calculate_size(int const n);
 static char		_to_char(int n);
 static char		*_allocate(int n);
 
-char	*__itoa(int n)
+char	*__result_use_check __itoa(int n)
 {
 	return (_allocate(n));
 }

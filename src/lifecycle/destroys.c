@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 20:02:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:02:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void __t_shell__(t_shell * shell)
     list_clear(&shell->export);
     list_clear(&shell->path);
 
-	reset_descriptors(shell);
 
-	free(shell->sysdescriptors);
-	free(shell->descriptors);
+	free(shell->stddesc);
 
     free(shell);
 
@@ -41,9 +39,33 @@ void __t_command__(t_command **cmdptr)
 
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
+	reset_descriptors(cmd);
+	
+	free(cmd->descriptors);
 	free(cmd->name);
 
 	free(cmd);
 
 	*cmdptr = NULL;
+}
+
+void __t_cmd_container__(t_cmd_container ** cmdsptr)
+{
+	if (NULL == cmdsptr) return;
+
+	t_cmd_container *cmds = *cmdsptr;
+
+	if (NULL == cmds) return;
+
+	size_t i = 0;
+
+	while (i < cmds->size)
+	{
+		__t_command__(&(cmds->arr[i]));
+		i++;
+	}
+
+	free(cmds->arr);
+	free(cmds);
+	*cmdsptr = NULL;
 }

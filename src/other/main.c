@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 18:18:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:09:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,34 @@ int main(int ac, char **av, char **env)
 	{
 		string line = read_line();
 
-		t_command * __dtor(__t_command__) cmd = make_command(line);
+		a_cmd_container cmds = make_cmd_container(line);
 
-		if (NULL != cmd)
+		if (!line || (cmds && cmds->size == 1 && cmds->arr[0] && list_value_same(cmds->arr[0]->name, "exit")))
 		{
-			if (0 == __strcmp(cmd->name, "exit")) break;
-
-			eval(cmd);
+			printf("exit\n");
+			break;
 		}
 
-		if (line && *line && __strcmp(line, "\n"))
+		if (NULL != cmds)
+		{
+			size_t i = 0;
+
+			while (i < cmds->size)
+			{
+				eval(cmds, i++);
+			}
+
+			while (-1 != wait(NULL));
+		}
+
+		if (__strcmp(line, "\n"))
 		{
 			push_back(shell->history, line);
 
 			add_history(line);
 		}
-	}
 
+	}
 	__t_shell__(shell);
 
 	return 0;

@@ -6,27 +6,32 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 20:28:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 01:39:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
-
-void __unset__(t_node *token)
+void __unset__(t_shell *shell, t_list_value val)
 {
-	if (!token || !token->val) return;
+	if (!val) return;
 
-	list_remove_if(shell->export, token->val, __contains_as_key__);
-	list_remove_if(shell->env, token->val, __contains_as_key__);
+	list_remove_if(shell->export, val, __contains_as_key__);
+	list_remove_if(shell->env, val, __contains_as_key__);
 
-	if (list_value_same(token->val, "PATH")) list_clear(&shell->path); // path is a special case, since I keep it as a separate list
+	if (list_value_same(val, "PATH")) list_clear(&shell->path); // path is a special case, since I keep it as a separate list
 }
+
 
 void unset(t_command *cmd)
 {
 	if (!cmd || !cmd->args) return;
 
-	preorder_traverse(cmd->args->head, __unset__);
+	t_node *arg = cmd->args->head;
+
+	while (arg)
+	{
+		__unset__(cmd->shell, arg->val);
+		arg = arg->next;	
+	}
 }

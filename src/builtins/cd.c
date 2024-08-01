@@ -6,17 +6,22 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/17 20:11:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:05:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
+static void update_pwd(t_shell *shell, char *oldpwd);
+static void __cd_one_arg__(t_command *cmd);
+static void __cd_no_arg__(t_command *cmd);
+static void _chdir(const char *path);
 
 void cd(t_command *cmd)
 {
 	if (!cmd) return;
+
+	list_move_back(cmd->options, cmd->args);
 
 	if (!empty(cmd->args) && size(cmd->args) != 1)
 	{
@@ -24,27 +29,57 @@ void cd(t_command *cmd)
 		return;
 	}
 
-	string wd = get_value(shell->export, "PWD");
+	string oldpwd = get_value(cmd->shell->export, "PWD");
 
-	if (empty(cmd->args) || find_range(cmd->args, "~", NULL))
+	if (empty(cmd->args)) __cd_no_arg__(cmd);
+
+	else __cd_one_arg__(cmd);
+
+	update_pwd(cmd->shell, oldpwd);
+}
+
+static void _chdir(const char *path)
+{
+	if (chdir(path) == -1)
+		__perror(strerror(errno));
+}
+
+static void __cd_no_arg__(t_command *cmd)
+{
+	string home = get_value(cmd->shell->export, "HOME");
+	_chdir(home);
+
+}
+
+static void __cd_one_arg__(t_command *cmd)
+{
+	if (find_range(cmd->args, "-", NULL) != NULL)
 	{
-		string home = get_value(shell->export, "HOME");
-		chdir(home);
+		string path = get_value(cmd->shell->export, "OLDPWD");
+		if (!path || *path == '\0')
+		{
+			__perror("cd: OLDPWD not set");
+		}
+		else
+		{
+			_chdir(path);
+			pwd();
+		}
 	}
-
-	else if (size(cmd->args) == 1)
+	else if (find_range(cmd->args, "~", NULL))
 	{
-		chdir(cmd->args->head->val);
+		__cd_no_arg__(cmd);
 	}
+	else
+		_chdir(cmd->args->head->val);
 
-	if (wd)
-	{
-		string oldpwd = __strappend(__make_string_empty(), "OLDPWD", "=", wd);
-		string cwd = __pwd__();
-		string pwd = __strappend(__make_string_empty(), "PWD", "=", cwd);
+}
 
-		__export_from_string__(oldpwd);
-		__export_from_string__(pwd);
-	}
+static void update_pwd(t_shell *shell, char *oldpwd)
+{
+	if (!shell || !oldpwd) return;
 
+	string pwd = __pwd__();
+	export_update(shell, "OLDPWD", oldpwd);
+	export_update(shell, "PWD", pwd);
 }

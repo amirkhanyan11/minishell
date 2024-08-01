@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tigpetro <tigpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:49:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:31:51 by tigpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ t_shell * __result_use_check make_shell(char **env)
 
     shell->history = make_list();
 
-	shell->descriptors = make_descriptors(1488, 1337, 1234);
-	shell->sysdescriptors = make_descriptors(111, 222, 333);
-	dup2(STDOUT_FILENO, shell->sysdescriptors->stdout);
-	dup2(STDIN_FILENO, shell->sysdescriptors->stdin);
-	dup2(STDERR_FILENO, shell->sysdescriptors->stderr);
+	shell->stddesc = make_stddesc();
+	// shell->descriptors = make_descriptors();
 
+	make_shlvl(shell);
+
+	export_update(shell, "SHELL", "minishell");
+	export_update(shell, "OLDPWD", "");
 	shell->status = 0;
 
     return shell;

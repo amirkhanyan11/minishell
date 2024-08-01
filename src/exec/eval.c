@@ -6,41 +6,57 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 17:53:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:48:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// needs refactoring for pipes
-void eval(t_command *cmd)
+void eval(t_cmd_container *cmds, size_t i)
 {
-	set_descriptors(cmd->shell);
+	if (NULL == cmds || i >= cmds->size || !cmds->arr[i]) return;
 
-	if (0 == __strcmp(cmd->name, "pwd")) pwd();
+	t_command *cmd = cmds->arr[i];
 
-	else if (0 == __strcmp(cmd->name, "history")) display_history();
+	t_file		pipe[2];
 
-	else if (0 == __strcmp(cmd->name, "export")) export(cmd);
+	__pipe(pipe);
 
-	else if (0 == __strcmp(cmd->name, "echo")) echo(cmd);
-
-	else if (0 == __strcmp(cmd->name, "unset")) unset(cmd);
-
-	else if (0 == __strcmp(cmd->name, "env") || 0 == __strcmp(cmd->name, "printenv")) _env(cmd->name);
-
-	else if (0 == __strcmp(cmd->name, "cd")) cd(cmd);
-
-	else
+	if (i < cmds->size - 1)
 	{
-		pid_t pid = __fork();
-		if (0 == pid)
-		{
-			eval_prog(cmd);
-		}
-		int x = 0;
-		waitpid(pid, &x, 0);
-		cmd->shell->status = WEXITSTATUS(x);	
+		dup2(pipe[out], STDOUT_FILENO);
 	}
-	reset_descriptors(cmd->shell);
+
+	set_descriptors(cmd);
+
+	if (list_value_same(cmd->name, "pwd")) pwd();
+
+	else if (list_value_same(cmd->name, "history")) display_history();
+
+	else if (list_value_same(cmd->name, "export")) export(cmd);
+
+	else if (list_value_same(cmd->name, "echo")) echo(cmd);
+
+	else if (list_value_same(cmd->name, "unset")) unset(cmd);
+
+	else if (list_value_same(cmd->name, "env") || list_value_same(cmd->name, "printenv")) env();
+
+	else if (list_value_same(cmd->name, "cd")) cd(cmd);
+
+	else eval_prog(pipe, cmds, i);
+
+	dup2(pipe[in], STDIN_FILENO);
+
+	dup2(cmd->shell->stddesc->stdout, STDOUT_FILENO);
+
+	close(pipe[in]);
+	close(pipe[out]);
+
+	export_update(cmds->arr[i]->shell, "_", cmds->arr[i]->name);
+	if (cmd->redirection & redirect_heredoc)
+	{
+		unlink(heredoc);
+	    printf("\n"); // not here but in the end of all commands :)
+	}
+	// reset_descriptors(cmd);
 }

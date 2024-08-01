@@ -1,10 +1,10 @@
 NAME = minishell
 
-COCOBOLOPATH = ./cocobolo/
-COCOBOLO = ${COCOBOLOPATH}cocobolo.a
+SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./src/exec/ \
+			./cocobolo/cocobolo_src/ ./cocobolo/optional/ ./cocobolo/list/ \
+			./cocobolo/get_next_line/ ./cocobolo/BinarySearchTree/
 
-SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./src/exec/
-INCPATH = ./includes/ ${COCOBOLOPATH}cocobolo_includes/ ./readline_lib/include/
+INCPATH = ./includes/ ./cocobolo/cocobolo_includes/ ./readline_local/include/
 OBJSPATH = ./objs/
 
 # SRCS = $(wildcard $(SRCSPATH)*.c)
@@ -15,61 +15,93 @@ vpath %.c ${SRCSPATH}
 SRCS = $(foreach D, ${SRCSPATH}, $(wildcard ${D}*.c))
 OBJS = $(foreach D, ${SRCSPATH}, $(patsubst ${D}%.c, ${OBJSPATH}%.o, ${SRCS}))
 
-END = \x1b[0m
-GREEN = \x1b[33;1m
-YELLOW = \x1b[32;1m
-PURPLE = \x1b[35;1m
-CYAN = \x1b[1;36m
-BLUE = \x1b[1;34m
-YELLOW = \x1b[1;33m
-GREEN = \x1b[1;32m
-RED = \x1b[1;31m
+# Basic colors
+BLACK   = \033[0;30m
+RED     = \033[0;31m
+GREEN   = \033[0;32m
+YELLOW  = \033[0;33m
+BLUE    = \033[0;34m
+PURPLE = \033[0;35m
+CYAN    = \033[0;36m
+WHITE   = \033[0;37m
+
+# Bold colors
+BOLD_BLACK   = \033[1;30m
+BOLD_RED     = \033[1;31m
+BOLD_GREEN   = \033[1;32m
+BOLD_YELLOW  = \033[1;33m
+BOLD_BLUE    = \033[1;34m
+BOLD_PURPLE = \033[1;35m
+BOLD_CYAN    = \033[1;36m
+BOLD_WHITE   = \033[1;37m
+
+# Attributes
+RESET   = \033[0m
+BOLD    = \033[1m
+UNDERLINE = \033[4m
+REVERSE  = \033[7m
 
 CC = gcc
-DEBUG = -g #-fsanitize=address
+# DEBUG = -fsanitize=address
+DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 
-LREADLINE = -L/usr/lib -lreadline
+UNAME = $(shell uname -s)
+ifeq ($(UNAME), Darwin)
+	LREADLINE =  -Lreadline_local/lib -lreadline
+else
+	LREADLINE = -lreadline
+endif
+
+SRC_COUNT_TOT := $(shell expr $(shell find ./src/ ./cocobolo/ -name "*.c" | wc -l) + 0)
+SRC_COUNT := 0
+SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
+
 
 all : ${OBJSPATH} ${NAME}
 
 ${OBJSPATH} :
 	@mkdir -p objs
 
-${NAME} : ${COCOBOLO} ${OBJS}
-	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${COCOBOLO} ${LREADLINE} -o $@
-	@echo "${GREEN} minishell compiled! ${END}"
+${NAME} : print_info ${OBJS}
+	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${LREADLINE} -o $@
+	@echo "\n\n${GREEN}            minishell compiled! ${END}\n"
 
 ${OBJSPATH}%.o : %.c Makefile
+	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
+	@printf "\r%18s\r$(YELLOW)             [ %d/%d (%d%%) ]$(RESET)" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@${CC} ${CFLAGS} -c $< -o $@
 
-${COCOBOLO} :
-	@make -C ${COCOBOLOPATH} all
 
 clean :
-	@make -C ${COCOBOLOPATH} clean
 	@rm -rf ${OBJSPATH} ${OPTIONALOBJS}
 
 fclean : clean
-	@make -C ${COCOBOLOPATH} fclean
 	@rm -f ${NAME}
 
 re : fclean all
 
-config :
-	./readline_config.sh readline_lib
+# BRANCH = master
 
 push :
-
 	make fclean
 	git add .
 	git commit -m "."
-	git push
+	git push ${BRANCH}
 
 leaks : re
-
 	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
+
+config:
+	mkdir -p readline_local
+	./readline_config.sh readline_local
+
+print_info:
+	@printf "%b" "\n$(PURPLE)                $(NAME)$(RESET)\n\n"
+	@printf "%b" "$(WHITE)      Authors : aamirkha, marikhac $(RESET)\n"
+	@printf "\n"
+
 
 .PHONY : all clean fclean re leaks config
 

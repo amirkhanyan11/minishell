@@ -6,32 +6,29 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:24:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/23 18:11:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:11:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void reset_descriptors(t_shell * shell)
+void reset_descriptors(t_command * cmd)
 {
-	if (!shell) return;
+	if (!cmd || !cmd->shell) return;
 
-	if (shell->descriptors->stdin != shell->sysdescriptors->stdin)
+	if (cmd->descriptors->stdin != cmd->shell->stddesc->stdin)
 	{
-		close(shell->descriptors->stdin);
-		shell->descriptors->stdin = shell->sysdescriptors->stdin;
-		dup2(shell->sysdescriptors->stdin, STDIN_FILENO);
+		close(cmd->descriptors->stdin);
+		dup2(cmd->shell->stddesc->stdin, STDIN_FILENO);
 	}
-	if (shell->descriptors->stdout != shell->sysdescriptors->stdout)
+	if (cmd->descriptors->stdout != cmd->shell->stddesc->stdout)
 	{
-		close(shell->descriptors->stdout);
-		shell->descriptors->stdout = shell->sysdescriptors->stdout;
-		dup2(shell->sysdescriptors->stdout, STDOUT_FILENO);
+		close(cmd->descriptors->stdout);
+		dup2(cmd->shell->stddesc->stdout, STDOUT_FILENO);
 	}
-	if (shell->descriptors->stderr != shell->sysdescriptors->stderr)
+	if (cmd->descriptors->stderr != cmd->shell->stddesc->stderr)
 	{
-		close(shell->descriptors->stderr);
-		shell->descriptors->stderr = shell->sysdescriptors->stderr;
-		dup2(shell->sysdescriptors->stderr, STDERR_FILENO);
+		close(cmd->descriptors->stderr);
+		dup2(cmd->shell->stddesc->stderr, STDERR_FILENO);
 	}
 }
