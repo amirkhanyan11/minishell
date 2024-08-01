@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   tree_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:11:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 21:51:38 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/07/31 17:28:29 by marikhac          #+#    #+#             */
+/*   Updated: 2024/08/01 21:59:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tree.h"
 
-void display_prompt()
+int main()
 {
-    // printf(ITALIC_ON PURPLE"minishell"GREEN  " $ > " RESET ITALIC_OFF);
-    printc("minishell", __italic__, __purple__);
-    printc(" $ > ", __italic__, __green__);
+	int arr[] = {8, 1, 2, 9, 6, 55, 4, 7, 5, 3};
+	const int size = sizeof(arr) / sizeof(int);
+
+	t_tree *tree = make_tree_from_array(arr, size);
+	print_preorder(tree);
+	node_clear(tree, 8);
+	print_preorder(tree);
+	node_clear(tree, 7);
+	print_preorder(tree);
+	return 0;
 }
+

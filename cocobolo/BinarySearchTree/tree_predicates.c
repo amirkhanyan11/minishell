@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   predicates.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 17:28:29 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 18:36:09 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/01 18:15:01 by marikhac          #+#    #+#             */
+/*   Updated: 2024/08/01 21:43:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "tree.h"
 
-// int main()
-// {
-// 	int arr[] = {8, 1, 2, 9, 6, 55, 4, 7, 5, 3};
-// 	const int size = sizeof(arr) / sizeof(int);
+bool less(t_val a, t_val b)
+{
+	return (a < b);
+}
 
-// 	t_tree *tree = make_tree_from_array(arr, size);
-// 	print_preorder(tree);
-// 	node_clear(tree, 8);
-// 	print_preorder(tree);
-// 	node_clear(tree, 7);
-// 	print_preorder(tree);
-// 	return 0;
-// }
+bool greater(t_val a, t_val b)
+{
+	return (a > b);
+}
+
+bool equal(t_val a, t_val b)
+{
+	return (a == b);
+}

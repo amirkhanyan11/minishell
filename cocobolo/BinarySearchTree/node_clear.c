@@ -1,17 +1,17 @@
-#include "header.h"
+#include "tree.h"
 
 
 static tree_node *__node_clear__(tree_node *root, const int val)
 {
 	if (!root) return NULL;
 
-	if (root->val > val)
+	if (greater(root->val, val))
 		root->left = __node_clear__(root->left, val);
 
-	if (root->val < val)
+	if (less(root->val, val))
 		root->right = __node_clear__(root->right, val);
 
-	else if (root->val == val)
+	else
 	{
 		if (!root->left && !root->right)
 		{

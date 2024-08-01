@@ -6,11 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:21:41 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 18:09:54 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:48:38 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "tree.h"
 
 void delete_node(tree_node *node)
 {
