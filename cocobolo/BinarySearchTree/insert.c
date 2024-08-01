@@ -6,11 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:58:02 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 15:51:01 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:14:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "tree.h"
 
 static void	__insert_node__(tree_node **root, int val)
 {

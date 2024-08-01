@@ -6,11 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:15:01 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 18:18:41 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:14:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "tree.h"
 
 bool less(t_val a, t_val b)
 {

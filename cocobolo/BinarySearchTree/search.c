@@ -6,11 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:39:01 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 18:13:46 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:14:45 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "tree.h"
 
 tree_node *__search__(tree_node *root, int val)
 {

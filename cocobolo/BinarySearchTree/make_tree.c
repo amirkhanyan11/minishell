@@ -6,11 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:46:33 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 15:50:10 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:14:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "tree.h"
 
 t_tree *make_tree()
 {
