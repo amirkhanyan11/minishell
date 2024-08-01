@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 20:56:29 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:58:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 #include "minishell.h"
 
 t_shell *shell = NULL;
-
-// int main()
-// {
-// 	int arr[] = {8, 1, 2, 9, 6, 55, 4, 7, 5, 3};
-// 	const int size = sizeof(arr) / sizeof(int);
-
-// 	t_tree *tree = make_tree_from_array(arr, size);
-// 	print_preorder(tree);
-// 	node_clear(tree, 8);
-// 	print_preorder(tree);
-// 	node_clear(tree, 7);
-// 	print_preorder(tree);
-// 	return 0;
-// }
 
 // int main(int ac, char **av, char **env)
 // {
