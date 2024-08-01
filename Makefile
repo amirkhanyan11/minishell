@@ -4,7 +4,6 @@ SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./sr
 			./cocobolo/cocobolo_src/ ./cocobolo/optional/ ./cocobolo/list/ \
 			./cocobolo/get_next_line/ ./cocobolo/BinarySearchTree/
 
-
 INCPATH = ./includes/ ./cocobolo/cocobolo_includes/ ./readline_local/include/
 OBJSPATH = ./objs/
 
@@ -41,7 +40,6 @@ RESET   = \033[0m
 BOLD    = \033[1m
 UNDERLINE = \033[4m
 REVERSE  = \033[7m
-
 
 CC = gcc
 # DEBUG = -fsanitize=address
