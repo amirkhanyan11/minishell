@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   inorder.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 15:45:00 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 20:14:46 by marikhac         ###   ########.fr       */
+/*   Created: 2024/08/01 22:09:11 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/01 22:09:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "tree.h"
 

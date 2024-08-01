@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 16:58:02 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 20:14:46 by marikhac         ###   ########.fr       */
+/*   Created: 2024/08/01 22:09:16 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/01 22:09:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	__insert_node__(tree_node **root, int val)
 {
 	if (NULL == *root)
-		*root = make_node(val);
-	else if (val < (*root)->val)
+		*root = make_tree_node(val);
+	else if (less(val, (*root)->val))
 		__insert_node__(&((*root)->left), val);
-	else if (val > (*root)->val)
+	else if (greater(val, (*root)->val))
 		__insert_node__(&((*root)->right), val);
 }
 
