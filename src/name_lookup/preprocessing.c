@@ -6,10 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 23:09:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:13:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
 extern t_shell * shell;
 
@@ -29,7 +30,6 @@ t_list * __result_use_check preprocess(t_list *tokens)
 	list_remove(tokens, "\'");
 	list_remove(tokens, "\"");
 
-	if (redirection_resolver(tokens) == -1) list_clear(&tokens);
 
 	return tokens;
 }
