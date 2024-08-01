@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_main.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 21:58:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/01 22:38:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,48 @@
 
 t_shell *shell = NULL;
 
-// int main(int ac, char **av, char **env)
-// {
-// 	shell = make_shell(env);
+int main(int ac, char **av, char **env)
+{
+	shell = make_shell(env);
 
-// 	// fetch -> decode -> execute
-// 	while (true)
-// 	{
-// 		string line = read_line();
-// 		// char * line = av[1];
+	// fetch -> decode -> execute
+	while (true)
+	{
+		string line = read_line();
+		// char * line = av[1];
 
-// 		a_cmd_container cmds = make_cmd_container(line);
+		a_cmd_container cmds = make_cmd_container(line);
 
-// 		if (!line || (cmds && cmds->size == 1 && cmds->arr[0] && list_value_same(cmds->arr[0]->name, "exit")))
-// 		{
-// 			printf("exit\n");
-// 			break;
-// 		}
+		if (!line || (cmds && cmds->size == 1 && cmds->arr[0] && list_value_same(cmds->arr[0]->name, "exit")))
+		{
+			printf("exit\n");
+			break;
+		}
 
-// 		if (NULL != cmds)
-// 		{
-// 			size_t i = 0;
+		if (NULL != cmds)
+		{
+			size_t i = 0;
 
-// 			while (i < cmds->size)
-// 			{
-// 				eval(cmds, i++);
-// 			}
+			while (i < cmds->size)
+			{
+				eval(cmds, i++);
+			}
 
-// 			while (-1 != wait(NULL));
-// 		}
+			while (-1 != wait(NULL));
+		}
 
-// 		if (__strcmp(line, "\n"))
-// 		{
-// 			push_back(shell->history, line);
+		if (__strcmp(line, "\n"))
+		{
+			push_back(shell->history, line);
 
-// 			add_history(line);
-// 		}
+			add_history(line);
+		}
 
-// 	}
-// 	__t_shell__(shell);
+	}
+	__t_shell__(shell);
 
-// 	return 0;
-// }
+	return 0;
+}
 
 // #ifdef __APPLE__
 // void	__attribute__((destructor)) moid(void)

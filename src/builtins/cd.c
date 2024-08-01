@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 22:37:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/01 22:39:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void cd(t_command *cmd)
 		_chdir(cmd->args->head->val);
 	}
 
-	if (wd)
+	if (oldpwd)
 	{
 		string pwd = __pwd__();
 		export_update(cmd->shell, "OLDPWD", oldpwd);
