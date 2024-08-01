@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cocobolo.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 19:58:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:32:49 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "optional.h"
 # include "list.h"
+# include "tree.h"
 # include "get_next_line.h"
 # include <errno.h>
 # include <limits.h>

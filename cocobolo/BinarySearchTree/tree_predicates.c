@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_node.c                                        :+:      :+:    :+:   */
+/*   tree_predicates.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 16:49:52 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/01 20:14:46 by marikhac         ###   ########.fr       */
+/*   Created: 2024/08/01 22:10:16 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/01 22:10:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "tree.h"
 
-tree_node *make_node(const int val)
+bool less(t_val a, t_val b)
 {
-	tree_node *new_node;
-	new_node = malloc(sizeof(tree_node));
-	new_node->val = val;
-	new_node->left = NULL;
-	new_node->right = NULL;
-	return new_node;
+	return (a < b);
+}
+
+bool greater(t_val a, t_val b)
+{
+	return (a > b);
+}
+
+bool equal(t_val a, t_val b)
+{
+	return (a == b);
 }
