@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 22:36:39 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/01 22:37:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void cd(t_command *cmd)
 		return;
 	}
 
-	string wd = get_value(cmd->shell->export, "PWD");
+	string oldpwd = get_value(cmd->shell->export, "PWD");
 
 	if (empty(cmd->args) || find_range(cmd->args, "~", NULL))
 	{
@@ -44,8 +44,8 @@ void cd(t_command *cmd)
 	// replace with export_update()
 	if (wd)
 	{
-		string cwd = __pwd__();
-		export_update(cmd->shell, "OLDPWD", wd);
-		export_update(cmd->shell, "PWD", cwd);
+		string pwd = __pwd__();
+		export_update(cmd->shell, "OLDPWD", oldpwd);
+		export_update(cmd->shell, "PWD", pwd);
 	}
 }
