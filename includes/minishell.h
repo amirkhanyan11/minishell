@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:24:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:47:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ enum e_
 
 struct s_shell
 {
-    t_list  	  *history;
     t_tree  	  *env;
     t_tree  	  *export;
+    t_list  	  *history;
 	t_list		  *path;
 
 	t_descriptor *stddesc;
