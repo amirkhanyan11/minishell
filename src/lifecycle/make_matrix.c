@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:49:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:57:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,11 @@ t_matrix  	__result_use_check make_matrix_from_tree(t_tree *tree)
 {
 	if (tree_empty(tree)) return NULL;
 
-	t_matrix arr = __malloc(sizeof(char *) * (tree_size(tree) + 1));
+	size_t size = tree_size(tree);
+
+	t_matrix arr = __malloc(sizeof(char *) * (size + 1));
+
+	arr[size] = NULL;
 
 	__make_matrix_from_tree__(arr, tree->root);
 
