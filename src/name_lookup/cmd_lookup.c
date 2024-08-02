@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:05:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 22:32:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int cmd_lookup(t_command *cmd)
 
 		if (node)
 		{
-			char *resolved_name = __strappend(__make_string_empty(), node->val, "/", cmd->name);
+			char *resolved_name = __make_string(node->val, "/", cmd->name);
 			free(cmd->name);
 			cmd->name = resolved_name;
 			cmd->resolved = true;
@@ -47,7 +47,7 @@ int cmd_lookup(t_command *cmd)
 
 bool __cmd_exists__(t_list_value path, t_list_value name)
 {
-	string guess = __strappend(__make_string_empty(), path, "/", name);
+	string guess = __make_string(path, "/", name);
 
 	return (0 == access(guess, F_OK));
 }

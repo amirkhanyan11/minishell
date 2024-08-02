@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:18:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 22:20:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_list t_list;
 
 // usage : str = __strappend(str, s1, s2, ...)
 # define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
+# define __make_string(s, ...) __unwrapped_make_string__(s, __VA_ARGS__, NULL);
 # define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
 
 #define string char * __dtor(__delete_string)
@@ -97,6 +98,7 @@ char 		*__make_string_from_char(const char c) __allocs __result_use_check;
 char		*__strtrim(char *s1, char *set) __allocs __result_use_check;
 char 		*__make_string_from_list(t_list *list) __allocs __result_use_check ;
 char 		*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...);
+char 		*__attribute__((sentinel)) __result_use_check __unwrapped_make_string__(char *s, ...);
 char		*__single_strappend__(char *lhv, char *rhv) __result_use_check;
 size_t	    __strlen(const char *str);
 char	    *__strdup(const char *src) __result_use_check;

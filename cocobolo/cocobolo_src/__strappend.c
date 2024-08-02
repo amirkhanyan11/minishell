@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:21:05 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 22:30:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static char	* __result_use_check __single_append__(char *lhv, char *rhv)
 	return (target);
 }
 
-
 char * __attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...)
 {
 	va_list args;
@@ -56,4 +55,27 @@ char * __attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char
 	va_end(args);
 
 	return s;
+}
+
+char * __attribute__((sentinel)) __result_use_check __unwrapped_make_string__(char *s, ...)
+{
+
+	if (!s) return NULL;
+
+	va_list args;
+	va_start(args, s);
+
+	char *arg = va_arg(args, char *);
+
+	char *res = __strdup(s);
+
+	while (NULL != arg)
+	{
+		res = __single_append__(res, arg);
+		arg = va_arg(args, char *);
+	}
+
+	va_end(args);
+
+	return res;
 }
