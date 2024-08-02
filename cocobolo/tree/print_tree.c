@@ -3,7 +3,7 @@
 
 static void __print_key__(tree_node *root)
 {
-	printf("%s\n", root->key);
+	printf("%s ~jupa~ %s\n", root->key, root->val);
 }
 
 void print_tree_preorder(t_tree *tree)

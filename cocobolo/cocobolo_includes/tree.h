@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 15:45:41 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:29:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef void				(*fptr)(tree_node *);
 struct						t_tree
 {
 	tree_node				*root;
+};
+
+enum e_e_e
+{
+	pair_key = 0,
+	pair_val = 1
 };
 
 tree_node					*make_tree_node(t_treeval key, t_treeval val);
@@ -55,7 +61,7 @@ void						treeval_move(tree_node *lhv, tree_node *rhv);
 void						__treeval_copy__(t_treeval *lhv, t_treeval *rhv);
 void						__treeval_move__(t_treeval *lhv, t_treeval *rhv);
 
-t_tree	*make_tree_from_matrix(t_treeval *arr); // questionable
+t_tree						*make_tree_from_matrix(t_treeval *arr); // questionable
 
 struct						tree_node
 {
