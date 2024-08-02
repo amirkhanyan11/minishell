@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cocobolo.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 20:32:49 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:48:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ size_t	    __strlen(const char *str);
 char	    *__strdup(const char *src) __result_use_check;
 char		*__strdup_until(const char *src, const char end) __result_use_check;
 char	    *__strstr(char *haystack, char *needle);
-size_t      __strcmp(const char *lhv, const char *rhv);
+ssize_t      __strcmp(const char *lhv, const char *rhv);
 bool        __strchr(char *s, const char c);
 char 		*__strchr_p(char *s, bool (*p) (char));
 bool        __strcmp_weak__(const char *lhv, const char *rhv);

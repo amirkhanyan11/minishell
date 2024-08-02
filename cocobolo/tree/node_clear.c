@@ -1,11 +1,11 @@
 #include "tree.h"
 
 
-static tree_node *__node_clear__(tree_node *root, const int val)
+static tree_node *__node_clear__(tree_node *root,   t_treeval val)
 {
 	if (!root) return NULL;
 
-	if (greater(root->val, val))
+	if (less(val, root->val))
 		root->left = __node_clear__(root->left, val);
 
 	if (less(root->val, val))
@@ -38,7 +38,7 @@ static tree_node *__node_clear__(tree_node *root, const int val)
 	return root;
 }
 
-void node_clear(t_tree *tree, const int val)
+void node_clear(t_tree *tree,   t_treeval val)
 {
 	if (!tree) return;
 

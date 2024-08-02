@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_val.c                                         :+:      :+:    :+:   */
+/*   tree_generics.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 14:32:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 14:42:42 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/02 14:34:56 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/02 14:37:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
+#include <cocobolo.h>
 
-void swap_val(tree_node *lhv, tree_node *rhv)
+bool less(t_treeval a, t_treeval b)
 {
-	if (!rhv || !lhv) return;
+	return (__strcmp(a, b) < 0);
+}
 
-	t_treeval tmp;
-	treeval_move(&tmp, &rhv->val);
-	treeval_move(&rhv->val, &lhv->val);
-	treeval_move(&lhv->val, &tmp);
+void treeval_copy(t_treeval *lhv, t_treeval *rhv)
+{
+	if (*lhv == *rhv) return;
+
+	__delete_string(lhv);
+	*lhv = __strdup(*rhv);
+}
+
+void treeval_move(t_treeval *lhv, t_treeval *rhv)
+{
+	if (*lhv == *rhv) return;
+
+	__delete_string(lhv);
+	*lhv = *rhv;
+	*rhv = NULL;
 }

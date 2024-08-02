@@ -3,6 +3,8 @@
 
 void delete_node(tree_node *node)
 {
+	// free(node->val)
+	// node->val = NULL;
 	node->left = NULL;
 	node->right = NULL;
 	free(node);

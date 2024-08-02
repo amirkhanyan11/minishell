@@ -66,7 +66,7 @@ ${OBJSPATH} :
 
 ${NAME} : print_info ${OBJS}
 	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${LREADLINE} -o $@
-	@echo "\n\n${GREEN}            minishell compiled! ${END}\n"
+	@echo "\n\n${GREEN}            minishell compiled! ${RESET}\n"
 
 ${OBJSPATH}%.o : %.c Makefile
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))

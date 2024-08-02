@@ -10,14 +10,14 @@ t_tree *make_tree()
 	return new_tree;
 }
 
-t_tree *make_tree_from_array(int *arr, const int size)
+t_tree *make_tree_from_matrix(t_treeval *arr)
 {
 	if (NULL == arr) return make_tree();
 
 	size_t i = 0;
 	t_tree *new_tree = make_tree();
 
-	while (i < size)
+	while (arr[i])
 	{
 		insert_node(new_tree, arr[i++]);
 	}

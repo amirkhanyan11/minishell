@@ -3,7 +3,7 @@
 
 static void __print_val__(tree_node *root)
 {
-	printf("%d ", root->val);
+	printf("%s\n", root->val);
 }
 
 void print_tree_preorder(t_tree *tree)
