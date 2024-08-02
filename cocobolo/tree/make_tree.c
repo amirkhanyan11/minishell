@@ -6,12 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 17:01:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:25:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 #include <cocobolo.h>
+#include "minishell.h" // for matrix. Better change
 
 static void __make_tree_copy__(t_tree *tree, tree_node *root);
 
@@ -34,29 +35,42 @@ t_tree *make_tree_copy(t_tree *other)
 	return tree;
 }
 
+static tree_node *__make_tree_from_matrix__(t_matrix arr, int low, int high)
+{
+	if (low > high) return NULL;
+
+	int mid = low + (high - low) / 2;
+
+	tree_node *root = NULL;
+
+	a_matrix pair = __split(arr[mid], "=");
+
+	if (__matrix_size(pair) >= 1)
+	{
+		char *val = pair[pair_val];
+		if (val == NULL)
+		{
+			val = "";
+		}
+		root = make_tree_node(pair[pair_key], val);
+		root->left = __make_tree_from_matrix__(arr, low, mid - 1);
+		root->right = __make_tree_from_matrix__(arr, mid + 1, high);
+	}
+	return root;
+}
+
 t_tree *make_tree_from_matrix(t_treeval *arr)
 {
 	if (NULL == arr) return make_tree();
 
 	size_t i = 0;
-	t_tree *new_tree = make_tree();
+	t_tree *tree = make_tree();
 
-	while (arr[i])
-	{
-		a_matrix pair = __split(arr[i], "=");
-		char *val = pair[pair_val];
+	matrix_sort(arr, NULL);
 
-		if (__matrix_size(pair) >= 1)
-		{
-			if (val == NULL)
-			{
-				val = "";
-			}
-			tree_update(new_tree, pair[pair_key], val);
-		}
-		i++;
-	}
-	return new_tree;
+	tree->root = __make_tree_from_matrix__(arr, 0, __matrix_size(arr) - 1);
+
+	return tree;
 }
 
 static void __make_tree_copy__(t_tree *tree, tree_node *root)

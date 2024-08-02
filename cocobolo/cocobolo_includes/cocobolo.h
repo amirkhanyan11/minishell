@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 16:27:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:18:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ typedef struct s_list t_list;
 #define a_matrix t_matrix  __dtor(__matrix_clear)
 
 typedef void (*t_printf_option)(const char * const);
+
+typedef bool				(*str_binary_predicate)(char *, char *);
+
 typedef char ** t_matrix;
 
 void 		__perror(char * err);
@@ -85,6 +88,8 @@ void	    __putstr_fd(char *s, int fd);
 void		*__memset(void *b, int c, size_t len);
 
 // string
+void 		__string_swap(char **lhv, char **rhv);
+void 		__string_move(char **lhv, char **rhv);
 void 		__delete_string(char **s);
 t_optional	__atoi(char const *str);
 char 		*__make_string_empty() __allocs __result_use_check;
@@ -104,6 +109,9 @@ bool        __strcmp_weak__(const char *lhv, const char *rhv);
 char		*__itoa(int n) __result_use_check;
 t_matrix    __split(char const *s, char *set) __result_use_check;
 t_matrix    __split_include_delimiters(char const *s, char c) __result_use_check;
+
+// string predicates
+bool string_less(char *lhv, char *rhv);
 
 // matrix
 void 		__print_matrix(t_matrix arr);

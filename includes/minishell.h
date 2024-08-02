@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:35:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:24:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,6 @@ t_tree		 *make_export(t_shell *shell) __result_use_check;
 t_shell 	 *make_shell(char **env) __result_use_check;
 void		 make_shlvl(t_shell *shell);
 t_file		 make_heredoc(char *eof);
-t_matrix 	 make_matrix_from_string(char *s, char *set) __result_use_check;
-t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
-t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
-t_matrix  	 make_matrix_from_tree(t_tree *tree)  __result_use_check;
 t_cmd_container *make_cmd_container(char * raw_cmd) __result_use_check;
 t_command 	 *make_command(t_list *tokens) __result_use_check;
 t_list 		 *make_path(t_shell *shell) __result_use_check;
@@ -142,6 +138,13 @@ t_descriptor *make_stddesc() __result_use_check;
 void 		 __t_command__(t_command **cmdptr);
 void 	 	 __t_shell__(t_shell * shell);
 void 		 __t_cmd_container__(t_cmd_container ** cmdsptr);
+
+// matrix
+t_matrix 	 make_matrix_from_string(char *s, char *set) __result_use_check;
+t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
+t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
+t_matrix  	 make_matrix_from_tree(t_tree *tree)  __result_use_check;
+void 		 matrix_sort(t_matrix arr, str_binary_predicate cmp);
 
 // builtins
 void cd(t_command *cmd);
