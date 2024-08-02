@@ -6,20 +6,18 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 23:14:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:08:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell * shell;
-
 // handles redirections and $variables
-t_list * __result_use_check preprocess(t_list *tokens)
+t_list * __result_use_check preprocess(t_list *tokens, t_shell *shell)
 {
 	if (empty(tokens) || !shell) return NULL;
 
-	dollar_sign_resolver(tokens);
+	dollar_sign_resolver(tokens, shell);
 
 	merge_tokens(tokens);
 

@@ -6,17 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 03:04:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:03:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
-
 // if (redirection_resolver(tokens, cmd) == -1) list_clear(&tokens);
 
-t_command * __result_use_check make_command(t_list *tokens)
+t_command * __result_use_check make_command(t_list *tokens, t_shell *shell)
 {
 	if (empty(tokens) || !shell) return NULL;
 
@@ -36,8 +34,8 @@ t_command * __result_use_check make_command(t_list *tokens)
 	while (token)
 	{
 		t_node *next = token->next;
-        
-		if (list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>") || list_value_same(token->val, "<<")) 
+
+		if (list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>") || list_value_same(token->val, "<<"))
 		{
 			if (-1 == redirect(token, cmd))
 			{
@@ -48,13 +46,13 @@ t_command * __result_use_check make_command(t_list *tokens)
 			next = token->next->next;
 			erase(tokens, token, token->next);
 		}
-		
+
 		else if (token->val[0] == '-')
 			push_back(cmd->options, token->val);
-		
+
 		else
 			push_back(cmd->args, token->val);
-		
+
 		token = next;
 
 	}

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:47:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:04:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av, char **env)
 	{
 		string line = read_line();
 
-		a_cmd_container cmds = make_cmd_container(line);
+		a_cmd_container cmds = make_cmd_container(line, shell);
 
 		if (!line || (cmds && cmds->size == 1 && cmds->arr[0] && list_value_same(cmds->arr[0]->name, "exit")))
 		{

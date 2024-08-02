@@ -6,13 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:46:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:03:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_shell *shell;
 
 static void __eval_prog__(t_command *cmd);
 
@@ -40,9 +38,7 @@ void eval_prog(t_file *pipe, t_cmd_container *cmds, size_t i)
 
 static void __eval_prog__(t_command *cmd)
 {
-	int lookup = cmd_lookup(cmd);
-
-	if (lookup == -1) __exit(NULL);
+	if (!cmd || cmd_lookup(cmd) == -1) __exit(NULL); // from child
 
 	a_list options_copy = make_list_copy_range(cmd->options, NULL);
 	push_front(options_copy, cmd->name);
@@ -51,7 +47,7 @@ static void __eval_prog__(t_command *cmd)
 	list_move_back(args_copy, options_copy);
 
 	a_matrix _args = make_matrix_from_list(options_copy);
-	a_matrix _env  = make_matrix_from_tree(shell->env);
+	a_matrix _env  = make_matrix_from_tree(cmd->shell->env);
 
 	execve(cmd->name, _args, _env);
 	__exit(NULL);

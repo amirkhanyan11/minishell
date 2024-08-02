@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:53:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:08:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void 		 reset_descriptors(t_command * cmd);
 // execution helpers
 int		    export_update(t_shell *shell, t_list_value key, t_list_value val);
 char 		*get_value(t_list *list, char *target) __result_use_check;
-void 		resolve(t_node *t, t_list *tokens);
+void 		resolve(t_node *t, t_list *tokens, t_shell *shell);
 char 		*get_key(t_list_value line)  __result_use_check;
 int 		cmd_lookup(t_command *cmd);
 t_file 		open_file(char *filenae, int options);
@@ -105,8 +105,8 @@ int 		redirect(t_node *token, t_command *cmd);
 
 // parsing
 t_list 		 *tokenize(char * raw_cmd) __result_use_check;
-t_list 		 *preprocess(t_list *tokens) __result_use_check ;
-void 		 dollar_sign_resolver(t_list *tokens);
+t_list 		 *preprocess(t_list *tokens, t_shell *shell) __result_use_check ;
+void 		 dollar_sign_resolver(t_list *tokens, t_shell *shell);
 int 		 redirection_resolver(t_list *tokens, t_command *cmd);
 
 void 		 merge_tokens(t_list *tokens);
@@ -129,8 +129,8 @@ t_tree		 *make_export(t_shell *shell) __result_use_check;
 t_shell 	 *make_shell(char **env) __result_use_check;
 void		 make_shlvl(t_shell *shell);
 t_file		 make_heredoc(char *eof);
-t_cmd_container *make_cmd_container(char * raw_cmd) __result_use_check;
-t_command 	 *make_command(t_list *tokens) __result_use_check;
+t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell) __result_use_check;
+t_command 	 *make_command(t_list *tokens, t_shell *shell) __result_use_check;
 t_list 		 *make_path(t_shell *shell) __result_use_check;
 t_descriptor *make_descriptors() __result_use_check;
 t_descriptor *make_stddesc() __result_use_check;
@@ -155,7 +155,7 @@ void echo(t_command *cmd);
 void history(t_command *cmd);
 
 // other
-int __export_from_string__(char *val);
+static int __export_from_string__(char *expr, t_shell *shell);
 char *  __pwd__() __result_use_check;
 void __unset__(t_shell *shell, t_list_value val);
 

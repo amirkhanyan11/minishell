@@ -6,20 +6,18 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:33:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:06:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_shell *shell;
 
 static bool p(char c)
 {
 	return !is_name_part(c);
 }
 
-void resolve(t_node *t, t_list *tokens) // add $?
+void resolve(t_node *t, t_list *tokens, t_shell *shell) // add $?
 {
 	size_t i = 0;
 	char *s = __strdup(t->val);

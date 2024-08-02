@@ -6,17 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 18:50:39 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:05:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
 
 int cmd_lookup(t_command *cmd)
 {
-	if (!cmd || empty(shell->path)) return -1;
+	if (!cmd || empty(cmd->shell->path)) return -1;
 
 	if (cmd->resolved) return 0;
 
@@ -24,7 +23,7 @@ int cmd_lookup(t_command *cmd)
 
 	if (__strchr(cmd->name, '/') == false)
 	{
-		t_node *node = find_range(shell->path, cmd->name, __cmd_exists__);
+		t_node *node = find_range(cmd->shell->path, cmd->name, __cmd_exists__);
 
 		if (node)
 		{
@@ -42,7 +41,7 @@ int cmd_lookup(t_command *cmd)
 	}
 
 	__perror("command not found");
-	shell->status = 127;
+	cmd->shell->status = 127;
 	return -1;
 }
 

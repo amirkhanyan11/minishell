@@ -6,13 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 03:18:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:06:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_shell *shell;
 
 int redirect(t_node *token, t_command *cmd)
 {

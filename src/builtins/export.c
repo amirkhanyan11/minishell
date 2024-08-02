@@ -6,22 +6,22 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:48:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:01:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
-
 static void __print_export__(tree_node *node);
-
+static int __export_from_string__(char *expr, t_shell *shell);
 
 void export(t_command *cmd)
 {
+	if (!cmd) return;
+
 	if (empty(cmd->args))
 	{
-		print_tree_inorder_custom(shell->export, __print_export__);
+		print_tree_inorder_custom(cmd->shell->export, __print_export__);
 		return ;
 	}
 
@@ -30,15 +30,15 @@ void export(t_command *cmd)
 
 	while (arg)
 	{
-		__export_from_string__(arg->val);
+		__export_from_string__(arg->val, cmd->shell);
 		arg = arg->next;
 	}
 
 }
 
-int __export_from_string__(char *expr)
+static int __export_from_string__(char *expr, t_shell *shell)
 {
-	if (!expr) return -1;
+	if (!expr || !shell) return -1;
 
 	a_matrix arr = __split_include_delimiters(expr, '=');
 
