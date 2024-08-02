@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 23:05:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:23:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void cd(t_command *cmd)
 		return;
 	}
 
-	string oldpwd = get_value(cmd->shell->export, "PWD");
+	char *oldpwd = get_val(cmd->shell->export, "PWD");
 
 	if (empty(cmd->args)) __cd_no_arg__(cmd);
 
@@ -46,7 +46,7 @@ static void _chdir(const char *path)
 
 static void __cd_no_arg__(t_command *cmd)
 {
-	string home = get_value(cmd->shell->export, "HOME");
+	char *home = get_val(cmd->shell->export, "HOME");
 	_chdir(home);
 
 }
@@ -55,7 +55,7 @@ static void __cd_one_arg__(t_command *cmd)
 {
 	if (find_range(cmd->args, "-", NULL) != NULL)
 	{
-		string path = get_value(cmd->shell->export, "OLDPWD");
+		char *path = get_val(cmd->shell->export, "OLDPWD");
 		if (!path || *path == '\0')
 		{
 			__perror("cd: OLDPWD not set");

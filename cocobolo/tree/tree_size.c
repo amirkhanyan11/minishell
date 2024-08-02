@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_shlvl.c                                       :+:      :+:    :+:   */
+/*   tree_size.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 01:40:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:21:52 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/02 19:35:52 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/02 19:37:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tree.h"
 
-void make_shlvl(t_shell *shell)
+static size_t __tree_size__(tree_node *root)
 {
-    t_treeval shlvl_old = get_val(shell->export, "SHLVL");
+	if (!root) return 0;
 
-	t_optional lvl = __atoi(shlvl_old);
+	return 1 + __tree_size__(root->left) + __tree_size__(root->right);
+}
 
-	string shlvl = __itoa(value_or(&lvl, 0) + 1);
+size_t tree_size(t_tree *tree)
+{
+	if (tree_empty(tree)) return 0;
 
-	export_update(shell, "SHLVL", shlvl);
+	return __tree_size__(tree->root);
 }

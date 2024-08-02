@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 01:38:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:48:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 extern t_shell *shell;
 
-static void __print_export__(t_node *head);
+static void __print_export__(tree_node *node);
 
 
 void export(t_command *cmd)
 {
 	if (empty(cmd->args))
 	{
-		print_list_custom(shell->export, __print_export__);
+		print_tree_inorder_custom(shell->export, __print_export__);
 		return ;
 	}
 
@@ -54,7 +54,7 @@ int __export_from_string__(char *expr)
 		return -1;
 	}
 
-	if (size(tokens) >= 2) 
+	if (size(tokens) >= 2)
 	{
 		char *val = (tokens->head->next->next) ? tokens->head->next->next->val : "\0";
 		return export_update(shell, tokens->head->val, val);
@@ -63,7 +63,7 @@ int __export_from_string__(char *expr)
 	else
 	{
 		__unset__(shell, tokens->head->val);
-		push_back(shell->export, tokens->head->val);
+		tree_update(shell->export, tokens->head->val, "");
 	}
 
 	return 0;
@@ -72,7 +72,7 @@ int __export_from_string__(char *expr)
 int export_update(t_shell *shell, t_list_value key, t_list_value val)
 {
 	if (!shell || !key) return -1;
-	
+
 	if (!is_name(key))
 	{
 		__perror("export: not a valid identifier");
@@ -80,45 +80,25 @@ int export_update(t_shell *shell, t_list_value key, t_list_value val)
 	}
 
 	__unset__(shell, key);
-	
-	string res = __strappend(__make_string_empty(), key, "=", val);
 
-	push_back(shell->export, res);
-	
+	tree_update(shell->export, key, val);
+
 	if (val)
 	{
-		push_back(shell->env, res);
-		
+		tree_update(shell->env, key, val);
+
 		if (list_value_same(key, "PATH")) shell->path = make_path(shell);
 	}
-	
+
 	return 0;
 }
 
 
-static void __print_export__(t_node *head)
+static void __print_export__(tree_node *node)
 {
-	if (!head) return;
+	if (!node) return;
 
 	printf("%s", declarex);
 
-	char *s = head->val;
-
-	while (*s && *s != '=')
-	{
-		printf("%c", *s);
-		++s;
-	}
-	if (*s == '=')
-	{
-		printf("%c", *(s++));
-		printf("\"");
-		while (*s)
-		{
-			printf("%c", *s);
-			++s;
-		}
-		printf("\"");
-	}
-	printf("\n");
+	printf("%s=\"%s\"\n", node->key, node->val);
 }

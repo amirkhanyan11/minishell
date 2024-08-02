@@ -6,20 +6,20 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 01:39:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:31:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void __unset__(t_shell *shell, t_list_value val)
+void __unset__(t_shell *shell, t_list_value key)
 {
-	if (!val) return;
+	if (!key) return;
 
-	list_remove_if(shell->export, val, __contains_as_key__);
-	list_remove_if(shell->env, val, __contains_as_key__);
+	tree_pop(shell->export, key);
+	tree_pop(shell->env, key);
 
-	if (list_value_same(val, "PATH")) list_clear(&shell->path); // path is a special case, since I keep it as a separate list
+	if (list_value_same(key, "PATH")) list_clear(&shell->path); // path is a special case, since I keep it as a separate list
 }
 
 
@@ -32,6 +32,6 @@ void unset(t_command *cmd)
 	while (arg)
 	{
 		__unset__(cmd->shell, arg->val);
-		arg = arg->next;	
+		arg = arg->next;
 	}
 }

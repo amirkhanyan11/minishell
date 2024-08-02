@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 21:23:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:46:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void eval_prog(t_file *pipe, t_cmd_container *cmds, size_t i)
 	if (NULL == cmds || i >= cmds->size) return;
 
 	t_command *cmd = cmds->arr[i];
-	
+
 	pid_t pid = __fork();
 	if (0 == pid)
 	{
@@ -46,13 +46,13 @@ static void __eval_prog__(t_command *cmd)
 
 	a_list options_copy = make_list_copy_range(cmd->options, NULL);
 	push_front(options_copy, cmd->name);
-	
+
 	a_list args_copy = make_list_copy_range(cmd->args, NULL);
 	list_move_back(args_copy, options_copy);
-	
+
 	a_matrix _args = make_matrix_from_list(options_copy);
-	a_matrix _env  = make_matrix_from_list(shell->env);
-		
+	a_matrix _env  = make_matrix_from_tree(shell->env);
+
 	execve(cmd->name, _args, _env);
 	__exit(NULL);
 }

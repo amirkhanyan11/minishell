@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:50:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 16:50:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:20:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,19 @@ void print_tree_inorder(t_tree *tree)
 void print_tree_postorder(t_tree *tree)
 {
 	postorder(tree, __print_key__);
+}
+
+void print_tree_inorder_custom(t_tree *tree, fptr foo)
+{
+	inorder(tree, foo);
+}
+
+void print_tree_preorder_custom(t_tree *tree, fptr foo)
+{
+	preorder(tree, foo);
+}
+
+void print_tree_postorder_custom(t_tree *tree, fptr foo)
+{
+	postorder(tree, foo);
 }

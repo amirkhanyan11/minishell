@@ -6,19 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:34:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 16:34:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:47:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-int main(int ac, char **av, char **envp)
-{
+// int main(int ac, char **av, char **envp)
+// {
 
-	t_tree *tree = make_tree_from_matrix(envp);
+// 	t_tree *tree = make_tree_from_matrix(envp);
 
-	print_tree_inorder(tree);
+// 	print_tree_inorder(tree);
 
-	return 0;
-}
+// 	return 0;
+// }
 

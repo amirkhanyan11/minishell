@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_shlvl.c                                       :+:      :+:    :+:   */
+/*   tree_predicates.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 01:40:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:21:52 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/02 18:52:17 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/02 18:52:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tree.h"
+#include <cocobolo.h>
 
-void make_shlvl(t_shell *shell)
+bool tree_value_same(t_treeval lhv, t_treeval rhv)
 {
-    t_treeval shlvl_old = get_val(shell->export, "SHLVL");
+    if (!lhv || !rhv) return (!lhv && !rhv);
 
-	t_optional lvl = __atoi(shlvl_old);
+    return (__strcmp(lhv, rhv) == 0);
+}
 
-	string shlvl = __itoa(value_or(&lvl, 0) + 1);
+bool tree_value_contains(t_treeval lhv, t_treeval rhv)
+{
+    if (!lhv || !rhv) return (!lhv && !rhv);
 
-	export_update(shell, "SHLVL", shlvl);
+    return (__strstr(lhv, rhv) != NULL);
 }

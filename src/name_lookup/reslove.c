@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 16:55:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 19:33:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void resolve(t_node *t, t_list *tokens) // add $?
 			char c = s[k];
 			s[k] = '\0';
 
-			string val = get_value(shell->export, s + i + 1);
+			char *val = get_val(shell->export, s + i + 1);
 			s[k] = c;
 
 			if (val)
