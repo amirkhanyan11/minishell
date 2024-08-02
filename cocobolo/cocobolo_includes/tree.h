@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:37:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 22:44:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef bool				(*tree_binary_predicate)(t_treeval, t_treeval);
 struct						t_tree
 {
 	tree_node				*root;
+	tree_binary_predicate 	less;
 };
 
 enum e_e_e
@@ -47,7 +48,7 @@ bool						tree_empty(t_tree *tree);
 t_treeval					get_val(t_tree *tree, t_treeval key);
 tree_node					*tree_find(t_tree *tree, t_treeval key);
 tree_node 					*tree_find_if(t_tree *tree, t_treeval key, tree_binary_predicate p);
-t_tree						*make_tree(void);
+t_tree						*make_tree(tree_binary_predicate less);
 void						delete_node(tree_node *node);
 void						tree_clear(t_tree **treeptr);
 void						swap_content(tree_node *lhv, tree_node *rhv);
@@ -61,13 +62,12 @@ void						print_tree_postorder(t_tree *tree);
 void 						print_tree_preorder_custom(t_tree *tree, fptr foo);
 void 						print_tree_inorder_custom(t_tree *tree, fptr foo);
 void 						print_tree_postorder_custom(t_tree *tree, fptr foo);
-bool						less(t_treeval a, t_treeval b);
 void						treeval_copy(tree_node *lhv, tree_node *rhv);
 void						treeval_move(tree_node *lhv, tree_node *rhv);
 void						__treeval_copy__(t_treeval *lhv, t_treeval *rhv);
 void						__treeval_move__(t_treeval *lhv, t_treeval *rhv);
 t_tree 						*make_tree_copy(t_tree *other);
-t_tree						*make_tree_from_matrix(t_treeval *arr); // questionable
+t_tree						*make_tree_from_matrix(t_treeval *arr, tree_binary_predicate less);
 size_t 						tree_size(t_tree *tree);
 
 

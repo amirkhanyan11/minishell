@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:40:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 22:41:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,23 @@
 
 static void __make_tree_copy__(t_tree *tree, tree_node *root);
 
-t_tree *make_tree()
+t_tree *make_tree(tree_binary_predicate less)
 {
 	t_tree *new_tree;
 
+	if (less == NULL) less = string_less;
+
 	new_tree = malloc(sizeof(t_tree));
+	new_tree->less = less;
 	new_tree->root = NULL;
 	return new_tree;
 }
 
-
 t_tree *make_tree_copy(t_tree *other)
 {
-	t_tree *tree = make_tree();
+	if (!other) return NULL;
+
+	t_tree *tree = make_tree(other->less);
 
 	__make_tree_copy__(tree, other->root);
 
@@ -58,13 +62,13 @@ static tree_node *__make_tree_from_matrix__(t_matrix arr, int low, int high)
 	return root;
 }
 
-t_tree *make_tree_from_matrix(t_treeval *arr)
+t_tree *make_tree_from_matrix(t_treeval *arr, tree_binary_predicate less)
 {
-	if (NULL == arr) return make_tree();
+	if (NULL == arr) return make_tree(less);
 
-	t_tree *tree = make_tree();
+	t_tree *tree = make_tree(less);
 
-	matrix_sort(arr, NULL);
+	matrix_sort(arr, less);
 
 	tree->root = __make_tree_from_matrix__(arr, 0, __matrix_size(arr) - 1);
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 22:20:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 22:46:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ t_matrix    __split_include_delimiters(char const *s, char c) __result_use_check
 
 // string predicates
 bool string_less(char *lhv, char *rhv);
+bool string_greater(char *lhv, char *rhv);
 
 // matrix
 void 		__print_matrix(t_matrix arr);
