@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:47:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:53:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ struct s_cmd_container
 
 // displays
 void display_prompt();
-void display_history();
 
 //	reading input
 char	*read_line(void);
@@ -148,11 +147,12 @@ void 		 matrix_sort(t_matrix arr, str_binary_predicate cmp);
 
 // builtins
 void cd(t_command *cmd);
-void pwd();
-void env();
+void pwd(t_command *cmd);
+void env(t_command *cmd);
 void unset(t_command *cmd);
 void export(t_command *cmd);
 void echo(t_command *cmd);
+void history(t_command *cmd);
 
 // other
 int __export_from_string__(char *val);

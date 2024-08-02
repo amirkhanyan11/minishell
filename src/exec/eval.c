@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 18:48:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:52:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void eval(t_cmd_container *cmds, size_t i)
 
 	set_descriptors(cmd);
 
-	if (list_value_same(cmd->name, "pwd")) pwd();
+	if (list_value_same(cmd->name, "pwd")) pwd(cmd);
 
-	else if (list_value_same(cmd->name, "history")) display_history();
+	else if (list_value_same(cmd->name, "history")) history(cmd);
 
 	else if (list_value_same(cmd->name, "export")) export(cmd);
 
@@ -39,7 +39,7 @@ void eval(t_cmd_container *cmds, size_t i)
 
 	else if (list_value_same(cmd->name, "unset")) unset(cmd);
 
-	else if (list_value_same(cmd->name, "env") || list_value_same(cmd->name, "printenv")) env();
+	else if (list_value_same(cmd->name, "env") || list_value_same(cmd->name, "printenv")) env(cmd);
 
 	else if (list_value_same(cmd->name, "cd")) cd(cmd);
 

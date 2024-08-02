@@ -6,16 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 19:57:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:51:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define SIZE 4096
 
-extern t_shell *shell;
-
-void pwd()
+void pwd(t_command *cmd)
 {
 	string path = __pwd__();
 

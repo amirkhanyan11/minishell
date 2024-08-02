@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:23:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:54:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void __cd_one_arg__(t_command *cmd)
 		else
 		{
 			_chdir(path);
-			pwd();
+			pwd(cmd); // debatable
 		}
 	}
 	else if (find_range(cmd->args, "~", NULL))

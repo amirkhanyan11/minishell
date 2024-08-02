@@ -6,19 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:26:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:51:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_shell *shell;
-
 void __print_env__(tree_node *node);
 
-void env()
+void env(t_command *cmd)
 {
-	print_tree_inorder_custom(shell->env, __print_env__);
+	if (!cmd || !cmd->shell) return;
+
+	print_tree_inorder_custom(cmd->shell->env, __print_env__);
 }
 
 void __print_env__(tree_node *node)
