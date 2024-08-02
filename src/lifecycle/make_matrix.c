@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:57:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 21:27:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,28 @@ t_matrix  __result_use_check make_matrix_from_list(t_list *list)
 	return arr;
 }
 
-static void __matrix_insert__(t_matrix arr, char *val)
+static void __matrix_insert__(t_matrix arr, char *val, size_t *i)
 {
-	static size_t i = 0;
 
-	arr[i] = __strdup(val);
+	if (arr == NULL) return;
 
-	i++;
+	arr[*i] = __strdup(val);
+
+	++(*i);
 }
 
 
-static void   __make_matrix_from_tree__(t_matrix arr, tree_node *root)
+static void   __make_matrix_from_tree__(t_matrix arr, tree_node *root, size_t *i)
 {
 	if (!root) return;
 
-	__make_matrix_from_tree__(arr, root->left);
+	__make_matrix_from_tree__(arr, root->left, i);
 
 	string val = __strappend(__make_string_empty(), root->key, "=", root->val);
 
-	__matrix_insert__(arr, val);
+	__matrix_insert__(arr, val, i);
 
-	__make_matrix_from_tree__(arr, root->right);
+	__make_matrix_from_tree__(arr, root->right, i);
 }
 
 
@@ -93,7 +94,9 @@ t_matrix  	__result_use_check make_matrix_from_tree(t_tree *tree)
 
 	arr[size] = NULL;
 
-	__make_matrix_from_tree__(arr, tree->root);
+	size_t i = 0;
+
+	__make_matrix_from_tree__(arr, tree->root, &i);
 
 	return arr;
 }
