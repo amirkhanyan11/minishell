@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 20:12:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:54:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ enum e_
 struct s_shell
 {
     t_list  	  *history;
-    t_list  	  *env;
-    t_list  	  *export;
-	t_list		  *path;
+    t_tree  	  *env;
+    t_tree  	  *export;
+	t_tree		  *path;
 
 	t_descriptor *stddesc;
 
@@ -126,7 +126,7 @@ bool is_digit(const char c);
 bool is_name_part(const char c);
 
 // lifecycle
-t_list 		 *make_export(t_shell *shell) __result_use_check;
+t_tree		 *make_export(t_shell *shell) __result_use_check;
 t_shell 	 *make_shell(char **env) __result_use_check;
 void		 make_shlvl(t_shell *shell);
 t_file		 make_heredoc(char *eof);

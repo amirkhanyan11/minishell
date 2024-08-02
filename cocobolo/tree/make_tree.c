@@ -6,12 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 16:33:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:01:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 #include <cocobolo.h>
+
+static void __make_tree_copy__(t_tree *tree, tree_node *root);
 
 t_tree *make_tree()
 {
@@ -20,6 +22,16 @@ t_tree *make_tree()
 	new_tree = malloc(sizeof(t_tree));
 	new_tree->root = NULL;
 	return new_tree;
+}
+
+
+t_tree *make_tree_copy(t_tree *other)
+{
+	t_tree *tree = make_tree();
+
+	__make_tree_copy__(tree, other->root);
+
+	return tree;
 }
 
 t_tree *make_tree_from_matrix(t_treeval *arr)
@@ -45,4 +57,13 @@ t_tree *make_tree_from_matrix(t_treeval *arr)
 		i++;
 	}
 	return new_tree;
+}
+
+static void __make_tree_copy__(t_tree *tree, tree_node *root)
+{
+	if (!tree || !root) return;
+
+	tree_update(tree, root->key, root->val);
+	__make_tree_copy__(tree, root->left);
+	__make_tree_copy__(tree, root->right);
 }

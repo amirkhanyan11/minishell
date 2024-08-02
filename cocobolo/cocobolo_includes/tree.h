@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 16:29:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:01:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void						treeval_copy(tree_node *lhv, tree_node *rhv);
 void						treeval_move(tree_node *lhv, tree_node *rhv);
 void						__treeval_copy__(t_treeval *lhv, t_treeval *rhv);
 void						__treeval_move__(t_treeval *lhv, t_treeval *rhv);
-
+t_tree 						*make_tree_copy(t_tree *other);
 t_tree						*make_tree_from_matrix(t_treeval *arr); // questionable
 
 struct						tree_node
