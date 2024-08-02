@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:25:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:40:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ static tree_node *__make_tree_from_matrix__(t_matrix arr, int low, int high)
 	if (__matrix_size(pair) >= 1)
 	{
 		char *val = pair[pair_val];
-		if (val == NULL)
-		{
-			val = "";
-		}
+
+		if (val == NULL) val = "";
+
 		root = make_tree_node(pair[pair_key], val);
 		root->left = __make_tree_from_matrix__(arr, low, mid - 1);
 		root->right = __make_tree_from_matrix__(arr, mid + 1, high);
@@ -63,7 +62,6 @@ t_tree *make_tree_from_matrix(t_treeval *arr)
 {
 	if (NULL == arr) return make_tree();
 
-	size_t i = 0;
 	t_tree *tree = make_tree();
 
 	matrix_sort(arr, NULL);

@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:09:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:24:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:32:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int __pivot__(t_matrix arr, int low, int high, str_binary_predicate cmp)
+static int __partition__(t_matrix arr, int low, int high, str_binary_predicate cmp)
 {
 	int i = low - 1;
 	int j = low;
@@ -29,11 +29,11 @@ int __pivot__(t_matrix arr, int low, int high, str_binary_predicate cmp)
 	return i;
 }
 
-void __matrix_qsort__(t_matrix arr, int low, int high, str_binary_predicate cmp)
+static void __matrix_qsort__(t_matrix arr, int low, int high, str_binary_predicate cmp)
 {
 	if (low > high) return;
 
-	int pivot = __pivot__(arr, low, high, cmp);
+	int pivot = __partition__(arr, low, high, cmp);
 	__matrix_qsort__(arr, low, pivot - 1, cmp);
 	__matrix_qsort__(arr, pivot + 1, high, cmp);
 }
