@@ -1,10 +1,11 @@
 
 #include "tree.h"
+#include <cocobolo.h>
 
 void delete_node(tree_node *node)
 {
-	// free(node->val)
-	// node->val = NULL;
+	__delete_string(&node->key);
+	__delete_string(&node->val);
 	node->left = NULL;
 	node->right = NULL;
 	free(node);
