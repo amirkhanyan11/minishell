@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_tree.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/02 16:50:36 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/02 16:50:45 by aamirkha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "tree.h"
 
 static void __print_key__(tree_node *root)
 {
-	printf("%s ~jupa~ %s\n", root->key, root->val);
+	printf("%s = %s\n", root->key, root->val);
 }
 
 void print_tree_preorder(t_tree *tree)
