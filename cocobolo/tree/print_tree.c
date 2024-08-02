@@ -1,25 +1,22 @@
 
 #include "tree.h"
 
-static void __print_val__(tree_node *root)
+static void __print_key__(tree_node *root)
 {
-	printf("%s\n", root->val);
+	printf("%s\n", root->key);
 }
 
 void print_tree_preorder(t_tree *tree)
 {
-	preorder(tree, __print_val__);
-	printf("\n");
+	preorder(tree, __print_key__);
 }
 
 void print_tree_inorder(t_tree *tree)
 {
-	inorder(tree, __print_val__);
-	printf("\n");
+	inorder(tree, __print_key__);
 }
 
 void print_tree_postorder(t_tree *tree)
 {
-	postorder(tree, __print_val__);
-	printf("\n");
+	postorder(tree, __print_key__);
 }

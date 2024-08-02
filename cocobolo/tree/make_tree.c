@@ -19,7 +19,7 @@ t_tree *make_tree_from_matrix(t_treeval *arr)
 
 	while (arr[i])
 	{
-		insert_node(new_tree, arr[i++]);
+		tree_update(new_tree, arr[i++], "aber");
 	}
 	return new_tree;
 }
