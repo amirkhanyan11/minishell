@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 17:04:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 18:01:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,24 @@ void dollar_sign_resolver(t_list *tokens, t_shell *shell)
 {
 	if (!tokens || !shell) return;
 
-	bool dquote_open = false;
-	bool squote_open = false;
+	a_list queue = make_list();
 	t_node *token = tokens->head;
 
 	while (token)
 	{
 		t_node *next = token->next;
 
-		if (list_value_same(token->val, "\"")) dquote_open = !dquote_open;
+		if (is_quote(token->val))
+		{
 
-		if (list_value_same(token->val, "\'")) squote_open = !squote_open;
+			if (empty(queue) || !string_equal(queue->tail->val, token->val))
+				push_back(queue, token->val);
 
-		if ((!squote_open || dquote_open)) // echo '"$SHELL"' resolves, which shouldn't
+			else
+				pop_back(queue);
+		}
+
+		if (empty(queue) || string_equal(queue->head->val, "\""))
 			resolve(token, tokens, shell);
 
 		token = next;

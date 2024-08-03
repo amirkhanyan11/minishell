@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 16:01:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:59:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell *make_shell(char **env) __result_use_check
+t_shell * __result_use_check make_shell(char **env)
 {
     t_shell *shell = __malloc(sizeof(t_shell));
 

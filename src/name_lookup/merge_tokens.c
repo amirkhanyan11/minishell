@@ -6,13 +6,12 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/31 21:16:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:10:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool __is_quote__(char *s);
 void merge_inside_quotes(t_list *tokens);
 
 void merge_tokens(t_list *tokens)
@@ -27,9 +26,9 @@ void merge_tokens(t_list *tokens)
 	{
 		t_node *next = token->next;
 
-		if (__is_quote__(token->val) && !list_value_same(token->prev->val, " "))
+		if (is_quote(token->val) && !list_value_same(token->prev->val, " "))
 		{
-			while (next && __is_quote__(next->val))
+			while (next && is_quote(next->val))
 			{
 				next = next->next;
 			}
@@ -59,7 +58,7 @@ void merge_inside_quotes(t_list *tokens)
 	{
 		t_node *next = token->next;
 
-		if (__is_quote__(token->val))
+		if (is_quote(token->val))
 		{
 			string quote_type = __strdup(token->val);
 			if (!open)
@@ -99,7 +98,7 @@ static void merge_consequtive_quotes(t_list *tokens)
 
 	while (token && token->next)
 	{
-		if (!__is_quote__(token->val))
+		if (!is_quote(token->val))
 		{
 			token = token->next;
 			continue;
@@ -111,7 +110,7 @@ static void merge_consequtive_quotes(t_list *tokens)
 
 		t_node *next = token->next;
 
-		if (((s ^ d) && list_value_same(token->next->val, token->val)) || (__is_quote__(token->next->val) && __is_opening__(token->val, s, d)
+		if (((s ^ d) && list_value_same(token->next->val, token->val)) || (is_quote(token->next->val) && __is_opening__(token->val, s, d)
 
 				&& __is_opening__(token->next->val, s, d)))
 		{
@@ -123,7 +122,3 @@ static void merge_consequtive_quotes(t_list *tokens)
 	}
 }
 
-static bool __is_quote__(char *s)
-{
-	return list_value_same(s, "\'") || list_value_same(s, "\"");
-}

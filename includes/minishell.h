@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:08:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:13:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ bool __contains_as_key__(char *line, char *target);
 bool __cmd_exists__(t_list_value path, t_list_value name);
 
 // name predicates
+bool is_quote(char *s);
 bool is_redirection(char * val);
 bool is_name(char *s);
 bool is_alpha(const char c);
