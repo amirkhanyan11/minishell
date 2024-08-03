@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:52:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:27:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void eval(t_cmd_container *cmds, size_t i)
 	close(pipe[in]);
 	close(pipe[out]);
 
-	export_update(cmds->arr[i]->shell, "_", cmds->arr[i]->name);
+	export_update(cmd->shell, "_", cmd->name);
 	if (cmd->redirection & redirect_heredoc)
 	{
 		unlink(heredoc);

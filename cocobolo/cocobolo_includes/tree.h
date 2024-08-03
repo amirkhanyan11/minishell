@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 15:24:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:53:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef bool				(*t_cmp)(t_treeval, t_treeval);
 struct						t_tree
 {
 	tree_node				*root;
-	t_cmp 	less;
+	t_cmp 					less;
 };
 
 enum e_e_e

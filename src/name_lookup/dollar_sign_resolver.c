@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:08:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:04:15 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void dollar_sign_resolver(t_list *tokens, t_shell *shell)
 
 		if (list_value_same(token->val, "\'")) squote_open = !squote_open;
 
-		if ((!squote_open || dquote_open))
+		if ((!squote_open || dquote_open)) // echo '"$SHELL"' resolves, which shouldn't
 			resolve(token, tokens, shell);
 
 		token = next;

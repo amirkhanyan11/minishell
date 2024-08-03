@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:03:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:25:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ void eval_prog(t_file *pipe, t_cmd_container *cmds, size_t i)
 	if (0 == pid)
 	{
 		close(pipe[in]);
-		// if (i < cmds->size - 1)
-		// {
-		// 	// dup2(pipe[out], cmd->descriptors->stdout);
-		// 	dup2(pipe[out], STDOUT_FILENO);
-		// }
 		__eval_prog__(cmd);
 	}
 	// int x = 0;
