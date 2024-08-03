@@ -1,7 +1,7 @@
 
 #include "tree.h"
 
-static void	__insert_node__(tree_node **root, t_treeval key, t_treeval val, tree_binary_predicate less)
+static void	__insert_node__(tree_node **root, t_treeval key, t_treeval val, t_cmp less)
 {
 	if (NULL == *root)
 		*root = make_tree_node(key, val);

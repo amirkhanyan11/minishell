@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 18:28:18 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 22:43:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/03 15:24:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-static tree_node *__tree_find__(tree_node *root, t_treeval key, tree_binary_predicate less)
+static tree_node *__tree_find__(tree_node *root, t_treeval key, t_cmp less)
 {
  	if (NULL == root)
 		return NULL;
@@ -29,7 +29,7 @@ tree_node *tree_find(t_tree *tree, t_treeval key)
 	return(__tree_find__(tree->root, key, tree->less));
 }
 
-tree_node *__tree_find_if__(tree_node *root, t_treeval key, tree_binary_predicate p)
+tree_node *__tree_find_if__(tree_node *root, t_treeval key, t_cmp p)
 {
 	if (!root) return NULL;
 
@@ -43,7 +43,7 @@ tree_node *__tree_find_if__(tree_node *root, t_treeval key, tree_binary_predicat
 		return __tree_find_if__(root->right, key, p);
 }
 
-tree_node *tree_find_if(t_tree *tree, t_treeval key, tree_binary_predicate p)
+tree_node *tree_find_if(t_tree *tree, t_treeval key, t_cmp p)
 {
 	if (tree_empty(tree) || !key || !p) return NULL;
 
