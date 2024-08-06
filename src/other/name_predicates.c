@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:41:51 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 17:10:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ bool is_name_part(const char c)
 
 bool is_redirection(char * val)
 {
-    return (list_value_same(val, "<") || list_value_same(val, ">"));
+    return (string_equal(val, "<") || string_equal(val, ">"));
 }
 
 bool is_quote(char *s)
 {
-	return list_value_same(s, "\'") || list_value_same(s, "\"");
+	return string_equal(s, "\'") || string_equal(s, "\"");
 }
 
 bool is_name(char *s)

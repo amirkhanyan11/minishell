@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:06:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int redirect(t_node *token, t_command *cmd)
 {
-	if (!token || !token->next || list_value_same(token->next->val, ""))
+	if (!token || !token->next || string_equal(token->next->val, ""))
 	{
 		__perror((token->next) ? "ambiguous redirect" : "syntax error");
 		return -1;
@@ -22,7 +22,7 @@ int redirect(t_node *token, t_command *cmd)
 
 	t_file fd = -1;
 
-	if (list_value_same(token->val, "<"))
+	if (string_equal(token->val, "<"))
 	{
 		fd = open_file(token->next->val, O_RDONLY);
 		if (fd == -1)
@@ -30,7 +30,7 @@ int redirect(t_node *token, t_command *cmd)
 		cmd->descriptors->stdin = fd;
 		cmd->redirection |= redirect_in;
 	}
-	else if (list_value_same(token->val, "<<"))
+	else if (string_equal(token->val, "<<"))
 	{
 		fd = make_heredoc(token->next->val);
 		if (fd == -1)
@@ -38,7 +38,7 @@ int redirect(t_node *token, t_command *cmd)
 		cmd->descriptors->stdin = fd;
 		cmd->redirection |= redirect_in | redirect_heredoc;
 	}
-	else if (list_value_same(token->val, ">"))
+	else if (string_equal(token->val, ">"))
 	{
 		fd = open_file(token->next->val, O_WRONLY | O_CREAT | O_TRUNC);
 		if (fd == -1)

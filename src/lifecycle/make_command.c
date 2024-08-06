@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:22:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:55:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,9 @@ t_command * make_command(t_list *tokens, t_shell *shell)
 	cmd->resolved = false;
 	cmd->redirection = 0;
 
-	t_node *token = tokens->head->next;
-
-	while (token)
+	if (sort_tokens(cmd, tokens) == -1)
 	{
-		t_node *next = token->next;
-
-		if (list_value_same(token->val, "<") || list_value_same(token->val, ">") || list_value_same(token->val, ">>") || list_value_same(token->val, "<<"))
-		{
-			if (-1 == redirect(token, cmd))
-			{
-				__t_command__(&cmd);
-				return NULL;
-			}
-
-			next = token->next->next;
-			erase(tokens, token, token->next);
-		}
-
-		else if (token->val[0] == '-')
-			push_back(cmd->options, token->val);
-
-		else
-			push_back(cmd->args, token->val);
-
-		token = next;
-
+		__t_command__(&cmd);
 	}
 
 	return cmd;

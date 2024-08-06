@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void merge_tokens(t_list *tokens)
 	{
 		t_node *next = token->next;
 
-		if (is_quote(token->val) && !list_value_same(token->prev->val, " "))
+		if (is_quote(token->val) && !string_equal(token->prev->val, " "))
 		{
 			while (next && is_quote(next->val))
 			{
@@ -35,7 +35,7 @@ void merge_tokens(t_list *tokens)
 
 			if (next)
 			{
-				if (!list_value_same(next->val, " "))
+				if (!string_equal(next->val, " "))
 					token->prev->val = __strappend(token->prev->val, next->val);
 				t_node *end = next;
 				next = next->next;
@@ -65,7 +65,7 @@ void merge_inside_quotes(t_list *tokens)
 			{
 				token = token->next;
 				t_node *tmp = token->next;
-				while (tmp && list_value_same(tmp->val, quote_type) == false)
+				while (tmp && string_equal(tmp->val, quote_type) == false)
 				{
 					next = tmp->next;
 					token->val = __strappend(token->val, tmp->val);
@@ -82,7 +82,7 @@ void merge_inside_quotes(t_list *tokens)
 
 static bool __is_opening__(t_list_value val, bool s, bool d)
 {
-	if (list_value_same(val, "\'")) return (s == false);
+	if (string_equal(val, "\'")) return (s == false);
 
 	else return (d == false);
 }
@@ -104,13 +104,13 @@ static void merge_consequtive_quotes(t_list *tokens)
 			continue;
 		}
 
-		if (list_value_same(token->val, "\'")) s = !s;
+		if (string_equal(token->val, "\'")) s = !s;
 
 		else d = !d;
 
 		t_node *next = token->next;
 
-		if (((s ^ d) && list_value_same(token->next->val, token->val)) || (is_quote(token->next->val) && __is_opening__(token->val, s, d)
+		if (((s ^ d) && string_equal(token->next->val, token->val)) || (is_quote(token->next->val) && __is_opening__(token->val, s, d)
 
 				&& __is_opening__(token->next->val, s, d)))
 		{

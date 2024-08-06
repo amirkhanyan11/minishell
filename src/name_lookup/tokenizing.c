@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:24:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int quote_parse(t_list *tokens)
 	t_node *token = tokens->head;
 	while (token)
 	{
-		if (!d && list_value_same(token->val, "\'")) s = !s;
-		if (!s && list_value_same(token->val, "\"")) d = !d;
+		if (!d && string_equal(token->val, "\'")) s = !s;
+		if (!s && string_equal(token->val, "\"")) d = !d;
 
 		token = token->next;
 	}
