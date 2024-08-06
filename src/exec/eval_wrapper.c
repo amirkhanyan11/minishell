@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_wrapper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:35:37 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 
 	else if (_unset == opcode) __unset__(cmd);
 
+	else if (_msh_exit == opcode) __exit__(cmd);
+
 	else if (_program == opcode)
 	{
 		pid_t pid = __fork();
@@ -48,6 +50,7 @@ void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 			__eval_prog__(cmd);
 		}
 	}
+
 
 	dup2(pipe[in], STDIN_FILENO);
 
