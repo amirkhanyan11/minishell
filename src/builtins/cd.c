@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:54:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void update_pwd(t_shell *shell, char *oldpwd)
 {
 	if (!shell || !oldpwd) return;
 
-	string pwd = __pwd__();
+	scoped_string pwd = __pwd__();
 	export_update(shell, "OLDPWD", oldpwd);
 	export_update(shell, "PWD", pwd);
 }

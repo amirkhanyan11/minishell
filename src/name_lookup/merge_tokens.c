@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 17:10:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void merge_inside_quotes(t_list *tokens)
 
 		if (is_quote(token->val))
 		{
-			string quote_type = __strdup(token->val);
+			scoped_string quote_type = __strdup(token->val);
 			if (!open)
 			{
 				token = token->next;

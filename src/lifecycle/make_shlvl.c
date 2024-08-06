@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:40:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:21:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void make_shlvl(t_shell *shell)
 
 	t_optional lvl = __atoi(shlvl_old);
 
-	string shlvl = __itoa(value_or(&lvl, 0) + 1);
+	scoped_string shlvl = __itoa(value_or(&lvl, 0) + 1);
 
 	export_update(shell, "SHLVL", shlvl);
 }

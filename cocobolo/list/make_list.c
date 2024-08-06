@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:45:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_list *make_list_from_string(char *s, char *set, t_opcode opcode)
 	{
 		if (__strchr(set, *s) == true)
 		{
-			string val = __make_string_from_char(*s);
+			scoped_string val = __make_string_from_char(*s);
 			push_back(list, val);
 			++s;
 		}
@@ -62,7 +62,7 @@ t_list *make_list_from_string(char *s, char *set, t_opcode opcode)
 		{
 			char *tmp = s + 1;
 			while (*tmp && __strchr(set, *tmp) == false) tmp++;
-			string val = __strdup_until(s, *tmp);
+			scoped_string val = __strdup_until(s, *tmp);
 			push_back(list, val);
 			s = tmp;
 		}

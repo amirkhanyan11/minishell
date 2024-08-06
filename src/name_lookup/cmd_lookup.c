@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:45:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int cmd_lookup(t_command *cmd)
 
 bool __cmd_exists__(t_list_value path, t_list_value name)
 {
-	string guess = __make_string(path, "/", name);
+	scoped_string guess = __make_string(path, "/", name);
 
 	return (0 == access(guess, F_OK));
 }
