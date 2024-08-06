@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 17:21:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void _chdir(const char *path);
 
 void cd(t_command *cmd)
 {
-	eval_wrapper(cmd, code_cd);
+	eval_wrapper(cmd, _cd);
 }
 
 void __cd__(t_command *cmd)

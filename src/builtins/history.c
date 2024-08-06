@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:36:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 17:21:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void history(t_command *cmd)
 {
-	eval_wrapper(cmd, code_history);
+	eval_wrapper(cmd, _history);
 }
 
 void __history__(t_command *cmd)

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 17:21:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void echo(t_command *cmd)
 {
-	eval_wrapper(cmd, code_echo);
+	eval_wrapper(cmd, _echo);
 }
 
 void __echo__(t_command *cmd)

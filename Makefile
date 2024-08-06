@@ -7,6 +7,8 @@ SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./sr
 INCPATH = ./includes/ ./cocobolo/cocobolo_includes/ ./readline_local/include/
 OBJSPATH = ./objs/
 
+__SUPER_SECRET_GREETING__ = meow meow meow jupa jupa
+
 # SRCS = $(wildcard $(SRCSPATH)*.c)
 # OBJS = $(patsubst $(SRCSPATH)%.c, $(OBJSPATH)%.o, $(SRCS))
 
@@ -67,6 +69,7 @@ ${OBJSPATH} :
 ${NAME} : print_info ${OBJS}
 	@${CC} ${CFLAGS} ${OBJSPATH}*.o ${LREADLINE} -o $@
 	@echo "\n\n${GREEN}            minishell compiled! ${RESET}\n"
+	@say ${__SUPER_SECRET_GREETING__}
 
 ${OBJSPATH}%.o : %.c Makefile
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))

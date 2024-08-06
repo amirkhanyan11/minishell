@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 17:22:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void unset(t_command *cmd)
 {
-	eval_wrapper(cmd, code_unset);
+	eval_wrapper(cmd, _unset);
 }
 
 void unset_var(t_shell *shell, t_list_value key)

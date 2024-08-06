@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 15:32:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:43:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,7 @@ int cmd_lookup(t_command *cmd)
 
 	// if (empty(path)) return -1;
 
-	if (builtin_lookup(cmd) == 0)
-	{
-		cmd->type = builtin;
-		return 0;
-	}
-
-	cmd->type = program;
+	if (builtin_lookup(cmd) == 0) return 0;
 
 	t_node *node = NULL;
 

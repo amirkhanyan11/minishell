@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:18:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,16 @@ enum e_
 	redirect_heredoc = 8
 };
 
-enum e_cmd_type
-{
-	builtin,
-	program,
-	unspecified
-};
-
 enum e_eval_opcode
 {
-	code_cd,
-	code_echo,
-	code_env,
-	code_export,
-	code_history,
-	code_pwd,
-	code_unset,
-	code_program
+	_cd,
+	_echo,
+	_env,
+	_export,
+	_history,
+	_pwd,
+	_unset,
+	_program
 };
 
 struct s_shell
@@ -96,7 +89,6 @@ struct s_command
 
 	t_cmd_container *container;
 
-	t_cmd_type  type;
 	t_eval 		eval;
 
 	int 	redirection;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 // 	// cmd->shell->status = WEXITSTATUS(x);
 // }
 
-void __eval_prog__(t_command *cmd)
+void eval_prog(t_command *cmd)
 {
-	eval_wrapper(cmd, code_program);
+	eval_wrapper(cmd, _program);
 }
 
-void eval_prog(t_command *cmd)
+void __eval_prog__(t_command *cmd)
 {
 	if (!cmd) __exit(NULL); // from child
 
