@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 20:00:25 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:42:38 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@
 # include <sys/wait.h>
 # include <termios.h>
 
-#include "__minishell_typedefs__.h"
-#include "__minishell_commands__.h"
-#include "__minishell_enums__.h"
+# include "__minishell_typedefs__.h"
+# include "__minishell_commands__.h"
+# include "__minishell_enums__.h"
 # include "__minishell_lexer__.h"
 
 # define declarex "declare -x "
 # define heredoc  ".__heredoc__.txt"
-
+# define special_symbols "<>| \'\""
+# define non_mergeable_tokens "<>|"
 # define PIPE_MAX 2
 
-# define a_cmd_container t_cmd_container * __dtor(__t_cmd_container__)
+# define scoped_cmd_container t_cmd_container * __dtor(__t_cmd_container__)
 
 struct s_shell
 {

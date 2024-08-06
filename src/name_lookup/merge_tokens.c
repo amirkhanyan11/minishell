@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 15:01:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:49:59 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,32 @@
 
 void merge_inside_quotes(t_list *tokens);
 
-void merge_tokens(t_list *tokens) // echo "a" "b" --> ab BUG
+void merge_tokens(t_list *tokens)
 {
 	if (!tokens || empty(tokens)) return;
 
 	merge_inside_quotes(tokens);
 
-	t_node *token = tokens->head->next;
+	list_remove(tokens, "\'");
+	list_remove(tokens, "\"");
+
+	t_node *token = tokens->head;
 
 	while (token && token->next)
 	{
 		t_node *next = token->next;
 
-		if (is_quote(token->val) && !string_equal(token->prev->val, " "))
+		if (string_equal(token->val, "<<") || string_equal(token->val, ">>"))
 		{
-			while (next && is_quote(next->val))
-			{
-				next = next->next;
-			}
+			token = next;
+			continue;
+		}
 
-			if (next)
-			{
-				if (!string_equal(next->val, " "))
-					token->prev->val = __strappend(token->prev->val, next->val);
-				t_node *end = next;
-				next = next->next;
-				erase(tokens, token, end);
-			}
-			else break;
+		if ((__strlen(token->val) == 1 && !strchr(non_mergeable_tokens, token->val[0]) && string_equal(next->val, token->val)) || (!string_equal(token->val, " ") && !string_equal(next->val, " ")))
+		{
+			token->val = __strappend(token->val, next->val);
+			pop(tokens, next);
+			next = token;
 		}
 		token = next;
 	}
