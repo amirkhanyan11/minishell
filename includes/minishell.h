@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:08:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 
+
 # define declarex "declare -x "
 # define heredoc  ".__heredoc__.txt"
 
@@ -39,28 +40,10 @@ typedef enum e_eval_opcode t_eval_opcode;
 
 typedef void (*t_eval) (t_command *cmd);
 
+#include "__minishell_commands__.h"
+#include "__minishell_enums__.h"
+
 # define a_cmd_container t_cmd_container * __dtor(__t_cmd_container__)
-
-enum e_
-{
-	in = 0,
-	out = 1,
-	redirect_in = 2,
-	redirect_out = 4,
-	redirect_heredoc = 8
-};
-
-enum e_eval_opcode
-{
-	_cd,
-	_echo,
-	_env,
-	_export,
-	_history,
-	_pwd,
-	_unset,
-	_program
-};
 
 struct s_shell
 {
@@ -80,31 +63,6 @@ struct s_descriptor
 	t_fd stderr;
 };
 
-struct s_command
-{
-    t_shell *shell;
-	char 	*name;
-	t_list  *options;
-    t_list 	*args;
-
-	t_cmd_container *container;
-
-	t_eval 		eval;
-
-	int 	redirection;
-	t_descriptor *descriptors;
-
-};
-
-struct s_cmd_container
-{
-	t_command **arr;
-	size_t size;
-	size_t current_cmd_index;
-};
-
-// displays
-void display_prompt();
 
 //	reading input
 char	*read_line(void);
@@ -137,7 +95,6 @@ void 		 merge_redirections(t_list *tokens);
 
 
 // find predicates
-bool __contains_as_key__(char *line, char *target);
 bool __cmd_exists__(t_list_value path, t_list_value name);
 
 // name predicates
@@ -191,7 +148,7 @@ void __eval_prog__(t_command *cmd);
 // other
 static int __export_from_string__(char *expr, t_shell *shell);
 char *  _getcwd() __result_use_check;
-void unset_var(t_shell *shell, t_list_value val);
+void 	unset_var(t_shell *shell, t_list_value val);
 
 // signals
 void	set_signals_interactive(void);

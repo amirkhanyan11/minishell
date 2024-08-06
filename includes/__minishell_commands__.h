@@ -1,20 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   __minishell__commands.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 15:11:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/01 21:51:38 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/06 19:05:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef __MINISHELL_COMMANDS___H
+#define __MINISHELL_COMMANDS___H
+
 #include "minishell.h"
 
-void display_prompt()
+struct s_command
 {
-    // printf(ITALIC_ON PURPLE"minishell"GREEN  " $ > " RESET ITALIC_OFF);
-    printc("minishell", __italic__, __purple__);
-    printc(" $ > ", __italic__, __green__);
-}
+    t_shell *shell;
+	char 	*name;
+	t_list  *options;
+    t_list 	*args;
+
+	t_cmd_container *container;
+
+	t_eval 		eval;
+
+	int 	redirection;
+	t_descriptor *descriptors;
+
+};
+
+struct s_cmd_container
+{
+	t_command **arr;
+	size_t size;
+	size_t current_cmd_index;
+};
+
+
+
+
+#endif // __MINISHELL_COMMANDS___H
