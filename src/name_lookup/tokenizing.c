@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 16:49:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:24:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void __quote_counter__(size_t *sum, char *s);
 static void __dquote_counter__(size_t *sum, char *s);
 static int quote_parse(t_list *tokens);
 
-t_list * __result_use_check tokenize(char * raw_cmd)
+t_list * tokenize(char * raw_cmd)
 {
 	if (!raw_cmd) return NULL;
 

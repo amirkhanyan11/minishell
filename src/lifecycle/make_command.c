@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:03:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:22:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // if (redirection_resolver(tokens, cmd) == -1) list_clear(&tokens);
 
-t_command * __result_use_check make_command(t_list *tokens, t_shell *shell)
+t_command * make_command(t_list *tokens, t_shell *shell)
 {
 	if (empty(tokens) || !shell) return NULL;
 

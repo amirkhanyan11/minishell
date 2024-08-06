@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:21:05 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 22:30:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:18:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-static char	* __result_use_check __single_append__(char *lhv, char *rhv)
+static char	* __single_append__(char *lhv, char *rhv)
 {
 	if (!lhv || !rhv) return lhv;
 
@@ -39,7 +39,7 @@ static char	* __result_use_check __single_append__(char *lhv, char *rhv)
 	return (target);
 }
 
-char * __attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...)
+char * __unwrapped_strappend__(char *s, ...)
 {
 	va_list args;
 	va_start(args, s);
@@ -57,7 +57,7 @@ char * __attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char
 	return s;
 }
 
-char * __attribute__((sentinel)) __result_use_check __unwrapped_make_string__(char *s, ...)
+char * __unwrapped_make_string__(char *s, ...)
 {
 
 	if (!s) return NULL;

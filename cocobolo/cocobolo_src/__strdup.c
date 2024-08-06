@@ -6,18 +6,18 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:15:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 20:04:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:18:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-char	* __result_use_check __strdup(const char *src)
+char	* __strdup(const char *src)
 {
 	return __strdup_until(src, '\0');
 }
 
-char	* __result_use_check __strdup_until(const char *src, const char c)
+char	* __strdup_until(const char *src, const char c)
 {
 	char	*dest;
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:51:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:21:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void pwd(t_command *cmd)
     printf ("%s\n", path);
 }
 
-char * __result_use_check __pwd__()
+char * __pwd__()
 {
    	char * path = __malloc(SIZE + 1);
 	getcwd(path, SIZE);

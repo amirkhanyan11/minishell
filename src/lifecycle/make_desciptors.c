@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:09:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 20:21:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:22:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_descriptor * __result_use_check make_descriptors()
+t_descriptor * make_descriptors()
 {
 	static int __fd = 999;
 	t_descriptor *descriptor = __malloc(sizeof(t_descriptor));
@@ -24,10 +24,10 @@ t_descriptor * __result_use_check make_descriptors()
 	return descriptor;
 }
 
-t_descriptor * __result_use_check make_stddesc()
+t_descriptor * make_stddesc()
 {
 	t_descriptor *res = make_descriptors();
-	
+
 	res->stdout = dup(STDOUT_FILENO);
 	res->stdin =  dup(STDIN_FILENO);
 	res->stderr = dup(STDERR_FILENO);

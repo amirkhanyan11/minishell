@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 19:14:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:16:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-t_list * __attribute__((malloc)) __result_use_check make_list()
+t_list *make_list()
 {
 	t_list *list = __malloc(sizeof(t_list));
 
@@ -22,7 +22,7 @@ t_list * __attribute__((malloc)) __result_use_check make_list()
 	return list;
 }
 
-t_list *__attribute__((malloc)) __result_use_check make_list_from_matrix(char **arr)
+t_list * make_list_from_matrix(char **arr)
 {
 	if (NULL == arr) __exit("nullptr passed to make_list_from_matrix");
 
@@ -37,7 +37,7 @@ t_list *__attribute__((malloc)) __result_use_check make_list_from_matrix(char **
 	return list;
 }
 
-t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *s, char *set, t_opcode opcode)
+t_list *make_list_from_string(char *s, char *set, t_opcode opcode)
 {
 	a_matrix arr = NULL;
 
@@ -73,14 +73,14 @@ t_list * __attribute__((malloc)) __result_use_check make_list_from_string(char *
 
 }
 
-t_list * __attribute__((malloc)) __result_use_check make_list_copy_range(t_list *other, t_value_mutate f)
+t_list *make_list_copy_range(t_list *other, t_value_mutate f)
 {
 	if (!other) return NULL;
 
 	return (make_list_copy(other->head, other->tail, f));
 }
 
-t_list * __attribute__((malloc)) __result_use_check make_list_copy(t_node *first, t_node *last, t_value_mutate f)
+t_list *  make_list_copy(t_node *first, t_node *last, t_value_mutate f)
 {
 	t_list *list = make_list();
 

@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 14:28:18 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 15:39:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:20:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 
-void __attribute__((sentinel))  __unwrapped_push__(f_push f, t_list *const list, ...)
+void __unwrapped_push__(f_push f, t_list *const list, ...)
 {
 	va_list args;
 	va_start(args, list);

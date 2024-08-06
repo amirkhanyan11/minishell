@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:03:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/05 21:47:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:17:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-void	__attribute__((malloc))	*__malloc(size_t n)
+void	*__malloc(size_t n)
 {
 	void	*ptr;
 

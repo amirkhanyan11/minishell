@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:08:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:22:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_container * __result_use_check make_cmd_container(char * raw_cmd, t_shell *shell)
+t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 {
     a_list tokens = preprocess(tokenize(raw_cmd), shell);
 

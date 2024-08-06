@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 21:21:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/25 18:40:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:18:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static size_t	_current_len(char const **str, char *set);
 static t_matrix _allocate(char const *str, char *set, size_t const SIZE);
 static void		_skip_(char const **str, char *set);
 
-t_matrix  __result_use_check  __split(char const *s, char * set)
+t_matrix  __split(char const *s, char * set)
 {
 	if (!s)
 		__exit("nullptr passed to __split");

@@ -6,19 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 22:29:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:22:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // move to separate dir
-t_matrix __result_use_check  make_matrix_from_string(char *s, char *set)
+t_matrix  make_matrix_from_string(char *s, char *set)
 {
 	return __split(s, set);
 }
 
-t_matrix  __result_use_check make_matrix_copy(t_matrix other)
+t_matrix  make_matrix_copy(t_matrix other)
 {
 	if (!other) return NULL;
 
@@ -37,7 +37,7 @@ t_matrix  __result_use_check make_matrix_copy(t_matrix other)
 	return res;
 }
 
-t_matrix  __result_use_check make_matrix_from_list(t_list *list)
+t_matrix  make_matrix_from_list(t_list *list)
 {
 	if (!list) return NULL;
 
@@ -84,7 +84,7 @@ static void   __make_matrix_from_tree__(t_matrix arr, tree_node *root, size_t *i
 }
 
 
-t_matrix  	__result_use_check make_matrix_from_tree(t_tree *tree)
+t_matrix   make_matrix_from_tree(t_tree *tree)
 {
 	if (tree_empty(tree)) return NULL;
 

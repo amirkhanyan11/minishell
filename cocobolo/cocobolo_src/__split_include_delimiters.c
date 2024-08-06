@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:52:49 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/19 18:57:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:18:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-t_matrix  __result_use_check  __split_include_delimiters(char const *s, char c)
+t_matrix  __split_include_delimiters(char const *s, char c)
 {
 	if (!s) return NULL;
 

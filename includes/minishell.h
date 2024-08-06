@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 17:13:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:24:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,7 @@ void 		 reset_descriptors(t_command * cmd);
 
 // execution helpers
 int		    export_update(t_shell *shell, t_list_value key, t_list_value val);
-char 		*get_value(t_list *list, char *target) __result_use_check;
 void 		resolve(t_node *t, t_list *tokens, t_shell *shell);
-char 		*get_key(t_list_value line)  __result_use_check;
 int 		cmd_lookup(t_command *cmd);
 t_file 		open_file(char *filenae, int options);
 int 		redirect(t_node *token, t_command *cmd);

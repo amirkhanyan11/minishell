@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 20:19:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 20:43:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:18:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	_move_ptrs(char **left, char **right, char  *set);
 
-char	* __attribute__((malloc)) __result_use_check __strtrim(char *s1, char  *set)
+char	* __strtrim(char *s1, char  *set)
 {
 	char	*left;
 	char	*right;
