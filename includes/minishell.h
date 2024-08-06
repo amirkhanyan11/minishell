@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:56:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:23:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef struct s_command t_command;
 typedef struct s_cmd_container t_cmd_container;
 typedef struct s_descriptor t_descriptor;
 typedef int	   t_file;
+typedef enum e_cmd_type t_cmd_type;
+typedef enum e_eval_opcode t_eval_opcode;
+
+typedef void (*t_eval) (t_command *cmd);
 
 # define a_cmd_container t_cmd_container * __dtor(__t_cmd_container__)
 
@@ -42,6 +46,25 @@ enum e_
 	redirect_in = 2,
 	redirect_out = 4,
 	redirect_heredoc = 8
+};
+
+enum e_cmd_type
+{
+	builtin,
+	program,
+	unspecified
+};
+
+enum e_eval_opcode
+{
+	code_cd,
+	code_echo,
+	code_env,
+	code_export,
+	code_history,
+	code_pwd,
+	code_unset,
+	code_program
 };
 
 struct s_shell
@@ -69,10 +92,12 @@ struct s_command
 	t_list  *options;
     t_list 	*args;
 
+	t_cmd_type type;
+	t_eval eval;
+
 	int 	redirection;
 	t_descriptor *descriptors;
 
-	bool resolved;
 };
 
 struct s_cmd_container
@@ -89,10 +114,10 @@ char	*read_line(void);
 
 // execution
 void 		 eval(t_cmd_container *cmds, size_t i);
-void 		 eval_prog(t_file *pipe, t_command * cmd);
 void 		 set_descriptors(t_command * cmd);
 void 		 reset_descriptors(t_command * cmd);
-void 		__eval_prog__(t_command *cmd);
+void 		 eval_prog(t_command *cmd);
+// void 		 __eval_prog__deprecated__(t_file *pipe, t_command * cmd);
 
 // execution helpers
 int		    export_update(t_shell *shell, t_list_value key, t_list_value val);
@@ -100,6 +125,8 @@ void 		resolve(t_node *t, t_list *tokens, t_shell *shell);
 int 		cmd_lookup(t_command *cmd);
 t_file 		open_file(char *filenae, int options);
 int 		redirect(t_node *token, t_command *cmd);
+void 		eval_wrapper(t_command *cmd, t_eval_opcode opcode);
+
 
 // parsing
 t_list 		 *tokenize(char * raw_cmd) __result_use_check;
@@ -154,10 +181,20 @@ void export(t_command *cmd);
 void echo(t_command *cmd);
 void history(t_command *cmd);
 
+void __cd__(t_command *cmd);
+void __pwd__(t_command *cmd);
+void __env__(t_command *cmd);
+void __unset__(t_command *cmd);
+void __export__(t_command *cmd);
+void __echo__(t_command *cmd);
+void __history__(t_command *cmd);
+void __eval_prog__(t_command *cmd);
+
+
 // other
 static int __export_from_string__(char *expr, t_shell *shell);
-char *  __pwd__() __result_use_check;
-void __unset__(t_shell *shell, t_list_value val);
+char *  _getcwd() __result_use_check;
+void unset_var(t_shell *shell, t_list_value val);
 
 // signals
 void	set_signals_interactive(void);

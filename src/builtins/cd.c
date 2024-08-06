@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:21:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static void __cd_no_arg__(t_command *cmd);
 static void _chdir(const char *path);
 
 void cd(t_command *cmd)
+{
+	eval_wrapper(cmd, code_cd);
+}
+
+void __cd__(t_command *cmd)
 {
 	if (!cmd) return;
 
@@ -79,7 +84,7 @@ static void update_pwd(t_shell *shell, char *oldpwd)
 {
 	if (!shell || !oldpwd) return;
 
-	scoped_string pwd = __pwd__();
+	scoped_string pwd = _getcwd();
 	export_update(shell, "OLDPWD", oldpwd);
 	export_update(shell, "PWD", pwd);
 }

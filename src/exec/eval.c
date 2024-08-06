@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:37:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,20 @@ void eval(t_cmd_container *cmds, size_t i)
 		dup2(pipe[out], STDOUT_FILENO);
 	}
 
-	set_descriptors(cmd);
+	// set_descriptors(cmd);
 
-	if (string_equal(cmd->name, "pwd")) pwd(cmd);
+	if (cmd->type == builtin) cmd->eval(cmd);
 
-	else if (string_equal(cmd->name, "history")) history(cmd);
-
-	else if (string_equal(cmd->name, "export")) export(cmd);
-
-	else if (string_equal(cmd->name, "echo")) echo(cmd);
-
-	else if (string_equal(cmd->name, "unset")) unset(cmd);
-
-	else if (string_equal(cmd->name, "env") || string_equal(cmd->name, "printenv")) env(cmd);
-
-	else if (string_equal(cmd->name, "cd")) cd(cmd);
-
-	else eval_prog(pipe, cmd);
+	else if (cmd->type == program)
+	{
+		pid_t pid = __fork();
+		if (0 == pid)
+		{
+			close(pipe[in]);
+			cmd->eval(cmd);
+		}
+		// __eval_prog__(pipe, cmd);
+	}
 
 	dup2(pipe[in], STDIN_FILENO);
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:01:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void merge_inside_quotes(t_list *tokens);
 
-void merge_tokens(t_list *tokens)
+void merge_tokens(t_list *tokens) // echo "a" "b" --> ab BUG
 {
 	if (!tokens || empty(tokens)) return;
 

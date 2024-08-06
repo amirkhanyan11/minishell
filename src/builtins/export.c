@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:45:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:21:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static void __print_export__(tree_node *node);
 static int __export_from_string__(char *expr, t_shell *shell);
 
 void export(t_command *cmd)
+{
+	eval_wrapper(cmd, code_export);
+}
+
+void __export__(t_command *cmd)
 {
 	if (!cmd) return;
 
@@ -62,7 +67,7 @@ static int __export_from_string__(char *expr, t_shell *shell)
 
 	else
 	{
-		__unset__(shell, tokens->head->val);
+		unset_var(shell, tokens->head->val);
 		tree_update(shell->export, tokens->head->val, "");
 	}
 
@@ -79,7 +84,7 @@ int export_update(t_shell *shell, t_list_value key, t_list_value val)
 		return -1;
 	}
 
-	__unset__(shell, key);
+	unset_var(shell, key);
 
 	tree_update(shell->export, key, val);
 

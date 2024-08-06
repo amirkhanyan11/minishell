@@ -6,13 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:46:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:22:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void __unset__(t_shell *shell, t_list_value key)
+
+void unset(t_command *cmd)
+{
+	eval_wrapper(cmd, code_unset);
+}
+
+void unset_var(t_shell *shell, t_list_value key)
 {
 	if (!key) return;
 
@@ -21,7 +27,7 @@ void __unset__(t_shell *shell, t_list_value key)
 }
 
 
-void unset(t_command *cmd)
+void __unset__(t_command *cmd)
 {
 	if (!cmd || !cmd->args) return;
 
@@ -29,7 +35,7 @@ void unset(t_command *cmd)
 
 	while (arg)
 	{
-		__unset__(cmd->shell, arg->val);
+		unset_var(cmd->shell, arg->val);
 		arg = arg->next;
 	}
 }

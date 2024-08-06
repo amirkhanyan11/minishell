@@ -6,30 +6,35 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:46:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:23:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void eval_prog(t_file *pipe, t_command *cmd)
-{
-	if (NULL == cmd) return;
+// void __eval_prog__deprecated__(t_file *pipe, t_command *cmd)
+// {
+// 	if (NULL == cmd) return;
 
-	pid_t pid = __fork();
-	if (0 == pid)
-	{
-		close(pipe[in]);
-		__eval_prog__(cmd);
-	}
-	// int x = 0;
-	// waitpid(pid, &x, 0);
-	// cmd->shell->status = WEXITSTATUS(x);
-}
+// 	pid_t pid = __fork();
+// 	if (0 == pid)
+// 	{
+// 		close(pipe[in]);
+// 		eval_prog(cmd);
+// 	}
+// 	// int x = 0;
+// 	// waitpid(pid, &x, 0);
+// 	// cmd->shell->status = WEXITSTATUS(x);
+// }
 
 void __eval_prog__(t_command *cmd)
 {
-	if (!cmd || cmd_lookup(cmd) == -1) __exit(NULL); // from child
+	eval_wrapper(cmd, code_program);
+}
+
+void eval_prog(t_command *cmd)
+{
+	if (!cmd) __exit(NULL); // from child
 
 	scoped_list options_copy = make_list_copy_range(cmd->options, NULL);
 	push_front(options_copy, cmd->name);

@@ -6,11 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:32:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int builtin_lookup(t_command *cmd);
 
 
 int cmd_lookup(t_command *cmd)
@@ -19,9 +21,15 @@ int cmd_lookup(t_command *cmd)
 
 	scoped_list path = get_path(cmd->shell);
 
-	if (empty(path)) return -1;
+	// if (empty(path)) return -1;
 
-	if (cmd->resolved) return 0;
+	if (builtin_lookup(cmd) == 0)
+	{
+		cmd->type = builtin;
+		return 0;
+	}
+
+	cmd->type = program;
 
 	t_node *node = NULL;
 
@@ -34,13 +42,13 @@ int cmd_lookup(t_command *cmd)
 			char *resolved_name = __make_string(node->val, "/", cmd->name);
 			free(cmd->name);
 			cmd->name = resolved_name;
-			cmd->resolved = true;
+			cmd->eval = eval_prog;
 			return 0;
 		}
 	}
 	else if (0 == access(cmd->name, F_OK))
 	{
-		cmd->resolved = true;
+		cmd->eval = eval_prog;
 		return 0;
 	}
 
@@ -54,4 +62,23 @@ bool __cmd_exists__(t_list_value path, t_list_value name)
 	scoped_string guess = __make_string(path, "/", name);
 
 	return (0 == access(guess, F_OK));
+}
+
+static int builtin_lookup(t_command *cmd)
+{
+	if (string_equal(cmd->name, "pwd")) cmd->eval = pwd;
+
+	else if (string_equal(cmd->name, "history")) cmd->eval = history;
+
+	else if (string_equal(cmd->name, "export")) cmd->eval = export;
+
+	else if (string_equal(cmd->name, "echo")) cmd->eval = echo;
+
+	else if (string_equal(cmd->name, "unset")) cmd->eval = unset;
+
+	else if (string_equal(cmd->name, "env") || string_equal(cmd->name, "printenv")) cmd->eval = env;
+
+	else if (string_equal(cmd->name, "cd")) cmd->eval = cd;
+
+	return (cmd->eval == NULL) ? -1 : 0;
 }

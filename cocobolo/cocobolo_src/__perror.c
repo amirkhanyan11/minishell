@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:56:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/12 15:06:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:02:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-#define __project_name__ "./minishell: "
+#define __project_name__ "minishell: "
 
 void __perror(char * err)
 {
