@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 19:08:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:31:03 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <termios.h>
-
 
 # define declarex "declare -x "
 # define heredoc  ".__heredoc__.txt"
@@ -134,6 +133,7 @@ void unset(t_command *cmd);
 void export(t_command *cmd);
 void echo(t_command *cmd);
 void history(t_command *cmd);
+void msh_exit(t_command *cmd);
 
 void __cd__(t_command *cmd);
 void __pwd__(t_command *cmd);
@@ -143,7 +143,7 @@ void __export__(t_command *cmd);
 void __echo__(t_command *cmd);
 void __history__(t_command *cmd);
 void __eval_prog__(t_command *cmd);
-
+void __exit__(t_command *cmd) __dead2;
 
 // other
 static int __export_from_string__(char *expr, t_shell *shell);

@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __minishell_enums__.h                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 19:00:33 by aamirkha          #+#    #+#             */
+/*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
 /*   Updated: 2024/08/06 19:35:37 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __MINIHSELL_ENUMS___H
-#define __MINIHSELL_ENUMS___H
+#include "minishell.h"
 
-enum e_rdr
+void __exit__(t_command *cmd)
 {
-	in = 0,
-	out = 1,
-	redirect_in = 2,
-	redirect_out = 4,
-	redirect_heredoc = 8
-};
+	printf("exit\n");
+	exit(EXIT_SUCCESS);
+}
 
-enum e_eval_opcode
+void msh_exit(t_command *cmd)
 {
-	_cd,
-	_echo,
-	_env,
-	_export,
-	_history,
-	_pwd,
-	_unset,
-	_program,
-	_msh_exit
-};
-
-
-#endif // __MINIHSELL_ENUMS___H
+	eval_wrapper(cmd, _msh_exit);
+}

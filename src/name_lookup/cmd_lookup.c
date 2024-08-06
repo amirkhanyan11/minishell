@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lookup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:43:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:32:25 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ static int builtin_lookup(t_command *cmd)
 
 	else if (string_equal(cmd->name, "unset")) cmd->eval = unset;
 
-	else if (string_equal(cmd->name, "env") || string_equal(cmd->name, "printenv")) cmd->eval = env;
+	else if (string_equal(cmd->name, "env")) cmd->eval = env;
 
 	else if (string_equal(cmd->name, "cd")) cmd->eval = cd;
+
+	else if (string_equal(cmd->name, "exit")) cmd->eval = msh_exit;
 
 	return (cmd->eval == NULL) ? -1 : 0;
 }
