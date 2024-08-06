@@ -6,23 +6,23 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 17:36:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void eval(t_cmd_container *cmds, size_t i)
+void eval(t_cmd_container *cmds)
 {
-	if (NULL == cmds || i >= cmds->size || !cmds->arr[i]) return;
+	if (NULL == cmds || !cmds->arr[cmds->current_cmd_index]) return;
 
-	t_command *cmd = cmds->arr[i];
+	t_command *cmd = cmds->arr[cmds->current_cmd_index];
 
-	t_file		pipe[2];
+	t_fd		pipe[PIPE_MAX];
 
 	__pipe(pipe);
 
-	if (i < cmds->size - 1)
+	if (cmds->current_cmd_index < cmds->size - 1)
 	{
 		dup2(pipe[out], STDOUT_FILENO);
 	}

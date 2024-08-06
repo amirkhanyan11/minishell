@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 15:31:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:09:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // if (redirection_resolver(tokens, cmd) == -1) list_clear(&tokens);
 
-t_command * make_command(t_list *tokens, t_shell *shell)
+t_command * make_command(t_list *tokens, t_cmd_container *container, t_shell *shell)
 {
 	if (empty(tokens) || !shell) return NULL;
 
@@ -23,6 +23,7 @@ t_command * make_command(t_list *tokens, t_shell *shell)
 	cmd->descriptors = make_stddesc();
 
 	cmd->shell = shell;
+	cmd->container = container;
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->name = __strdup(tokens->head->val); // assume the name of the command goes always first in the input

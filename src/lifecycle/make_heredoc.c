@@ -6,17 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 03:34:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_file make_heredoc(char *eof)
+t_fd make_heredoc(char *eof)
 {
     if (!eof) return -1;
-    
-    t_file fd = open_file(heredoc, O_CREAT | O_RDWR);
+
+    t_fd fd = open_file(heredoc, O_CREAT | O_RDWR);
 
     char *line = readline(">"); // can I lose stdin?
 

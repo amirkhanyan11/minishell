@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int redirect(t_node *token, t_command *cmd)
 		return -1;
 	}
 
-	t_file fd = -1;
+	t_fd fd = -1;
 
 	if (string_equal(token->val, "<"))
 	{

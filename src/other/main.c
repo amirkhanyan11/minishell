@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:15:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int main(int ac, char **av, char **env)
 
 		if (NULL != cmds)
 		{
-			size_t i = 0;
 
-			while (i < cmds->size)
+			while (cmds->current_cmd_index < cmds->size)
 			{
-				eval(cmds, i++);
+				eval(cmds);
+				cmds->current_cmd_index++;
 			}
 
 			while (-1 != wait(NULL));

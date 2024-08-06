@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:45:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:13:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 
     t_cmd_container * cmds = __malloc(sizeof(t_cmd_container));
 
-    cmds->size = count_range(tokens, "|") + 1;
+	cmds->current_cmd_index = 0;
+
+	cmds->size = count_range(tokens, "|") + 1;
 
     cmds->arr = __malloc(sizeof(t_command) * cmds->size);
 
@@ -41,7 +43,7 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 
         scoped_list partition = make_list_copy(first, pipe, NULL);
 
-        cmds->arr[i] = make_command(partition, shell);
+        cmds->arr[i] = make_command(partition, cmds, shell);
 
         first = pipe->next;
         i++;

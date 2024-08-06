@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 17:23:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void __eval_prog__deprecated__(t_file *pipe, t_command *cmd)
+// void __eval_prog__deprecated__(t_fd *pipe, t_command *cmd)
 // {
 // 	if (NULL == cmd) return;
 

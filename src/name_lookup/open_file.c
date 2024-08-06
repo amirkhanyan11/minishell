@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 17:38:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #define PERMISSIONS 0644
 
-t_file open_file(char *filename, int option)
+t_fd open_file(char *filename, int option)
 {
-	t_file fd = -1;
+	t_fd fd = -1;
 
 	if (O_RDONLY == option)
 		fd = open(filename, O_RDONLY);
