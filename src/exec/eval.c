@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 15:27:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:29:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void eval(t_cmd_container *cmds, size_t i)
 
 	else if (list_value_same(cmd->name, "cd")) cd(cmd);
 
-	else eval_prog(pipe, cmds, i);
+	else eval_prog(pipe, cmd);
 
 	dup2(pipe[in], STDIN_FILENO);
 

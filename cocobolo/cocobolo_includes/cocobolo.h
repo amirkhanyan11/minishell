@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:03:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:45:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_list t_list;
 # define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
 
 #define string char * __dtor(__delete_string)
-#define a_list t_list * __dtor(list_clear)
-#define a_matrix t_matrix  __dtor(__matrix_clear)
+#define scoped_list t_list * __dtor(list_clear)
+#define scoped_matrix t_matrix  __dtor(__matrix_clear)
 
 typedef void (*t_printf_option)(const char * const);
 

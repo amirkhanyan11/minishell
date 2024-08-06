@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 18:58:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:46:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void __t_shell__(t_shell * shell)
     list_clear(&shell->history);
     tree_clear(&shell->env);
     tree_clear(&shell->export);
-    list_clear(&shell->path);
-
 
 	free(shell->stddesc);
 

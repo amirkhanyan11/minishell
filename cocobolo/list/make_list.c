@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:16:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:45:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list * make_list_from_matrix(char **arr)
 
 t_list *make_list_from_string(char *s, char *set, t_opcode opcode)
 {
-	a_matrix arr = NULL;
+	scoped_matrix arr = NULL;
 
 	if (words_only == opcode)
 	{

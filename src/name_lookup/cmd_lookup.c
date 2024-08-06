@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 22:32:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:45:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 
 int cmd_lookup(t_command *cmd)
 {
-	if (!cmd || empty(cmd->shell->path)) return -1;
+	if (!cmd) return -1;
+
+	scoped_list path = get_path(cmd->shell);
+
+	if (empty(path)) return -1;
 
 	if (cmd->resolved) return 0;
 
@@ -23,7 +27,7 @@ int cmd_lookup(t_command *cmd)
 
 	if (__strchr(cmd->name, '/') == false)
 	{
-		t_node *node = find_range(cmd->shell->path, cmd->name, __cmd_exists__);
+		t_node *node = find_range(path, cmd->name, __cmd_exists__);
 
 		if (node)
 		{

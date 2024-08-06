@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:24:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:43:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ struct s_shell
     t_tree  	  *env;
     t_tree  	  *export;
     t_list  	  *history;
-	t_list		  *path;
 
 	t_descriptor *stddesc;
 
@@ -90,9 +89,10 @@ char	*read_line(void);
 
 // execution
 void 		 eval(t_cmd_container *cmds, size_t i);
-void 		 eval_prog(t_file *pipe, t_cmd_container *cmds, size_t i);
+void 		 eval_prog(t_file *pipe, t_command * cmd);
 void 		 set_descriptors(t_command * cmd);
 void 		 reset_descriptors(t_command * cmd);
+void 		__eval_prog__(t_command *cmd);
 
 // execution helpers
 int		    export_update(t_shell *shell, t_list_value key, t_list_value val);
@@ -130,7 +130,7 @@ void		 make_shlvl(t_shell *shell);
 t_file		 make_heredoc(char *eof);
 t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell) __result_use_check;
 t_command 	 *make_command(t_list *tokens, t_shell *shell) __result_use_check;
-t_list 		 *make_path(t_shell *shell) __result_use_check;
+t_list 		 *get_path(t_shell *shell) __result_use_check;
 t_descriptor *make_descriptors() __result_use_check;
 t_descriptor *make_stddesc() __result_use_check;
 void 		 __t_command__(t_command **cmdptr);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 21:01:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:45:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static int __export_from_string__(char *expr, t_shell *shell)
 {
 	if (!expr || !shell) return -1;
 
-	a_matrix arr = __split_include_delimiters(expr, '=');
+	scoped_matrix arr = __split_include_delimiters(expr, '=');
 
-	a_list tokens = make_list_from_matrix(arr);
+	scoped_list tokens = make_list_from_matrix(arr);
 
-	// a_list tokens = make_list_from_string(expr, "=", all);
+	// scoped_list tokens = make_list_from_string(expr, "=", all);
 
 	if (empty(tokens)) return -1;
 
@@ -86,8 +86,6 @@ int export_update(t_shell *shell, t_list_value key, t_list_value val)
 	if (val)
 	{
 		tree_update(shell->env, key, val);
-
-		if (list_value_same(key, "PATH")) shell->path = make_path(shell);
 	}
 
 	return 0;

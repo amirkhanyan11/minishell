@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 19:31:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:46:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void __unset__(t_shell *shell, t_list_value key)
 
 	tree_pop(shell->export, key);
 	tree_pop(shell->env, key);
-
-	if (list_value_same(key, "PATH")) list_clear(&shell->path); // path is a special case, since I keep it as a separate list
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 15:24:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:45:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static tree_node *__make_tree_from_matrix__(t_matrix arr, int low, int high)
 
 	tree_node *root = NULL;
 
-	a_matrix pair = __split(arr[mid], "=");
+	scoped_matrix pair = __split(arr[mid], "=");
 
 	if (__matrix_size(pair) >= 1)
 	{

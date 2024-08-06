@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:22:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:45:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 {
-    a_list tokens = preprocess(tokenize(raw_cmd), shell);
+    scoped_list tokens = preprocess(tokenize(raw_cmd), shell);
 
 	if (empty(tokens) || !shell) return NULL;
 
@@ -39,7 +39,7 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
             pop(tokens, pipe->next);
         }
 
-        a_list partition = make_list_copy(first, pipe, NULL);
+        scoped_list partition = make_list_copy(first, pipe, NULL);
 
         cmds->arr[i] = make_command(partition, shell);
 

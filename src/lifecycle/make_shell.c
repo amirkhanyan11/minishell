@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:22:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:42:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ t_shell * make_shell(char **env)
     shell->env = make_tree_from_matrix(env, string_less);
 
 	shell->export = make_export(shell);
-
-	shell->path = make_path(shell);
 
     shell->history = make_list();
 
