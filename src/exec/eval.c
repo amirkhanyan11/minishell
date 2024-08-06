@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 15:37:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:36:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void eval(t_cmd_container *cmds, size_t i)
 			close(pipe[in]);
 			cmd->eval(cmd);
 		}
-		// __eval_prog__(pipe, cmd);
 	}
 
 	dup2(pipe[in], STDIN_FILENO);
