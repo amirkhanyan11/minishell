@@ -87,7 +87,7 @@ re : fclean all
 
 # BRANCH = master
 
-push :
+oda :
 	make fclean
 	git add .
 	git commit -m "."
