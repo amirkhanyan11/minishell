@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_wrapper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 19:35:37 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/06 22:48:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 {
-	set_descriptors(cmd);
 
 	t_fd		pipe[PIPE_MAX];
 
@@ -24,6 +23,8 @@ void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 	{
 		dup2(pipe[out], STDOUT_FILENO);
 	}
+
+	set_descriptors(cmd);
 
 	if (_cd == opcode) __cd__(cmd);
 
@@ -50,7 +51,6 @@ void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 			__eval_prog__(cmd);
 		}
 	}
-
 
 	dup2(pipe[in], STDIN_FILENO);
 
