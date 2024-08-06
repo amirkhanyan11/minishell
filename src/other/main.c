@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 19:28:45 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:34:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char **av, char **env)
 	{
 		scoped_string line = read_line();
 
-		a_cmd_container cmds = make_cmd_container(line, shell);
+		scoped_cmd_container cmds = make_cmd_container(line, shell);
 
 		if (!line) // ctr + D
 		{
