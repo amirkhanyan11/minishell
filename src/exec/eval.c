@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:39:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:51:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,23 @@
 
 void eval(t_cmd_container *cmds)
 {
-	if (NULL == cmds || !cmds->arr[cmds->current_cmd_index]) return;
+	if (NULL == cmds) return ;
 
-	t_command *cmd = cmds->arr[cmds->current_cmd_index];
-
-	cmd->eval(cmd);
-
-	export_update(cmd->shell, "_", cmd->name);
-
-	if (cmd->redirection & redirect_heredoc)
+	while (cmds->current_cmd_index < cmds->size)
 	{
-		unlink(heredoc);
-	    printf("\n"); // not here but in the end of all commands :)
+		t_command *cmd = cmds->arr[cmds->current_cmd_index];
+
+		if (cmd) cmd->eval(cmd);
+
+		export_update(cmd->shell, "_", cmd->name);
+
+		if (cmd->redirection & redirect_heredoc)
+		{
+			unlink(heredoc);
+			printf("\n"); // not here but in the end of all commands :)
+		}
+
+		cmds->current_cmd_index++;
 	}
+	while (-1 != wait(NULL));
 }
