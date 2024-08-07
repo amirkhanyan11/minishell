@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 20:42:38 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:20:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define declarex "declare -x "
 # define heredoc  ".__heredoc__.txt"
 # define special_symbols "<>| \'\""
-# define non_mergeable_tokens "<>|"
+# define self_mergeable_tokens "<>|"
 # define PIPE_MAX 2
 
 # define scoped_cmd_container t_cmd_container * __dtor(__t_cmd_container__)
