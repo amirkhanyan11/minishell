@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:19:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 18:36:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:18:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t count(t_node *first, t_node *last, t_list_value val)
 
 	while (first && first->prev != last)
 	{
-		if (__strstr(first->val, val) != NULL) res++;
+		if (string_equal(first->val, val) == true) res++;
 		first = first->next;
 	}
 	return res;
