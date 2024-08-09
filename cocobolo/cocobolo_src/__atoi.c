@@ -62,3 +62,22 @@ t_optional	__atoi(char const *str)
 		return (make_optional());
 	return (res);
 }
+
+
+static bool	_non_digit(char c)
+{
+	return !_is_digit(c);
+}
+
+t_optional	__atoi_strict(char const *str)
+{
+	if (NULL == str) __exit("nullptr passed to __atoi_strict");
+
+	char *t_str = (char*)str;
+
+	if (_is_sign(t_str[0])) t_str++;
+
+	if (*__strchr_p(t_str, _non_digit) != '\0') return make_optional();
+
+	return __atoi(str);
+}

@@ -6,17 +6,20 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:55:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+extern int g_exit_status;
+
 int redirect(t_node *token, t_command *cmd)
 {
 	if (!token || !token->next || string_equal(token->next->val, ""))
 	{
-		__perror((token->next) ? "ambiguous redirect" : "syntax error");
+		set_exit_status(1);
+		__perror((token->next) ? "ambiguous redirect" : "syntax error"); // amb redirect not for all commands
 		return -1;
 	}
 

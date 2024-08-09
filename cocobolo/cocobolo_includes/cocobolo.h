@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:09:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void 		__string_swap(char **lhv, char **rhv);
 void 		__string_move(char **lhv, char **rhv);
 void 		__delete_string(char **s);
 t_optional	__atoi(char const *str);
+t_optional	__atoi_strict(char const *str);
 char 		*__make_string_empty() __allocs __result_use_check;
 char 		*__make_string_from_char(const char c) __allocs __result_use_check;
 char		*__strtrim(char *s1, char *set) __allocs __result_use_check;

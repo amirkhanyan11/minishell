@@ -6,11 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 16:49:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:40:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int g_exit_status;
 
 void echo(t_command *cmd)
 {
@@ -42,6 +44,8 @@ void __echo__(t_command *cmd)
 
 	if (newline)
 		printf("\n");
+
+	g_exit_status = 0;
 }
 
 static void echo_arglist(t_list *arglist)

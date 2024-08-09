@@ -6,17 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 16:15:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:37:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell *shell = NULL;
+int g_exit_status = 0;
 
 int main(int ac, char **av, char **env)
 {
-	shell = make_shell(env);
+	t_shell *shell = make_shell(env);
 
 	// fetch -> decode -> execute
 	while (true)
@@ -41,7 +41,7 @@ int main(int ac, char **av, char **env)
 	}
 	__t_shell__(shell);
 
-	return 0;
+	return g_exit_status;
 }
 
 // #ifdef __APPLE__

@@ -6,19 +6,20 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 17:19:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:53:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
 static int sort_redirections(t_command *cmd, t_list *tokens);
 
 int sort_tokens(t_command *cmd, t_list *tokens)
 {
-
 	if (sort_redirections(cmd, tokens) == -1)
 	{
+		set_exit_status(1);
 		return -1;
 	}
 
