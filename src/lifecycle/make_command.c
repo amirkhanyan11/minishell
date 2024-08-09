@@ -6,13 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:44:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:50:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// if (redirection_resolver(tokens, cmd) == -1) list_clear(&tokens);
 
 t_command * make_command(t_list *tokens, t_cmd_container *container, t_shell *shell)
 {

@@ -6,13 +6,40 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:55:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:19:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int sort_redirections(t_command *cmd, t_list *tokens);
+
 int sort_tokens(t_command *cmd, t_list *tokens)
+{
+
+	if (sort_redirections(cmd, tokens) == -1)
+	{
+		return -1;
+	}
+
+	t_node *token = tokens->head->next;
+
+	while (token && token->val && token->val[0] == '-')
+	{
+		push_back(cmd->options, token->val);
+		token = token->next;
+	}
+
+	while (token)
+	{
+		push_back(cmd->args, token->val);
+		token = token->next;
+	}
+
+	return 0;
+}
+
+static int sort_redirections(t_command *cmd, t_list *tokens)
 {
 	t_node *token = tokens->head->next;
 
@@ -30,16 +57,7 @@ int sort_tokens(t_command *cmd, t_list *tokens)
 			next = token->next->next;
 			erase(tokens, token, token->next);
 		}
-
-		else if (token->val[0] == '-')
-			push_back(cmd->options, token->val);
-
-		else
-			push_back(cmd->args, token->val);
-
 		token = next;
-
 	}
 	return 0;
 }
-

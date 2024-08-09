@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 17:51:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:42:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_node   t_node;
 typedef struct s_list   t_list;
 typedef char * 		 	t_list_value;
 typedef void (*t_list_Upredicate) (t_node * const);
+typedef bool (*t_list_Upredicate_b) (t_node * const);
 typedef bool (*t_list_Countpredicate) (t_list_value);
 typedef bool (*t_list_Bpredicate_val)(t_list_value, t_list_value);
 typedef void (*t_list_Apredicate_val)(size_t *, t_list_value);
@@ -90,6 +91,7 @@ void 	print_list_enumerate(t_list *list);
 
 //	algorithms
 size_t size(t_list *list);
+t_node *find_if(t_node *first, t_node *last, t_list_Upredicate_b p);
 t_node *find(t_node *first, t_node *last, t_list_value target, t_list_Bpredicate_val cmp);
 t_node *find_range(t_list *list, t_list_value target, t_list_Bpredicate_val cmp);
 t_node *find_strict(t_node *first, t_node *last, t_list_value target, t_list_Bpredicate_val cmp);

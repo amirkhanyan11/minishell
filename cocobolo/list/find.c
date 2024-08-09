@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 00:18:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:42:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,20 @@ t_node *find_strict(t_node *first, t_node *last, t_list_value target, t_list_Bpr
 	if (NULL == res) __exit(err);
 
 	return res;
+}
+
+static t_node *__find_if__(t_node *curr, t_node *last, t_list_Upredicate_b p)
+{
+    if (!curr || curr->prev == last) return NULL;
+
+	if (p(curr) == true) return curr;
+
+	return __find_if__(curr->next, last, p);
+}
+
+t_node *find_if(t_node *first, t_node *last, t_list_Upredicate_b p)
+{
+	if (!first || !last || !p) return NULL;
+
+	return __find_if__(first, last, p);
 }
