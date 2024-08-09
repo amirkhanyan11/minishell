@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 19:10:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:59:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ static int __export_from_string__(char *expr, t_shell *shell);
 char *  _getcwd() __result_use_check;
 void 	unset_var(t_shell *shell, t_list_value val);
 void 	set_exit_status(int status);
+void __exit_nb__(const int status, char * err) __dead2;
 
 // signals
 void	set_signals_interactive(void);

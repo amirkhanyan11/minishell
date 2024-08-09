@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/09 19:24:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:59:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ void __exit__(t_command *cmd)
 		if (!has_value(&val))
 		{
 			err = __make_string("exit: ", cmd->args->head->val, ": numeric argument required");
-			set_exit_status(-1);
+			__exit_nb__(-1, err);
 		}
-		else set_exit_status(value(&val));
+		__exit_nb__(value(&val), err);
 	}
-	else
-		set_exit_status(0);
+	__exit_nb__(0, err);
+}
+
+void __exit_nb__(const int status, char * err)
+{
+	set_exit_status(status);
 	printf("exit\n");
 	if (err) __perror(err);
 	exit(g_exit_status);

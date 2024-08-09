@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 21:31:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:59:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(int ac, char **av, char **env)
 
 		if (!line) // ctr + D
 		{
-			__exit__(NULL);
+			__exit_nb__(0, NULL);
 		}
 
 		eval(cmds);

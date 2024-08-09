@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 22:19:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:54:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void merge_tokens(t_list *tokens)
 	}
 }
 
-
 static void erase_quotes(t_list *tokens)
 {
 	if (empty(tokens)) return;
@@ -59,7 +58,6 @@ static void erase_quotes(t_list *tokens)
 
 	while (token)
 	{
-
 		t_node *pair = find(token->next, tokens->tail, token->val, string_equal);
 
 		if (!pair) break;
