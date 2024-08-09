@@ -17,6 +17,8 @@ void tree_clear(t_tree **treeptr)
 
 	t_tree *tree = *treeptr;
 	postorder(tree, delete_node);
+	delete_node(tree->NIL);
+	tree->NIL = NULL;
 	tree->root = NULL;
 	free(tree);
 	*treeptr = NULL;

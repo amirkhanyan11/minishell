@@ -6,14 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 15:22:16 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/09 19:41:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:03:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "tree.h"
+#include <cocobolo.h>
 
-tree_node *make_tree_node(t_treeval key, t_treeval val, tree_node *NIL, e_color color)
+tree_node *make_tree_node(t_treeval key, t_treeval val, tree_node *NIL, t_color color)
 {
 	tree_node *new_node;
 	new_node = __malloc(sizeof(tree_node));

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 19:30:39 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:57:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 			__eval_prog__(cmd);
 		}
 
-		if (_program == opcode && cmd->container->current_cmd_index == cmd->container->size - 1)
+		if (cmd->container->current_cmd_index == cmd->container->size - 1)
 		{
 			waitpid(pid, &g_exit_status, 0);
 			g_exit_status = WEXITSTATUS(g_exit_status);

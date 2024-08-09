@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:02:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void unset_var(t_shell *shell, t_list_value key)
 {
 	if (!key) return;
 
-	tree_pop(shell->export, key);
-	tree_pop(shell->env, key);
+	tree_remove(shell->export, key);
+	tree_remove(shell->env, key);
 }
 
 

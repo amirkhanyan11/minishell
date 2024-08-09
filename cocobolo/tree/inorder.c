@@ -6,22 +6,22 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:24:00 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 16:24:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:15:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-static void __inorder__(tree_node *node, fptr foo)
+static void __inorder__(t_tree *tree, tree_node *node, fptr foo)
 {
-	if(node == NULL || foo == NULL)
+	if(node == tree->NIL || foo == NULL)
 		return ;
-	__inorder__(node->left, foo);
+	__inorder__(tree, node->left, foo);
 	foo(node);
-	__inorder__(node->right, foo);
+	__inorder__(tree, node->right, foo);
 }
 
 void inorder(t_tree *tree, fptr foo)
 {
-	__inorder__(tree->root, foo);
+	__inorder__(tree, tree->root, foo);
 }

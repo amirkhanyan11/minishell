@@ -6,46 +6,46 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 18:28:18 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/03 15:24:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:12:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-static tree_node *__tree_find__(tree_node *root, t_treeval key, t_cmp less)
+static tree_node *__tree_find__(t_tree *tree, tree_node *x, t_treeval key)
 {
- 	if (NULL == root)
-		return NULL;
-	if (less(root->key, key))
-		return(__tree_find__(root->right, key, less));
-	else if (less(key, root->key))
-		return(__tree_find__(root->left, key, less));
+ 	if (x == tree->NIL)
+		return tree->NIL;
+	if (tree->less(x->key, key))
+		return(__tree_find__(tree, x->right, key));
+	else if (tree->less(key, x->key))
+		return(__tree_find__(tree, x->left, key));
 	else
-		return root;
+		return x;
 }
 
 tree_node *tree_find(t_tree *tree, t_treeval key)
 {
-	return(__tree_find__(tree->root, key, tree->less));
+	return(__tree_find__(tree, tree->root, key));
 }
 
-tree_node *__tree_find_if__(tree_node *root, t_treeval key, t_cmp p)
-{
-	if (!root) return NULL;
+// tree_node *__tree_find_if__(tree_node *root, t_treeval key, t_cmp p)
+// {
+// 	if (!root) return NULL;
 
-	if (p(root->val, key) == true) return root;
+// 	if (p(root->val, key) == true) return root;
 
-	tree_node * guess = __tree_find_if__(root->left, key, p);
+// 	tree_node * guess = __tree_find_if__(root->left, key, p);
 
-	if (guess) return guess;
+// 	if (guess) return guess;
 
-	else
-		return __tree_find_if__(root->right, key, p);
-}
+// 	else
+// 		return __tree_find_if__(root->right, key, p);
+// }
 
-tree_node *tree_find_if(t_tree *tree, t_treeval key, t_cmp p)
-{
-	if (tree_empty(tree) || !key || !p) return NULL;
+// tree_node *tree_find_if(t_tree *tree, t_treeval key, t_cmp p)
+// {
+// 	if (tree_empty(tree) || !key || !p) return NULL;
 
-	return __tree_find_if__(tree->root, key, p);
-}
+// 	return __tree_find_if__(tree->root, key, p);
+// }

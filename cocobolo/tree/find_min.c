@@ -1,14 +1,14 @@
 
 #include "tree.h"
 
-tree_node *__find_min__(tree_node *root)
+tree_node *__find_min__(t_tree *tree, tree_node *root)
 {
-	return (root == NULL || !root->left) ? root : __find_min__(root->left);
+	return (root == tree->NIL || root->left == tree->NIL) ? root : __find_min__(tree, root->left);
 }
 
 tree_node *find_min(t_tree *tree)
 {
 	if (!tree) return NULL;
 
-	return __find_min__(tree->root);
+	return __find_min__(tree, tree->root);
 }

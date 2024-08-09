@@ -1,16 +1,16 @@
 
 #include "tree.h"
 
-static void __postorder__(tree_node *node, fptr foo)
+static void __postorder__(t_tree *tree, tree_node *node, fptr foo)
 {
-	if(node == NULL || foo == NULL)
+	if(node == tree->NIL || foo == NULL)
 		return ;
-	__postorder__(node->left, foo);
-	__postorder__(node->right, foo);
+	__postorder__(tree, node->left, foo);
+	__postorder__(tree, node->right, foo);
 	foo(node);
 }
 
 void postorder(t_tree *tree, fptr foo)
 {
-	__postorder__(tree->root, foo);
+	__postorder__(tree, tree->root, foo);
 }
