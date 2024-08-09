@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/07 16:57:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:42:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef bool				(*t_cmp)(t_treeval, t_treeval);
 struct						t_tree
 {
 	tree_node				*root;
+	tree_node				*NIL;
 	t_cmp 					less;
 };
 
@@ -37,7 +38,8 @@ enum e_e_e
 	pair_val = 1
 };
 
-tree_node					*make_tree_node(t_treeval key, t_treeval val);
+tree_node *make_tree_node(t_treeval key, t_treeval val, tree_node *NIL, e_color color);
+
 void						tree_update(t_tree *tree, t_treeval key,
 								t_treeval val);
 void						preorder(t_tree *tree, fptr foo);
@@ -83,6 +85,15 @@ struct						tree_node
 	t_treeval				val;
 	tree_node				*right;
 	tree_node				*left;
+	tree_node				*p;
+	e_color					color;
+
+};
+
+enum e_color
+{
+	BLACK,
+	RED
 };
 
 #endif // BST_HEADER_H

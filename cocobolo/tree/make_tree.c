@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:45:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:43:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ t_tree *make_tree(t_cmp less)
 
 	if (less == NULL) less = string_less;
 
-	new_tree = malloc(sizeof(t_tree));
+	new_tree = __malloc(sizeof(t_tree));
 	new_tree->less = less;
-	new_tree->root = NULL;
+	new_tree->NIL = make_tree_node(NULL, NULL, NULL, BLACK);
+	new_tree->root = new_tree->NIL;
 	return new_tree;
 }
 
@@ -77,7 +78,7 @@ t_tree *make_tree_from_matrix(t_treeval *arr, t_cmp less)
 
 static void __make_tree_copy__(t_tree *tree, tree_node *root)
 {
-	if (!tree || !root) return;
+	if (!tree || tree->root == tree->NIL) return;
 
 	tree_update(tree, root->key, root->val);
 	__make_tree_copy__(tree, root->left);
