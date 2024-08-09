@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lookup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 19:32:25 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:32:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int builtin_lookup(t_command *cmd);
-
 
 int cmd_lookup(t_command *cmd)
 {
@@ -47,7 +46,7 @@ int cmd_lookup(t_command *cmd)
 	}
 
 	__perror("command not found");
-	cmd->shell->status = 127;
+	set_exit_status(127);
 	return -1;
 }
 

@@ -6,11 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 22:48:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:30:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int g_exit_status;
 
 void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 {
@@ -45,10 +47,17 @@ void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 	else if (_program == opcode)
 	{
 		pid_t pid = __fork();
+
 		if (0 == pid)
 		{
 			close(pipe[in]);
 			__eval_prog__(cmd);
+		}
+
+		if (_program == opcode && cmd->container->current_cmd_index == cmd->container->size - 1)
+		{
+			waitpid(pid, &g_exit_status, 0);
+			g_exit_status = WEXITSTATUS(g_exit_status);
 		}
 	}
 
@@ -58,4 +67,5 @@ void eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 
 	close(pipe[in]);
 	close(pipe[out]);
+
 }
