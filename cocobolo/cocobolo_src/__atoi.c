@@ -100,5 +100,7 @@ t_optional	__atoi_strict_no_overflow(char const *str)
 	}
 	num *= sign;
 	set_optional(&res, num);
+	if (num > LONG_MAX || num < LONG_MIN)
+		return (make_optional());
 	return (res);
 }
