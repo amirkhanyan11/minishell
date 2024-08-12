@@ -69,7 +69,7 @@ static bool	_non_digit(char c)
 	return !_is_digit(c);
 }
 
-t_optional	__atoi_strict(char const *str)
+t_optional	__atoi_strict_no_overflow(char const *str)
 {
 	if (NULL == str) __exit("nullptr passed to __atoi_strict");
 
@@ -79,5 +79,26 @@ t_optional	__atoi_strict(char const *str)
 
 	if (*__strchr_p(t_str, _non_digit) != '\0') return make_optional();
 
-	return __atoi(str);
+	long long	num;
+	short		sign;
+	t_optional	res;
+
+	num = 0;
+	sign = 1;
+	res = make_optional();
+	_skip_spaces(&str);
+	if (_is_sign(*str))
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str && _is_digit(*str))
+	{
+		num = _process(num, *str);
+		str++;
+	}
+	num *= sign;
+	set_optional(&res, num);
+	return (res);
 }

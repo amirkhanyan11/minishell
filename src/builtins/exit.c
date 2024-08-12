@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/09 22:59:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:49:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,26 @@ extern int g_exit_status;
 void __exit__(t_command *cmd)
 {
 	scoped_string err = NULL;
+	printf("exit\n");
 
 	list_move_back(cmd->options, cmd->args);
 
-	if (size(cmd->args) > 1)
+	if (size(cmd->args) >= 1)
 	{
-		__perror("exit: too many arguments");
-		set_exit_status(1);
-		return;
-	}
-	else if (size(cmd->args) == 1)
-	{
-		t_optional val = __atoi_strict(cmd->args->head->val);
+		t_optional val = __atoi_strict_no_overflow(cmd->args->head->val);
 		if (!has_value(&val))
 		{
 			err = __make_string("exit: ", cmd->args->head->val, ": numeric argument required");
 			__exit_nb__(-1, err);
 		}
-		__exit_nb__(value(&val), err);
+		if (size(cmd->args) > 1)
+		{
+			__perror("exit: too many arguments");
+			set_exit_status(1);
+			return;
+		}
+		else
+			__exit_nb__(value(&val), err);
 	}
 	__exit_nb__(0, err);
 }
@@ -42,7 +44,6 @@ void __exit__(t_command *cmd)
 void __exit_nb__(const int status, char * err)
 {
 	set_exit_status(status);
-	printf("exit\n");
 	if (err) __perror(err);
 	exit(g_exit_status);
 }
