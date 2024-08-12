@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:01:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,27 @@ void __export__(t_command *cmd)
 {
 	if (!cmd) return;
 
-	if (empty(cmd->args))
+	int status = 0;
+
+	if (empty(cmd->args) && empty(cmd->options))
 	{
 		print_tree_inorder_custom(cmd->shell->export, __print_export__);
-		return ;
 	}
 
-	// print_list(cmd->args);
-	t_node *arg = cmd->args->head;
+	else if(invalid_option(cmd) == -1)
+		status = 2;
 
-	while (arg)
+	else
 	{
-		__export_from_string__(arg->val, cmd->shell);
-		arg = arg->next;
+		t_node *arg = cmd->args->head;
+		while (arg)
+		{
+			if (-1 == __export_from_string__(arg->val, cmd->shell))
+				status = 1;
+			arg = arg->next;
+		}
 	}
-
+	set_exit_status(status);
 }
 
 static int __export_from_string__(char *expr, t_shell *shell)
@@ -55,7 +61,8 @@ static int __export_from_string__(char *expr, t_shell *shell)
 
 	if (!is_name(tokens->head->val))
 	{
-		__perror("export: not a valid identifier");
+		scoped_string str = __make_string("export: `", tokens->head->val, "\': not a valid identifier");
+		__perror(str);
 		return -1;
 	}
 

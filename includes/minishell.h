@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 22:59:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:49:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,10 @@ void __exit__(t_command *cmd);
 // other
 static int __export_from_string__(char *expr, t_shell *shell);
 char *  _getcwd() __result_use_check;
-void 	unset_var(t_shell *shell, t_list_value val);
+int 	unset_var(t_shell *shell, t_list_value val);
 void 	set_exit_status(int status);
 void __exit_nb__(const int status, char * err) __dead2;
+int invalid_option(t_command *cmd);
 
 // signals
 void	set_signals_interactive(void);

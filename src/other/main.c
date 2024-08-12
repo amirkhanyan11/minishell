@@ -6,11 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 22:59:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 17:06:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// different exit status
+// <<
+// .
 
 int g_exit_status = 0;
 
