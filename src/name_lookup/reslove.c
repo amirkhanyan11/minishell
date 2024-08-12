@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 18:48:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:38:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool p(char c)
 	return !is_name_part(c);
 }
 
-void resolve(t_node *t, t_list *tokens, t_shell *shell) // add $?
+void resolve(t_node *t, t_list *tokens, t_shell *shell)
 {
 	size_t i = 0;
 	char *s = __strdup(t->val);
@@ -28,11 +28,15 @@ void resolve(t_node *t, t_list *tokens, t_shell *shell) // add $?
 	{
 		if (s[i] == '$')
 		{
-
 			size_t k = __strchr_p(s + i + 1, p) - s;
 
-			if (s[i + 1] == '?')
+			if (s[i + 1] == '?' || s[i + 1] == '$')
 				++k;
+
+			if (is_digit(s[i + 1]))
+			{
+				k = 2;
+			}
 
 			char *prefix = __strdup(s);
 			char *postfix = __strdup(s + k);
@@ -44,11 +48,28 @@ void resolve(t_node *t, t_list *tokens, t_shell *shell) // add $?
 
 			char *val = NULL;
 			scoped_string _val = NULL;
-			
+
 			if (string_equal(s + i, "$?"))
 			{
 				_val = __itoa(g_exit_status);
+
 				val = _val;
+			}
+
+			else if (string_equal(s + i, "$$"))
+			{
+				int pid = __fork();
+
+				if (pid == 0) exit(0);
+
+				_val = __itoa(pid);
+
+				val = _val;
+			}
+
+			else if (is_digit(*(s + i + 1)))
+			{
+				val = "";
 			}
 
 			else
