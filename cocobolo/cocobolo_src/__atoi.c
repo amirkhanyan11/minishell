@@ -12,6 +12,8 @@
 
 #include "cocobolo.h"
 
+#define ATOL_MAX 922337203685477580
+
 static void	_skip_spaces(char const **const str)
 {
 	while (**str && (**str == ' ' || **str == '\n' || **str == '\t'))
@@ -69,7 +71,7 @@ static bool	_non_digit(char c)
 	return !_is_digit(c);
 }
 
-t_optional	__atoi_strict_no_overflow(char const *str)
+t_optional	__atol_strict(char const *str)
 {
 	if (NULL == str) __exit("nullptr passed to __atoi_strict");
 
@@ -95,12 +97,12 @@ t_optional	__atoi_strict_no_overflow(char const *str)
 	}
 	while (*str && _is_digit(*str))
 	{
+		const char lim = (sign == -1) ? '8' : '7';
+		if (num > ATOL_MAX || (num == ATOL_MAX && *str > lim)) return make_optional();
 		num = _process(num, *str);
 		str++;
 	}
 	num *= sign;
 	set_optional(&res, num);
-	if (num > LONG_MAX || num < LONG_MIN)
-		return (make_optional());
 	return (res);
 }

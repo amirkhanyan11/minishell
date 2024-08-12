@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/12 16:49:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:37:57 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void __exit__(t_command *cmd)
 
 	if (size(cmd->args) >= 1)
 	{
-		t_optional val = __atoi_strict_no_overflow(cmd->args->head->val);
+		t_optional val = __atol_strict(cmd->args->head->val);
 		if (!has_value(&val))
 		{
 			err = __make_string("exit: ", cmd->args->head->val, ": numeric argument required");

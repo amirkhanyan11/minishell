@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:20:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void update_pwd(t_shell *shell, char *oldpwd);
 static void __cd_one_arg__(t_command *cmd);
+static void _chdir(const char *path, int *status);
 static void __cd_no_arg__(t_command *cmd);
-static void _chdir(const char *path);
 
 void cd(t_command *cmd)
 {
@@ -26,13 +26,15 @@ void __cd__(t_command *cmd)
 {
 	if (!cmd) return;
 
-	list_move_back(cmd->options, cmd->args);
-
-	if (!empty(cmd->args) && size(cmd->args) != 1)
+	if (size(cmd->options) >= 1 || (size(cmd->options) == 1  && !string_equal(cmd->options->head->val, "-")))
 	{
-		__perror("cd : wrong arguments");
-		return;
+		set_exit_status(2);
+		scoped_string msg = __make_string("cd: ", cmd->options->head->val, ": invalid option");
+		__perror(msg);
+		return ;
 	}
+
+	list_move_back(cmd->options, cmd->args);
 
 	char *oldpwd = get_val(cmd->shell->export, "PWD");
 
@@ -41,43 +43,57 @@ void __cd__(t_command *cmd)
 	else __cd_one_arg__(cmd);
 
 	update_pwd(cmd->shell, oldpwd);
+
 }
 
-static void _chdir(const char *path)
+static void _chdir(const char *path, int *status)
 {
 	if (chdir(path) == -1)
+	{
+		*status = 1;
 		__perror(strerror(errno));
+	}
 }
 
 static void __cd_no_arg__(t_command *cmd)
 {
-	char *home = get_val(cmd->shell->export, "HOME");
-	_chdir(home);
+	int status = 0;
 
+	char *home = get_val(cmd->shell->export, "HOME");
+
+	_chdir(home, &status);
+
+	set_exit_status(status);
 }
 
 static void __cd_one_arg__(t_command *cmd)
 {
+
+	int status = 0;
+
 	if (find_range(cmd->args, "-", NULL) != NULL)
 	{
 		char *path = get_val(cmd->shell->export, "OLDPWD");
 		if (!path || *path == '\0')
 		{
+			status = 1;
 			__perror("cd: OLDPWD not set");
 		}
 		else
 		{
-			_chdir(path);
+			_chdir(path, &status);
 			pwd(cmd); // debatable
 		}
 	}
 	else if (find_range(cmd->args, "~", NULL))
 	{
 		__cd_no_arg__(cmd);
+		return;
 	}
 	else
-		_chdir(cmd->args->head->val);
+		_chdir(cmd->args->head->val, &status);
 
+	set_exit_status(status);
 }
 
 static void update_pwd(t_shell *shell, char *oldpwd)

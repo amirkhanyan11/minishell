@@ -6,12 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 18:53:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:02:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+extern int g_exit_status;
 
 static int sort_redirections(t_command *cmd, t_list *tokens);
 
@@ -19,7 +20,6 @@ int sort_tokens(t_command *cmd, t_list *tokens)
 {
 	if (sort_redirections(cmd, tokens) == -1)
 	{
-		set_exit_status(1);
 		return -1;
 	}
 
@@ -50,8 +50,16 @@ static int sort_redirections(t_command *cmd, t_list *tokens)
 
 		if (string_equal(token->val, "<") || string_equal(token->val, ">") || string_equal(token->val, ">>") || string_equal(token->val, "<<"))
 		{
-			if (-1 == redirect(token, cmd))
+			if (!token->next || string_equal(token->next->val, ""))
 			{
+				__perror((token->next) ? "ambiguous redirect" : "syntax error"); // amb redirect not for all commands
+				g_exit_status = 258; // change
+				return -1;
+			}
+
+			else if (-1 == redirect(token, cmd))
+			{
+				set_exit_status(1);
 				return -1;
 			}
 

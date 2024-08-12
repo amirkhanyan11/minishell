@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:17:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 21:58:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ t_fd open_file(char *filename, int option)
 	else
 		fd = open(filename, option, PERMISSIONS);
 
-	if (-1 == fd) __perror("no such file or directory");
+	if (-1 == fd)
+	{
+		scoped_string msg = __make_string(filename, ": ", "no such file or directory");
+		__perror(msg);
+	}
 
 	return fd;
 }

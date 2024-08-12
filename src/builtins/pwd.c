@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 22:33:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,20 @@ void __pwd__(t_command *cmd)
 
 void pwd(t_command *cmd)
 {
-	scoped_string path = _getcwd();
+	int status = 0;
 
-    printf ("%s\n", path);
+	if (invalid_option(cmd))
+	{
+		status = 1;
+	}
+
+	else
+	{
+		scoped_string path = _getcwd();
+		printf ("%s\n", path);
+	}
+
+	set_exit_status(status);
 }
 
 char * _getcwd()
