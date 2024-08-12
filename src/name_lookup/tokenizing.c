@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 18:32:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 23:23:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ static void __dquote_counter__(size_t *sum, char *s);
 static int quote_parse(t_list *tokens);
 static bool not_space(t_node *node);
 static int pipe_parse(t_list *tokens);
+static bool is_redir(t_node * const node);
+static int redirection_parse(t_list *tokens);
+
 
 t_list * tokenize(char * raw_cmd)
 {
@@ -25,13 +28,47 @@ t_list * tokenize(char * raw_cmd)
 
 	t_list *tokens = make_list_from_string(raw_cmd, special_symbols, all);
 
-	if (quote_parse(tokens) == -1 || pipe_parse(tokens) == -1)
+	if (quote_parse(tokens) == -1 || pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
 	{
+		set_exit_status(2);
 		list_clear(&tokens);
 	}
 
 	return tokens;
 }
+
+static int redirection_parse(t_list *tokens)
+{
+	if (!tokens) return 0;
+
+	t_node *rdr = NULL;
+
+	rdr = find_if(tokens->head, tokens->tail, is_redir);
+
+	while (rdr)
+	{
+		rdr = rdr->next;
+		
+		while (rdr && string_equal(rdr->val, " ")) rdr = rdr->next;
+
+		if (!rdr)
+		{
+			__perror("parse error near token `newline\'");
+			return -1;
+		}
+
+		else if (is_redirection(rdr->val))
+		{
+			scoped_string err = __make_string("parse error near token ", rdr->val);
+			__perror(err);
+			return -1;
+		}
+		rdr = find_if(rdr->next, tokens->tail, is_redir);
+	}
+
+	return 0;
+}
+
 
 static int pipe_parse(t_list *tokens)
 {
@@ -39,23 +76,23 @@ static int pipe_parse(t_list *tokens)
 
 	t_node *pipe = NULL;
 
-	size_t pipes_count = count_range(tokens, "|");
-
-	if (pipes_count == 0) return 0;
-
 	pipe = find(tokens->head, tokens->tail, "|", string_equal);
-	pipes_count--;
 
-	while (pipes_count)
+	while (pipe)
 	{
-		pipe = find(pipe->next, tokens->tail, pipe->val, string_equal);
-		pipes_count--;
-	}
+		t_node *pair = find(pipe->next, tokens->tail, "|", string_equal);
 
-	if (NULL == find_if(pipe->next, tokens->tail, not_space))
-	{
-		__perror("parse error near token \'|\'");
-		return -1;
+		if (!pair) pair = tokens->tail;
+
+		else pair = pair->prev;
+
+		if (NULL == find_if(pipe->next, pair, not_space))
+		{
+			__perror("parse error near token `|\'");
+			return -1;
+		}
+
+		pipe = find(pair->next, tokens->tail, "|", string_equal);
 	}
 
 	return 0;
@@ -115,4 +152,9 @@ static void __dquote_counter__(size_t *sum, char *s)
 static bool not_space(t_node *node)
 {
 	return node && !string_equal(node->val, " ");
+}
+
+static bool is_redir(t_node * node)
+{
+	return node && is_redirection(node->val);
 }

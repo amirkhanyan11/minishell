@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:30:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:52:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/12 23:05:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void merge_redirections(t_list *tokens)
     {
         t_node *next = token->next;
 
-        if (is_redirection(token->val) && string_equal(token->val, token->next->val))
+        if (is_single_redirection(token->val) && string_equal(token->val, token->next->val))
         {
             token->val = __strappend(token->val, token->next->val);
             next = token->next->next;
