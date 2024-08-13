@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 23:23:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:55:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ static void __quote_counter__(size_t *sum, char *s);
 static void __dquote_counter__(size_t *sum, char *s);
 static int quote_parse(t_list *tokens);
 static bool not_space(t_node *node);
-static int pipe_parse(t_list *tokens);
 static bool is_redir(t_node * const node);
-static int redirection_parse(t_list *tokens);
+
 
 
 t_list * tokenize(char * raw_cmd)
@@ -28,7 +27,7 @@ t_list * tokenize(char * raw_cmd)
 
 	t_list *tokens = make_list_from_string(raw_cmd, special_symbols, all);
 
-	if (quote_parse(tokens) == -1 || pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
+	if (quote_parse(tokens) == -1)
 	{
 		set_exit_status(2);
 		list_clear(&tokens);
@@ -37,7 +36,7 @@ t_list * tokenize(char * raw_cmd)
 	return tokens;
 }
 
-static int redirection_parse(t_list *tokens)
+int redirection_parse(t_list *tokens)
 {
 	if (!tokens) return 0;
 
@@ -48,7 +47,7 @@ static int redirection_parse(t_list *tokens)
 	while (rdr)
 	{
 		rdr = rdr->next;
-		
+
 		while (rdr && string_equal(rdr->val, " ")) rdr = rdr->next;
 
 		if (!rdr)
@@ -70,7 +69,7 @@ static int redirection_parse(t_list *tokens)
 }
 
 
-static int pipe_parse(t_list *tokens)
+int pipe_parse(t_list *tokens)
 {
 	if (!tokens) return 0;
 

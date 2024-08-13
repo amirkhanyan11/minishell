@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 22:54:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:53:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ t_list *preprocess(t_list *tokens, t_shell *shell)
 	dollar_sign_resolver(tokens, shell);
 
 	merge_tokens(tokens);
+
+	if (pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
+	{
+		set_exit_status(2);
+		list_clear(&tokens);
+	}
 
 	list_remove(tokens, " "); // remove white spaces
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 23:06:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:54:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,9 @@ int 	unset_var(t_shell *shell, t_list_value val);
 void 	set_exit_status(int status);
 void __exit_nb__(const int status, char * err) __dead2;
 int invalid_option(t_command *cmd);
+
+int pipe_parse(t_list *tokens);
+int redirection_parse(t_list *tokens);
 
 // signals
 void	set_signals_interactive(void);
