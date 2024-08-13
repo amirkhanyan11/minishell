@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 20:52:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:28:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ t_fd make_heredoc(char *eof, t_shell *shell) // cat << "EOL"
         line = __strappend(line, "\n");
 		if (__strchr(line, '$'))
 		{
-			scoped_string t_line = __strdup(line);
-			free(line);
-			line = resolve(t_line, shell);
+			line = resolve(line, shell);
 		}
         __putstr_fd(line, fd);
         free(line);

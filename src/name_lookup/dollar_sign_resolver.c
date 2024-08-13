@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 20:44:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:28:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void dollar_sign_resolver(t_list *tokens, t_shell *shell)
 
 		if ((empty(queue) || string_equal(queue->head->val, "\"")) && __strchr(token->val, '$'))
 		{
-			scoped_string t_val = __strdup(token->val);
-			free(token->val);
-			token->val = resolve(t_val, shell);
+			token->val = resolve(token->val, shell);
 		}
 
 		token = next;
