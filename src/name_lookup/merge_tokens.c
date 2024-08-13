@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 23:28:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:31:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ static void merge_inside_quotes(t_list *tokens)
 
 			if (token->next && string_equal(token->next->val, quote_type))
 			{
-				token = token->next->next; // insert '\0'
-				continue;
+				list_insert(tokens, token, "");
+				next = token->next;
 			}
 
 			token = token->next;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 19:33:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:45:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,34 @@ int cmd_lookup(t_command *cmd)
 
 	scoped_list path = get_path(cmd->shell);
 
-	// if (empty(path)) return -1;
-
 	if (builtin_lookup(cmd) == 0) return 0;
 
-	t_node *node = NULL;
-
-	if (__strchr(cmd->name, '/') == false)
+	if (!string_equal(cmd->name, ""))
 	{
-		t_node *node = find_range(path, cmd->name, __cmd_exists__);
+		t_node *node = NULL;
 
-		if (node)
+		if (__strchr(cmd->name, '/') == false)
 		{
-			char *resolved_name = __make_string(node->val, "/", cmd->name);
-			free(cmd->name);
-			cmd->name = resolved_name;
+			t_node *node = find_range(path, cmd->name, __cmd_exists__);
+
+			if (node)
+			{
+				char *resolved_name = __make_string(node->val, "/", cmd->name);
+				free(cmd->name);
+				cmd->name = resolved_name;
+				cmd->eval = eval_prog;
+				return 0;
+			}
+		}
+		else if (0 == access(cmd->name, F_OK))
+		{
 			cmd->eval = eval_prog;
 			return 0;
 		}
 	}
-	else if (0 == access(cmd->name, F_OK))
-	{
-		cmd->eval = eval_prog;
-		return 0;
-	}
 
-	__perror("command not found");
+	scoped_string err = __make_string(cmd->name, ": command not found")
+	__perror(err);
 	set_exit_status(127);
 	return -1;
 }
