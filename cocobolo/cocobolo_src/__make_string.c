@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:17:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:36:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,18 @@ char * __make_string_from_char(const char c)
 	return s;
 }
 
-char * __make_string_from_list(t_list *list)
+char * __make_string_from_list(t_node *first, t_node *last)
 {
-	if (!list) return NULL;
+	if (!first || !last) return NULL;
 
 	char *res = __make_string_empty();
 
-	t_node *node = list->head;
-	while (node)
+	t_node *curr = first;
+
+	while (curr && curr->prev != last)
 	{
-		res = __strappend(res, node->val);
-		node = node->next;
+		res = __strappend(res, curr->val);
+		curr = curr->next;
 	}
 	return res;
 }

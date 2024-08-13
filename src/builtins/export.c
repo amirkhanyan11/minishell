@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 20:01:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:50:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void __print_export__(tree_node *node);
 static int __export_from_string__(char *expr, t_shell *shell);
+static bool not_equal_sign(t_node *const node);
 
 void export(t_command *cmd)
 {
@@ -47,35 +48,46 @@ void __export__(t_command *cmd)
 	set_exit_status(status);
 }
 
-static int __export_from_string__(char *expr, t_shell *shell)
+static int __export_from_string__(char *expr, t_shell *shell) // export ==========
 {
 	if (!expr || !shell) return -1;
 
-	scoped_matrix arr = __split_include_delimiters(expr, '=');
-
-	scoped_list tokens = make_list_from_matrix(arr);
-
-	// scoped_list tokens = make_list_from_string(expr, "=", all);
+	scoped_list tokens = make_list_from_string(expr, "=", all);
 
 	if (empty(tokens)) return -1;
 
-	if (!is_name(tokens->head->val))
+	t_node *lhv = tokens->head;
+
+	if (lhv->val[__strlen(lhv->val) - 1] == '+')
 	{
-		scoped_string str = __make_string("export: `", tokens->head->val, "\': not a valid identifier");
+		lhv->val[__strlen(lhv->val) - 1] = '\0';
+
+		char *old_val = get_val(shell->export, lhv->val);
+
+		if (old_val == NULL) old_val = "";
+
+		list_insert(tokens, lhv->next, old_val);
+	}
+
+	if (!is_name(lhv->val) || NULL == find_if(lhv, tokens->tail, not_equal_sign))
+	{
+		scoped_string str = __make_string("export: `", expr, "\': not a valid identifier");
 		__perror(str);
 		return -1;
 	}
 
 	if (size(tokens) >= 2)
 	{
-		char *val = (tokens->head->next->next) ? tokens->head->next->next->val : "\0";
-		return export_update(shell, tokens->head->val, val);
+		// scoped_string val = (tokens->head->next->next) ? tokens->head->next->next->val : "\0";
+		scoped_string val = __make_string_from_list(lhv->next->next, tokens->tail);
+		if (val == NULL) val = __make_string_empty();
+		return export_update(shell, lhv->val, val);
 	}
 
 	else
 	{
-		unset_var(shell, tokens->head->val);
-		tree_update(shell->export, tokens->head->val, "");
+		unset_var(shell, lhv->val);
+		tree_update(shell->export, lhv->val, NULL);
 	}
 
 	return 0;
@@ -87,7 +99,8 @@ int export_update(t_shell *shell, t_list_value key, t_list_value val)
 
 	if (!is_name(key))
 	{
-		__perror("export: not a valid identifier");
+		scoped_string str = __make_string("export: `", key, "\': not a valid identifier");
+		__perror(str);
 		return -1;
 	}
 
@@ -110,5 +123,15 @@ static void __print_export__(tree_node *node)
 
 	printf("%s", declarex);
 
-	printf("%s=\"%s\"\n", node->key, node->val);
+	printf("%s", node->key);
+
+	if (node->val)
+		printf("=\"%s\"", node->val);
+
+	printf("\n");
+}
+
+static bool not_equal_sign(t_node *const node)
+{
+	return node && !string_equal(node->val, "=");
 }

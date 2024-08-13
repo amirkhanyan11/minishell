@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 16:42:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:20:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ size_t erase(t_list *list, t_node *first, t_node *last);
 size_t list_remove(t_list *list, t_list_value val);
 size_t list_remove_if(t_list *list, t_list_value val, t_list_Bpredicate_val p);
 bool   empty(t_list *list);
+t_node * list_insert(t_list *list, t_node *pos, char *val);
 
 
 //	assumes each node's value is a malloced string

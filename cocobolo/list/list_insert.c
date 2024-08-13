@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __strdup.c                                         :+:      :+:    :+:   */
+/*   list_insert.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 13:15:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 17:43:35 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/13 16:55:58 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/13 17:23:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "list.h"
 
-char	* __strdup(const char *src)
+t_node * list_insert(t_list *list, t_node *pos, char *val)
 {
-	return __strdup_until(src, '\0');
-}
+	if(list == NULL || pos == NULL || !val) return NULL;
 
-char	* __strdup_until(const char *src, const char c)
-{
-	char	*dest;
-	size_t	i;
-
-	if (NULL == src) return NULL;
-
-	dest = __malloc(__strlen(src) + 1);
-
-	i = 0;
-	while (src[i] && src[i] != c)
+	if(empty(list) || pos == list->tail)
 	{
-		dest[i] = src[i];
-		i++;
+		push_back(list, val);
+		return list->tail;
 	}
-	dest[i] = '\0';
-	return (dest);
+	t_node *new = make_node(val);
+
+	new->prev = pos;
+	pos->next->prev = new;
+	new->next = pos->next;
+	pos->next = new;
+	return new;
 }

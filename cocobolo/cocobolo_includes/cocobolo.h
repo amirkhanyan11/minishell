@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 22:38:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:36:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 #define ITALIC_OFF "\e[23m"
 
 typedef struct s_list t_list;
+typedef struct s_node t_node;
 
 #ifdef __linux__
 #if __has_attribute(noreturn)
@@ -97,7 +98,7 @@ t_optional	__atol_strict(char const *str);
 char 		*__make_string_empty() __allocs __result_use_check;
 char 		*__make_string_from_char(const char c) __allocs __result_use_check;
 char		*__strtrim(char *s1, char *set) __allocs __result_use_check;
-char 		*__make_string_from_list(t_list *list) __allocs __result_use_check ;
+char 		*__make_string_from_list(t_node *first, t_node *last) __allocs __result_use_check ;
 char 		*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s, ...);
 char 		*__attribute__((sentinel)) __result_use_check __unwrapped_make_string__(char *s, ...);
 char		*__single_strappend__(char *lhv, char *rhv) __result_use_check;
@@ -113,7 +114,6 @@ char		*__itoa(int n) __result_use_check;
 
 t_matrix    __split(char const *s, char *set) __result_use_check;
 
-t_matrix    __split_include_delimiters(char const *s, char c) __result_use_check;
 
 // string predicates
 bool string_equal(char *lhv, char *rhv);

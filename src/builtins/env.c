@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 22:26:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:51:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,10 @@ void __print_env__(tree_node *node)
 {
 	if (!node) return;
 
-	printf("%s=%s\n", node->key, node->val);
+	printf("%s=", node->key);
+
+	if (node->val)
+		printf("%s", node->val);
+
+	printf("\n");
 }
