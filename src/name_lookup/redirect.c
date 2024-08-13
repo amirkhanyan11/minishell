@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 22:01:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 20:49:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ extern int g_exit_status;
 
 int redirect(t_node *token, t_command *cmd)
 {
-
 	t_fd fd = -1;
 
 	if (string_equal(token->val, "<"))
@@ -29,7 +28,7 @@ int redirect(t_node *token, t_command *cmd)
 	}
 	else if (string_equal(token->val, "<<"))
 	{
-		fd = make_heredoc(token->next->val);
+		fd = make_heredoc(token->next->val, cmd->shell);
 		if (fd == -1)
 		 	return -1;
 		cmd->descriptors->stdin = fd;
