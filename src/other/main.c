@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 16:46:14 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:05:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int ac, char **av, char **env)
 	// fetch -> decode -> execute
 	while (true)
 	{
-		scoped_string line = read_line();
+		scoped_string line = read_line(minishell_prompt);
 
 		scoped_cmd_container cmds = make_cmd_container(line, shell);
 

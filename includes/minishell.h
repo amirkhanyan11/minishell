@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 17:13:49 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:05:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define self_mergeable_tokens "<>|"
 # define PIPE_MAX 2
 
+# define minishell_prompt PURPLE ITALIC_ON"minishell" GREEN " > $ " RESET
+
+
 # define scoped_cmd_container t_cmd_container * __dtor(__t_cmd_container__)
 
 struct s_shell
@@ -56,7 +59,7 @@ struct s_descriptor
 };
 
 //	reading input
-char	*read_line(void);
+char	*read_line(char *);
 
 // execution
 void 		 eval(t_cmd_container *cmds);
