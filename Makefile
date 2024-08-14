@@ -73,7 +73,7 @@ ${NAME} : print_info ${OBJS}
 
 ${OBJSPATH}%.o : %.c Makefile
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
-	@printf "\r%18s\r$(YELLOW)             [ %d/%d (%d%%) ]$(RESET)" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
+	@printf "\r%18s\r$(PURPLE)             [ %d/%d (%d%%) ]$(RESET)" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@${CC} ${CFLAGS} -c $< -o $@
 
 
