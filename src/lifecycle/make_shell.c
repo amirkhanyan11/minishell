@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:16:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:55:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_shell * make_shell(char **env)
 
 	export_update(shell, "SHELL", "minishell");
 	export_update(shell, "OLDPWD", "");
+	export_update(shell, "__HOME_CACHE__", get_val(shell->export, "HOME"));
 	shell->status = 0;
 
     return shell;

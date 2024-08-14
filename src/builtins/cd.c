@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:28:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:58:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,15 @@ static void __cd_no_arg__(t_command *cmd)
 
 	char *home = get_val(cmd->shell->export, "HOME");
 
-	_chdir(cmd, home, &status);
+	if (!home) home = get_val(cmd->shell->export, "__HOME_CACHE__");
+
+	if (!home)
+	{
+		status = 1;
+		__perror("cd: HOME not set");
+	}
+	else
+		_chdir(cmd, home, &status);
 
 	set_exit_status(status);
 }
