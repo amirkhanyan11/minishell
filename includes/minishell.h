@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 20:05:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:20:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ struct s_shell
     t_tree  	  *export;
     t_list  	  *history;
 
-	t_descriptor *stddesc;
+	t_descriptor  	*stddesc;
+	t_cmd_container *container;
 
 	int			 status;
 };

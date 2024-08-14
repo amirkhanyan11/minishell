@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 13:42:36 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:20:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void __t_cmd_container__(t_cmd_container ** cmdsptr)
 		__t_command__(&(cmds->arr[i]));
 		i++;
 	}
+
+	cmds->shell->container = NULL;
+	cmds->shell = NULL;
 
 	free(cmds->arr);
 	free(cmds);

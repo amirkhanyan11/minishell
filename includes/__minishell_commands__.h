@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell_commands__.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 20:00:54 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:19:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ struct s_command
 
 struct s_cmd_container
 {
+	t_shell *shell;
 	t_command **arr;
 	size_t size;
 	size_t current_cmd_index;

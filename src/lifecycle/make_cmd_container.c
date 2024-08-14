@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:13:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:19:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,22 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 
 	if (empty(tokens) || !shell) return NULL;
 
-    t_cmd_container * cmds = __malloc(sizeof(t_cmd_container));
+    t_cmd_container * container = __malloc(sizeof(t_cmd_container));
 
-	cmds->current_cmd_index = 0;
+	container->current_cmd_index = 0;
 
-	cmds->size = count_range(tokens, "|") + 1;
+	container->shell = shell;
 
-    cmds->arr = __malloc(sizeof(t_command) * cmds->size);
+	container->size = count_range(tokens, "|") + 1;
+
+    container->arr = __malloc(sizeof(t_command) * container->size);
+
+	container->shell->container = container;
 
     size_t i = 0;
 
     t_node *first = tokens->head;
-    while (i < cmds->size)
+    while (i < container->size)
     {
         t_node *pipe = find(first, tokens->tail, "|", NULL);
 
@@ -43,10 +47,10 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 
         scoped_list partition = make_list_copy(first, pipe, NULL);
 
-        cmds->arr[i] = make_command(partition, cmds, shell);
+        container->arr[i] = make_command(partition, container, shell);
 
         first = pipe->next;
         i++;
     }
-    return cmds;
+    return container;
 }
