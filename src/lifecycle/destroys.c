@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:46:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:42:36 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void __t_command__(t_command **cmdptr)
 	reset_descriptors(cmd);
 
 	free(cmd->descriptors);
-	free(cmd->name);
+		free(cmd->name);
 
 	free(cmd);
 

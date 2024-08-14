@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   make_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 21:37:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:38:11 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <cocobolo.h>
 
 // move to separate dir
 t_matrix  make_matrix_from_string(char *s, char *set)
