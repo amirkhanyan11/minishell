@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:09:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:32:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:37:37 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <cocobolo.h>
 
 static int __partition__(t_matrix arr, int low, int high, str_binary_predicate cmp)
 {
@@ -44,6 +44,6 @@ void matrix_sort(t_matrix arr, str_binary_predicate cmp)
 
 	if (!cmp) cmp = string_less;
 
-	__matrix_qsort__(arr, 0, __matrix_size(arr) - 1, cmp);
+	__matrix_qsort__(arr, 0, matrix_size(arr) - 1, cmp);
 
 }

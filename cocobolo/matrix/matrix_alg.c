@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __matrix_alg.c                                     :+:      :+:    :+:   */
+/*   matrix_alg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:59:12 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 21:55:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:37:18 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-size_t __matrix_size(t_matrix arr)
+size_t matrix_size(t_matrix arr)
 {
 	if (!arr) return 0;
 
@@ -22,7 +22,7 @@ size_t __matrix_size(t_matrix arr)
 	return i;
 }
 
-void __print_matrix(t_matrix arr)
+void print_matrix(t_matrix arr)
 {
 	if (!arr) return ;
 

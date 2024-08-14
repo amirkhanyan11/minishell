@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 18:54:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:42:44 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,7 @@ t_descriptor *make_stddesc() __result_use_check;
 void 	 	 __t_shell__(t_shell * shell);
 
 // matrix
-t_matrix 	 make_matrix_from_string(char *s, char *set) __result_use_check;
-t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
-t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
-t_matrix  	 make_matrix_from_tree(t_tree *tree)  __result_use_check;
-void 		 matrix_sort(t_matrix arr, str_binary_predicate cmp);
+
 
 // builtins
 void cd(t_command *cmd);

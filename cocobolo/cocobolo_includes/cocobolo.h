@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cocobolo.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 16:36:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:44:39 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_node t_node;
 
 #define scoped_string char * __dtor(__delete_string)
 #define scoped_list t_list * __dtor(list_clear)
-#define scoped_matrix t_matrix  __dtor(__matrix_clear)
+#define scoped_matrix t_matrix  __dtor(matrix_clear)
 
 typedef void (*t_printf_option)(const char * const);
 
@@ -121,9 +121,14 @@ bool string_less(char *lhv, char *rhv);
 bool string_greater(char *lhv, char *rhv);
 
 // matrix
-void 		__print_matrix(t_matrix arr);
-void        __matrix_clear(t_matrix *arrptr);
-size_t 		__matrix_size(t_matrix arr);
+void 		print_matrix(t_matrix arr);
+void        matrix_clear(t_matrix *arrptr);
+size_t 		matrix_size(t_matrix arr);
+t_matrix 	 make_matrix_from_string(char *s, char *set) __result_use_check;
+t_matrix 	 make_matrix_copy(t_matrix other) __result_use_check;
+t_matrix  	 make_matrix_from_list(t_list *list)  __result_use_check;
+t_matrix  	 make_matrix_from_tree(t_tree *tree)  __result_use_check;
+void 		 matrix_sort(t_matrix arr, str_binary_predicate cmp);
 
 // colors
 void  __attribute__((sentinel)) __unwrapped_printc__(const char * const message, ...);

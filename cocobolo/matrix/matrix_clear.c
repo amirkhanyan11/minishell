@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __matrix_clear.c                                   :+:      :+:    :+:   */
+/*   matrix_clear.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include <cocobolo.h>
 
-void __matrix_clear(t_matrix *arrptr)
+void matrix_clear(t_matrix *arrptr)
 {
 	if (!arrptr) return ;
     t_matrix arr = *arrptr;
