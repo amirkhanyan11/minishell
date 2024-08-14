@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 16:42:44 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/14 17:13:49 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void 		 eval_prog(t_command *cmd);
 
 // execution helpers
 int		    export_update(t_shell *shell, t_list_value key, t_list_value val);
-void 		resolve(t_node *t, t_list *tokens, t_shell *shell);
+char 		*resolve(char *t_val, t_shell *shell) __result_use_check;
 int 		cmd_lookup(t_command *cmd);
 t_fd 		open_file(char *filenae, int options);
 int 		redirect(t_node *token, t_command *cmd);
@@ -89,7 +89,7 @@ bool is_name_part(const char c);
 t_tree		 *make_export(t_shell *shell) __result_use_check;
 t_shell 	 *make_shell(char **env) __result_use_check;
 void		 make_shlvl(t_shell *shell);
-t_fd		 make_heredoc(char *eof);
+t_fd		 make_heredoc(char *eof, t_shell *shell) __result_use_check;
 t_list 		 *get_path(t_shell *shell) __result_use_check;
 t_descriptor *make_descriptors() __result_use_check;
 t_descriptor *make_stddesc() __result_use_check;

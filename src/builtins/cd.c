@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 22:20:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:31:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void __cd__(t_command *cmd)
 {
 	if (!cmd) return;
 
-	if (size(cmd->options) >= 1 || (size(cmd->options) == 1  && !string_equal(cmd->options->head->val, "-")))
+	if (size(cmd->options) > 1 || (size(cmd->options) == 1  && !string_equal(cmd->options->head->val, "-")))
 	{
 		set_exit_status(2);
 		scoped_string msg = __make_string("cd: ", cmd->options->head->val, ": invalid option");

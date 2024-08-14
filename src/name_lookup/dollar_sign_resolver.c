@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 22:21:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:28:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void dollar_sign_resolver(t_list *tokens, t_shell *shell)
 				pop_front(queue);
 		}
 
-		if (empty(queue) || string_equal(queue->head->val, "\""))
-			resolve(token, tokens, shell);
+		if ((empty(queue) || string_equal(queue->head->val, "\"")) && __strchr(token->val, '$'))
+		{
+			token->val = resolve(token->val, shell);
+		}
 
 		token = next;
 	}

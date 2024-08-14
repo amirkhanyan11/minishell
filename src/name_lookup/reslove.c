@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 20:38:31 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:28:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static bool p(char c)
 	return !is_name_part(c);
 }
 
-void resolve(t_node *t, t_list *tokens, t_shell *shell)
+char *resolve(char *t_val, t_shell *shell)
 {
 	size_t i = 0;
-	char *s = __strdup(t->val);
+	char *s = __strdup(t_val);
 
 	while (s[i] && s[i + 1])
 	{
@@ -97,7 +97,6 @@ void resolve(t_node *t, t_list *tokens, t_shell *shell)
 		}
 		i++;
 	}
-
-	free(t->val);
-	t->val = s;
+	free(t_val);
+	return s;
 }
