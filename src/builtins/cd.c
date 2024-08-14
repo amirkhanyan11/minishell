@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 21:31:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:28:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void update_pwd(t_shell *shell, char *oldpwd);
 static void __cd_one_arg__(t_command *cmd);
-static void _chdir(const char *path, int *status);
+static void _chdir(t_command * cmd, const char *path, int *status);
 static void __cd_no_arg__(t_command *cmd);
 
 void cd(t_command *cmd)
@@ -46,12 +46,17 @@ void __cd__(t_command *cmd)
 
 }
 
-static void _chdir(const char *path, int *status)
+static void _chdir(t_command * cmd, const char *path, int *status)
 {
+	scoped_string cwd = _getcwd();
 	if (chdir(path) == -1)
 	{
 		*status = 1;
 		__perror(strerror(errno));
+	}
+	if (cmd->container->size > 1)
+	{
+		chdir(cwd);
 	}
 }
 
@@ -61,7 +66,7 @@ static void __cd_no_arg__(t_command *cmd)
 
 	char *home = get_val(cmd->shell->export, "HOME");
 
-	_chdir(home, &status);
+	_chdir(cmd, home, &status);
 
 	set_exit_status(status);
 }
@@ -81,7 +86,7 @@ static void __cd_one_arg__(t_command *cmd)
 		}
 		else
 		{
-			_chdir(path, &status);
+			_chdir(cmd, path, &status);
 			pwd(cmd); // debatable
 		}
 	}
@@ -91,7 +96,7 @@ static void __cd_one_arg__(t_command *cmd)
 		return;
 	}
 	else
-		_chdir(cmd->args->head->val, &status);
+		_chdir(cmd, cmd->args->head->val, &status);
 
 	set_exit_status(status);
 }

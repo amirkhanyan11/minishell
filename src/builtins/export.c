@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 17:50:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:36:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static int __export_from_string__(char *expr, t_shell *shell) // export ========
 		return -1;
 	}
 
+	if (shell->container && shell->container->size > 1) return 0;
+
 	if (size(tokens) >= 2)
 	{
 		// scoped_string val = (tokens->head->next->next) ? tokens->head->next->next->val : "\0";
@@ -97,12 +99,6 @@ int export_update(t_shell *shell, t_list_value key, t_list_value val)
 {
 	if (!shell || !key) return -1;
 
-	if (!is_name(key))
-	{
-		scoped_string str = __make_string("export: `", key, "\': not a valid identifier");
-		__perror(str);
-		return -1;
-	}
 
 	unset_var(shell, key);
 

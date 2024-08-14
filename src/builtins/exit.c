@@ -6,11 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/12 22:37:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:50:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void __exit_nb_wrapper(t_command *cmd, const int status, char * err);
 
 extern int g_exit_status;
 
@@ -27,7 +29,8 @@ void __exit__(t_command *cmd)
 		if (!has_value(&val))
 		{
 			err = __make_string("exit: ", cmd->args->head->val, ": numeric argument required");
-			__exit_nb__(-1, err);
+			__exit_nb_wrapper(cmd, -1, err);
+			return;
 		}
 		if (size(cmd->args) > 1)
 		{
@@ -36,9 +39,20 @@ void __exit__(t_command *cmd)
 			return;
 		}
 		else
-			__exit_nb__(value(&val), err);
+			__exit_nb_wrapper(cmd, value_or(&val, -1), err);
 	}
-	__exit_nb__(0, err);
+	__exit_nb_wrapper(cmd, 0, err);
+}
+
+static void __exit_nb_wrapper(t_command *cmd, const int status, char * err)
+{
+	if (err) __perror(err);
+
+	if (cmd->container->size == 1)
+	{
+		set_exit_status(status);
+		exit(g_exit_status);
+	}
 }
 
 void __exit_nb__(const int status, char * err)

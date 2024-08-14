@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 19:36:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:38:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ int unset_var(t_shell *shell, t_list_value key)
 		return (-1);
 	}
 
-	tree_remove(shell->export, key);
-	tree_remove(shell->env, key);
+	if (shell->container && shell->container->size == 1)
+	{
+		tree_remove(shell->export, key);
+		tree_remove(shell->env, key);
+	}
+
 	return (0);
 }
 
@@ -43,13 +47,14 @@ void __unset__(t_command *cmd)
 	t_node *arg = cmd->args->head;
 
 //  unset: -a: invalid option
-	
+
 	if(!empty(cmd->options))
 	{
 		scoped_string str = __make_string("unset: ", cmd->options->head->val, ": invalid option");
 		__perror(str);
 		status = 1;
 	}
+
 	else
 	{
 		while (arg)
