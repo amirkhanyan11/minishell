@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell_commands__.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:19:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:23:09 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ struct s_command
 
 	t_eval 		eval;
 
-	int 	redirection;
+	int 		 redirection;
 	t_descriptor *descriptors;
 
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 22:33:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/15 20:06:11 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void pwd(t_command *cmd)
 char * _getcwd()
 {
    	char * path = __malloc(SIZE + 1);
-	getcwd(path, SIZE);
+	if (NULL == getcwd(path, SIZE)) path = __strappend(path, "/../");
 	return path;
 }
