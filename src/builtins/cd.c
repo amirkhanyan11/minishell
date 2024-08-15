@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:58:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:09:11 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,20 @@ void __cd__(t_command *cmd)
 static void _chdir(t_command * cmd, const char *path, int *status)
 {
 	scoped_string cwd = _getcwd();
+
 	if (chdir(path) == -1)
 	{
 		*status = 1;
-		__perror(strerror(errno));
+		scoped_string err = __make_string("cd: ", path, ": No such file or directory");
+		__perror(err);
+		return;
 	}
+
+	if (errno == ENOENT)
+	{
+		__perror("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory");
+	}
+	
 	if (cmd->container->size > 1)
 	{
 		chdir(cwd);
