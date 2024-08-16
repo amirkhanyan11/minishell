@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/16 18:31:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:40:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ char *resolve(char *t_val, t_shell *shell)
 
 			else if (string_equal(s + i, "$$"))
 			{
-				val = get_pid(shell);
+				_val = get_pid(shell);
+				val = _val;
 			}
 
 			else if (is_digit(*(s + i + 1)))
