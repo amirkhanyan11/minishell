@@ -6,13 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 21:28:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:31:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern int g_exit_status;
+
+static char *get_pid(t_shell *shell) __result_use_check;
 
 static bool p(char c)
 {
@@ -58,13 +60,7 @@ char *resolve(char *t_val, t_shell *shell)
 
 			else if (string_equal(s + i, "$$"))
 			{
-				int pid = __fork();
-
-				if (pid == 0) exit(0);
-
-				_val = __itoa(pid);
-
-				val = _val;
+				val = get_pid(shell);
 			}
 
 			else if (is_digit(*(s + i + 1)))
@@ -99,4 +95,46 @@ char *resolve(char *t_val, t_shell *shell)
 	}
 	free(t_val);
 	return s;
+}
+
+
+static char *get_pid(t_shell *shell)
+{
+	t_fd pipe[PIPE_MAX];
+
+	char *_val = NULL;
+
+	__pipe(pipe);
+	t_fd pid = __fork();
+	if (pid == 0)
+	{
+		char *cmd[] = {"/bin/ps", NULL};
+		scoped_matrix t_env = make_matrix_from_tree(shell->env);
+		dup2(pipe[out], STDOUT_FILENO);
+		close(pipe[in]);
+		close(pipe[out]);
+		execve(cmd[0], cmd, t_env);
+	}
+	waitpid(pid, NULL, 0);
+	char BUF[1024 + 1];
+	BUF[1024] = '\0';
+
+	_val = get_next_line(pipe[in]);
+
+	while (_val && !__strstr(_val, "minishell"))
+	{
+		_val = get_next_line(pipe[in]);
+	}
+
+	if (!_val) _val = __strdup("1337");
+
+	t_optional p = __atoi(_val);
+
+	free(_val);
+	_val = __itoa(value(&p));
+
+	close(pipe[in]);
+	close(pipe[out]);
+
+	return _val;
 }
