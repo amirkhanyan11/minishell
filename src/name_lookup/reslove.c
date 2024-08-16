@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/16 18:48:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/16 19:11:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char *resolve(char *t_val, t_shell *shell)
 	{
 		if (s[i] == '$')
 		{
-			size_t k = __strchr_p(s + i + 1, p) - s;
+			size_t k = __strchr_p(s + i + 1, p) - s; // k - i + 1 is the length of the name of the variable
 
 			if (s[i + 1] == '?' || s[i + 1] == '$')
 				++k;
@@ -93,6 +93,7 @@ static char *get_pid(t_shell *shell)
 {
 	t_fd pipe[PIPE_MAX];
 
+	scoped_list lines = make_list();
 	char *_val = NULL;
 
 	__pipe(pipe);
@@ -103,21 +104,33 @@ static char *get_pid(t_shell *shell)
 		scoped_matrix t_env = make_matrix_from_tree(shell->env);
 		dup2(pipe[out], STDOUT_FILENO);
 		close(pipe[in]);
-		close(pipe[out]);
 		execve(cmd[0], cmd, t_env);
+		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, NULL, 0);
-	char BUF[1024 + 1];
-	BUF[1024] = '\0';
 
 	_val = get_next_line(pipe[in]);
 
-	while (_val && !__strstr(_val, "minishell"))
+	while (_val)
 	{
+		push_back(lines, _val);
+		free(_val);
 		_val = get_next_line(pipe[in]);
 	}
 
-	if (!_val) _val = __strdup("1337");
+	get_next_line(-1);
+
+	t_node *node = lines->tail;
+
+	while (node && !__strstr(node->val, "minishell"))
+	{
+		node = node->prev;
+	}
+
+	if (!node || !node->val) _val = __strdup("1337");
+
+	else
+		_val = __strdup(node->val);
 
 	t_optional p = __atoi(_val);
 
