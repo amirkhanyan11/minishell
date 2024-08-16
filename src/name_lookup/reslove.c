@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/16 18:40:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:47:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char *resolve(char *t_val, t_shell *shell)
 			}
 
 			char *prefix = __strdup(s);
-			char *postfix = __strdup(s + k);
+			scoped_string postfix = __strdup(s + k);
 			prefix[i] = '\0';
 
 
@@ -74,20 +74,13 @@ char *resolve(char *t_val, t_shell *shell)
 
 			s[k] = c;
 
+			if (!val) val = postfix;
+
 			if (val)
 			{
 				i += __strlen(val) - 1;
 				prefix = __strappend(prefix, val, s + k);
 				free(s);
-				s = prefix;
-			}
-
-			else
-			{
-				i = __strlen(prefix) - 1;
-				prefix = __strappend(prefix, postfix);
-				free(s);
-				free(postfix);
 				s = prefix;
 			}
 
