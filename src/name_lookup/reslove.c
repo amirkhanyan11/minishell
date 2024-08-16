@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/16 19:11:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/16 19:27:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ static char *get_pid(t_shell *shell)
 {
 	t_fd pipe[PIPE_MAX];
 
-	scoped_list lines = make_list();
-	char *_val = NULL;
+	char *val = NULL;
 
 	__pipe(pipe);
 	t_fd pid = __fork();
@@ -109,36 +108,25 @@ static char *get_pid(t_shell *shell)
 	}
 	waitpid(pid, NULL, 0);
 
-	_val = get_next_line(pipe[in]);
+	val = get_next_line(pipe[in]);
 
-	while (_val)
+	while (val && !__strstr(val, "minishell"))
 	{
-		push_back(lines, _val);
-		free(_val);
-		_val = get_next_line(pipe[in]);
+		free(val);
+		val = get_next_line(pipe[in]);
 	}
 
 	get_next_line(-1);
 
-	t_node *node = lines->tail;
+	if (!val) val = __strdup("1337");
 
-	while (node && !__strstr(node->val, "minishell"))
-	{
-		node = node->prev;
-	}
+	t_optional p = __atoi(val);
 
-	if (!node || !node->val) _val = __strdup("1337");
-
-	else
-		_val = __strdup(node->val);
-
-	t_optional p = __atoi(_val);
-
-	free(_val);
-	_val = __itoa(value(&p));
+	free(val);
+	val = __itoa(value(&p));
 
 	close(pipe[in]);
 	close(pipe[out]);
 
-	return _val;
+	return val;
 }
