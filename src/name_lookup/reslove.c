@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/16 18:47:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/16 18:48:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,10 @@ char *resolve(char *t_val, t_shell *shell)
 
 			if (!val) val = postfix;
 
-			if (val)
-			{
-				i += __strlen(val) - 1;
-				prefix = __strappend(prefix, val, s + k);
-				free(s);
-				s = prefix;
-			}
+			i += __strlen(val) - 1;
+			prefix = __strappend(prefix, val, s + k);
+			free(s);
+			s = prefix;
 
 		}
 		i++;
