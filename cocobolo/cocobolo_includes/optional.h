@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:09:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/09 16:41:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:05:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef int				t_optional_value;
 
 struct						s_optional
 {
-	t_optional_value		value;
-	bool					has_value;
+	t_optional_value		__attribute__((deprecated)) value;
+	bool					__attribute__((deprecated)) has_value;
 };
 
 t_optional					make_optional(void);

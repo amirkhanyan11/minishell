@@ -12,19 +12,22 @@
 
 #include <cocobolo.h>
 
-void matrix_clear(t_matrix *arrptr)
+void	matrix_clear(t_matrix *arrptr)
 {
-	if (!arrptr) return ;
-    t_matrix arr = *arrptr;
+	t_matrix	arr;
+	int			i;
 
-	if (!arr) return ;
-
-    int i = 0;
-    while (arr[i])
-    {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
-    *arrptr = NULL;
+	if (!arrptr)
+		return ;
+	arr = *arrptr;
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	*arrptr = NULL;
 }

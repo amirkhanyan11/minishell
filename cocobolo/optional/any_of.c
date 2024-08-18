@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 20:03:33 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:20:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:06:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cocobolo.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 bool	any_of(t_optional_predicate unary_predicate, ...)
 {
@@ -33,3 +36,5 @@ bool	any_of(t_optional_predicate unary_predicate, ...)
 	va_end(arglist);
 	return (res);
 }
+
+#pragma GCC diagnostic pop

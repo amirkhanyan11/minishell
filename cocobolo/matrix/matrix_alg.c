@@ -3,30 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_alg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:59:12 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 16:37:18 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:06:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-size_t matrix_size(t_matrix arr)
+size_t	matrix_size(t_matrix arr)
 {
-	if (!arr) return 0;
+	size_t	i;
 
-	size_t i = 0;
-	while (arr[i]) i++;
-
-	return i;
+	if (!arr)
+		return (0);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }
 
-void print_matrix(t_matrix arr)
+void	print_matrix(t_matrix arr)
 {
-	if (!arr) return ;
+	size_t	i;
 
-	size_t i = 0;
+	if (!arr)
+		return ;
+	i = 0;
 	while (arr[i])
 	{
 		printf("%s\n", arr[i]);
