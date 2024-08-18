@@ -6,37 +6,37 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:34:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 22:44:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:59:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 #include <cocobolo.h>
 
-void __treeval_copy__(t_treeval *lhv, t_treeval *rhv)
+void	__treeval_copy__(t_treeval *lhv, t_treeval *rhv)
 {
-	if (*lhv == *rhv) return;
-
+	if (*lhv == *rhv)
+		return ;
 	__delete_string(lhv);
 	*lhv = __strdup(*rhv);
 }
 
-void treeval_copy(tree_node *lhv, tree_node *rhv)
+void	treeval_copy(tree_node *lhv, tree_node *rhv)
 {
 	__treeval_copy__(&lhv->key, &rhv->key);
 	__treeval_copy__(&lhv->val, &rhv->val);
 }
 
-void __treeval_move__(t_treeval *lhv, t_treeval *rhv)
+void	__treeval_move__(t_treeval *lhv, t_treeval *rhv)
 {
-	if (*lhv == *rhv) return;
-
+	if (*lhv == *rhv)
+		return ;
 	__delete_string(lhv);
 	*lhv = *rhv;
 	*rhv = NULL;
 }
 
-void treeval_move(tree_node *lhv, tree_node *rhv)
+void	treeval_move(tree_node *lhv, tree_node *rhv)
 {
 	__treeval_move__(&lhv->key, &rhv->key);
 	__treeval_move__(&lhv->val, &rhv->val);
