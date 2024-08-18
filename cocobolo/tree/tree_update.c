@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 22:07:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 22:07:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:14:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,55 +31,65 @@
 // 	__insert_node__(&tree->root, key, val, tree->less);
 // }
 
+static void __left_case__(t_tree *tree, tree_node **z)
+{
+	tree_node *y = (*z)->p->p->right;
+
+	if (y->color == RED)
+	{
+		y->color = BLACK;
+		(*z)->p->color = BLACK;
+		(*z)->p->p->color = RED;
+		(*z) = (*z)->p->p;
+	}
+	else
+	{
+		if ((*z) == (*z)->p->right)
+		{
+			(*z) = (*z)->p;
+			left_rotate(tree, (*z));
+		}
+		(*z)->p->color = BLACK;
+        (*z)->p->p->color = RED;
+        right_rotate(tree, (*z)->p->p);
+	}
+}
+
+static void __right_case__(t_tree *tree, tree_node **z)
+{
+	tree_node *y = (*z)->p->p->left;
+
+	if (y->color == RED)
+	{
+		y->color = BLACK;
+		(*z)->p->color = BLACK;
+		(*z)->p->p->color = RED;
+		(*z) = (*z)->p->p;
+	}
+	else
+	{
+		if ((*z) == (*z)->p->left)
+		{
+			(*z) = (*z)->p;
+			right_rotate(tree, (*z));
+		}
+		(*z)->p->color = BLACK;
+        (*z)->p->p->color = RED;
+        left_rotate(tree, (*z)->p->p);
+	}
+}
+
 static void	_insert_fixup(t_tree *tree, tree_node *z)
 {
 	while (z->p->color == RED)
 	{
 		if (z->p == z->p->p->left)
 		{
-			tree_node *y = z->p->p->right;
-
-			if (y->color == RED)
-			{
-				y->color = BLACK;
-				z->p->color = BLACK;
-				z->p->p->color = RED;
-				z = z->p->p;
-			}
-			else
-			{
-				if (z == z->p->right)
-				{
-					z = z->p;
-					left_rotate(tree, z);
-				}
-				z->p->color = BLACK;
-                z->p->p->color = RED;
-                right_rotate(tree, z->p->p);
-			}
+			__left_case__(tree, &z);
 		}
 		else
 		{
-			tree_node *y = z->p->p->left;
-
-			if (y->color == RED)
-			{
-				y->color = BLACK;
-				z->p->color = BLACK;
-				z->p->p->color = RED;
-				z = z->p->p;
-			}
-			else
-			{
-				if (z == z->p->left)
-				{
-					z = z->p;
-					right_rotate(tree, z);
-				}
-				z->p->color = BLACK;
-                z->p->p->color = RED;
-                left_rotate(tree, z->p->p);
-			}
+			__right_case__(tree, &z);
 		}
 	}
 	tree->root->color = BLACK;
