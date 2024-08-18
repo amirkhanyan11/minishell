@@ -6,12 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:38:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:42:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void unset(t_command *cmd)
 {
@@ -66,3 +68,5 @@ void __unset__(t_command *cmd)
 	}
 	set_exit_status(status);
 }
+
+#pragma GCC diagnostic pop

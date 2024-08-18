@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 18:47:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:43:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 // void __eval_prog__deprecated__(t_fd *pipe, t_command *cmd)
 // {
@@ -48,3 +51,5 @@ void __eval_prog__(t_command *cmd)
 	execve(cmd->name, _args, _env);
 	__exit(NULL);
 }
+
+#pragma GCC diagnostic pop

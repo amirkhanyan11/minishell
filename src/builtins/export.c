@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:36:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:41:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static void __print_export__(tree_node *node);
 static int __export_from_string__(char *expr, t_shell *shell);
@@ -131,3 +134,5 @@ static bool not_equal_sign(t_node *const node)
 {
 	return node && !string_equal(node->val, "=");
 }
+
+#pragma GCC diagnostic pop

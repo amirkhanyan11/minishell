@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/14 21:50:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:41:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static void __exit_nb_wrapper(t_command *cmd, const int status, char * err);
 
@@ -66,3 +69,5 @@ void msh_exit(t_command *cmd)
 {
 	eval_wrapper(cmd, _msh_exit);
 }
+
+#pragma GCC diagnostic pop

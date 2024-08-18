@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:32:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/29 21:31:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:43:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void set_descriptors(t_command * cmd)
 {
@@ -22,3 +25,5 @@ void set_descriptors(t_command * cmd)
 		dup2(cmd->descriptors->stdout, STDOUT_FILENO);
 	// dup2(cmd->descriptors->stderr, STDERR_FILENO);
 }
+
+#pragma GCC diagnostic pop

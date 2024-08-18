@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:20:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:39:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define PIPE_MAX 2
 
 # define minishell_prompt PURPLE ITALIC_ON"minishell" GREEN " > $ " RESET
+
 
 
 # define scoped_cmd_container t_cmd_container * __dtor(__t_cmd_container__)

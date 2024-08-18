@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cocobolo.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 16:44:39 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:39:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 
 typedef struct s_list t_list;
 typedef struct s_node t_node;
+
 
 #ifdef __linux__
 #if __has_attribute(noreturn)

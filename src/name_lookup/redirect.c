@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 20:49:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:39:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 extern int g_exit_status;
 
@@ -52,3 +55,6 @@ int redirect(t_node *token, t_command *cmd)
 	}
 	return 0;
 }
+
+#pragma GCC diagnostic pop
+

@@ -47,7 +47,7 @@ CC = gcc
 # DEBUG = -fsanitize=address
 DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
-CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
+CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} -Werror #${WFLAGS}
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Darwin)

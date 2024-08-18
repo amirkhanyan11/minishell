@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 17:51:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:41:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void __print_env__(tree_node *node);
 
@@ -54,3 +57,5 @@ void __print_env__(tree_node *node)
 
 	printf("\n");
 }
+
+#pragma GCC diagnostic pop

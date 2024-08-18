@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 17:20:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:28:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef bool (*t_list_Bpredicate_val)(t_list_value, t_list_value);
 typedef void (*t_list_Apredicate_val)(size_t *, t_list_value);
 typedef void (*f_push) (t_list *const, const t_list_value);
 typedef t_list_value (*t_value_mutate)(t_list_value);
-
 
 typedef enum e_opcode t_opcode;
 

@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/15 19:09:11 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:41:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static void update_pwd(t_shell *shell, char *oldpwd);
 static void __cd_one_arg__(t_command *cmd);
@@ -62,7 +65,7 @@ static void _chdir(t_command * cmd, const char *path, int *status)
 	{
 		__perror("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory");
 	}
-	
+
 	if (cmd->container->size > 1)
 	{
 		chdir(cwd);
@@ -126,3 +129,5 @@ static void update_pwd(t_shell *shell, char *oldpwd)
 	export_update(shell, "OLDPWD", oldpwd);
 	export_update(shell, "PWD", pwd);
 }
+
+#pragma GCC diagnostic pop

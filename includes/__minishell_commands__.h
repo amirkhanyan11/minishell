@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell_commands__.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/15 19:23:09 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:40:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 
 struct s_command
 {
-    t_shell *shell;
-	char 	*name;
-	t_list  *options;
-    t_list 	*args;
+    t_shell *__attribute__((deprecated)) shell;
+	char 	*__attribute__((deprecated)) name;
+	t_list  *__attribute__((deprecated)) options;
+    t_list 	*__attribute__((deprecated)) args;
 
-	t_cmd_container *container;
+	t_cmd_container *__attribute__((deprecated)) container;
 
-	t_eval 		eval;
+	t_eval 		__attribute__((deprecated)) eval;
 
-	int 		 redirection;
-	t_descriptor *descriptors;
+	int 		 __attribute__((deprecated)) redirection;
+	t_descriptor *__attribute__((deprecated)) descriptors;
 
 };
 

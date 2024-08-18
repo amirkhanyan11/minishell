@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 17:11:31 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:45:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 extern int g_exit_status;
 
@@ -86,3 +89,5 @@ static bool is_n(char * opt)
 	return (*__strchr_p(opt, not_n_predicate) == '\0');
 }
 
+
+#pragma GCC diagnostic pop

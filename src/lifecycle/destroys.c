@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:20:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:39:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void __t_shell__(t_shell * shell)
 {
@@ -70,3 +73,5 @@ void __t_cmd_container__(t_cmd_container ** cmdsptr)
 	free(cmds);
 	*cmdsptr = NULL;
 }
+
+#pragma GCC diagnostic pop
