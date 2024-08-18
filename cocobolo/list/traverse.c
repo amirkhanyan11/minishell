@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:50:20 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:52:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:36:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,35 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void preorder_traverse (t_node *head, t_list_Upredicate f)
+void	preorder_traverse(t_node *head, t_list_Upredicate f)
 {
-	if (NULL == head) return;
-
+	if (NULL == head)
+		return ;
 	f(head);
-
 	preorder_traverse(head->next, f);
 }
 
-void reverse_preorder_traverse (t_node *head, t_list_Upredicate f)
+void	reverse_preorder_traverse(t_node *head, t_list_Upredicate f)
 {
-	if (NULL == head) return;
-
+	if (NULL == head)
+		return ;
 	f(head);
-
 	reverse_preorder_traverse(head->prev, f);
 }
 
-void postorder_traverse (t_node *head, t_list_Upredicate f)
+void	postorder_traverse(t_node *head, t_list_Upredicate f)
 {
-	if (NULL == head) return;
-
+	if (NULL == head)
+		return ;
 	postorder_traverse(head->next, f);
-
 	f(head);
 }
 
-void reverse_postorder_traverse (t_node *head, t_list_Upredicate f)
+void	reverse_postorder_traverse(t_node *head, t_list_Upredicate f)
 {
-	if (NULL == head) return;
-
+	if (NULL == head)
+		return ;
 	reverse_postorder_traverse(head->prev, f);
-
 	f(head);
 }
 

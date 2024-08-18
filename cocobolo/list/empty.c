@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:41:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:53:44 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:35:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-bool empty(t_list *list)
+bool	empty(t_list *list)
 {
 	return (!list || !list->head);
 }

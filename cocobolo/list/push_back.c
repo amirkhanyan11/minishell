@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:58:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:53:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:36:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void __single__push_back__(t_list *const list, const t_list_value x)
+void	__single__push_back__(t_list *const list, const t_list_value x)
 {
-	if (!list) return;
+	t_node	*node;
 
-	t_node *node = make_node(x);
+	if (!list)
+		return ;
+	node = make_node(x);
 	node->prev = list->tail;
-
 	if (NULL == list->head)
 		list->head = node;
-
-	if (list->tail) list->tail->next = node;
-
+	if (list->tail)
+		list->tail->next = node;
 	list->tail = node;
 }
 

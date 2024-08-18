@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   accumulate.c                                       :+:      :+:    :+:   */
+/*   find_vol_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 16:37:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:35:23 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/18 21:40:57 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/18 21:41:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-static size_t	__accumulate__(t_node *head, size_t sum_so_far,
-		t_list_Apredicate_val p)
+static t_node	*__find_if__(t_node *curr, t_node *last, t_list_Upredicate_b p)
 {
-	if (!head)
-		return (sum_so_far);
-	p(&sum_so_far, head->val);
-	return (__accumulate__(head->next, sum_so_far, p));
+	if (!curr || curr->prev == last)
+		return (NULL);
+	if (p(curr) == true)
+		return (curr);
+	return (__find_if__(curr->next, last, p));
 }
 
-size_t	accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p)
+t_node	*find_if(t_node *first, t_node *last, t_list_Upredicate_b p)
 {
-	if (!list || !p)
-		return (sum_so_far);
-	return (__accumulate__(list->head, sum_so_far, p));
+	if (!first || !last || !p)
+		return (NULL);
+	return (__find_if__(first, last, p));
 }
 
 #pragma GCC diagnostic pop
