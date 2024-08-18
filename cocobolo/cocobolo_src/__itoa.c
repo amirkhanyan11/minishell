@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:08:03 by kali              #+#    #+#             */
-/*   Updated: 2024/08/06 14:17:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:28:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static int		_calculate_size(int const n);
 static char		_to_char(int n);
 static char		*_allocate(int n);
 
-char	* __itoa(int n)
+char	*__itoa(int n)
 {
 	return (_allocate(n));
 }
 
-static	size_t	_digit_count(int const n)
+static size_t	_digit_count(int const n)
 {
 	if (n == 0)
 		return (0);
@@ -43,7 +43,7 @@ static char	_to_char(int n)
 	return (n + '0');
 }
 
-static	char	*_allocate(int n)
+static char	*_allocate(int n)
 {
 	char	*dst;
 	int		size;

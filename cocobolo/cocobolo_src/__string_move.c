@@ -6,16 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:17:12 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/02 20:18:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:29:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-void __string_move(char **lhv, char **rhv)
+void	__string_move(char **lhv, char **rhv)
 {
-	if (!lhv || !rhv || *lhv == *rhv) return;
-
+	if (!lhv || !rhv || *lhv == *rhv)
+		return ;
 	__delete_string(lhv);
 	*lhv = *rhv;
 	*rhv = NULL;

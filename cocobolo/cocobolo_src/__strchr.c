@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:33:49 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 19:16:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:29:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 bool	__strchr(char *s, const char c)
 {
-	while(*s)
+	while (*s)
 	{
-		if (*s == c) return true;
+		if (*s == c)
+			return (true);
 		++s;
 	}
-	return false;
+	return (false);
 }
 
-char 		*__strchr_p(char *s, bool (*p) (char))
+char	*__strchr_p(char *s, bool (*p)(char))
 {
-	while(*s)
+	while (*s)
 	{
-		if (p(*s) == true) break;
+		if (p(*s) == true)
+			break ;
 		++s;
 	}
-	return s;
+	return (s);
 }

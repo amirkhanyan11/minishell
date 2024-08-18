@@ -6,16 +6,16 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:56:12 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 22:56:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:28:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-void __delete_string(char **s)
+void	__delete_string(char **s)
 {
-	if (!s) return;
-
+	if (!s)
+		return ;
 	free(*s);
 	*s = NULL;
 }

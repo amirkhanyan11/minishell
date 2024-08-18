@@ -6,18 +6,19 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 20:19:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:18:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:30:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-static void	_move_ptrs(char **left, char **right, char  *set);
+static void	_move_ptrs(char **left, char **right, char *set);
 
-char	* __strtrim(char *s1, char  *set)
+char	*__strtrim(char *s1, char *set)
 {
 	char	*left;
 	char	*right;
+	char	*res;
 
 	if (!s1 || !set)
 		return (NULL);
@@ -26,15 +27,12 @@ char	* __strtrim(char *s1, char  *set)
 	_move_ptrs(&left, &right, set);
 	if (left > right)
 		return (__make_string_empty());
-
-	char * res = __strdup(left);
-
+	res = __strdup(left);
 	res[right - left + 1] = '\0';
-
-	return res;
+	return (res);
 }
 
-static	void	_move_ptrs(char **left, char **right, char *set)
+static void	_move_ptrs(char **left, char **right, char *set)
 {
 	while (((*left)) && __strchr(set, **left))
 		++(*left);

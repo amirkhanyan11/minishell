@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 21:21:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:18:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:33:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static size_t	_count_words(char const *s, char *set);
 static size_t	_current_len(char const **str, char *set);
-static t_matrix _allocate(char const *str, char *set, size_t const SIZE);
+static t_matrix	_allocate(char const *str, char *set, size_t const SIZE);
 static void		_skip_(char const **str, char *set);
 
-t_matrix  __split(char const *s, char * set)
+t_matrix	__split(char const *s, char *set)
 {
 	if (!s)
 		__exit("nullptr passed to __split");
 	return (_allocate(s, set, _count_words(s, set)));
 }
 
-static	size_t	_count_words(char const *s, char * set)
+static size_t	_count_words(char const *s, char *set)
 {
 	size_t	words;
 	short	flag;
@@ -46,7 +46,7 @@ static	size_t	_count_words(char const *s, char * set)
 	return (flag + words);
 }
 
-static	size_t	_current_len(char const **str, char * set)
+static size_t	_current_len(char const **str, char *set)
 {
 	size_t	len;
 
@@ -59,18 +59,19 @@ static	size_t	_current_len(char const **str, char * set)
 	return (len);
 }
 
-static void	_skip_(char const **str, char * set)
+static void	_skip_(char const **str, char *set)
 {
 	while (**str && __strchr(set, **str) == true)
 		(*str)++;
 }
 
-static	t_matrix    _allocate(char const *str, char * set, size_t const SIZE)
+static t_matrix	_allocate(char const *str, char *set, size_t const SIZE)
 {
-	t_matrix    arr;
-	char	*tmp;
-	size_t	current_len;
-	size_t	i;
+	t_matrix	arr;
+	char		*tmp;
+	size_t		current_len;
+	size_t		i;
+	int			j;
 
 	arr = (char **)__malloc((SIZE + 1) * sizeof(char *));
 	if (!arr)
@@ -83,15 +84,10 @@ static	t_matrix    _allocate(char const *str, char * set, size_t const SIZE)
 		tmp = (char *)str;
 		current_len = _current_len(&str, set);
 		arr[i] = (char *)__malloc(current_len + 1);
-        arr[i][current_len] = '\0';
-
-        int j = 0;
-        while (j < current_len)
-        {
-            arr[i][j] = tmp[j];
-            j++;
-        }
-
+		arr[i][current_len] = '\0';
+		j = -1;
+		while (++j < current_len)
+			arr[i][j] = tmp[j];
 		i++;
 	}
 	return (arr);

@@ -6,13 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:16:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/30 18:47:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:29:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-void __pipe(int *p)
+void	__pipe(int *p)
 {
-    if (pipe(p) == -1) __exit("pipe error");
+	if (pipe(p) == -1)
+		__exit("pipe error");
 }

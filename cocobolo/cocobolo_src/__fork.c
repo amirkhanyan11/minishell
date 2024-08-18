@@ -6,20 +6,21 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:01:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/10 16:02:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:28:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <cocobolo.h>
+#include <cocobolo.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
-pid_t __fork(void)
+pid_t	__fork(void)
 {
-	pid_t pid = fork();
+	pid_t	pid;
 
-	if (-1 == pid) __exit("fork error");
-
-	return pid;
+	pid = fork();
+	if (-1 == pid)
+		__exit("fork error");
+	return (pid);
 }
