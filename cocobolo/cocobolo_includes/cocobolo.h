@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 19:39:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:19:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ void		*__memset(void *b, int c, size_t len);
 void 		__string_swap(char **lhv, char **rhv);
 void 		__string_move(char **lhv, char **rhv);
 void 		__delete_string(char **s);
-t_optional	__atoi(char const *str);
-t_optional	__atol_strict(char const *str);
 char 		*__make_string_empty() __allocs __result_use_check;
 char 		*__make_string_from_char(const char c) __allocs __result_use_check;
 char		*__strtrim(char *s1, char *set) __allocs __result_use_check;
@@ -114,6 +112,16 @@ bool        __strcmp_weak__(const char *lhv, const char *rhv);
 char		*__itoa(int n) __result_use_check;
 
 t_matrix    __split(char const *s, char *set) __result_use_check;
+
+
+// atoi
+t_optional	__atoi(char const *str);
+t_optional	__atol_strict(char const *str);
+void	_skip_spaces(char const **const str);
+int	_is_digit(char const c);
+int	_is_sign(char const c);
+long long	_process(long long res, char const c);
+bool	_non_digit(char c);
 
 
 // string predicates
