@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 21:19:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 
     size_t i = 0;
 
-    t_node *first = tokens->head;
+    t_node *first = front(tokens);
     while (i < container->size)
     {
-        t_node *pipe = find(first, tokens->tail, "|", NULL);
+        t_node *pipe = find(first, back(tokens), "|", NULL);
 
-        if (!pipe) pipe = tokens->tail;
+        if (!pipe) pipe = back(tokens);
 
         else
         {

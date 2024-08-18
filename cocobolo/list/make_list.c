@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 14:49:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 t_list *make_list()
 {
@@ -122,3 +125,4 @@ void	list_move_back(t_list *lhv, t_list *rhv)
 	lhv->tail = NULL;
 }
 
+#pragma GCC diagnostic pop

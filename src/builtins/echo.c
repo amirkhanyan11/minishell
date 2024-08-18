@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:45:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:59:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void __echo__(t_command *cmd)
 
 	bool newline = true;
 
-	if (!empty(cmd->options) && is_n(cmd->options->head->val))
+	if (!empty(cmd->options) && is_n(front(cmd->options)->val))
 	{
 		newline = false;
 
-		erase(cmd->options, cmd->options->head, find_if(cmd->options->head, cmd->options->tail, last_nl));
+		erase(cmd->options, front(cmd->options), find_if(front(cmd->options), back(cmd->options), last_nl));
 	}
 
 	if (!empty(cmd->options)) push_back(cmd->options, "");
@@ -59,7 +59,7 @@ static void echo_arglist(t_list *arglist)
 
 	if (!arglist) return;
 
-	t_node *arg = arglist->head;
+	t_node *arg = front(arglist);
 	while (arg)
 	{
 		printf("%s", arg->val);

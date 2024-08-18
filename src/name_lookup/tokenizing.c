@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 18:55:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int redirection_parse(t_list *tokens)
 
 	t_node *rdr = NULL;
 
-	rdr = find_if(tokens->head, tokens->tail, is_redir);
+	rdr = find_if(front(tokens), back(tokens), is_redir);
 
 	while (rdr)
 	{
@@ -62,7 +62,7 @@ int redirection_parse(t_list *tokens)
 			__perror(err);
 			return -1;
 		}
-		rdr = find_if(rdr->next, tokens->tail, is_redir);
+		rdr = find_if(rdr->next, back(tokens), is_redir);
 	}
 
 	return 0;
@@ -75,13 +75,13 @@ int pipe_parse(t_list *tokens)
 
 	t_node *pipe = NULL;
 
-	pipe = find(tokens->head, tokens->tail, "|", string_equal);
+	pipe = find(front(tokens), back(tokens), "|", string_equal);
 
 	while (pipe)
 	{
-		t_node *pair = find(pipe->next, tokens->tail, "|", string_equal);
+		t_node *pair = find(pipe->next, back(tokens), "|", string_equal);
 
-		if (!pair) pair = tokens->tail;
+		if (!pair) pair = back(tokens);
 
 		else pair = pair->prev;
 
@@ -91,7 +91,7 @@ int pipe_parse(t_list *tokens)
 			return -1;
 		}
 
-		pipe = find(pair->next, tokens->tail, "|", string_equal);
+		pipe = find(pair->next, back(tokens), "|", string_equal);
 	}
 
 	return 0;
@@ -104,7 +104,7 @@ static int quote_parse(t_list *tokens)
 	bool d = false;
 	bool s = false;
 
-	t_node *token = tokens->head;
+	t_node *token = front(tokens);
 	while (token)
 	{
 		if (!d && string_equal(token->val, "\'")) s = !s;

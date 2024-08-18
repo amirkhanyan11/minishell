@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 19:28:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:49:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ enum e_opcode
 
 struct s_list
 {
-	t_node *head;
-	t_node *tail;
+	t_node * __attribute__((deprecated)) head;
+	t_node * __attribute__((deprecated)) tail;
 };
 
 struct s_node
@@ -76,6 +76,8 @@ void __single__push_front__(t_list *const list, const t_list_value x);
 void 	pop_front(t_list *const list);
 void 	pop_back(t_list *const list);
 
+t_node 	*front(t_list *list);
+t_node 	*back(t_list *list);
 t_list  *make_list() __attribute__((malloc)) __result_use_check;
 t_list 	*make_list_copy(t_node *first, t_node *last, t_value_mutate f) __attribute__((malloc)) __result_use_check;
 t_list 	*make_list_copy_range(t_list *other, t_value_mutate f) __attribute__((malloc)) __result_use_check;

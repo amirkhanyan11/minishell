@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:19:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/08 17:10:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 size_t count(t_node *first, t_node *last, t_list_value val)
 {
@@ -46,3 +49,5 @@ size_t count_if(t_node *first, t_node *last, t_list_Countpredicate p)
 	}
 	return res;
 }
+
+#pragma GCC diagnostic pop

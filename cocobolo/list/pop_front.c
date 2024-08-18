@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 22:36:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 22:05:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void	pop_front(t_list *const list)
 {
@@ -20,7 +23,7 @@ void	pop_front(t_list *const list)
 		return ;
 
 	if (list->head == list->tail) list->tail = NULL;
-	
+
 	to_remove = list->head;
 
 	list->head = list->head->next;
@@ -33,3 +36,4 @@ void	pop_front(t_list *const list)
 
 }
 
+#pragma GCC diagnostic pop

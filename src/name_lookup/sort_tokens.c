@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 19:39:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:58:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int sort_tokens(t_command *cmd, t_list *tokens)
 		return -1;
 	}
 
-	t_node *token = tokens->head->next;
+	t_node *token = front(tokens)->next;
 
 	while (token && token->val && token->val[0] == '-')
 	{
@@ -45,7 +45,7 @@ int sort_tokens(t_command *cmd, t_list *tokens)
 
 static int sort_redirections(t_command *cmd, t_list *tokens)
 {
-	t_node *token = tokens->head->next;
+	t_node *token = front(tokens)->next;
 
 	while (token)
 	{

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:42:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:58:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void __unset__(t_command *cmd)
 	if (!cmd || !cmd->args) return;
 
 	int status = 0;
-	t_node *arg = cmd->args->head;
+	t_node *arg = front(cmd->args);
 
 //  unset: -a: invalid option
 
 	if(!empty(cmd->options))
 	{
-		scoped_string str = __make_string("unset: ", cmd->options->head->val, ": invalid option");
+		scoped_string str = __make_string("unset: ", front(cmd->options)->val, ": invalid option");
 		__perror(str);
 		status = 1;
 	}

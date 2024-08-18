@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_insert.c                                      :+:      :+:    :+:   */
+/*   back.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 16:55:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:53:32 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/18 20:50:55 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/18 20:51:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,12 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-t_node * list_insert(t_list *list, t_node *pos, char *val)
+t_node 	*back(t_list *list)
 {
-	if(list == NULL || pos == NULL || !val) return NULL;
+	if (!list) return NULL;
 
-	if(empty(list) || pos == list->tail)
-	{
-		push_back(list, val);
-		return list->tail;
-	}
-	t_node *new = make_node(val);
-
-	new->prev = pos;
-	pos->next->prev = new;
-	new->next = pos->next;
-	pos->next = new;
-	return new;
+	return list->tail;
 }
+
 
 #pragma GCC diagnostic pop

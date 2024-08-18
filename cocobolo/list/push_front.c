@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:01:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 14:27:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void __single__push_front__(t_list *const list, const t_list_value x)
 {
@@ -26,3 +29,5 @@ void __single__push_front__(t_list *const list, const t_list_value x)
 
 	list->head = node;
 }
+
+#pragma GCC diagnostic pop

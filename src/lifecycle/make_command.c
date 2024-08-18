@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 19:40:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:58:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_command * make_command(t_list *tokens, t_cmd_container *container, t_shell *sh
 	cmd->container = container;
 	cmd->options = make_list();
 	cmd->args = make_list();
-	cmd->name = __strdup(tokens->head->val); // assume the name of the command goes always first in the input
+	cmd->name = __strdup(front(tokens)->val); // assume the name of the command goes always first in the input
 	cmd->eval = NULL;
 	cmd->redirection = 0;
 

@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 22:42:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 21:28:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static void __pop__(t_node * const head)
 {
@@ -21,8 +24,10 @@ static void __pop__(t_node * const head)
 void list_clear(t_list **list)
 {
 	if (!list || !(*list)) return;
-	
+
 	postorder_traverse((*list)->head, __pop__);
 	free(*list);
 	*list = NULL;
 }
+
+#pragma GCC diagnostic pop

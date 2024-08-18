@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:01:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 17:03:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 size_t __size__(t_node *head)
 {
@@ -24,3 +27,5 @@ size_t size(t_list *list)
 
 	return __size__(list->head);
 }
+
+#pragma GCC diagnostic pop

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 18:47:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void merge_tokens(t_list *tokens)
 
 	erase_quotes(tokens);
 
-	t_node *token = tokens->head;
+	t_node *token = front(tokens);
 
 	while (token && token->next)
 	{
@@ -54,16 +54,16 @@ static void erase_quotes(t_list *tokens)
 {
 	if (empty(tokens)) return;
 
-	t_node *token = find_if(tokens->head, tokens->tail, is_quote_node);
+	t_node *token = find_if(front(tokens), back(tokens), is_quote_node);
 
 	while (token)
 	{
-		t_node *pair = find(token->next, tokens->tail, token->val, string_equal);
+		t_node *pair = find(token->next, back(tokens), token->val, string_equal);
 
 		if (!pair) break;
 
 		pop(tokens, token);
-		token = find_if(pair->next, tokens->tail, is_quote_node);
+		token = find_if(pair->next, back(tokens), is_quote_node);
 		pop(tokens, pair);
 	}
 }
@@ -73,7 +73,7 @@ static void merge_inside_quotes(t_list *tokens)
 	if (!tokens || empty(tokens)) return;
 
 
-	t_node *token = tokens->head;
+	t_node *token = front(tokens);
 	while (token)
 	{
 		t_node *next = token->next;

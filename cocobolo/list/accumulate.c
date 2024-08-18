@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:37:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/08 16:55:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static size_t __accumulate__(t_node *head, size_t sum_so_far, t_list_Apredicate_val p)
 {
@@ -27,3 +30,5 @@ size_t accumulate(t_list *list, size_t sum_so_far, t_list_Apredicate_val p)
 
 	return __accumulate__(list->head, sum_so_far, p);
 }
+
+#pragma GCC diagnostic pop

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/13 17:36:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:03:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ t_tree *make_tree_from_matrix(t_treeval *arr, t_cmp less)
 	{
 		scoped_list tokens = make_list_from_string(arr[i], "=", all);
 
-		scoped_string val = __make_string_from_list(tokens->head->next->next, tokens->tail);
+		scoped_string val = __make_string_from_list(front(tokens)->next->next, back(tokens));
 
-		tree_update(tree, tokens->head->val, val);
+		tree_update(tree, front(tokens)->val, val);
 
 		i++;
 	}

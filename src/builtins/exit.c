@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/18 20:41:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:57:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void __exit__(t_command *cmd)
 
 	if (size(cmd->args) >= 1)
 	{
-		t_optional val = __atol_strict(cmd->args->head->val);
+		t_optional val = __atol_strict(front(cmd->args)->val);
 		if (!has_value(&val))
 		{
-			err = __make_string("exit: ", cmd->args->head->val, ": numeric argument required");
+			err = __make_string("exit: ", front(cmd->args)->val, ": numeric argument required");
 			__exit_nb_wrapper(cmd, -1, err);
 			return;
 		}

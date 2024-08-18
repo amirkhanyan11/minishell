@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 22:40:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/16 22:05:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void pop_back(t_list *const list)
 {
@@ -29,3 +32,5 @@ void pop_back(t_list *const list)
 	free(to_remove);
 
 }
+
+#pragma GCC diagnostic pop

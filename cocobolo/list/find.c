@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 00:18:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 16:42:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static t_node *__find(t_node *first, t_node *last, t_list_value target, t_list_Bpredicate_val cmp)
 {
@@ -65,3 +68,5 @@ t_node *find_if(t_node *first, t_node *last, t_list_Upredicate_b p)
 
 	return __find_if__(first, last, p);
 }
+
+#pragma GCC diagnostic pop

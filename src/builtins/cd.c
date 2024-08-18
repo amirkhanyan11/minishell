@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:41:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:55:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void __cd__(t_command *cmd)
 {
 	if (!cmd) return;
 
-	if (size(cmd->options) > 1 || (size(cmd->options) == 1  && !string_equal(cmd->options->head->val, "-")))
+	if (size(cmd->options) > 1 || (size(cmd->options) == 1  && !string_equal(front(cmd->options)->val, "-")))
 	{
 		set_exit_status(2);
-		scoped_string msg = __make_string("cd: ", cmd->options->head->val, ": invalid option");
+		scoped_string msg = __make_string("cd: ", front(cmd->options)->val, ": invalid option");
 		__perror(msg);
 		return ;
 	}
@@ -116,7 +116,7 @@ static void __cd_one_arg__(t_command *cmd)
 		return;
 	}
 	else
-		_chdir(cmd, cmd->args->head->val, &status);
+		_chdir(cmd, front(cmd->args)->val, &status);
 
 	set_exit_status(status);
 }

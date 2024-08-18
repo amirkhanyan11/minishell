@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/14 16:38:11 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:03:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_matrix  make_matrix_from_list(t_list *list)
 
 	arr[lstsize] = NULL;
 
-	t_node *node = list->head;
+	t_node *node = front(list);
 	size_t i = 0;
 	while (node)
 	{

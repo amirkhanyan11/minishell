@@ -6,11 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:49:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/11 20:17:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:53:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static void __print_listnode__(t_node *const head)
 {
@@ -53,3 +56,5 @@ void print_list_enumerate(t_list *list)
 		return;
 	__print_listnode_enumerate__(list->head, 1);
 }
+
+#pragma GCC diagnostic pop

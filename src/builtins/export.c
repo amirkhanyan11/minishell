@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:41:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void __export__(t_command *cmd)
 
 	else
 	{
-		t_node *arg = cmd->args->head;
+		t_node *arg = front(cmd->args);
 		while (arg)
 		{
 			if (-1 == __export_from_string__(arg->val, cmd->shell))
@@ -59,7 +59,7 @@ static int __export_from_string__(char *expr, t_shell *shell) // export ========
 
 	if (empty(tokens)) return -1;
 
-	t_node *lhv = tokens->head;
+	t_node *lhv = front(tokens);
 
 	if (lhv->val[__strlen(lhv->val) - 1] == '+')
 	{
@@ -72,7 +72,7 @@ static int __export_from_string__(char *expr, t_shell *shell) // export ========
 		list_insert(tokens, lhv->next, old_val);
 	}
 
-	if (!is_name(lhv->val) || NULL == find_if(lhv, tokens->tail, not_equal_sign))
+	if (!is_name(lhv->val) || NULL == find_if(lhv, back(tokens), not_equal_sign))
 	{
 		scoped_string str = __make_string("export: `", expr, "\': not a valid identifier");
 		__perror(str);
@@ -83,8 +83,8 @@ static int __export_from_string__(char *expr, t_shell *shell) // export ========
 
 	if (size(tokens) >= 2)
 	{
-		// scoped_string val = (tokens->head->next->next) ? tokens->head->next->next->val : "\0";
-		scoped_string val = __make_string_from_list(lhv->next->next, tokens->tail);
+		// scoped_string val = (front(tokens)->next->next) ? front(tokens)->next->next->val : "\0";
+		scoped_string val = __make_string_from_list(lhv->next->next, back(tokens));
 		if (val == NULL) val = __make_string_empty();
 		return export_update(shell, lhv->val, val);
 	}

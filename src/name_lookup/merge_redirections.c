@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:30:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 23:05:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:58:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void merge_redirections(t_list *tokens)
 {
     if (!tokens) return;
 
-    t_node *token = tokens->head;
+    t_node *token = front(tokens);
 
     while (token && token->next)
     {

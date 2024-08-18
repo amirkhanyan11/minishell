@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:41:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:56:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void __env__(t_command *cmd)
 
 	else if (!empty(cmd->args))
 	{
-		scoped_string str = __make_string("env", ": ", cmd->args->head->val, ": No such file or directory");
+		scoped_string str = __make_string("env", ": ", front(cmd->args)->val, ": No such file or directory");
 		__perror(str);
 		status = 127;
 	}
