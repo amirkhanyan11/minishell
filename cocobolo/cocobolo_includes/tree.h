@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 21:29:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:43:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void						__treeval_copy__(t_treeval *lhv, t_treeval *rhv);
 void						__treeval_move__(t_treeval *lhv, t_treeval *rhv);
 t_tree						*make_tree_from_matrix(t_treeval *arr, t_cmp less);
 size_t 						tree_size(t_tree *tree);
+void						_delete_fixup(t_tree *tree, tree_node *x);
+
 
 // x
 // void						swap_content(tree_node *lhv, tree_node *rhv);
