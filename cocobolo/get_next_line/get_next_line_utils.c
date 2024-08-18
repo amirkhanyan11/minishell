@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 17:02:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/07/07 22:18:07 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:49:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void	ft_append(char **const memory, char const *const buffer)
 	i = 0;
 	j = 0;
 	k = 0;
-	target = (char *)malloc((ft_frankenstein((char *)(*memory), 0, __strlen_enum__)
-				- (*memory)) + (ft_frankenstein((char *)buffer, 0, __strlen_enum__) + 1
+	target = (char *)malloc((ft_frankenstein((char *)(*memory), 0,
+					__strlen_enum__) - (*memory))
+			+ (ft_frankenstein((char *)buffer, 0, __strlen_enum__) + 1
 				- buffer));
 	if (!target)
 		return ;
