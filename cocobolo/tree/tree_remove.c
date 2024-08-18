@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 20:42:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 21:06:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:21:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,28 @@ static void _delete_fixup(t_tree *tree, tree_node *x)
 	x->color = BLACK;
 }
 
+static void delete_2_child_case(t_tree *tree, tree_node *z, tree_node **x, tree_node **y, t_color *y_orig_color)
+{
+	(*y) = __find_min__(tree, z->right);
+	*y_orig_color = (*y)->color;
+	(*x) = (*y)->right;
+
+	if ((*y)->p == z)
+		(*x)->p = (*y);
+
+	else
+	{
+		transplant(tree, (*y), (*y)->right);
+		(*y)->right = z->right;
+		(*y)->right->p = (*y);
+	}
+
+	transplant(tree, z, (*y));
+	(*y)->left = z->left;
+	(*y)->left->p = (*y);
+	(*y)->color = z->color;
+}
+
 static void _delete(t_tree *tree, tree_node *z)
 {
 	tree_node *x = tree->NIL;
@@ -115,26 +137,7 @@ static void _delete(t_tree *tree, tree_node *z)
 		transplant(tree, z, z->left);
 	}
 	else
-	{
-		y = __find_min__(tree, z->right);
-		y_orig_color = y->color;
-		x = y->right;
-
-		if (y->p == z)
-			x->p = y;
-
-		else
-		{
-			transplant(tree, y, y->right);
-			y->right = z->right;
-			y->right->p = y;
-		}
-
-		transplant(tree, z, y);
-		y->left = z->left;
-		y->left->p = y;
-		y->color = z->color;
-	}
+		delete_2_child_case(tree, z, &x, &y, &y_orig_color);
 
 	delete_node(z);
 	z = NULL;
