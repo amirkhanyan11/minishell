@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 20:21:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:17:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_shell * make_shell(char **env)
 	shell->export = make_export(shell);
 
     shell->history = make_list();
+
+    shell->quoted_tokens = make_set();
 
 	shell->stddesc = make_stddesc();
 

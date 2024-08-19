@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:46:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:13:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static bool is_mergeable(t_node *token);
 static void erase_quotes(t_list *tokens);
 static bool is_quote_node(t_node * const node);
 
-
-void merge_tokens(t_list *tokens)
+void merge_tokens(t_shell *shell, t_list *tokens)
 {
 	if (!tokens || empty(tokens)) return;
 

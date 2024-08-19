@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 20:29:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:12:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list *preprocess(t_list *tokens, t_shell *shell)
 
 	dollar_sign_resolver(tokens, shell);
 
-	merge_tokens(tokens);
+	merge_tokens(shell, tokens);
 
 	if (pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
 	{

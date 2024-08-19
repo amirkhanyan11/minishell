@@ -2,7 +2,7 @@ NAME = minishell
 
 SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./src/exec/ \
 			./cocobolo/cocobolo_src/ ./cocobolo/optional/ ./cocobolo/list/ \
-			./cocobolo/get_next_line/ ./cocobolo/tree/ ./cocobolo/matrix/
+			./cocobolo/get_next_line/ ./cocobolo/tree/ ./cocobolo/matrix/ ./cocobolo/set/
 
 INCPATH = ./includes/ ./cocobolo/cocobolo_includes/ ./readline_local/include/
 OBJSPATH = ./objs/

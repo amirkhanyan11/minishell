@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 21:03:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:17:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "list.h"
 # include "optional.h"
 # include "tree.h"
+# include "set.h"
 # include <assert.h>
 # include <errno.h>
 # include <limits.h>
