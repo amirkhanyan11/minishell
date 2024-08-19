@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell_enums__.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:00:33 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/06 19:35:37 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:22:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __MINIHSELL_ENUMS___H
-#define __MINIHSELL_ENUMS___H
+#ifndef __MINISHELL_ENUMS___H
+# define __MINISHELL_ENUMS___H
 
-enum e_rdr
+enum	e_rdr
 {
 	in = 0,
 	out = 1,
@@ -22,7 +22,7 @@ enum e_rdr
 	redirect_heredoc = 8
 };
 
-enum e_eval_opcode
+enum	e_eval_opcode
 {
 	_cd,
 	_echo,
@@ -35,5 +35,4 @@ enum e_eval_opcode
 	_msh_exit
 };
 
-
-#endif // __MINIHSELL_ENUMS___H
+#endif // __MINISHELL_ENUMS___H
