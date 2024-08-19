@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 22:43:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:53:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_tree						*make_tree_from_matrix(t_treeval *arr, t_cmp less);
 size_t 						tree_size(t_tree *tree);
 void						_delete_fixup(t_tree *tree, tree_node *x);
 
-
+void	__print_key__(tree_node *root);
 // x
 // void						swap_content(tree_node *lhv, tree_node *rhv);
 // tree_node 					*tree_find_if(t_tree *tree, t_treeval key, t_cmp p);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:32:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/09 21:03:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:53:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // void swap_content(tree_node *lhv, tree_node *rhv)
 // {
-// 	if (!rhv || !lhv) return;
+// 	if (!rhv || !lhv) return ;
 
 // 	tree_node *tmp;
 
@@ -25,4 +25,3 @@
 
 // 	delete_node(tmp);
 // }
-

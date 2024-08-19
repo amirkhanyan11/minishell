@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_height.c                                      :+:      :+:    :+:   */
+/*   print_tree_vol_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 21:22:41 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 16:54:23 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/02 16:50:36 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/19 16:53:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-static size_t	__tree_height__(t_tree *tree, tree_node *curr)
+void	__print_key__(tree_node *root)
 {
-	size_t	l;
-	size_t	r;
-	size_t	x;
-
-	if (curr == tree->NIL)
-		return (0);
-	l = __tree_height__(tree, curr->left);
-	r = __tree_height__(tree, curr->right);
-	x = 0;
-	if (l > r)
-		x = l;
-	else
-		x = r;
-	return (1 + x);
+	printf("%s = %s\n", root->key, root->val);
 }
 
-size_t	tree_height(t_tree *tree)
+void	print_tree_preorder(t_tree *tree)
 {
-	if (!tree)
-		return (0);
-	return (__tree_height__(tree, tree->root));
+	preorder(tree, __print_key__);
+}
+
+void	print_tree_inorder(t_tree *tree)
+{
+	inorder(tree, __print_key__);
 }
