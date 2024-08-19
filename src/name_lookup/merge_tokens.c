@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:46:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void merge_inside_quotes(t_list *tokens)
 
 static bool is_self_mergeable(t_node *token)
 {
-	return token && token->val && __strlen(token->val) == 1 && __strchr(self_mergeable_tokens, token->val[0]);
+	return token && token->val && __strlen(token->val) == 1 && __strchr(SELF_MERGEABLE_TOKENS, token->val[0]);
 }
 
 static bool is_mergeable(t_node *token)

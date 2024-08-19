@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:45:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list * tokenize(char * raw_cmd)
 {
 	if (!raw_cmd) return NULL;
 
-	t_list *tokens = make_list_from_string(raw_cmd, special_symbols, all);
+	t_list *tokens = make_list_from_string(raw_cmd, SPECIAL_SYMBOLS, all);
 
 	if (quote_parse(tokens) == -1)
 	{

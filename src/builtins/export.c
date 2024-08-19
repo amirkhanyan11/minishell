@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:06:54 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:44:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void __print_export__(t_tree_node *node)
 {
 	if (!node) return;
 
-	printf("%s", declarex);
+	printf("%s", DECLAREX);
 
 	printf("%s", node->key);
 

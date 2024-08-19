@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:27:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:46:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int ac, char **av, char **env)
 	// fetch -> decode -> execute
 	while (true)
 	{
-		scoped_string line = read_line(minishell_prompt);
+		scoped_string line = read_line(MINISHELL_PROMPT);
 
 		t_cmd_container *__dtor(__t_cmd_container__) cmds = make_cmd_container(line, shell);
 

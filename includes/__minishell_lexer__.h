@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:47:09 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/19 17:26:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:42:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 // parsing
 t_list	*tokenize(char *raw_cmd) __attribute__((warn_unused_result));
-t_list	*preprocess(t_list *tokens, t_shell *shell) __attribute__((warn_unused_result));
+t_list	*preprocess(t_list *tokens, t_shell *shell)
+		__attribute__((warn_unused_result));
 void	dollar_sign_resolver(t_list *tokens, t_shell *shell);
 int		redirection_resolver(t_list *tokens, t_command *cmd);
 int		sort_tokens(t_command *cmd, t_list *tokens);
