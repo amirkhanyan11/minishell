@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:58:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:23:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void unset(t_command *cmd)
 	eval_wrapper(cmd, _unset);
 }
 
-int unset_var(t_shell *shell, t_list_value key)
+int __unset_var__(t_shell *shell, t_list_value key)
 {
 	if (!key) return -1;
 
@@ -33,13 +33,19 @@ int unset_var(t_shell *shell, t_list_value key)
 
 	if (shell->container && shell->container->size == 1)
 	{
-		tree_remove(shell->export, key);
-		tree_remove(shell->env, key);
+		unset_var(shell, key);
 	}
 
 	return (0);
 }
 
+void unset_var(t_shell *shell, t_list_value key)
+{
+	if (!key) return ;
+
+	tree_remove(shell->export, key);
+	tree_remove(shell->env, key);
+}
 
 void __unset__(t_command *cmd)
 {
@@ -61,7 +67,7 @@ void __unset__(t_command *cmd)
 	{
 		while (arg)
 		{
-			if (-1 == unset_var(cmd->shell, arg->val))
+			if (-1 == __unset_var__(cmd->shell, arg->val))
 				status = 1;
 			arg = arg->next;
 		}

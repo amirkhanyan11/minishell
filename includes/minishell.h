@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:55:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:21:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ void				__exit__(t_command *cmd);
 // other
 static int			__export_from_string__(char *expr, t_shell *shell);
 char				*_getcwd(void) __attribute__((warn_unused_result));
-int					unset_var(t_shell *shell, t_list_value val);
+int					__unset_var__(t_shell *shell, t_list_value val);
+void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
 void				__exit_nb__(const int status,
 						char *err) __attribute__((noreturn));
