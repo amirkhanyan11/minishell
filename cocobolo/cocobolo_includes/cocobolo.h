@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 16:55:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:03:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ bool					__strchr(char *s, const char c);
 char					*__strchr_p(char *s, bool (*p)(char));
 bool					__strcmp_weak__(const char *lhv, const char *rhv);
 char					*__itoa(int n) __result_use_check;
+char					*__ptoa(size_t n) __result_use_check;
 
 t_matrix				__split(char const *s, char *set) __result_use_check;
 

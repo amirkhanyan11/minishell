@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing.c                                    :+:      :+:    :+:   */
+/*   make_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 20:29:17 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/19 20:45:04 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/19 20:45:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "set.h"
 
-// handles redirections and $variables
-t_list *preprocess(t_list *tokens, t_shell *shell)
+t_set *make_set()
 {
-	if (empty(tokens) || !shell) return NULL;
-
-	dollar_sign_resolver(tokens, shell);
-
-	merge_tokens(tokens);
-
-	if (pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
-	{
-		set_exit_status(2);
-		list_clear(&tokens);
-	}
-
-	list_remove(tokens, " "); // remove white spaces
-
-	return tokens;
+	t_set *set = (t_set *)__malloc(sizeof(t_set));
+	set->tree = make_tree(string_less);
 }

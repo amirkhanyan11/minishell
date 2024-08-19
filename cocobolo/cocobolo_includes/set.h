@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing.c                                    :+:      :+:    :+:   */
+/*   set.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 20:29:17 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/19 20:36:11 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/19 20:56:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SET_H
+#define SET_H
 
-// handles redirections and $variables
-t_list *preprocess(t_list *tokens, t_shell *shell)
+#include "tree.h"
+#include <cocobolo.h>
+
+#define scoped_set t_set * __dtor(set_clear)
+
+typedef struct s_set t_set;
+
+struct s_set
 {
-	if (empty(tokens) || !shell) return NULL;
+	t_tree *tree;
+};
 
-	dollar_sign_resolver(tokens, shell);
+t_set *make_set();
+void set_clear(t_set **setptr);
+void set_insert(t_set *set, char *val);
+void set_remove(t_set *set, char *val);
+size_t set_count(t_set *set, char *val);
 
-	merge_tokens(tokens);
 
-	if (pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
-	{
-		set_exit_status(2);
-		list_clear(&tokens);
-	}
 
-	list_remove(tokens, " "); // remove white spaces
-
-	return tokens;
-}
+#endif // SET_H

@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing.c                                    :+:      :+:    :+:   */
+/*   set_count.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 20:29:17 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/19 20:56:56 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/19 20:58:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "set.h"
 
-// handles redirections and $variables
-t_list *preprocess(t_list *tokens, t_shell *shell)
+size_t set_count(t_set *set, char *val)
 {
-	if (empty(tokens) || !shell) return NULL;
+	if (!set || !val) return;
 
-	dollar_sign_resolver(tokens, shell);
+	if (tree_find(set->tree, val) == set->tree->nil) return 0;
 
-	merge_tokens(tokens);
-
-	if (pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
-	{
-		set_exit_status(2);
-		list_clear(&tokens);
-	}
-
-	list_remove(tokens, " "); // remove white spaces
-
-	return tokens;
+	return 1;
 }
