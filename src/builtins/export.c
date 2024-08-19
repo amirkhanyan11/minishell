@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:06:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-static void __print_export__(tree_node *node);
+static void __print_export__(t_tree_node *node);
 static int __export_from_string__(char *expr, t_shell *shell);
 static bool not_equal_sign(t_node *const node);
 
@@ -116,7 +116,7 @@ int export_update(t_shell *shell, t_list_value key, t_list_value val)
 }
 
 
-static void __print_export__(tree_node *node)
+static void __print_export__(t_tree_node *node)
 {
 	if (!node) return;
 

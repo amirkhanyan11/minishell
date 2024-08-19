@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:02:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:58:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:05:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_treeval	get_val(t_tree *tree, t_treeval key)
 {
-	tree_node	*node;
+	t_tree_node	*node;
 
 	node = tree_find(tree, key);
-	if (node == tree->NIL)
+	if (node == tree->nil)
 		return (NULL);
 	return (node->val);
 }

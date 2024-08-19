@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:26:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 16:51:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:06:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "tree.h"
 #include <cocobolo.h>
 
-static void	__make_tree_copy__(t_tree *tree, t_tree *other, tree_node *root);
+static void	__make_tree_copy__(t_tree *tree, t_tree *other, t_tree_node *root);
 
 t_tree	*make_tree(t_cmp less)
 {
@@ -24,8 +24,8 @@ t_tree	*make_tree(t_cmp less)
 		less = string_less;
 	new_tree = __malloc(sizeof(t_tree));
 	new_tree->less = less;
-	new_tree->NIL = make_tree_node(NULL, NULL, NULL, BLACK);
-	new_tree->root = new_tree->NIL;
+	new_tree->nil = make_tree_node(NULL, NULL, NULL, BLACK);
+	new_tree->root = new_tree->nil;
 	return (new_tree);
 }
 
@@ -40,9 +40,9 @@ t_tree	*make_tree_copy(t_tree *other)
 	return (tree);
 }
 
-static void	__make_tree_copy__(t_tree *tree, t_tree *other, tree_node *root)
+static void	__make_tree_copy__(t_tree *tree, t_tree *other, t_tree_node *root)
 {
-	if (!tree || root == other->NIL)
+	if (!tree || root == other->nil)
 		return ;
 	tree_update(tree, root->key, root->val);
 	__make_tree_copy__(tree, other, root->left);

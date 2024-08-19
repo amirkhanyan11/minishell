@@ -6,33 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 22:07:22 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 22:16:06 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:09:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-// static void	__insert_node__(tree_node **root, t_treeval key, t_treeval val,
-// t_cmp less)
-// {
-// 	if (NULL == *root)
-// 		*root = make_tree_node(key, val);
-// 	else if (less(key, (*root)->key))
-// 		__insert_node__(&((*root)->left), key, val, less);
-// 	else if (less((*root)->key, key))
-// 		__insert_node__(&((*root)->right), key, val, less);
-// }
-
-// void	tree_update(t_tree *tree, t_treeval key, t_treeval val)
-// {
-// 	if (!tree) return ;
-// 	tree_pop(tree, key);
-// 	__insert_node__(&tree->root, key, val, tree->less);
-// }
-
-static void	__left_case__(t_tree *tree, tree_node **z)
+static void	__left_case__(t_tree *tree, t_tree_node **z)
 {
-	tree_node	*y;
+	t_tree_node	*y;
 
 	y = (*z)->p->p->right;
 	if (y->color == RED)
@@ -55,9 +37,9 @@ static void	__left_case__(t_tree *tree, tree_node **z)
 	}
 }
 
-static void	__right_case__(t_tree *tree, tree_node **z)
+static void	__right_case__(t_tree *tree, t_tree_node **z)
 {
-	tree_node	*y;
+	t_tree_node	*y;
 
 	y = (*z)->p->p->left;
 	if (y->color == RED)
@@ -80,7 +62,7 @@ static void	__right_case__(t_tree *tree, tree_node **z)
 	}
 }
 
-static void	_insert_fixup(t_tree *tree, tree_node *z)
+static void	_insert_fixup(t_tree *tree, t_tree_node *z)
 {
 	while (z->p->color == RED)
 	{
@@ -92,14 +74,14 @@ static void	_insert_fixup(t_tree *tree, tree_node *z)
 	tree->root->color = BLACK;
 }
 
-static void	_insert(t_tree *tree, tree_node *z)
+static void	_insert(t_tree *tree, t_tree_node *z)
 {
-	tree_node	*y;
-	tree_node	*x;
+	t_tree_node	*y;
+	t_tree_node	*x;
 
-	y = tree->NIL;
+	y = tree->nil;
 	x = tree->root;
-	while (x != tree->NIL)
+	while (x != tree->nil)
 	{
 		y = x;
 		if (tree->less(z->key, x->key))
@@ -108,7 +90,7 @@ static void	_insert(t_tree *tree, tree_node *z)
 			x = x->right;
 	}
 	z->p = y;
-	if (y == tree->NIL)
+	if (y == tree->nil)
 		tree->root = z;
 	else if (tree->less(z->key, y->key))
 		y->left = z;
@@ -122,5 +104,5 @@ void	tree_update(t_tree *tree, t_treeval key, t_treeval val)
 	if (!tree)
 		return ;
 	tree_remove(tree, key);
-	_insert(tree, make_tree_node(key, val, tree->NIL, RED));
+	_insert(tree, make_tree_node(key, val, tree->nil, RED));
 }

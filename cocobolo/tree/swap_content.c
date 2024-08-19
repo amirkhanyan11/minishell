@@ -6,17 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 14:32:24 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 16:53:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:06:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-// void swap_content(tree_node *lhv, tree_node *rhv)
+// void swap_content(t_tree_node *lhv, t_tree_node *rhv)
 // {
 // 	if (!rhv || !lhv) return ;
 
-// 	tree_node *tmp;
+// 	t_tree_node *tmp;
 
 // 	tmp = make_tree_node(NULL, NULL);
 // 	treeval_move(tmp, rhv);

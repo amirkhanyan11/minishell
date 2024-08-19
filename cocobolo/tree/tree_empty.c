@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 22:07:01 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 22:07:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:05:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 bool	tree_empty(t_tree *tree)
 {
-	return (NULL == tree || tree->NIL == tree->root);
+	return (NULL == tree || tree->nil == tree->root);
 }

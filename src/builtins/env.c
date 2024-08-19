@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:56:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:06:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void __print_env__(tree_node *node);
+void __print_env__(t_tree_node *node);
 
 void env(t_command *cmd)
 {
@@ -46,7 +46,7 @@ void __env__(t_command *cmd)
 	set_exit_status(status);
 }
 
-void __print_env__(tree_node *node)
+void __print_env__(t_tree_node *node)
 {
 	if (!node) return;
 

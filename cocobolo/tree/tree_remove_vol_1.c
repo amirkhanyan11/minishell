@@ -6,17 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 20:42:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 22:42:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:08:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-static void	transplant(t_tree *tree, tree_node *u, tree_node *v)
+static void	transplant(t_tree *tree, t_tree_node *u, t_tree_node *v)
 {
 	if (!tree)
 		return ;
-	if (u->p == tree->NIL)
+	if (u->p == tree->nil)
 		tree->root = v;
 	else if (u == u->p->left)
 		u->p->left = v;
@@ -25,8 +25,8 @@ static void	transplant(t_tree *tree, tree_node *u, tree_node *v)
 	v->p = u->p;
 }
 
-static t_color	delete_2_child_case(t_tree *tree, tree_node *z, tree_node **x,
-		tree_node **y)
+static t_color	delete_2_child_case(t_tree *tree, t_tree_node *z,
+		t_tree_node **x, t_tree_node **y)
 {
 	t_color	y_orig_color;
 
@@ -48,21 +48,21 @@ static t_color	delete_2_child_case(t_tree *tree, tree_node *z, tree_node **x,
 	return (y_orig_color);
 }
 
-static void	_delete(t_tree *tree, tree_node *z)
+static void	_delete(t_tree *tree, t_tree_node *z)
 {
-	tree_node	*x;
-	tree_node	*y;
+	t_tree_node	*x;
+	t_tree_node	*y;
 	t_color		y_orig_color;
 
-	x = tree->NIL;
+	x = tree->nil;
 	y = z;
 	y_orig_color = y->color;
-	if (z->left == tree->NIL)
+	if (z->left == tree->nil)
 	{
 		x = z->right;
 		transplant(tree, z, z->right);
 	}
-	else if (z->right == tree->NIL)
+	else if (z->right == tree->nil)
 	{
 		x = z->left;
 		transplant(tree, z, z->left);
@@ -77,11 +77,11 @@ static void	_delete(t_tree *tree, tree_node *z)
 
 void	tree_remove(t_tree *tree, t_treeval key)
 {
-	tree_node	*z;
+	t_tree_node	*z;
 
 	if (!tree)
 		return ;
 	z = tree_find(tree, key);
-	if (z != tree->NIL)
+	if (z != tree->nil)
 		_delete(tree, z);
 }

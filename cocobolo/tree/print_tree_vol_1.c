@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:50:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 16:53:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:02:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tree.h"
 
-void	__print_key__(tree_node *root)
+void	__print_key__(t_tree_node *root)
 {
 	printf("%s = %s\n", root->key, root->val);
 }

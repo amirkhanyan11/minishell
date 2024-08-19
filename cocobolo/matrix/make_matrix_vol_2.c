@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 21:26:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:27:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:07:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void	__matrix_insert__(t_matrix arr, char *val, size_t *i)
 }
 
 static void	__make_matrix_from_tree__(t_matrix arr, t_tree *tree,
-		tree_node *curr, size_t *i)
+		t_tree_node *curr, size_t *i)
 {
 	scoped_string	val;
 
 	val = NULL;
-	if (curr == tree->NIL)
+	if (curr == tree->nil)
 		return ;
 	__make_matrix_from_tree__(arr, tree, curr->left, i);
 	val = __make_string(curr->key, "=", curr->val);

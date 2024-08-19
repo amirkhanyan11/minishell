@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 16:52:49 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 16:53:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:02:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	print_tree_postorder(t_tree *tree)
 	postorder(tree, __print_key__);
 }
 
-void	print_tree_inorder_custom(t_tree *tree, fptr foo)
+void	print_tree_inorder_custom(t_tree *tree, t_fptr foo)
 {
 	inorder(tree, foo);
 }
 
-void	print_tree_preorder_custom(t_tree *tree, fptr foo)
+void	print_tree_preorder_custom(t_tree *tree, t_fptr foo)
 {
 	preorder(tree, foo);
 }
 
-void	print_tree_postorder_custom(t_tree *tree, fptr foo)
+void	print_tree_postorder_custom(t_tree *tree, t_fptr foo)
 {
 	postorder(tree, foo);
 }
