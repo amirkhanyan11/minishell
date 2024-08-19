@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 21:13:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 21:34:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ static bool is_self_mergeable(t_node *token);
 static bool is_mergeable(t_node *token);
 static void erase_quotes(t_list *tokens);
 static bool is_quote_node(t_node * const node);
+static void mark_quoted_tokens(t_shell * shell, t_list *tokens);
 
 void merge_tokens(t_shell *shell, t_list *tokens)
 {
 	if (!tokens || empty(tokens)) return;
 
 	merge_inside_quotes(tokens);
+
+	mark_quoted_tokens(shell, tokens);
 
 	erase_quotes(tokens);
 
@@ -46,6 +49,39 @@ void merge_tokens(t_shell *shell, t_list *tokens)
 		}
 
 		token = next;
+	}
+}
+
+void save(t_shell * shell, t_node *address)
+{
+	char *val = __ptoa((size_t)address);
+
+	set_insert(shell->quoted_tokens, val);
+
+	free(val);
+}
+
+static void mark_quoted_tokens(t_shell * shell, t_list *tokens)
+{
+	if (empty(tokens)) return;
+
+	t_node *left_quote = find_if(front(tokens), back(tokens), is_quote_node);
+
+	if (!left_quote) return;
+
+	while (left_quote)
+	{
+		t_node *right_quote = find(left_quote->next, back(tokens), left_quote->val, string_equal);
+		t_node *token = left_quote->next;
+
+		while (token && token != right_quote)
+		{
+			save(shell, token);
+			token = token->next;
+		}
+
+		left_quote = find_if(right_quote->next, back(tokens), is_quote_node);
+
 	}
 }
 
