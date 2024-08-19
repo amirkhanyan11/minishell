@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:50:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:55:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,9 @@ int					redirection_parse(t_list *tokens);
 // signals
 void				set_signals_interactive(void);
 void				set_signals_noninteractive(void);
+void				disable_echoctl(void);
+void				ignore_sigquit(void);
+void				signal_print_newline(int __attribute__((unused)) signal);
+void				signal_reset_prompt(int __attribute__((unused)) sig);
 
 #endif // MINISHELL_H
