@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 21:17:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:04:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ bool				is_alpha(const char c);
 bool				is_digit(const char c);
 bool				is_name_part(const char c);
 
+bool is_quoted_token(t_set *set, t_node *token);
+
 // lifecycle
 t_tree				*make_export(t_shell *shell)
 					__attribute__((warn_unused_result));
 t_shell				*make_shell(char **env) __attribute__((warn_unused_result));
 void				make_shlvl(t_shell *shell);
 t_fd				make_heredoc(char *eof,
-						t_shell *shell) __attribute__((warn_unused_result));
+						t_shell *shell, bool is_quoted) __attribute__((warn_unused_result));
 t_list				*get_path(t_shell *shell)
 					__attribute__((warn_unused_result));
 t_descriptor		*make_descriptors(void) __attribute__((warn_unused_result));
@@ -132,6 +134,8 @@ void				set_exit_status(int status);
 void				__exit_nb__(const int status,
 						char *err) __attribute__((noreturn));
 int					invalid_option(t_command *cmd);
+
+void remove_spaces(t_shell *shell, t_list *tokens);
 
 int					pipe_parse(t_list *tokens);
 int					redirection_parse(t_list *tokens);

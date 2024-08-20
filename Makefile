@@ -44,8 +44,8 @@ UNDERLINE = \033[4m
 REVERSE  = \033[7m
 
 CC = gcc
-DEBUG = -fsanitize=address
-# DEBUG = -g
+# DEBUG = -fsanitize=address
+DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} -Werror #${WFLAGS}
 

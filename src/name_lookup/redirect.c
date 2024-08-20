@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 19:39:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:05:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int redirect(t_node *token, t_command *cmd)
 	}
 	else if (string_equal(token->val, "<<"))
 	{
-		fd = make_heredoc(token->next->val, cmd->shell);
+		fd = make_heredoc(token->next->val, cmd->shell, is_quoted_token(cmd->shell->quoted_tokens, token->next));
 		if (fd == -1)
 		 	return -1;
 		cmd->descriptors->stdin = fd;
