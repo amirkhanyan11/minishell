@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/20 16:58:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:45:46 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int g_exit_status;
 
 // handles redirections and $variables
 t_list *preprocess(t_list *tokens, t_shell *shell)
@@ -23,7 +25,7 @@ t_list *preprocess(t_list *tokens, t_shell *shell)
 
 	if (pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
 	{
-		set_exit_status(2);
+		g_exit_status = 258;
 		list_clear(&tokens);
 	}
 
