@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reslove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 19:36:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:18:09 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char *resolve(char *t_val, t_shell *shell)
 	{
 		if (s[i] == '$')
 		{
-			size_t k = __strchr_p(s + i + 1, p) - s; // k - i + 1 is the length of the name of the variable
+			size_t k = __strchr_p(s + i + 1, p) - s; // k - i + 1 i	s the length of the name of the variable
+
 
 			if (s[i + 1] == '?' || s[i + 1] == '$')
 				++k;
@@ -38,6 +39,12 @@ char *resolve(char *t_val, t_shell *shell)
 			if (is_digit(s[i + 1]))
 			{
 				k = 2;
+			}
+
+			else if (k == 1)
+			{
+				i++;
+				continue;
 			}
 
 			char *prefix = __strdup(s);

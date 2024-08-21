@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/20 17:04:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:05:50 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ void remove_spaces(t_shell *shell, t_list *tokens);
 
 int					pipe_parse(t_list *tokens);
 int					redirection_parse(t_list *tokens);
+void				save_token(t_shell * shell, t_node *address);
+
 
 // signals
 void				set_signals_interactive(void);

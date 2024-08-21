@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 21:34:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:05:36 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void merge_tokens(t_shell *shell, t_list *tokens)
 
 	mark_quoted_tokens(shell, tokens);
 
-	erase_quotes(tokens);
+	// erase_quotes(tokens);
 
 	t_node *token = front(tokens);
 
@@ -52,7 +52,7 @@ void merge_tokens(t_shell *shell, t_list *tokens)
 	}
 }
 
-void save(t_shell * shell, t_node *address)
+void save_token(t_shell * shell, t_node *address)
 {
 	char *val = __ptoa((size_t)address);
 
@@ -76,12 +76,13 @@ static void mark_quoted_tokens(t_shell * shell, t_list *tokens)
 
 		while (token && token != right_quote)
 		{
-			save(shell, token);
+			save_token(shell, token);
 			token = token->next;
 		}
 
+		pop(tokens, left_quote);
 		left_quote = find_if(right_quote->next, back(tokens), is_quote_node);
-
+		pop(tokens, right_quote);
 	}
 }
 
