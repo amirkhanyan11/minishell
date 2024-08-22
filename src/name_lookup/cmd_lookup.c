@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:18:51 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:35:13 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static int	builtin_lookup(t_command *cmd);
+static int	replace_cmd_name(t_command *cmd, t_node *node);
+static int	set_eval_to_prog_i_love_norminette(t_command *cmd);
 
 int	cmd_lookup(t_command *cmd)
 {
-	scoped_list		path;
-	t_node			*node;
-	char			*resolved_name;
+	scoped_list	path;
+	t_node		*node;
 
 	path = NULL;
 	if (!cmd)
@@ -34,23 +35,31 @@ int	cmd_lookup(t_command *cmd)
 		{
 			node = find_range(path, cmd->name, __cmd_exists__);
 			if (node)
-			{
-				resolved_name = __make_string(node->val, "/", cmd->name);
-				free(cmd->name);
-				cmd->name = resolved_name;
-				cmd->eval = eval_prog;
-				return (0);
-			}
+				return (replace_cmd_name(cmd, node));
 		}
 		else if (0 == access(cmd->name, F_OK))
-		{
-			cmd->eval = eval_prog;
-			return (0);
-		}
+			return (set_eval_to_prog_i_love_norminette(cmd));
 	}
 	__va_perror(cmd->name, ": command not found");
 	set_exit_status(127);
 	return (-1);
+}
+
+static int	set_eval_to_prog_i_love_norminette(t_command *cmd)
+{
+	cmd->eval = eval_prog;
+	return (0);
+}
+
+static int	replace_cmd_name(t_command *cmd, t_node *node)
+{
+	char	*resolved_name;
+
+	resolved_name = __make_string(node->val, "/", cmd->name);
+	free(cmd->name);
+	cmd->name = resolved_name;
+	cmd->eval = eval_prog;
+	return (0);
 }
 
 bool	__cmd_exists__(t_list_value path, t_list_value name)
@@ -79,7 +88,9 @@ static int	builtin_lookup(t_command *cmd)
 		cmd->eval = cd;
 	else if (string_equal(cmd->name, "exit"))
 		cmd->eval = msh_exit;
-	return ((cmd->eval == NULL) ? -1 : 0);
+	if (cmd->eval == NULL)
+		return (-1);
+	return (0);
 }
 
 #pragma GCC diagnostic pop
