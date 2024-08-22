@@ -6,14 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 14:35:30 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:58:14 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static void __quote_counter__(size_t *sum, char *s);
-// static void __dquote_counter__(size_t *sum, char *s);
 
 t_list	*tokenize(char *raw_cmd)
 {
@@ -85,25 +82,3 @@ int	pipe_parse(t_list *tokens)
 	}
 	return (0);
 }
-
-// static void __quote_counter__(size_t *sum, char *s) //ne nuzhno
-// {
-// 	if (!sum || !s) return ;
-
-// 	while (*s)
-// 	{
-// 		if (*s == '\'') (*sum)++;
-// 		++s;
-// 	}
-// }
-
-// static void __dquote_counter__(size_t *sum, char *s) //ne nuzhno
-// {
-// 	if (!sum || !s) return ;
-
-// 	while (*s)
-// 	{
-// 		if (*s == '\"') (*sum)++;
-// 		++s;
-// 	}
-// }

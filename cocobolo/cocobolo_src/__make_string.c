@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __make_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:28:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:15:37 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,26 @@ char	*__make_string_empty(void)
 	s = __malloc(1);
 	*s = '\0';
 	return (s);
+}
+
+char	*__unwrapped_make_string__(char *s, ...)
+{
+	va_list	args;
+	char	*arg;
+	char	*res;
+
+	if (!s)
+		return (NULL);
+	va_start(args, s);
+	arg = va_arg(args, char *);
+	res = __strdup(s);
+	while (NULL != arg)
+	{
+		res = __single_append__(res, arg);
+		arg = va_arg(args, char *);
+	}
+	va_end(args);
+	return (res);
 }
 
 char	*__make_string_from_char(const char c)

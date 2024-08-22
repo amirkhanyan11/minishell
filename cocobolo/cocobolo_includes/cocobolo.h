@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cocobolo.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 21:17:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:21:07 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_node	t_node;
 // usage : str = __strappend(str, s1, s2, ...)
 # define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
 # define __make_string(s, ...) __unwrapped_make_string__(s, __VA_ARGS__, NULL);
+# define __va_perror(s, ...) __unwrapped_va_perror__(s, __VA_ARGS__, NULL);
 # define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
 
 # define scoped_string char *__dtor(__delete_string)
@@ -102,6 +103,8 @@ char					*__make_string_from_list(t_node *first,
 						t_node *last) __allocs __result_use_check;
 char					*__attribute__((sentinel)) __result_use_check __unwrapped_strappend__(char *s,
 							...);
+void					__attribute__((sentinel)) __unwrapped_va_perror__(char *s, ...);
+
 char					*__attribute__((sentinel)) __result_use_check __unwrapped_make_string__(char *s,
 							...);
 char					*__single_strappend__(char *lhv,
@@ -119,6 +122,9 @@ char					*__itoa(int n) __result_use_check;
 char					*__ptoa(size_t n) __result_use_check;
 
 t_matrix				__split(char const *s, char *set) __result_use_check;
+
+char	*__single_append__(char *lhv, char *rhv);
+
 
 // atoi
 t_optional				__atoi(char const *str);
