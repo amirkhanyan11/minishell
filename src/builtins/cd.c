@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 19:00:25 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:08:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	__cd__(t_command *cmd)
 	{
 		set_exit_status(2);
 		msg = __make_string("cd: ", front(cmd->options)->val,
-				": invalid option");
+				": invalid option", NULL);
 		__perror(msg);
 		__delete_string(&msg);
 		return ;

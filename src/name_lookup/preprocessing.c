@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:19:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 
 bool	is_quoted_token(t_set *set, t_node *token)
 {
-	char *__attribute__((cleanup(__delete_string)))	guess;
+	char *guess	__attribute__((cleanup(__delete_string)));
 
 	if (!set || !token)
 		return (false);

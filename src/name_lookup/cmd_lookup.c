@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:17:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static int	set_eval_to_prog_i_love_norminette(t_command *cmd);
 
 int	cmd_lookup(t_command *cmd)
 {
-	scoped_list	path;
-	t_node		*node;
+	t_list *path	__attribute__((cleanup(list_clear)));
 
 	path = NULL;
 	if (!cmd)
@@ -33,9 +32,9 @@ int	cmd_lookup(t_command *cmd)
 	{
 		if (__strchr(cmd->name, '/') == false)
 		{
-			node = find_range(path, cmd->name, __cmd_exists__);
-			if (node)
-				return (replace_cmd_name(cmd, node));
+			if (find_range(path, cmd->name, __cmd_exists__))
+				return (replace_cmd_name(cmd, find_range(path,
+							cmd->name, __cmd_exists__)));
 		}
 		else if (0 == access(cmd->name, F_OK))
 			return (set_eval_to_prog_i_love_norminette(cmd));
@@ -55,7 +54,7 @@ static int	replace_cmd_name(t_command *cmd, t_node *node)
 {
 	char	*resolved_name;
 
-	resolved_name = __make_string(node->val, "/", cmd->name);
+	resolved_name = __make_string(node->val, "/", cmd->name, NULL);
 	free(cmd->name);
 	cmd->name = resolved_name;
 	cmd->eval = eval_prog;
@@ -64,9 +63,9 @@ static int	replace_cmd_name(t_command *cmd, t_node *node)
 
 bool	__cmd_exists__(t_list_value path, t_list_value name)
 {
-	char *__attribute__((cleanup(__delete_string)))	guess;
+	char *guess	__attribute__((cleanup(__delete_string)));
 
-	guess = __make_string(path, "/", name);
+	guess = __make_string(path, "/", name, NULL);
 	return (0 == access(guess, F_OK));
 }
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:46:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	cd_minus(int *status, t_command *cmd);
 
 void	_chdir(t_command *cmd, const char *path, int *status)
 {
-	char *__attribute__((cleanup(__delete_string)))	cwd;
+	char *cwd	__attribute__((cleanup(__delete_string)));
 
 	cwd = _getcwd();
 	if (chdir(path) == -1)
@@ -96,7 +96,7 @@ void	cd_minus(int *status, t_command *cmd)
 
 void	update_pwd(t_shell *shell, char *oldpwd)
 {
-	char *__attribute__((cleanup(__delete_string)))	pwd;
+	char *pwd	__attribute__((cleanup(__delete_string)));
 
 	if (!shell || !oldpwd)
 		return ;

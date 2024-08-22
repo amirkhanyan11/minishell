@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:36:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:10:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*__make_string_empty(void)
 	return (s);
 }
 
-char	*__unwrapped_make_string__(char *s, ...)
+char	*__make_string(char *s, ...)
 {
 	va_list	args;
 	char	*arg;

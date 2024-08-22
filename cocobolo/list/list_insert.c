@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:55:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:36:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:39:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_node	*list_insert(t_list *list, t_node *pos, char *val)
 		return (NULL);
 	if (empty(list) || pos == list->tail)
 	{
-		push_back(list, val);
+		push_back(list, val, NULL);
 		return (list->tail);
 	}
 	new = make_node(val);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:31:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:36:48 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,10 @@ struct					s_node
 	t_node				*prev;
 };
 
-# ifdef __linux__
-#  if __has_attribute(warn_unused_result)
-#   define __attribute__((warn_unused_result)) __attribute__((__warn_unused_result__))
-#  else
-#   define __attribute__((warn_unused_result))
-#  endif //  __has_attribute(warn_unused_result)
-# endif // __linux__
-
-# define push_back(list, ...) __unwrapped_push__(__single__push_back__, list, __VA_ARGS__, NULL)
-# define push_front(list, ...) __unwrapped_push__(__single__push_front__, list, __VA_ARGS__, NULL)
-
-void					__attribute__((sentinel)) __unwrapped_push__(f_push f,
-							t_list *const list, ...);
-
+void					__attribute__((sentinel)) push_back(
+							t_list *list, ...);
+void					__attribute__((sentinel)) push_front(
+							t_list *list, ...);
 void					__single__push_back__(t_list *const list,
 							const t_list_value x);
 void					__single__push_front__(t_list *const list,

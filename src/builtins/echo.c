@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:28:21 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:40:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	__echo__(t_command *cmd)
 				back(cmd->options), last_nl));
 	}
 	if (!empty(cmd->options))
-		push_back(cmd->options, "");
+		push_back(cmd->options, "", NULL);
 	echo_arglist(cmd->options);
 	echo_arglist(cmd->args);
 	if (newline)

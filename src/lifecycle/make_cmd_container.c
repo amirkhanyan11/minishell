@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:12:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:40:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ static void		make_cmds(t_cmd_container *container, t_shell *shell,
 
 t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 {
-	scoped_list		tokens;
+	t_list			*tokens;
 	t_cmd_container	*container;
 
 	tokens = preprocess(tokenize(raw_cmd), shell);
 	if (empty(tokens) || !shell)
+	{
+		list_clear(&tokens);
 		return (NULL);
+	}
 	container = __malloc(sizeof(t_cmd_container));
 	container->current_cmd_index = 0;
 	container->shell = shell;
@@ -31,6 +34,7 @@ t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 	container->arr = __malloc(sizeof(t_command) * container->size);
 	container->shell->container = container;
 	make_cmds(container, shell, tokens);
+	list_clear(&tokens);
 	return (container);
 }
 
@@ -73,7 +77,7 @@ static t_list	*make_partition(t_shell *shell, t_node *first, t_node *last)
 	curr = first;
 	while (curr && curr->prev != last)
 	{
-		push_back(list, curr->val);
+		push_back(list, curr->val, NULL);
 		if (is_quoted_token(shell->quoted_tokens, curr))
 		{
 			save_token(shell, back(list));

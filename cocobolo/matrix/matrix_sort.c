@@ -6,14 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 20:09:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:07:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:21:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
 static int	__partition__(t_matrix arr, int low, int high,
-		str_binary_predicate cmp)
+		t_str_binary_predicate cmp)
 {
 	int	i;
 	int	j;
@@ -33,7 +33,7 @@ static int	__partition__(t_matrix arr, int low, int high,
 }
 
 static void	__matrix_qsort__(t_matrix arr, int low, int high,
-		str_binary_predicate cmp)
+		t_str_binary_predicate cmp)
 {
 	int	pivot;
 
@@ -44,7 +44,7 @@ static void	__matrix_qsort__(t_matrix arr, int low, int high,
 	__matrix_qsort__(arr, pivot + 1, high, cmp);
 }
 
-void	matrix_sort(t_matrix arr, str_binary_predicate cmp)
+void	matrix_sort(t_matrix arr, t_str_binary_predicate cmp)
 {
 	if (!arr)
 		return ;

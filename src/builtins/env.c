@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:15:43 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 19:06:39 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:08:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	__env__(t_command *cmd)
 	else if (!empty(cmd->args))
 	{
 		str = __make_string("env", ": ", front(cmd->args)->val,
-				": No such file or directory");
+				": No such file or directory", NULL);
 		__perror(str);
 		__delete_string(&str);
 		status = 127;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:08:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ static void	__exit_nb_wrapper(t_command *cmd, const int status, char *err);
 
 void	__exit__(t_command *cmd)
 {
-	char *__attribute__((cleanup(__delete_string)))	err;
-	t_optional		val;
+	char		*err;
+	t_optional	val;
 
-	err = NULL;
 	printf("exit\n");
 	list_move_back(cmd->options, cmd->args);
 	if (size(cmd->args) >= 1)
@@ -31,7 +30,7 @@ void	__exit__(t_command *cmd)
 		if (!has_value(&val))
 		{
 			err = __make_string("exit: ", front(cmd->args)->val,
-					": numeric argument required");
+					": numeric argument required", NULL);
 			__exit_nb_wrapper(cmd, -1, err);
 		}
 		else if (size(cmd->args) > 1)
@@ -44,6 +43,7 @@ void	__exit__(t_command *cmd)
 	}
 	else
 		__exit_nb_wrapper(cmd, 0, err);
+	__delete_string(&err);
 }
 
 static void	__exit_nb_wrapper(t_command *cmd, const int status, char *err)

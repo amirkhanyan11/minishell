@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:59:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,11 @@ void	unset(t_command *cmd)
 
 int	__unset_var__(t_shell *shell, t_list_value key)
 {
-	char *__attribute__((cleanup(__delete_string)))	str;
-
-	str = NULL;
 	if (!key)
 		return (-1);
 	if (!is_name(key))
 	{
-		str = __make_string("unset: `", key, "\': not a valid identifier");
-		__perror(str);
+		__va_perror("unset: `", key, "\': not a valid identifier", NULL);
 		return (-1);
 	}
 	if (shell->container && shell->container->size == 1)
@@ -60,7 +56,6 @@ static void	_unset_args(t_node *arg, t_command *cmd, int *status)
 
 void	__unset__(t_command *cmd)
 {
-	char	*str;
 	int		status;
 	t_node	*arg;
 
@@ -70,10 +65,8 @@ void	__unset__(t_command *cmd)
 	arg = front(cmd->args);
 	if (!empty(cmd->options))
 	{
-		str = __make_string("unset: ", front(cmd->options)->val,
-				": invalid option");
-		__perror(str);
-		__delete_string(&str);
+		__va_perror("unset: ", front(cmd->options)->val, ": invalid option",
+			NULL);
 		status = 1;
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pid.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:45:58 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 18:14:09 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:18:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ char	*get_pid(t_shell *shell)
 
 static void	exec_ps(t_fd *pipe, t_shell *shell)
 {
-	t_fd			pid;
-	scoped_matrix	t_env;
-	char			*cmd[2];
+	t_fd		pid;
+	t_matrix	t_env;
+	char		*cmd[2];
 
 	cmd[0] = "/bin/ps";
 	cmd[1] = NULL;
@@ -59,4 +59,5 @@ static void	exec_ps(t_fd *pipe, t_shell *shell)
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, NULL, 0);
+	matrix_clear(&t_env);
 }

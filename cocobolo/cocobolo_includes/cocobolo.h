@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:40:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:32:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include "get_next_line.h"
 # include "list.h"
 # include "optional.h"
-# include "tree.h"
 # include "pair.h"
 # include "set.h"
+# include "tree.h"
 # include <assert.h>
 # include <errno.h>
 # include <limits.h>
@@ -42,30 +42,18 @@
 typedef struct s_list	t_list;
 typedef struct s_node	t_node;
 
-# ifdef __linux__
-#  if __has_attribute(noreturn)
-#   define __dead2 __attribute__((__noreturn__))
-#  else
-#   define __dead2
-#  endif //  __has_attribute(noreturn)
-# endif // __linux__
-
-
-// usage : str = __strappend(str, s1, s2, ...)
-# define __make_string(s, ...) __unwrapped_make_string__(s, __VA_ARGS__, NULL);
-
-# define scoped_list t_list *__attribute__((cleanup(list_clear)))
-# define scoped_matrix t_matrix __attribute__((cleanup(matrix_clear)))
-
 typedef void			(*t_printf_option)(const char *const);
 
-typedef bool			(*str_binary_predicate)(char *, char *);
+typedef bool			(*t_str_binary_predicate)(char *, char *);
 
 typedef char			**t_matrix;
 
 void					__perror(char *err);
-void					__exit(char const *const err) __dead2;
-void					*__malloc(size_t n) __attribute__((malloc)) __attribute__((warn_unused_result));
+void					__exit(char const *const err)
+						__attribute__((__noreturn__));
+void					*__malloc(size_t n)
+						__attribute__((malloc))
+						__attribute__((warn_unused_result));
 pid_t					__fork(void);
 void					__pipe(int *p);
 void					__putstr_fd(char *s, int fd);
@@ -75,24 +63,34 @@ void					*__memset(void *b, int c, size_t len);
 void					__string_swap(char **lhv, char **rhv);
 void					__string_move(char **lhv, char **rhv);
 void					__delete_string(char **s);
-char					*__make_string_empty(void) __attribute__((malloc)) __attribute__((warn_unused_result));
-char					*__make_string_from_char(const char c) __attribute__((malloc)) __attribute__((warn_unused_result));
+char					*__make_string_empty(void)
+						__attribute__((malloc))
+						__attribute__((warn_unused_result));
+char					*__make_string_from_char(const char c)
+						__attribute__((malloc))
+						__attribute__((warn_unused_result));
 char					*__strtrim(char *s1,
-						char *set) __attribute__((malloc)) __attribute__((warn_unused_result));
+							char *set) __attribute__((malloc))
+						__attribute__((warn_unused_result));
 char					*__make_string_from_list(t_node *first,
-						t_node *last) __attribute__((malloc)) __attribute__((warn_unused_result));
-char					*__attribute__((sentinel)) __attribute__((warn_unused_result)) __strappend(char *s,
-							...);
-void					__attribute__((sentinel)) __va_perror(char *s, ...);
+							t_node *last)
+						__attribute__((malloc))
+						__attribute__((warn_unused_result));
+char					*__strappend(char *s,
+							...) __attribute__((sentinel))
+						__attribute__((warn_unused_result));
+void					__va_perror(char *s, ...) __attribute__((sentinel));
 
-char					*__attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrapped_make_string__(char *s,
-							...);
+char					*__make_string(char *s,
+							...) __attribute__((sentinel))
+						__attribute__((warn_unused_result));
 char					*__single_strappend__(char *lhv,
-						char *rhv) __attribute__((warn_unused_result));
+							char *rhv) __attribute__((warn_unused_result));
 size_t					__strlen(const char *str);
-char					*__strdup(const char *src) __attribute__((warn_unused_result));
+char					*__strdup(const char *src)
+						__attribute__((warn_unused_result));
 char					*__strdup_until(const char *src,
-						const char end) __attribute__((warn_unused_result));
+							const char end) __attribute__((warn_unused_result));
 char					*__strstr(char *haystack, char *needle);
 ssize_t					__strcmp(const char *lhv, const char *rhv);
 bool					__strchr(char *s, const char c);
@@ -101,10 +99,10 @@ bool					__strcmp_weak__(const char *lhv, const char *rhv);
 char					*__itoa(int n) __attribute__((warn_unused_result));
 char					*__ptoa(size_t n) __attribute__((warn_unused_result));
 
-t_matrix				__split(char const *s, char *set) __attribute__((warn_unused_result));
+t_matrix				__split(char const *s,
+							char *set) __attribute__((warn_unused_result));
 
-char	*__single_append__(char *lhv, char *rhv);
-
+char					*__single_append__(char *lhv, char *rhv);
 
 // atoi
 t_optional				__atoi(char const *str);
@@ -125,15 +123,19 @@ void					print_matrix(t_matrix arr);
 void					matrix_clear(t_matrix *arrptr);
 size_t					matrix_size(t_matrix arr);
 t_matrix				make_matrix_from_string(char *s,
-					char *set) __attribute__((warn_unused_result));
-t_matrix				make_matrix_copy(t_matrix other) __attribute__((warn_unused_result));
-t_matrix				make_matrix_from_list(t_list *list) __attribute__((warn_unused_result));
-t_matrix				make_matrix_from_tree(t_tree *tree) __attribute__((warn_unused_result));
-void					matrix_sort(t_matrix arr, str_binary_predicate cmp);
+							char *set)
+						__attribute__((warn_unused_result));
+t_matrix				make_matrix_copy(t_matrix other)
+						__attribute__((warn_unused_result));
+t_matrix				make_matrix_from_list(t_list *list)
+						__attribute__((warn_unused_result));
+t_matrix				make_matrix_from_tree(t_tree *tree)
+						__attribute__((warn_unused_result));
+void					matrix_sort(t_matrix arr, t_str_binary_predicate cmp);
 
 // colors
-void					__attribute__((sentinel)) printc(const char *const message,
-							...);
+void					printc(const char *const message,
+							...) __attribute__((sentinel));
 void					__italic__(const char *const message);
 void					__purple__(const char *const message);
 void					__cyan__(const char *const message);

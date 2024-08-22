@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:33:39 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:40:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	sort_tokens(t_command *cmd, t_list *tokens)
 	token = front(tokens)->next;
 	while (token && token->val && token->val[0] == '-')
 	{
-		push_back(cmd->options, token->val);
+		push_back(cmd->options, token->val, NULL);
 		token = token->next;
 	}
 	while (token)
 	{
-		push_back(cmd->args, token->val);
+		push_back(cmd->args, token->val, NULL);
 		token = token->next;
 	}
 	return (0);

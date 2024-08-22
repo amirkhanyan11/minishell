@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 21:26:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:08:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	__make_matrix_from_tree__(t_matrix arr, t_tree *tree,
 	if (curr == tree->nil)
 		return ;
 	__make_matrix_from_tree__(arr, tree, curr->left, i);
-	val = __make_string(curr->key, "=", curr->val);
+	val = __make_string(curr->key, "=", curr->val, NULL);
 	__matrix_insert__(arr, val, i);
 	__make_matrix_from_tree__(arr, tree, curr->right, i);
 }

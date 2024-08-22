@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_sign_resolver.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:06:34 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:40:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 {
-	scoped_list	queue;
-	t_node		*token;
-	t_node		*next;
+	t_list	*queue;
+	t_node	*token;
+	t_node	*next;
 
-	queue = NULL;
 	if (!tokens || !shell)
 		return ;
 	queue = make_list();
@@ -29,7 +28,7 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		if (is_quote(token->val))
 		{
 			if (empty(queue))
-				push_back(queue, token->val);
+				push_back(queue, token->val, NULL);
 			else if (string_equal(front(queue)->val, token->val))
 				pop_front(queue);
 		}
@@ -38,4 +37,5 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 			token->val = resolve(token->val, shell);
 		token = next;
 	}
+	list_clear(&queue);
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 00:18:19 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:08:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_node	*find_strict(t_node *first, t_node *last, t_list_value target,
 	char *__attribute__((cleanup(__delete_string)))	err;
 
 	res = find(first, last, target, cmp);
-	err = __make_string("bad strict find ", "(", target, ")");
+	err = __make_string("bad strict find ", "(", target, ")", NULL);
 	if (NULL == res)
 		__exit(err);
 	return (res);

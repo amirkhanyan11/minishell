@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:02:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ char	*resolve(char *t_val, t_shell *shell)
 
 static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell)
 {
-	char			*val;
-	char *__attribute__((cleanup(__delete_string)))	_val;
-	size_t			k;
-	char			c;
+	char	*val;
+	char	*_val;
+	size_t	k;
+	char	c;
 
 	_val = NULL;
 	k = __strchr_p((*s) + (*i) + 1, not_name_part) - (*s);
@@ -59,6 +59,7 @@ static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell)
 	free((*s));
 	(*s) = data->first;
 	__delete_string(&data->second);
+	__delete_string(&_val);
 }
 
 static int	tune_k(char c, size_t *i, size_t *k)

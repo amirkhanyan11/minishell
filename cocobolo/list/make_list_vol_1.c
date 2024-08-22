@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 21:41:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:42:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 21:40:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ t_list	*make_list_copy(t_node *first, t_node *last, t_value_mutate f)
 	{
 		if (f == NULL)
 		{
-			push_back(list, first->val);
+			push_back(list, first->val, NULL);
 		}
 		else
 		{
 			val = f(first->val);
-			push_back(list, val);
+			push_back(list, val, NULL);
 			free(val);
 		}
 		first = first->next;
