@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_wrapper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:32:33 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:20:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,26 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
+static void	execute(t_command *cmd, t_fd *pipe, t_eval_opcode opcode);
+static void	not_funny(t_command *cmd, t_fd *pipe);
+
 void	eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 {
 	t_fd	pipe[PIPE_MAX];
-	pid_t	pid;
-	int 	s;
 
 	__pipe(pipe);
 	if (cmd->container->current_cmd_index < cmd->container->size - 1)
 		dup2(pipe[out], STDOUT_FILENO);
 	set_descriptors(cmd);
+	execute(cmd, pipe, opcode);
+	dup2(pipe[in], STDIN_FILENO);
+	dup2(cmd->shell->stddesc->stdout, STDOUT_FILENO);
+	close(pipe[in]);
+	close(pipe[out]);
+}
+
+static void	execute(t_command *cmd, t_fd *pipe, t_eval_opcode opcode)
+{
 	if (_cd == opcode)
 		__cd__(cmd);
 	else if (_echo == opcode)
@@ -42,22 +52,25 @@ void	eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 	else if (_msh_exit == opcode)
 		__exit__(cmd);
 	else if (_program == opcode)
-	{
-		pid = __fork();
-		if (0 == pid)
-		{
-			close(pipe[in]);
-			__eval_prog__(cmd);
-		}
-		if (cmd->container->current_cmd_index == cmd->container->size - 1)
-		{
-			waitpid(pid, &s, 0);
-			set_exit_status(WEXITSTATUS(s));
-		}
-	}
-	dup2(pipe[in], STDIN_FILENO);
-	dup2(cmd->shell->stddesc->stdout, STDOUT_FILENO);
-	close(pipe[in]);
-	close(pipe[out]);
+		not_funny(cmd, pipe);
 }
+
+static void	not_funny(t_command *cmd, t_fd *pipe)
+{
+	int		s;
+	pid_t	pid;
+
+	pid = __fork();
+	if (0 == pid)
+	{
+		close(pipe[in]);
+		__eval_prog__(cmd);
+	}
+	if (cmd->container->current_cmd_index == cmd->container->size - 1)
+	{
+		waitpid(pid, &s, 0);
+		set_exit_status(WEXITSTATUS(s));
+	}
+}
+
 #pragma GCC diagnostic pop
