@@ -12,17 +12,17 @@
 
 #include "minishell.h"
 
-t_list * get_path(t_shell *shell)
+t_list	*get_path(t_shell *shell)
 {
-	if (!shell) return NULL;
+	t_list		*path;
+	t_treeval	path_val;
 
-	t_list *path = NULL;
-
-	t_treeval path_val = get_val(shell->env, "PATH");
-
-	if (!path_val) return NULL;
-
+	if (!shell)
+		return (NULL);
+	path = NULL;
+	path_val = get_val(shell->env, "PATH");
+	if (!path_val)
+		return (NULL);
 	path = make_list_from_string(path_val, ":", words_only);
-
-	return path;
+	return (path);
 }

@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   name_predicates.c                                  :+:      :+:    :+:   */
+/*   name_predicates_vol_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 17:41:51 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:56:44 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/22 18:26:29 by marikhac          #+#    #+#             */
+/*   Updated: 2024/08/22 18:26:55 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	is_alpha(const char c)
-{
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
-}
-
-bool	is_digit(const char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-bool	is_name_part(const char c)
-{
-	return (c == '_' || is_alpha(c) || is_digit(c));
-}
-
-bool	is_single_redirection(char *val)
-{
-	return (string_equal(val, "<") || string_equal(val, ">"));
-}
 
 bool	is_redirection(char *val)
 {
@@ -55,4 +35,9 @@ bool	is_name(char *s)
 		++s;
 	}
 	return (true);
+}
+
+bool	not_name_part(char c)
+{
+	return (!is_name_part(c));
 }

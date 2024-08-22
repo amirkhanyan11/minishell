@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 18:51:52 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:33:07 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 // different exit status
 // <<
 // .
-
-int g_exit_status = 0;
 
 int main(int ac, char **av, char **env)
 {
@@ -45,7 +43,7 @@ int main(int ac, char **av, char **env)
 	}
 	__t_shell__(shell);
 
-	return g_exit_status;
+	return get_exit_status();
 }
 
 

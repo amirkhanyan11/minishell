@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 21:18:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:14:43 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,61 +15,55 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void __t_shell__(t_shell * shell)
+void	__t_shell__(t_shell *shell)
 {
-    if (NULL == shell) return;
-
-    list_clear(&shell->history);
-    tree_clear(&shell->env);
-    tree_clear(&shell->export);
-    set_clear(&shell->quoted_tokens);
-
+	if (NULL == shell)
+		return ;
+	list_clear(&shell->history);
+	tree_clear(&shell->env);
+	tree_clear(&shell->export);
+	set_clear(&shell->quoted_tokens);
 	free(shell->stddesc);
-
-    free(shell);
-
+	free(shell);
 	shell = NULL;
 }
 
-void __t_command__(t_command **cmdptr)
+void	__t_command__(t_command **cmdptr)
 {
-	if (NULL == cmdptr) return;
+	t_command	*cmd;
 
-	t_command *cmd = *cmdptr;
-
-	if (NULL == cmd) return;
-
+	if (NULL == cmdptr)
+		return ;
+	cmd = *cmdptr;
+	if (NULL == cmd)
+		return ;
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
 	reset_descriptors(cmd);
-
 	free(cmd->descriptors);
-		free(cmd->name);
-
+	free(cmd->name);
 	free(cmd);
-
 	*cmdptr = NULL;
 }
 
-void __t_cmd_container__(t_cmd_container ** cmdsptr)
+void	__t_cmd_container__(t_cmd_container **cmdsptr)
 {
-	if (NULL == cmdsptr) return;
+	t_cmd_container	*cmds;
+	size_t			i;
 
-	t_cmd_container *cmds = *cmdsptr;
-
-	if (NULL == cmds) return;
-
-	size_t i = 0;
-
+	if (NULL == cmdsptr)
+		return ;
+	cmds = *cmdsptr;
+	if (NULL == cmds)
+		return ;
+	i = 0;
 	while (i < cmds->size)
 	{
 		__t_command__(&(cmds->arr[i]));
 		i++;
 	}
-
 	cmds->shell->container = NULL;
 	cmds->shell = NULL;
-
 	free(cmds->arr);
 	free(cmds);
 	*cmdsptr = NULL;

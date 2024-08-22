@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset_descriptors.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:24:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:43:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:12:52 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void reset_descriptors(t_command * cmd)
+void	reset_descriptors(t_command *cmd)
 {
-	if (!cmd || !cmd->shell) return;
-
+	if (!cmd || !cmd->shell)
+		return ;
 	if (cmd->descriptors->stdin != cmd->shell->stddesc->stdin)
 	{
 		close(cmd->descriptors->stdin);

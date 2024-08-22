@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 21:58:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:46:29 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 #define PERMISSIONS 0644
 
-t_fd open_file(char *filename, int option)
+t_fd	open_file(char *filename, int option)
 {
-	t_fd fd = -1;
+	t_fd	fd;
 
+	fd = -1;
 	if (O_RDONLY == option)
 		fd = open(filename, O_RDONLY);
 	else
 		fd = open(filename, option, PERMISSIONS);
-
 	if (-1 == fd)
 	{
-		scoped_string msg = __make_string(filename, ": ", "no such file or directory");
-		__perror(msg);
+		__va_perror(filename, ": ", "no such file or directory");
 	}
-
-	return fd;
+	return (fd);
 }

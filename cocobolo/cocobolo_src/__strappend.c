@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   __strappend.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:21:05 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:29:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:20:48 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-static char	*__single_append__(char *lhv, char *rhv)
+char	*__single_append__(char *lhv, char *rhv)
 {
 	char	*target;
 	size_t	i;
@@ -53,24 +53,4 @@ char	*__unwrapped_strappend__(char *s, ...)
 	}
 	va_end(args);
 	return (s);
-}
-
-char	*__unwrapped_make_string__(char *s, ...)
-{
-	va_list	args;
-	char	*arg;
-	char	*res;
-
-	if (!s)
-		return (NULL);
-	va_start(args, s);
-	arg = va_arg(args, char *);
-	res = __strdup(s);
-	while (NULL != arg)
-	{
-		res = __single_append__(res, arg);
-		arg = va_arg(args, char *);
-	}
-	va_end(args);
-	return (res);
 }
