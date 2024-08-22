@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:01:15 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 18:57:37 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:07:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int	__export_from_string__(char *expr, t_shell *shell)
 	t_node		*lhv;
 
 	tokens = NULL;
-	if (!expr || !shell || empty(tokens))
+	if (!expr || !shell)
 		return (-1);
 	tokens = make_list_from_string(expr, "=", all);
+	if (empty(tokens))
+		return (-1);
 	lhv = front(tokens);
 	if (______i_a_g_t_c_i_m_p_f_n_________(expr, &lhv, tokens, shell))
 		return (-1);
