@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:21:07 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:25:00 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "list.h"
 # include "optional.h"
 # include "tree.h"
+# include "pair.h"
 # include "set.h"
 # include <assert.h>
 # include <errno.h>

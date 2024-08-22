@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:59:49 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:00:39 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 extern int	g_exit_status;
 
 static int	sort_redirections(t_command *cmd, t_list *tokens);
-static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens, t_node *token);
+static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens,
+				t_node *token);
 
 int	sort_tokens(t_command *cmd, t_list *tokens)
 {
@@ -62,7 +63,8 @@ static int	sort_redirections(t_command *cmd, t_list *tokens)
 	return (0);
 }
 
-static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens, t_node *token)
+static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens,
+		t_node *token)
 {
 	if (!token->next || string_equal(token->next->val, ""))
 	{

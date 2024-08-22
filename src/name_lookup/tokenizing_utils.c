@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:29:11 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 13:42:50 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:01:47 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	quote_parse(t_list *tokens)
 	bool	s;
 	t_node	*token;
 
-	if (!tokens)
-		return (0);
 	d = false;
 	s = false;
 	token = front(tokens);

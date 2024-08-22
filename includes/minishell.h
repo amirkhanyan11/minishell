@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 14:28:14 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:45:49 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,9 @@ void echo_arglist(t_list *arglist);
 bool not_n_predicate(char c);
 bool is_n(char * opt);
 int __export_from_string__(char *expr, t_shell *shell);
+
+
+char *get_pid(t_shell *shell) __result_use_check;
 
 // name_lookup utils
 

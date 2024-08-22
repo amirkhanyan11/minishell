@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 14:58:14 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:02:21 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*tokenize(char *raw_cmd)
 	if (!raw_cmd)
 		return (NULL);
 	tokens = make_list_from_string(raw_cmd, SPECIAL_SYMBOLS, all);
-	if (quote_parse(tokens) == -1)
+	if (!tokens || quote_parse(tokens) == -1)
 	{
 		set_exit_status(2);
 		list_clear(&tokens);
@@ -47,9 +47,7 @@ int	redirection_parse(t_list *tokens)
 		}
 		else if (is_redirection(rdr->val))
 		{
-			scoped_string err = __make_string("parse error near token ", rdr->val);
-				// changed scoped to char * and freed on line 56
-			__perror(err);
+			__va_perror("parse error near token ", rdr->val);
 			return (-1);
 		}
 		rdr = find_if(rdr->next, back(tokens), is_redir);
