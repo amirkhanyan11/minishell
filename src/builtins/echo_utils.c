@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eval_prog.c                                        :+:      :+:    :+:   */
+/*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 18:56:12 by marikhac         ###   ########.fr       */
+/*   Created: 2024/08/21 19:01:36 by marikhac          #+#    #+#             */
+/*   Updated: 2024/08/21 19:04:24 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,40 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void eval_prog(t_command *cmd)
+void	echo_arglist(t_list *arglist)
 {
-	eval_wrapper(cmd, _program);
+	t_node	*arg;
+
+	if (!arglist)
+		return ;
+	arg = front(arglist);
+	while (arg)
+	{
+		printf("%s", arg->val);
+		if (arg->next)
+			printf(" ");
+		arg = arg->next;
+	}
 }
 
-void __eval_prog__(t_command *cmd)
+bool	last_nl(t_node *const node)
 {
-	if (!cmd) __exit(NULL); // from child
+	if (!node || !node->val)
+		return (false);
+	return (is_n(node->val) && (node->next == NULL || !is_n(node->next->val)));
+}
 
-	scoped_list options_copy = make_list_copy_range(cmd->options, NULL);
-	push_front(options_copy, cmd->name);
+bool	not_n_predicate(char c)
+{
+	return (c != 'n');
+}
 
-	scoped_list args_copy = make_list_copy_range(cmd->args, NULL);
-	list_move_back(args_copy, options_copy);
-
-	scoped_matrix _args = make_matrix_from_list(options_copy);
-	scoped_matrix _env  = make_matrix_from_tree(cmd->shell->env);
-
-	execve(cmd->name, _args, _env);
-	__exit(NULL);
+bool	is_n(char *opt)
+{
+	if (__strlen(opt) < 2)
+		return (false);
+	opt++;
+	return (*__strchr_p(opt, not_n_predicate) == '\0');
 }
 
 #pragma GCC diagnostic pop

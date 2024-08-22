@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:13:48 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:44:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:42:50 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,10 @@ static int __export_from_string__(char *expr, t_shell *shell) // export ========
 
 	if (size(tokens) >= 2)
 	{
-		// scoped_string val = (front(tokens)->next->next) ? front(tokens)->next->next->val : "\0";
 		scoped_string val = __make_string_from_list(lhv->next->next, back(tokens));
 		if (val == NULL) val = __make_string_empty();
 		return export_update(shell, lhv->val, val);
 	}
-
 	else
 	{
 		unset_var(shell, lhv->val);
@@ -101,32 +99,25 @@ static int __export_from_string__(char *expr, t_shell *shell) // export ========
 int export_update(t_shell *shell, t_list_value key, t_list_value val)
 {
 	if (!shell || !key) return -1;
-
-
 	unset_var(shell, key);
-
 	tree_update(shell->export, key, val);
 
 	if (val)
 	{
 		tree_update(shell->env, key, val);
 	}
-
 	return 0;
 }
 
 
 static void __print_export__(t_tree_node *node)
 {
-	if (!node) return;
-
+	if (!node)
+		return;
 	printf("%s", DECLAREX);
-
 	printf("%s", node->key);
-
 	if (node->val)
 		printf("=\"%s\"", node->val);
-
 	printf("\n");
 }
 

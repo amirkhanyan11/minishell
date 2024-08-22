@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/20 17:03:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:09:40 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_fd make_heredoc(char *eof, t_shell *shell, bool is_quoted) // cat << "EOL"
 
     t_fd fd = open_file(HEREDOC, O_CREAT | O_RDWR);
 
-    char *line = read_line(heredoc_prompt); // can I lose stdin?
+    char *line = read_line(heredoc_prompt);
 
     while (!string_equal(line, eof))
     {

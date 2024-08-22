@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmd_container.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:00:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:10:17 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_list *make_partition(t_shell *shell, t_node *first, t_node *last);
 
 t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 {
@@ -45,7 +47,7 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
             pop(tokens, pipe->next);
         }
 
-        scoped_list partition = make_list_copy(first, pipe, NULL);
+        scoped_list partition = make_partition(shell, first, pipe);
 
         container->arr[i] = make_command(partition, container, shell);
 
@@ -53,4 +55,24 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
         i++;
     }
     return container;
+}
+
+
+t_list *make_partition(t_shell *shell, t_node *first, t_node *last)
+{
+	if (!shell || !first || !last) return NULL;
+
+	t_list *list = make_list();
+	t_node *curr = first;
+
+	while (curr && curr->prev != last)
+	{
+		push_back(list, curr->val);
+		if (is_quoted_token(shell->quoted_tokens, curr))
+		{
+			save_token(shell, back(list));
+		}
+		curr = curr->next;
+	}
+	return list;
 }

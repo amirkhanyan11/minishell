@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtins/ ./src/name_lookup/ ./src/exec/ \
+SRCSPATH = ./src/lifecycle/ ./src/other/ ./src/builtin_utils ./src/builtins/ ./src/name_lookup/ ./src/exec/ \
 			./cocobolo/cocobolo_src/ ./cocobolo/optional/ ./cocobolo/list/ \
 			./cocobolo/get_next_line/ ./cocobolo/tree/ ./cocobolo/matrix/ ./cocobolo/set/
 
@@ -8,9 +8,6 @@ INCPATH = ./includes/ ./cocobolo/cocobolo_includes/ ./readline_local/include/
 OBJSPATH = ./objs/
 
 __SUPER_SECRET_GREETING__ = meow meow meow jupa jupa
-
-# SRCS = $(wildcard $(SRCSPATH)*.c)
-# OBJS = $(patsubst $(SRCSPATH)%.c, $(OBJSPATH)%.o, $(SRCS))
 
 vpath %.c ${SRCSPATH}
 

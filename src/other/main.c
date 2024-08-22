@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:46:47 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:51:52 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int main(int ac, char **av, char **env)
 }
 
 
-// #ifdef __APPLE__
-// void	__attribute__((destructor)) moid(void)
-// {
-// 	// printf(GREEN);
-// 	printf("\n\nLeaks report\n");
-// 	system("leaks minishell");
-// 	// printf(RESET);
-// }
-// #endif // __APPLE__
+#ifdef __APPLE__
+void	__attribute__((destructor)) moid(void)
+{
+	// printf(GREEN);
+	printf("\n\nLeaks report\n");
+	system("leaks minishell");
+	// printf(RESET);
+}
+#endif // __APPLE__
