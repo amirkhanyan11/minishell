@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:34:35 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:44:28 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 static void	merge_inside_quotes(t_list *tokens);
 static bool	is_self_mergeable(t_node *token);
 static bool	is_mergeable(t_node *token);
+
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t, t_node **next);
+
 
 void	merge_tokens(t_shell *shell, t_list *tokens)
 {
@@ -49,8 +52,6 @@ static void	merge_inside_quotes(t_list *tokens)
 {
 	t_node	*token;
 	t_node	*next;
-	char	*quote_type;
-	t_node	*tmp;
 
 	if (!tokens || empty(tokens))
 		return ;
@@ -60,28 +61,36 @@ static void	merge_inside_quotes(t_list *tokens)
 		next = token->next;
 		if (is_quote(token->val))
 		{
-			quote_type = __strdup(token->val);
-			if (token->next && string_equal(token->next->val, quote_type))
-			{
-				list_insert(tokens, token, "");
-				next = token->next;
-			}
-			token = token->next;
-			tmp = token->next;
-			while (tmp && string_equal(tmp->val, quote_type) == false)
-			{
-				next = tmp->next;
-				token->val = __strappend(token->val, tmp->val);
-				pop(tokens, tmp);
-				tmp = next;
-			}
-			if (tmp)
-				tmp = tmp->next;
-			next = tmp;
-			__delete_string(&quote_type);
+			merge_inside_quotes_the_good_part(tokens, &token, &next);
 		}
 		token = next;
 	}
+}
+
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t, t_node **next)
+{
+	t_node	*tmp;
+	char	*quote_type;
+
+	quote_type = __strdup((*t)->val);
+	if ((*t)->next && string_equal((*t)->next->val, quote_type))
+	{
+		list_insert(tokens, (*t), "");
+		(*next) = (*t)->next;
+	}
+	(*t) = (*t)->next;
+	tmp = (*t)->next;
+	while (tmp && string_equal(tmp->val, quote_type) == false)
+	{
+		(*next) = tmp->next;
+		(*t)->val = __strappend((*t)->val, tmp->val);
+		pop(tokens, tmp);
+		tmp = (*next);
+	}
+	if (tmp)
+		tmp = tmp->next;
+	(*next) = tmp;
+	__delete_string(&quote_type);
 }
 
 static bool	is_self_mergeable(t_node *token)
