@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 18:05:36 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:41:25 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 static void merge_inside_quotes(t_list *tokens);
 static bool is_self_mergeable(t_node *token);
 static bool is_mergeable(t_node *token);
-static void erase_quotes(t_list *tokens);
-static bool is_quote_node(t_node * const node);
-static void mark_quoted_tokens(t_shell * shell, t_list *tokens);
 
 void merge_tokens(t_shell *shell, t_list *tokens)
 {
@@ -26,8 +23,6 @@ void merge_tokens(t_shell *shell, t_list *tokens)
 	merge_inside_quotes(tokens);
 
 	mark_quoted_tokens(shell, tokens);
-
-	// erase_quotes(tokens);
 
 	t_node *token = front(tokens);
 
@@ -49,58 +44,6 @@ void merge_tokens(t_shell *shell, t_list *tokens)
 		}
 
 		token = next;
-	}
-}
-
-void save_token(t_shell * shell, t_node *address)
-{
-	char *val = __ptoa((size_t)address);
-
-	set_insert(shell->quoted_tokens, val);
-
-	free(val);
-}
-
-static void mark_quoted_tokens(t_shell * shell, t_list *tokens)
-{
-	if (empty(tokens)) return;
-
-	t_node *left_quote = find_if(front(tokens), back(tokens), is_quote_node);
-
-	if (!left_quote) return;
-
-	while (left_quote)
-	{
-		t_node *right_quote = find(left_quote->next, back(tokens), left_quote->val, string_equal);
-		t_node *token = left_quote->next;
-
-		while (token && token != right_quote)
-		{
-			save_token(shell, token);
-			token = token->next;
-		}
-
-		pop(tokens, left_quote);
-		left_quote = find_if(right_quote->next, back(tokens), is_quote_node);
-		pop(tokens, right_quote);
-	}
-}
-
-static void erase_quotes(t_list *tokens)
-{
-	if (empty(tokens)) return;
-
-	t_node *token = find_if(front(tokens), back(tokens), is_quote_node);
-
-	while (token)
-	{
-		t_node *pair = find(token->next, back(tokens), token->val, string_equal);
-
-		if (!pair) break;
-
-		pop(tokens, token);
-		token = find_if(pair->next, back(tokens), is_quote_node);
-		pop(tokens, pair);
 	}
 }
 
@@ -150,9 +93,4 @@ static bool is_self_mergeable(t_node *token)
 static bool is_mergeable(t_node *token)
 {
 	return (!is_self_mergeable(token) && !string_equal(token->val, " "));
-}
-
-static bool is_quote_node(t_node * const node)
-{
-	return (is_quote(node->val));
 }

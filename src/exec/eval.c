@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 20:14:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:13:17 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void eval(t_cmd_container *cmds)
+void	eval(t_cmd_container *cmds)
 {
-	if (NULL == cmds) return ;
+	t_command	*cmd;
 
+	if (NULL == cmds)
+		return ;
 	while (cmds->current_cmd_index < cmds->size)
 	{
-		t_command *cmd = cmds->arr[cmds->current_cmd_index];
-
+		cmd = cmds->arr[cmds->current_cmd_index];
 		if (cmd)
 		{
 			cmd->eval(cmd);
-
 			if (cmd->redirection & redirect_heredoc)
 			{
 				unlink(HEREDOC);
@@ -35,6 +35,7 @@ void eval(t_cmd_container *cmds)
 		}
 		cmds->current_cmd_index++;
 	}
-	while (-1 != wait(NULL));
+	while (-1 != wait(NULL))
+		;
 }
 #pragma GCC diagnostic pop

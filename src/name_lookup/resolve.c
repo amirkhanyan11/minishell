@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reslove.c                                          :+:      :+:    :+:   */
+/*   resolve.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 18:18:09 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:44:12 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,11 @@ char *resolve(char *t_val, t_shell *shell)
 		{
 			size_t k = __strchr_p(s + i + 1, p) - s; // k - i + 1 i	s the length of the name of the variable
 
-
 			if (s[i + 1] == '?' || s[i + 1] == '$')
 				++k;
 
 			if (is_digit(s[i + 1]))
-			{
 				k = 2;
-			}
 
 			else if (k == 1)
 			{
@@ -50,7 +47,6 @@ char *resolve(char *t_val, t_shell *shell)
 			char *prefix = __strdup(s);
 			scoped_string postfix = __strdup(s + k);
 			prefix[i] = '\0';
-
 
 			char c = s[k];
 			s[k] = '\0';
@@ -72,22 +68,16 @@ char *resolve(char *t_val, t_shell *shell)
 			}
 
 			else if (is_digit(*(s + i + 1)))
-			{
 				val = "";
-			}
-
 			else
 				val = get_val(shell->export, s + i + 1);
-
 			s[k] = c;
-
 			if (!val) val = postfix;
 
 			i += __strlen(val) - 1;
 			prefix = __strappend(prefix, val, s + k);
 			free(s);
 			s = prefix;
-
 		}
 		i++;
 	}

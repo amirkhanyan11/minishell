@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 19:13:29 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:11:03 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	pwd(t_command *cmd)
 	else
 	{
 		path = _getcwd();
-		__delete_string(&path);
 		printf("%s\n", path);
+		__delete_string(&path);
 	}
 	set_exit_status(status);
 }

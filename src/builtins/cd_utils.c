@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/21 19:23:43 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:48:54 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void _chdir(t_command * cmd, const char *path, int *status)
 		return;
 	}
 
-	if (errno == ENOENT)
+	if (cmd->container->size == 1 && errno == ENOENT)
 	{
 		__perror("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory");
 	}

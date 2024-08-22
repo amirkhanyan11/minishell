@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 19:03:53 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:28:14 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void				__eval_prog__(t_command *cmd);
 void				__exit__(t_command *cmd);
 
 // other
-static int			__export_from_string__(char *expr, t_shell *shell);
 char				*_getcwd(void) __attribute__((warn_unused_result));
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);
@@ -151,6 +150,17 @@ bool last_nl(t_node * const node);
 void echo_arglist(t_list *arglist);
 bool not_n_predicate(char c);
 bool is_n(char * opt);
+int __export_from_string__(char *expr, t_shell *shell);
+
+// name_lookup utils
+
+int quote_parse(t_list *tokens);
+bool not_space(t_node *node);
+bool	is_redir(t_node *node);
+void	erase_quotes(t_list *tokens);
+bool	is_quote_node(t_node *const node);
+void	mark_quoted_tokens(t_shell *shell, t_list *tokens);
+
 
 // signals
 void				set_signals_interactive(void);

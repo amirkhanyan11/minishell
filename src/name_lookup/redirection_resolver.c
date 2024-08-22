@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_resolver.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:32:15 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 20:58:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:56:16 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// delete the file????
 
 // int redirection_resolver(t_list *tokens, t_command *cmd)
 // {

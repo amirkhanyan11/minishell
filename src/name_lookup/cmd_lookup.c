@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lookup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 19:39:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:10:42 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int builtin_lookup(t_command *cmd);
 
-int cmd_lookup(t_command *cmd)
+int cmd_lookup(t_command *cmd) 
 {
 	if (!cmd) return -1;
 

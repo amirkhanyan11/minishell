@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/12 21:58:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:46:54 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_fd open_file(char *filename, int option)
 
 	if (-1 == fd)
 	{
-		scoped_string msg = __make_string(filename, ": ", "no such file or directory");
+		scoped_string msg = __make_string(filename, ": ", "no such file or directory"); //remove variable and just write with __perror??
 		__perror(msg);
 	}
 
