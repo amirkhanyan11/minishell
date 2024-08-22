@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:07:40 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:53:16 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:32:40 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-extern int	g_exit_status;
 
 static int	process_infile(t_node *token, t_command *cmd);
 static int	process_outfile(t_node *token, t_command *cmd);

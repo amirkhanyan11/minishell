@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 19:04:34 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:28:21 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-extern int	g_exit_status;
 
 void	echo(t_command *cmd)
 {
@@ -41,7 +39,7 @@ void	__echo__(t_command *cmd)
 	echo_arglist(cmd->args);
 	if (newline)
 		printf("\n");
-	g_exit_status = 0;
+	set_exit_status(0);
 }
 
 #pragma GCC diagnostic pop

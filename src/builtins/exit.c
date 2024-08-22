@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/21 19:11:11 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:32:21 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static void	__exit_nb_wrapper(t_command *cmd, const int status, char *err);
-
-extern int	g_exit_status;
 
 void	__exit__(t_command *cmd)
 {
@@ -55,7 +53,7 @@ static void	__exit_nb_wrapper(t_command *cmd, const int status, char *err)
 	if (cmd->container->size == 1)
 	{
 		set_exit_status(status);
-		exit(g_exit_status);
+		exit(get_exit_status());
 	}
 }
 
@@ -64,7 +62,7 @@ void	__exit_nb__(const int status, char *err)
 	set_exit_status(status);
 	if (err)
 		__perror(err);
-	exit(g_exit_status);
+	exit(get_exit_status());
 }
 
 void	msh_exit(t_command *cmd)

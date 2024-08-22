@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 16:00:39 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:33:39 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-extern int	g_exit_status;
 
 static int	sort_redirections(t_command *cmd, t_list *tokens);
 static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens,
@@ -75,7 +73,7 @@ static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens,
 		}
 		else
 			__perror("syntax error");
-		g_exit_status = 258;
+		set_exit_status_no_of(258);
 		return (-1);
 	}
 	else if (-1 == redirect(token, cmd))

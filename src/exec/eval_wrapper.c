@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 14:13:51 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:32:33 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-extern int	g_exit_status;
-
 void	eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 {
 	t_fd	pipe[PIPE_MAX];
 	pid_t	pid;
+	int 	s;
 
 	__pipe(pipe);
 	if (cmd->container->current_cmd_index < cmd->container->size - 1)
@@ -52,8 +51,8 @@ void	eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 		}
 		if (cmd->container->current_cmd_index == cmd->container->size - 1)
 		{
-			waitpid(pid, &g_exit_status, 0);
-			g_exit_status = WEXITSTATUS(g_exit_status);
+			waitpid(pid, &s, 0);
+			set_exit_status(WEXITSTATUS(s));
 		}
 	}
 	dup2(pipe[in], STDIN_FILENO);

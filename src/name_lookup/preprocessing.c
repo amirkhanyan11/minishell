@@ -6,13 +6,11 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 13:46:06 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:33:13 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern int	g_exit_status;
 
 // handles redirections and $variables
 t_list	*preprocess(t_list *tokens, t_shell *shell)
@@ -23,10 +21,10 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 	merge_tokens(shell, tokens);
 	if (pipe_parse(tokens) == -1 || redirection_parse(tokens) == -1)
 	{
-		g_exit_status = 258;
+		set_exit_status_no_of(258);
 		list_clear(&tokens);
 	}
-	remove_spaces(shell, tokens); // remove white spaces
+	remove_spaces(shell, tokens);
 	return (tokens);
 }
 
