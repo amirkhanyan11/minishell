@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 13:43:24 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:59:49 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 extern int	g_exit_status;
 
 static int	sort_redirections(t_command *cmd, t_list *tokens);
+static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens, t_node *token);
 
 int	sort_tokens(t_command *cmd, t_list *tokens)
 {
@@ -51,23 +52,34 @@ static int	sort_redirections(t_command *cmd, t_list *tokens)
 		if (string_equal(token->val, "<") || string_equal(token->val, ">")
 			|| string_equal(token->val, ">>") || string_equal(token->val, "<<"))
 		{
-			if (!token->next || string_equal(token->next->val, ""))
-			{
-				__perror((token->next) ? "ambiguous redirect" : "syntax error");
-					// amb redirect not for all commands
-				g_exit_status = 258;
-					// change
+			if (sort_redirections_the_good_part(cmd, tokens, token) == -1)
 				return (-1);
-			}
-			else if (-1 == redirect(token, cmd))
-			{
-				set_exit_status(1);
-				return (-1);
-			}
 			next = token->next->next;
 			erase(tokens, token, token->next);
 		}
 		token = next;
+	}
+	return (0);
+}
+
+static int	sort_redirections_the_good_part(t_command *cmd, t_list *tokens, t_node *token)
+{
+	if (!token->next || string_equal(token->next->val, ""))
+	{
+		if (token->next)
+		{
+			set_exit_status(1);
+			__perror("ambiguous redirect");
+		}
+		else
+			__perror("syntax error");
+		g_exit_status = 258;
+		return (-1);
+	}
+	else if (-1 == redirect(token, cmd))
+	{
+		set_exit_status(1);
+		return (-1);
 	}
 	return (0);
 }

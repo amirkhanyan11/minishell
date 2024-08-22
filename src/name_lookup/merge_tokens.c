@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:44:28 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:45:32 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	merge_inside_quotes(t_list *tokens);
 static bool	is_self_mergeable(t_node *token);
 static bool	is_mergeable(t_node *token);
 
-static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t, t_node **next);
-
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
+				t_node **next);
 
 void	merge_tokens(t_shell *shell, t_list *tokens)
 {
@@ -67,7 +67,8 @@ static void	merge_inside_quotes(t_list *tokens)
 	}
 }
 
-static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t, t_node **next)
+static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
+		t_node **next)
 {
 	t_node	*tmp;
 	char	*quote_type;
