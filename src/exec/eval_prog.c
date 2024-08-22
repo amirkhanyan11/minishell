@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:14:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:22:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	__eval_prog__(t_command *cmd)
 	scoped_matrix	_env;
 
 	if (!cmd)
-		__exit(NULL); // from child
+		__exit(NULL);
 	options_copy = make_list_copy_range(cmd->options, NULL);
 	push_front(options_copy, cmd->name);
 	args_copy = make_list_copy_range(cmd->args, NULL);

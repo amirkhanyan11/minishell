@@ -3,49 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:33:07 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:26:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// different exit status
-// <<
-// .
-
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-	t_shell *shell = make_shell(env);
+	t_shell			*shell;
+	char			*line;
+	t_cmd_container	*cmds;
 
-	// fetch -> decode -> execute
+	shell = make_shell(env);
 	while (true)
 	{
-		scoped_string line = read_line(MINISHELL_PROMPT);
-
-		t_cmd_container *__dtor(__t_cmd_container__) cmds = make_cmd_container(line, shell);
-
-		if (!line) // ctr + D
+		line = read_line(MINISHELL_PROMPT);
+		cmds = make_cmd_container(line, shell);
+		if (!line)
 		{
 			__exit_nb__(0, NULL);
 		}
-
 		eval(cmds);
-
 		if (__strlen(line) > 0)
 		{
 			push_back(shell->history, line);
 			add_history(line);
 		}
-
+		__delete_string(&line);
+		__t_cmd_container__(&cmds);
 	}
 	__t_shell__(shell);
-
-	return get_exit_status();
+	return (get_exit_status());
 }
-
 
 #ifdef __APPLE__
 void	__attribute__((destructor)) moid(void)
