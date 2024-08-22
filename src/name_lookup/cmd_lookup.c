@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lookup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:35:13 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	cmd_lookup(t_command *cmd)
 		else if (0 == access(cmd->name, F_OK))
 			return (set_eval_to_prog_i_love_norminette(cmd));
 	}
-	__va_perror(cmd->name, ": command not found");
+	__va_perror(cmd->name, ": command not found", NULL);
 	set_exit_status(127);
 	return (-1);
 }
@@ -64,7 +64,7 @@ static int	replace_cmd_name(t_command *cmd, t_node *node)
 
 bool	__cmd_exists__(t_list_value path, t_list_value name)
 {
-	scoped_string	guess;
+	char *__attribute__((cleanup(__delete_string)))	guess;
 
 	guess = __make_string(path, "/", name);
 	return (0 == access(guess, F_OK));

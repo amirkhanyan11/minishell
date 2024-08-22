@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:45:32 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:37:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 		if ((is_self_mergeable(token) && string_equal(next->val, token->val))
 			|| (is_mergeable(token) && is_mergeable(next)))
 		{
-			token->val = __strappend(token->val, next->val);
+			token->val = __strappend(token->val, next->val, NULL);
 			pop(tokens, next);
 			next = token;
 		}
@@ -84,7 +84,7 @@ static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
 	while (tmp && string_equal(tmp->val, quote_type) == false)
 	{
 		(*next) = tmp->next;
-		(*t)->val = __strappend((*t)->val, tmp->val);
+		(*t)->val = __strappend((*t)->val, tmp->val, NULL);
 		pop(tokens, tmp);
 		tmp = (*next);
 	}

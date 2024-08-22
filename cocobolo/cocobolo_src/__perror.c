@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __perror.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:56:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:21:25 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:35:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	__perror(char *err)
 	}
 }
 
-void	__unwrapped_va_perror__(char *s, ...)
+void	__va_perror(char *s, ...)
 {
 	va_list	args;
 	char	*arg;

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:01:15 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 19:07:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	__export_from_string__(char *expr, t_shell *shell)
 
 static int	size_2(t_node *lhv, t_shell *shell, t_list *tokens)
 {
-	scoped_string	val;
+	char *__attribute__((cleanup(__delete_string)))	val;
 
 	val = __make_string_from_list(lhv->next->next, back(tokens));
 	if (val == NULL)
@@ -74,7 +74,7 @@ static int	______i_a_g_t_c_i_m_p_f_n_________(char *expr, t_node **lhv,
 	if (!is_name((*lhv)->val) || NULL == find_if((*lhv), back(tokens),
 			not_equal_sign))
 	{
-		__va_perror("export: `", expr, "\': not a valid identifier");
+		__va_perror("export: `", expr, "\': not a valid identifier", NULL);
 		return (-1);
 	}
 	return (0);

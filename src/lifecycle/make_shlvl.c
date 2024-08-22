@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:40:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:09:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	make_shlvl(t_shell *shell)
 {
 	t_treeval		shlvl_old;
 	t_optional		lvl;
-	scoped_string	shlvl;
+	char *__attribute__((cleanup(__delete_string)))	shlvl;
 
 	shlvl_old = get_val(shell->export, "SHLVL");
 	lvl = __atoi(shlvl_old);

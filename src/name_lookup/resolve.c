@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resolve.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:33:16 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*resolve(char *t_val, t_shell *shell)
 static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell)
 {
 	char			*val;
-	scoped_string	_val;
+	char *__attribute__((cleanup(__delete_string)))	_val;
 	size_t			k;
 	char			c;
 
@@ -55,7 +55,7 @@ static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell)
 	if (!val)
 		val = data->second;
 	(*i) += __strlen(val) - 1;
-	data->first = __strappend(data->first, val, (*s) + k);
+	data->first = __strappend(data->first, val, (*s) + k, NULL);
 	free((*s));
 	(*s) = data->first;
 	__delete_string(&data->second);

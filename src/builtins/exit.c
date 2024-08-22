@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 18:32:21 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	__exit_nb_wrapper(t_command *cmd, const int status, char *err);
 
 void	__exit__(t_command *cmd)
 {
-	scoped_string	err;
+	char *__attribute__((cleanup(__delete_string)))	err;
 	t_optional		val;
 
 	err = NULL;

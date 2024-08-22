@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 20:36:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 20:56:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:40:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "tree.h"
 #include <cocobolo.h>
 
-#define scoped_set t_set * __dtor(set_clear)
+#define scoped_set t_set * __attribute__((cleanup(set_clear)))
 
 typedef struct s_set t_set;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 18:49:30 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	cd_minus(int *status, t_command *cmd);
 
 void	_chdir(t_command *cmd, const char *path, int *status)
 {
-	scoped_string	cwd;
+	char *__attribute__((cleanup(__delete_string)))	cwd;
 
 	cwd = _getcwd();
 	if (chdir(path) == -1)
 	{
 		*status = 1;
-		__va_perror("cd: ", path, ": No such file or directory");
+		__va_perror("cd: ", path, ": No such file or directory", NULL);
 		return ;
 	}
 	if (cmd->container->size == 1 && errno == ENOENT)
@@ -96,7 +96,7 @@ void	cd_minus(int *status, t_command *cmd)
 
 void	update_pwd(t_shell *shell, char *oldpwd)
 {
-	scoped_string	pwd;
+	char *__attribute__((cleanup(__delete_string)))	pwd;
 
 	if (!shell || !oldpwd)
 		return ;

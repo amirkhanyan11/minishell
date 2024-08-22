@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:09:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/21 19:19:45 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	unset(t_command *cmd)
 
 int	__unset_var__(t_shell *shell, t_list_value key)
 {
-	scoped_string	str;
+	char *__attribute__((cleanup(__delete_string)))	str;
 
 	str = NULL;
 	if (!key)

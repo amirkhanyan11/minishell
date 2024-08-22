@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   invalid_option.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:50:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:26:03 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:34:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	invalid_option(t_command *cmd)
 	if (!empty(cmd->options))
 	{
 		__va_perror(cmd->name, ": ", front(cmd->options)->val,
-			": invalid option");
+			": invalid option", NULL);
 		return (-1);
 	}
 	return (0);

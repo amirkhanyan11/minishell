@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __strappend.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:21:05 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:20:48 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:37:40 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*__single_append__(char *lhv, char *rhv)
 	return (target);
 }
 
-char	*__unwrapped_strappend__(char *s, ...)
+char	*__strappend(char *s, ...)
 {
 	va_list	args;
 	char	*arg;

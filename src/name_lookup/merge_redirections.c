@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_redirections.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:30:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 14:31:36 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:36:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	merge_redirections(t_list *tokens)
 		if (is_single_redirection(token->val) && string_equal(token->val,
 				token->next->val))
 		{
-			token->val = __strappend(token->val, token->next->val);
+			token->val = __strappend(token->val, token->next->val, NULL);
 			next = token->next->next;
 			pop(tokens, token->next);
 		}

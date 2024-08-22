@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __make_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:53:36 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 15:15:37 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:36:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*__make_string_from_list(t_node *first, t_node *last)
 	curr = first;
 	while (curr && curr->prev != last)
 	{
-		res = __strappend(res, curr->val);
+		res = __strappend(res, curr->val, NULL);
 		curr = curr->next;
 	}
 	return (res);

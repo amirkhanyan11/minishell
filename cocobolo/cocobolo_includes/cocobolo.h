@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:31:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:40:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,12 @@ typedef struct s_node	t_node;
 #  endif //  __has_attribute(noreturn)
 # endif // __linux__
 
-# if __has_attribute(cleanup)
-#  define __dtor(f) __attribute__((cleanup(f)))
-# else
-#  define __dtor(f)
-# endif
 
 // usage : str = __strappend(str, s1, s2, ...)
-# define __strappend(s, ...) __unwrapped_strappend__(s, __VA_ARGS__, NULL);
 # define __make_string(s, ...) __unwrapped_make_string__(s, __VA_ARGS__, NULL);
-# define __va_perror(s, ...) __unwrapped_va_perror__(s, __VA_ARGS__, NULL);
-# define printc(...) __unwrapped_printc__(__VA_ARGS__, NULL)
 
-# define scoped_string char *__dtor(__delete_string)
-# define scoped_list t_list *__dtor(list_clear)
-# define scoped_matrix t_matrix __dtor(matrix_clear)
+# define scoped_list t_list *__attribute__((cleanup(list_clear)))
+# define scoped_matrix t_matrix __attribute__((cleanup(matrix_clear)))
 
 typedef void			(*t_printf_option)(const char *const);
 
@@ -90,9 +81,9 @@ char					*__strtrim(char *s1,
 						char *set) __attribute__((malloc)) __attribute__((warn_unused_result));
 char					*__make_string_from_list(t_node *first,
 						t_node *last) __attribute__((malloc)) __attribute__((warn_unused_result));
-char					*__attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrapped_strappend__(char *s,
+char					*__attribute__((sentinel)) __attribute__((warn_unused_result)) __strappend(char *s,
 							...);
-void					__attribute__((sentinel)) __unwrapped_va_perror__(char *s, ...);
+void					__attribute__((sentinel)) __va_perror(char *s, ...);
 
 char					*__attribute__((sentinel)) __attribute__((warn_unused_result)) __unwrapped_make_string__(char *s,
 							...);
@@ -141,7 +132,7 @@ t_matrix				make_matrix_from_tree(t_tree *tree) __attribute__((warn_unused_resul
 void					matrix_sort(t_matrix arr, str_binary_predicate cmp);
 
 // colors
-void					__attribute__((sentinel)) __unwrapped_printc__(const char *const message,
+void					__attribute__((sentinel)) printc(const char *const message,
 							...);
 void					__italic__(const char *const message);
 void					__purple__(const char *const message);
