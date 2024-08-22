@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 14:13:17 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:21:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	eval(t_cmd_container *cmds)
 			if (cmd->redirection & redirect_heredoc)
 			{
 				unlink(HEREDOC);
-				printf("\n"); // not here but in the end of all commands :)
 			}
 		}
 		cmds->current_cmd_index++;
