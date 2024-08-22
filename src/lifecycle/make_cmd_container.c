@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmd_container.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:17:59 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:11:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list *make_partition(t_shell *shell, t_node *first, t_node *last);
+static t_list *make_partition(t_shell *shell, t_node *first, t_node *last);
+static void make_cmds(t_cmd_container *container, t_shell *shell, t_list *tokens);
 
 t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 {
@@ -32,6 +33,14 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
 
 	container->shell->container = container;
 
+	make_cmds(container, shell, tokens);
+
+    return container;
+}
+
+
+static void make_cmds(t_cmd_container *container, t_shell *shell, t_list *tokens)
+{
     size_t i = 0;
 
     t_node *first = front(tokens);
@@ -54,11 +63,9 @@ t_cmd_container *make_cmd_container(char * raw_cmd, t_shell *shell)
         first = pipe->next;
         i++;
     }
-    return container;
 }
 
-
-t_list *make_partition(t_shell *shell, t_node *first, t_node *last)
+static t_list *make_partition(t_shell *shell, t_node *first, t_node *last)
 {
 	if (!shell || !first || !last) return NULL;
 
