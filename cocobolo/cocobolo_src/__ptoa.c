@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 21:01:00 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 21:02:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:42:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static char	_to_char(size_t n)
 static char	*_allocate(size_t n)
 {
 	char	*dst;
-	size_t		size;
-	size_t		sign;
+	size_t	size;
+	size_t	sign;
 
 	sign = (n < 0);
 	size = _calculate_size(n);
@@ -65,4 +65,3 @@ static char	*_allocate(size_t n)
 		dst[0] = '-';
 	return (dst);
 }
-

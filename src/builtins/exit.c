@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 20:08:40 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:52:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static void	__exit_nb_wrapper(t_command *cmd, const int status, char *err);
+static void	foo(char **err, t_command *cmd);
 
 void	__exit__(t_command *cmd)
 {
@@ -23,14 +24,14 @@ void	__exit__(t_command *cmd)
 	t_optional	val;
 
 	printf("exit\n");
+	err = NULL;
 	list_move_back(cmd->options, cmd->args);
 	if (size(cmd->args) >= 1)
 	{
 		val = __atol_strict(front(cmd->args)->val);
 		if (!has_value(&val))
 		{
-			err = __make_string("exit: ", front(cmd->args)->val,
-					": numeric argument required", NULL);
+			foo(&err, cmd);
 			__exit_nb_wrapper(cmd, -1, err);
 		}
 		else if (size(cmd->args) > 1)
@@ -44,6 +45,12 @@ void	__exit__(t_command *cmd)
 	else
 		__exit_nb_wrapper(cmd, 0, err);
 	__delete_string(&err);
+}
+
+static void	foo(char **err, t_command *cmd)
+{
+	*err = __make_string("exit: ", front(cmd->args)->val,
+			": numeric argument required", NULL);
 }
 
 static void	__exit_nb_wrapper(t_command *cmd, const int status, char *err)

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 22:36:48 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:41:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef bool			(*t_list_Upredicate_b)(t_node *const);
 typedef bool			(*t_list_Countpredicate)(t_list_value);
 typedef bool			(*t_list_Bpredicate_val)(t_list_value, t_list_value);
 typedef void			(*t_list_Apredicate_val)(size_t *, t_list_value);
-typedef void			(*f_push)(t_list *const, const t_list_value);
 typedef t_list_value	(*t_value_mutate)(t_list_value);
 
 typedef enum e_opcode	t_opcode;
@@ -41,8 +40,8 @@ enum					e_opcode
 
 struct					s_list
 {
-	t_node *__attribute__((deprecated)) head;
-	t_node *__attribute__((deprecated)) tail;
+	t_node *head		__attribute__((deprecated));
+	t_node *tail		__attribute__((deprecated));
 };
 
 struct					s_node
@@ -52,33 +51,38 @@ struct					s_node
 	t_node				*prev;
 };
 
-void					__attribute__((sentinel)) push_back(
-							t_list *list, ...);
-void					__attribute__((sentinel)) push_front(
-							t_list *list, ...);
+void					push_back(t_list *list, ...)
+						__attribute__((sentinel));
+void					push_front(t_list *list, ...)
+						__attribute__((sentinel));
 void					__single__push_back__(t_list *const list,
 							const t_list_value x);
 void					__single__push_front__(t_list *const list,
 							const t_list_value x);
-
-// void 	push_front(t_list *const list, const t_list_value x);
-// void 	push_back(t_list *const list, const t_list_value x);
-// void push_back(t_list *const list, const t_list_value x, ...);
 
 void					pop_front(t_list *const list);
 void					pop_back(t_list *const list);
 
 t_node					*front(t_list *list);
 t_node					*back(t_list *list);
-t_list					*make_list(void) __attribute__((malloc)) __attribute__((warn_unused_result));
+t_list					*make_list(void) __attribute__((malloc))
+						__attribute__((warn_unused_result));
 t_list					*make_list_copy(t_node *first, t_node *last,
-						t_value_mutate f) __attribute__((malloc)) __attribute__((warn_unused_result));
+							t_value_mutate f) __attribute__((malloc))
+						__attribute__((warn_unused_result));
 t_list					*make_list_copy_range(t_list *other,
-						t_value_mutate f) __attribute__((malloc)) __attribute__((warn_unused_result));
-t_list					*make_list_from_matrix(char **arr) __attribute__((malloc)) __attribute__((warn_unused_result));
+							t_value_mutate f) __attribute__((malloc))
+						__attribute__((warn_unused_result));
+t_list					*make_list_from_matrix(char **arr)
+						__attribute__((malloc))
+						__attribute__((warn_unused_result));
+
 t_list					*make_list_from_string(char *s, char *set,
-						t_opcode opcode) __attribute__((malloc)) __attribute__((warn_unused_result));
-t_node					*make_node(const t_list_value x) __attribute__((malloc)) __attribute__((warn_unused_result));
+							t_opcode opcode) __attribute__((malloc))
+						__attribute__((warn_unused_result));
+
+t_node					*make_node(const t_list_value x) __attribute__((malloc))
+						__attribute__((warn_unused_result));
 void					list_move_back(t_list *lhv, t_list *rhv);
 
 void					print_list(t_list *list);

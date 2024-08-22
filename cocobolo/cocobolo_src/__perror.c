@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 17:56:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:35:04 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:42:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	__va_perror(char *s, ...)
 	char	*res;
 
 	if (!s)
-		return;
+		return ;
 	va_start(args, s);
 	arg = va_arg(args, char *);
 	res = __strdup(s);
@@ -41,7 +41,6 @@ void	__va_perror(char *s, ...)
 		arg = va_arg(args, char *);
 	}
 	va_end(args);
-
 	__perror(res);
 	__delete_string(&res);
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 22:33:04 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 22:35:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:42:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	push_back(t_list *list, ...)
 	}
 	va_end(args);
 }
+
 void	push_front(t_list *list, ...)
 {
 	va_list	args;
