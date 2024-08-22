@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 16:56:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:31:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ struct					s_node
 
 # ifdef __linux__
 #  if __has_attribute(warn_unused_result)
-#   define __result_use_check __attribute__((__warn_unused_result__))
+#   define __attribute__((warn_unused_result)) __attribute__((__warn_unused_result__))
 #  else
-#   define __result_use_check
+#   define __attribute__((warn_unused_result))
 #  endif //  __has_attribute(warn_unused_result)
 # endif // __linux__
 
@@ -80,15 +80,15 @@ void					pop_back(t_list *const list);
 
 t_node					*front(t_list *list);
 t_node					*back(t_list *list);
-t_list					*make_list(void) __attribute__((malloc)) __result_use_check;
+t_list					*make_list(void) __attribute__((malloc)) __attribute__((warn_unused_result));
 t_list					*make_list_copy(t_node *first, t_node *last,
-						t_value_mutate f) __attribute__((malloc)) __result_use_check;
+						t_value_mutate f) __attribute__((malloc)) __attribute__((warn_unused_result));
 t_list					*make_list_copy_range(t_list *other,
-						t_value_mutate f) __attribute__((malloc)) __result_use_check;
-t_list					*make_list_from_matrix(char **arr) __attribute__((malloc)) __result_use_check;
+						t_value_mutate f) __attribute__((malloc)) __attribute__((warn_unused_result));
+t_list					*make_list_from_matrix(char **arr) __attribute__((malloc)) __attribute__((warn_unused_result));
 t_list					*make_list_from_string(char *s, char *set,
-						t_opcode opcode) __attribute__((malloc)) __result_use_check;
-t_node					*make_node(const t_list_value x) __attribute__((malloc)) __result_use_check;
+						t_opcode opcode) __attribute__((malloc)) __attribute__((warn_unused_result));
+t_node					*make_node(const t_list_value x) __attribute__((malloc)) __attribute__((warn_unused_result));
 void					list_move_back(t_list *lhv, t_list *rhv);
 
 void					print_list(t_list *list);

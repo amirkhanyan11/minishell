@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:31:45 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:32:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,15 @@ bool				is_digit(const char c);
 bool				is_name_part(const char c);
 bool				not_name_part(char c);
 
-bool is_quoted_token(t_set *set, t_node *token);
+bool				is_quoted_token(t_set *set, t_node *token);
 
 // lifecycle
 t_tree				*make_export(t_shell *shell)
 					__attribute__((warn_unused_result));
 t_shell				*make_shell(char **env) __attribute__((warn_unused_result));
 void				make_shlvl(t_shell *shell);
-t_fd				make_heredoc(char *eof,
-						t_shell *shell, bool is_quoted) __attribute__((warn_unused_result));
+t_fd				make_heredoc(char *eof, t_shell *shell,
+						bool is_quoted) __attribute__((warn_unused_result));
 t_list				*get_path(t_shell *shell)
 					__attribute__((warn_unused_result));
 t_descriptor		*make_descriptors(void) __attribute__((warn_unused_result));
@@ -129,42 +129,39 @@ char				*_getcwd(void) __attribute__((warn_unused_result));
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
-int					get_exit_status();
+int					get_exit_status(void);
 void				set_exit_status_no_of(int status);
 void				__exit_nb__(const int status,
 						char *err) __attribute__((noreturn));
 int					invalid_option(t_command *cmd);
 
-void remove_spaces(t_shell *shell, t_list *tokens);
+void				remove_spaces(t_shell *shell, t_list *tokens);
 
 int					pipe_parse(t_list *tokens);
 int					redirection_parse(t_list *tokens);
-void				save_token(t_shell * shell, t_node *address);
-
+void				save_token(t_shell *shell, t_node *address);
 
 // builtin utils
-void update_pwd(t_shell *shell, char *oldpwd);
-void __cd_one_arg__(t_command *cmd);
-void _chdir(t_command * cmd, const char *path, int *status);
-void __cd_no_arg__(t_command *cmd);
-bool last_nl(t_node * const node);
-void echo_arglist(t_list *arglist);
-bool not_n_predicate(char c);
-bool is_n(char * opt);
-int __export_from_string__(char *expr, t_shell *shell);
-
-
-char *get_pid(t_shell *shell) __result_use_check;
+void				update_pwd(t_shell *shell, char *oldpwd);
+void				__cd_one_arg__(t_command *cmd);
+void				_chdir(t_command *cmd, const char *path, int *status);
+void				__cd_no_arg__(t_command *cmd);
+bool				last_nl(t_node *const node);
+void				echo_arglist(t_list *arglist);
+bool				not_n_predicate(char c);
+bool				is_n(char *opt);
+int					__export_from_string__(char *expr, t_shell *shell);
+char				*get_pid(t_shell *shell)
+					__attribute__((warn_unused_result));
 
 // name_lookup utils
 
-int quote_parse(t_list *tokens);
-bool not_space(t_node *node);
-bool	is_redir(t_node *node);
-void	erase_quotes(t_list *tokens);
-bool	is_quote_node(t_node *const node);
-void	mark_quoted_tokens(t_shell *shell, t_list *tokens);
-
+int					quote_parse(t_list *tokens);
+bool				not_space(t_node *node);
+bool				is_redir(t_node *node);
+void				erase_quotes(t_list *tokens);
+bool				is_quote_node(t_node *const node);
+void				mark_quoted_tokens(t_shell *shell, t_list *tokens);
 
 // signals
 void				set_signals_interactive(void);
