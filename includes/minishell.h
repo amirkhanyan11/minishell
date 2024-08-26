@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:32:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:14:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <dirent.h>
 # include <termios.h>
 
 # define DECLAREX "declare -x "
@@ -155,7 +156,7 @@ char				*get_pid(t_shell *shell)
 					__attribute__((warn_unused_result));
 
 // name_lookup utils
-
+t_list				*get_cwd_files();
 int					quote_parse(t_list *tokens);
 bool				not_space(t_node *node);
 bool				is_redir(t_node *node);

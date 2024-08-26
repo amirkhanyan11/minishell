@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:21:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:16:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 void	eval(t_cmd_container *cmds)
 {
 	t_command	*cmd;
-
 	if (NULL == cmds)
 		return ;
 	while (cmds->current_cmd_index < cmds->size)
