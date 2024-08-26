@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:34:19 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:21:44 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	redirection_parse(t_list *tokens)
 	return (0);
 }
 
-int	pipe_parse(t_list *tokens)
+int	pipe_parse(t_list *tokens) 
 {
 	t_node	*pipe;
 	t_node	*pair;
