@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:36:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/26 16:24:11 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void	__pwd__(t_command *cmd)
+void	pwd(t_command *cmd)
 {
 	eval_wrapper(cmd, _pwd);
 }
 
-void	pwd(t_command *cmd)
+void	__pwd__(t_command *cmd)
 {
 	int		status;
 	char	*path;
