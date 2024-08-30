@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/26 17:16:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:30:34 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	eval(t_cmd_container *cmds)
 		cmd = cmds->arr[cmds->current_cmd_index];
 		if (cmd)
 		{
+			arg_eval(cmd);
 			cmd->eval(cmd);
 			if (cmd->redirection & redirect_heredoc)
 			{

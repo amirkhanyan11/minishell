@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell_commands__.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:42:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:02:21 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct				s_command
 	t_shell *shell					__attribute__((deprecated));
 	char *name						__attribute__((deprecated));
 	t_list *options					__attribute__((deprecated));
-	t_list *args					__attribute__((deprecated));
+	t_list *args		;		//here was an attribute deprecated
 
 	t_cmd_container *container		__attribute__((deprecated));
 

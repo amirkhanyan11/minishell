@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/29 16:50:50 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/30 20:20:15 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,32 @@ t_list	*get_cwd_files(void)
 	return (res);
 }
 
-vo sub_args(t_list *args, t_node *curr)
+void substitute_args(t_node *wildcard_node, t_list *args)
 {
 	t_list *dir = get_cwd_files();
-	t_list *
-	// write a substitution
+	t_node *w_node = dir->tail;
+	while(w_node)
+	{
+		list_insert(args, wildcard_node, w_node->val);
+		w_node = w_node->prev;
 
-
-
+	}
+	list_clear(&dir);
 }
 
-
-void arg_eval(t_command *cmd, t_shell *shell)
+void arg_eval(t_command *cmd)
 {
 	int i = 0;
-	t_list *args = cmd->args;
-	t_node *fake = args->head;
-	// t_list *dir = get_cwd_files();
+	t_node *wild = cmd->args->head;
 
-	t_list *res;
-	t_list *tmp;
+	wild = find_if(cmd->args->head, cmd->args->tail, is_wildcard);
 
-	while(fake)
+	while(wild)
 	{
-		res = find_if(fake, args->tail, is_wildcard);
-		if(res != NULL)
-		{
-			sub_args(fake, dir);
-			// append single result in res list
-			// __strstr(args[i], );
-		}
-		i++;
-		eval(args);
+		t_node *save = wild->next;
+		substitute_args(wild, cmd->args);
+		pop(cmd->args, wild);
+		wild = save;
+		wild = find_if(wild, cmd->args->tail, is_wildcard);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_prog.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 22:37:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/30 18:01:59 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	eval_prog(t_command *cmd)
 {
 	eval_wrapper(cmd, _program);
 }
-
 void	__eval_prog__(t_command *cmd)
 {
 	t_list		*options_copy;
@@ -31,10 +30,12 @@ void	__eval_prog__(t_command *cmd)
 		__exit(NULL);
 	options_copy = make_list_copy_range(cmd->options, NULL);
 	push_front(options_copy, cmd->name, NULL);
+
 	args_copy = make_list_copy_range(cmd->args, NULL);
 	list_move_back(args_copy, options_copy);
 	_args = make_matrix_from_list(options_copy);
 	_env = make_matrix_from_tree(cmd->shell->env);
+	
 	execve(cmd->name, _args, _env);
 	__exit(NULL);
 }

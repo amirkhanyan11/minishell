@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 22:41:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/30 14:36:52 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ enum					e_opcode
 
 struct					s_list
 {
-	t_node *head		__attribute__((deprecated));
-	t_node *tail		__attribute__((deprecated));
+	t_node *head; //here was an attribute deprecated
+	t_node *tail; //here was an attribute deprecated
 };
 
 struct					s_node
