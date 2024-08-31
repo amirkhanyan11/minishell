@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 20:17:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:50:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	cmd_lookup(t_command *cmd)
 	if (builtin_lookup(cmd) == 0)
 		return (0);
 	path = get_path(cmd->shell);
-	if (!string_equal(cmd->name, ""))
+	if (!string_equal(cmd->name, "") && !string_equal(cmd->name, "."))
 	{
 		if (__strchr(cmd->name, '/') == false)
 		{
@@ -37,7 +37,9 @@ int	cmd_lookup(t_command *cmd)
 							cmd->name, __cmd_exists__)));
 		}
 		else if (0 == access(cmd->name, F_OK))
+		{
 			return (set_eval_to_prog_i_love_norminette(cmd));
+		}
 	}
 	__va_perror(cmd->name, ": command not found", NULL);
 	set_exit_status(127);
