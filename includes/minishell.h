@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/26 17:14:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:15:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define SELF_MERGEABLE_TOKENS "<>|"
 # define PIPE_MAX 2
 
-# define MINISHELL_PROMPT "\033[1;35m\e[3mminishell\033[1;32m > $ \033[0m"
+# define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
 
 struct				s_shell
 {
