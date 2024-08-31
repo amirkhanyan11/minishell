@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:20:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 22:41:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,15 @@ static void	not_funny(t_command *cmd, t_fd *pipe)
 	if (cmd->container->current_cmd_index == cmd->container->size - 1)
 	{
 		waitpid(pid, &s, 0);
-		set_exit_status(WEXITSTATUS(s));
+		if (WIFSIGNALED(s))
+		{
+			s = WTERMSIG(s) + 128;
+			if (s == 131)
+				printf("Quit: 3\n");
+			set_exit_status(s);
+		}
+		else
+			set_exit_status(WEXITSTATUS(s));
 	}
 }
 

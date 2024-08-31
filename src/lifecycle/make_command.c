@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 22:06:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 22:28:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 			next = token->next->next;
 			if (string_equal(token->val, "<") || string_equal(token->val, "<<"))
 			{
+				close(cmd->descriptors->stdin);
 				dup2(get_next_fd(container), cmd->descriptors->stdin);
 				cmd->redirection |= redirect_in;
 				if (string_equal(token->val, "<<"))
@@ -62,6 +63,7 @@ int pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 			}
 			if (string_equal(token->val, ">") || string_equal(token->val, ">>"))
 			{
+				close(cmd->descriptors->stdout);
 				dup2(get_next_fd(container), cmd->descriptors->stdout);
 				cmd->redirection |= redirect_out;
 			}
