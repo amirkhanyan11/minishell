@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 20:57:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 22:55:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ struct				s_command
 	t_eval eval				;
 
 	int redirection			;
+	pid_t pid;
 	t_descriptor *descriptors;
 };
 
