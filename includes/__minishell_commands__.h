@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 19:52:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:57:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct				s_cmd_container
 	t_command		**arr;
 	size_t			size;
 	size_t			current_cmd_index;
+	t_fd			*fds;
 };
 
 t_command			*make_command(t_list *tokens, t_cmd_container *container,

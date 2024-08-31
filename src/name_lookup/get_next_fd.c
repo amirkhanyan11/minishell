@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_tokens.c                                      :+:      :+:    :+:   */
+/*   get_next_fd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 20:53:37 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/31 21:03:45 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/31 21:25:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	sort_tokens(t_command *cmd, t_list *tokens)
+t_fd	get_next_fd(t_cmd_container *container)
 {
-	t_node	*token;
+	static int	i = 0;
 
-	token = front(tokens)->next;
-	while (token && token->val && token->val[0] == '-')
+	if (!container)
 	{
-		push_back(cmd->options, token->val, NULL);
-		token = token->next;
+		i = 0;
+		return (-1);
 	}
-	while (token)
+	return (container->fds[i++]);
+}
+size_t	get_next_fd_idx(t_cmd_container *container)
+{
+	static int	i = 0;
+
+	if (!container)
 	{
-		push_back(cmd->args, token->val, NULL);
-		token = token->next;
+		i = 0;
+		return (-1);
 	}
-	return (0);
+	return (i++);
 }

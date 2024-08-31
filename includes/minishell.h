@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 19:53:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 21:25:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
 int					cmd_lookup(t_command *cmd);
 t_fd				open_file(char *filenae, int options);
-int					redirect(t_node *token, t_command *cmd);
+int					redirect(t_node *token, t_cmd_container *container);
 void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
 
 // find predicates
@@ -174,4 +174,10 @@ void				ignore_sigquit(void);
 void				signal_print_newline(int __attribute__((unused)) signal);
 void				signal_reset_prompt(int __attribute__((unused)) sig);
 
+
+int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
+int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_node *token);
+
+t_fd				get_next_fd(t_cmd_container *container);
+size_t				get_next_fd_idx(t_cmd_container *container);
 #endif // MINISHELL_H
