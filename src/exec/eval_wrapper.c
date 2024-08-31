@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 01:07:20 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 01:13:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 	t_fd	pipes[PIPE_MAX];
 
 	if (pipe(pipes) == -1)
-	{
 		return killall(cmd->container);
-	}
-
 	if (cmd->container->current_cmd_index < cmd->container->size - 1)
 		dup2(pipes[out], STDOUT_FILENO);
 	set_descriptors(cmd);

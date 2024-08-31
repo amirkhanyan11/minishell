@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:50:12 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:53:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 01:24:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	disable_echoctl(void)
 
 void	signal_print_newline(int __attribute__((unused)) signal)
 {
-	write(1, "\n", 1);
+	printf("\n");
 	rl_on_new_line();
 }
 
@@ -39,7 +39,7 @@ void	ignore_sigquit(void)
 
 void	signal_reset_prompt(int __attribute__((unused)) sig)
 {
-	write(1, "\n", 1);
+	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
