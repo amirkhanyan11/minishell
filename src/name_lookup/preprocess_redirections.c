@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:53:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:14:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 21:45:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,19 @@ int	preprocess_redirections(t_list *tokens, t_cmd_container *container)
 	t_node	*token;
 	t_node	*next;
 
-	token = front(tokens)->next;
+	token = tokens->head;
 	while (token)
 	{
 		next = token->next;
-		if (string_equal(token->val, "<") || string_equal(token->val, ">")
-			|| string_equal(token->val, ">>") || string_equal(token->val, "<<"))
+		if (is_redirection(token->val))
 		{
 			if (preprocess_redirections_the_good_part(container, tokens, token) == -1)
 				return (-1);
 			next = token->next->next;
-			// erase(tokens, token, token->next);
 		}
 		token = next;
 	}
+	get_next_fd_idx(NULL);
 	return (0);
 }
 
