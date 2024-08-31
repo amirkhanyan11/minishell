@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:42:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:52:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 
 struct				s_command
 {
-	t_shell *shell					__attribute__((deprecated));
-	char *name						__attribute__((deprecated));
-	t_list *options					__attribute__((deprecated));
-	t_list *args					__attribute__((deprecated));
+	t_shell *shell			;
+	char *name				;
+	t_list *options			;
+	t_list *args			;
 
-	t_cmd_container *container		__attribute__((deprecated));
+	t_cmd_container *container;
 
-	t_eval eval						__attribute__((deprecated));
+	t_eval eval				;
 
-	int redirection					__attribute__((deprecated));
-	t_descriptor *descriptors		__attribute__((deprecated));
+	int redirection			;
+	t_descriptor *descriptors;
 };
 
 struct				s_cmd_container

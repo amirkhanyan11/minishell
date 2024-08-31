@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 18:15:56 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:53:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void				__exit__(t_command *cmd);
 
 // other
 char				*_getcwd(void) __attribute__((warn_unused_result));
+int					set_eval_to_prog_i_love_norminette(t_command *cmd);
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
@@ -157,6 +158,7 @@ char				*get_pid(t_shell *shell)
 
 // name_lookup utils
 t_list				*get_cwd_files();
+int					absolute_path_lookup(t_command *cmd);
 int					quote_parse(t_list *tokens);
 bool				not_space(t_node *node);
 bool				is_redir(t_node *node);
