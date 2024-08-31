@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:39:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 23:20:15 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 01:07:20 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	eval_wrapper(t_command *cmd, t_eval_opcode opcode)
 
 	if (pipe(pipes) == -1)
 	{
-		killall(cmd->container);
-		return ;
+		return killall(cmd->container);
 	}
 
 	if (cmd->container->current_cmd_index < cmd->container->size - 1)
@@ -64,7 +63,10 @@ static void	not_funny(t_command *cmd, t_fd *pipes)
 
 	cmd->pid = fork();
 	if (cmd->pid < 0)
+	{
+		cmd->pid = -1;
 		return killall(cmd->container);
+	}
 	if (0 == cmd->pid)
 	{
 		close(pipes[in]);
@@ -89,8 +91,10 @@ static void killall(t_cmd_container *container)
 {
 	size_t	i;
 
-	i = container->current_cmd_index - 1;
-	while (i >= 0)
+	container->arr[container->current_cmd_index]->pid = -1;
+
+	i = 0;
+	while (i < container->current_cmd_index)
 	{
 		if (container->arr[i] && container->arr[i]->pid > -1)
 		{
@@ -98,7 +102,7 @@ static void killall(t_cmd_container *container)
 			waitpid(container->arr[i]->pid, NULL, 0);
 			container->arr[i]->pid = -1;
 		}
-		i--;
+		i++;
 	}
 	__perror("fork: Resource temporarily unavailable");
 }
