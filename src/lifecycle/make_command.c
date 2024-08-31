@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:18:19 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:22:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 	cmd->options = make_list();
 	cmd->args = make_list();
 	cmd->name = __strdup(front(tokens)->val);
+	if (is_redirection(cmd->name))
 	cmd->eval = NULL;
 	cmd->redirection = 0;
 	if (sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
