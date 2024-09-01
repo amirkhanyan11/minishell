@@ -6,16 +6,20 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:37:08 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/01 18:41:48 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/01 18:46:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	take_infile(t_command *cmd, char *val, t_list *tokens);
+static int	take_outfile(t_command *cmd, t_list *tokens);
+
 int	pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 {
-	t_node *token;
-	t_node *next;
+	t_node	*token;
+	t_node	*next;
+	t_fd	fd;
 
 	token = tokens->head;
 	while (token)
@@ -25,23 +29,11 @@ int	pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 			&& !is_quoted_token(container->shell->quoted_tokens, token))
 		{
 			next = token->next->next;
-			t_fd fd = -1337;
+			fd = -1337;
 			if (string_equal(token->val, "<") || string_equal(token->val, "<<"))
-			{
-				fd = get_next_fd(container);
-				close(cmd->descriptors->stdin);
-				cmd->descriptors->stdin = fd;
-				cmd->redirection |= redirect_in;
-				if (string_equal(token->val, "<<"))
-					cmd->redirection |= redirect_heredoc;
-			}
+				fd = take_infile(cmd, token->val, tokens);
 			if (string_equal(token->val, ">") || string_equal(token->val, ">>"))
-			{
-				fd = get_next_fd(container);
-				close(cmd->descriptors->stdout);
-				cmd->descriptors->stdout = fd;
-				cmd->redirection |= redirect_out;
-			}
+				fd = take_outfile(cmd, tokens);
 			if (fd == -1)
 				return (-1);
 			erase(tokens, token, token->next);
@@ -50,4 +42,27 @@ int	pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 	}
 	get_next_fd_idx(NULL);
 	return (0);
+}
+
+static int	take_infile(t_command *cmd, char *val, t_list *tokens)
+{
+	int	fd;
+
+	fd = get_next_fd(cmd->container);
+	close(cmd->descriptors->stdin);
+	cmd->descriptors->stdin = fd;
+	cmd->redirection |= redirect_in;
+	if (string_equal(val, "<<"))
+		cmd->redirection |= redirect_heredoc;
+	return (fd);
+}
+static int	take_outfile(t_command *cmd, t_list *tokens)
+{
+	int	fd;
+
+	fd = get_next_fd(cmd->container);
+	close(cmd->descriptors->stdout);
+	cmd->descriptors->stdout = fd;
+	cmd->redirection |= redirect_out;
+	return (fd);
 }
