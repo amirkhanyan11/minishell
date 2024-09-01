@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 17:02:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:10:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted)
 	t_fd	fd;
 	char	*line;
 
-	if (!eof)
+	if (!eof || !shell)
 		return (-1);
 	fd = open_file(HEREDOC, O_CREAT | O_RDWR);
 	set_signals_heredoc();
