@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 01:31:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:02:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ t_fd	make_heredoc(char *eof, t_shell *shell, bool is_quoted)
 	}
 	waitpid(pid, &res, 0);
 	res = WEXITSTATUS(res);
-	if (res == 130) 
+	if (res == 130)
+	{
 		set_exit_status(130);
+		return (-1);
+	}
 	return open_file(HEREDOC, O_RDONLY);
 }
 

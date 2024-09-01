@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 23:02:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:00:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 	cmd->eval = NULL;
 	cmd->redirection = 0;
 	cmd->name = __strdup(tokens->head->val);
-	pop_redirections(cmd, tokens, container);
 
-	if (empty(tokens) || sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
+	if (pop_redirections(cmd, tokens, container) == -1 || empty(tokens) || sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
 	{
 		if (cmd->redirection & redirect_heredoc)
 		{
@@ -54,20 +53,25 @@ int pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 		if (is_redirection(token->val))
 		{
 			next = token->next->next;
+			t_fd fd = -1337;
 			if (string_equal(token->val, "<") || string_equal(token->val, "<<"))
 			{
+				fd = get_next_fd(container);
 				close(cmd->descriptors->stdin);
-				dup2(get_next_fd(container), cmd->descriptors->stdin);
+				dup2(fd, cmd->descriptors->stdin);
 				cmd->redirection |= redirect_in;
 				if (string_equal(token->val, "<<"))
 					cmd->redirection |= redirect_heredoc;
 			}
 			if (string_equal(token->val, ">") || string_equal(token->val, ">>"))
 			{
+				fd = get_next_fd(container);
 				close(cmd->descriptors->stdout);
-				dup2(get_next_fd(container), cmd->descriptors->stdout);
+				dup2(fd, cmd->descriptors->stdout);
 				cmd->redirection |= redirect_out;
 			}
+			if (fd == -1)
+				return -1;
 			erase(tokens, token, token->next);
 		}
 		token = next;
