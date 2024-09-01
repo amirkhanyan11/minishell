@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:41:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:13:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+#include <sys/stat.h>
 # include <dirent.h>
 # include <termios.h>
 
