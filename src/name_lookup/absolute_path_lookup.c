@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   absolute_path_lookup.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:44:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 18:14:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 19:04:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	absolute_path_lookup(t_command *cmd)
 
 	if (t == pathname || string_equal(pathname, filename))
 	{
-		filename = __strdup(pathname);
+		filename = __strtrim(pathname, "./");
 		free(pathname);
 		pathname = __strdup(".");
 	}
