@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 17:14:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:47:46 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 	while (token)
 	{
 		next = token->next;
-		if (is_redirection(token->val))
+		if (is_redirection(token->val) && !is_quoted_token(container->shell->quoted_tokens, token))
 		{
 			next = token->next->next;
 			t_fd fd = -1337;

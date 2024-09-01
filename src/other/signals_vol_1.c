@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:50:12 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 01:24:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:57:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void	signal_reset_prompt(int __attribute__((unused)) sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	set_exit_status(1);
 }

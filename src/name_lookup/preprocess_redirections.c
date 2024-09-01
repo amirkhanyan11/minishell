@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:53:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:45:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:42:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	preprocess_redirections(t_list *tokens, t_cmd_container *container)
 	while (token)
 	{
 		next = token->next;
-		if (is_redirection(token->val))
+		if (is_redirection(token->val) && !is_quoted_token(container->shell->quoted_tokens, token))
 		{
 			if (preprocess_redirections_the_good_part(container, tokens, token) == -1)
 				return (-1);

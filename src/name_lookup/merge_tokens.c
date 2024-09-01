@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 19:37:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:54:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 			continue ;
 		}
 		if ((is_self_mergeable(token) && string_equal(next->val, token->val))
-			|| (is_mergeable(token) && is_mergeable(next)))
+			|| (is_mergeable(token) && (is_mergeable(next) || is_quoted_token(shell->quoted_tokens, next))))
 		{
 			token->val = __strappend(token->val, next->val, NULL);
 			pop(tokens, next);
