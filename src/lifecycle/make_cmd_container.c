@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:26:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 22:14:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 	container->current_cmd_index = 0;
 	container->shell = shell;
 	container->fds = __malloc(count_if(tokens->head, tokens->tail, is_redirection) * sizeof(int)); // what if malloc 0?
-	container->size = count_range(tokens, "|") + 1;
+	container->size = count_pipes(tokens, shell) + 1;
 	container->arr = __malloc(sizeof(t_command) * container->size);
 	container->shell->container = container;
 	preprocess_redirections(tokens, container);
@@ -52,7 +52,7 @@ static void	make_cmds(t_cmd_container *container, t_shell *shell,
 	first = front(tokens);
 	while (i < container->size)
 	{
-		pipe = find(first, back(tokens), "|", NULL);
+		pipe = find_next_pipe(first, tokens, shell);
 		if (!pipe)
 			pipe = back(tokens);
 		else

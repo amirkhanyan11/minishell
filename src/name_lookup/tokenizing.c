@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/26 14:21:44 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/01 22:12:36 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*tokenize(char *raw_cmd)
 	return (tokens);
 }
 
-int	redirection_parse(t_list *tokens)
+int	redirection_parse(t_list *tokens, t_shell *shell)
 {
 	t_node	*rdr;
 
@@ -35,6 +35,8 @@ int	redirection_parse(t_list *tokens)
 		return (0);
 	rdr = NULL;
 	rdr = find_if(front(tokens), back(tokens), is_redir);
+	while (rdr && is_quoted_token(shell->quoted_tokens, rdr))
+		rdr = find_if(rdr->next, back(tokens), is_redir);
 	while (rdr)
 	{
 		rdr = rdr->next;
@@ -45,7 +47,7 @@ int	redirection_parse(t_list *tokens)
 			__perror("parse error near token `newline\'");
 			return (-1);
 		}
-		else if (is_redirection(rdr->val))
+		else if (is_redirection(rdr->val) && !is_quoted_token(shell->quoted_tokens, rdr))
 		{
 			__va_perror("parse error near token ", rdr->val, NULL);
 			return (-1);
@@ -55,7 +57,7 @@ int	redirection_parse(t_list *tokens)
 	return (0);
 }
 
-int	pipe_parse(t_list *tokens) 
+int	pipe_parse(t_list *tokens, t_shell *shell)
 {
 	t_node	*pipe;
 	t_node	*pair;
@@ -63,10 +65,10 @@ int	pipe_parse(t_list *tokens)
 	if (!tokens)
 		return (0);
 	pipe = NULL;
-	pipe = find(front(tokens), back(tokens), "|", string_equal);
+	pipe = find_next_pipe(tokens->head, tokens, shell);
 	while (pipe)
 	{
-		pair = find(pipe->next, back(tokens), "|", string_equal);
+		pair = find_next_pipe(pipe->next, tokens, shell);
 		if (!pair)
 			pair = back(tokens);
 		else
@@ -76,7 +78,7 @@ int	pipe_parse(t_list *tokens)
 			__perror("parse error near token `|\'");
 			return (-1);
 		}
-		pipe = find(pair->next, back(tokens), "|", string_equal);
+		pipe = find_next_pipe(pair->next, tokens, shell);
 	}
 	return (0);
 }

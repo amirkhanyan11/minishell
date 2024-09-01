@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 18:13:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/01 22:13:13 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ int					invalid_option(t_command *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);
 
-int					pipe_parse(t_list *tokens);
-int					redirection_parse(t_list *tokens);
+int					pipe_parse(t_list *tokens, t_shell *shell);
+int					redirection_parse(t_list *tokens, t_shell *shell);
 void				save_token(t_shell *shell, t_node *address);
 
 // builtin utils
@@ -183,6 +183,9 @@ t_fd				get_next_fd(t_cmd_container *container);
 size_t				get_next_fd_idx(t_cmd_container *container);
 
 int					pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container);
+size_t				count_pipes(t_list *tokens, t_shell *shell);
+t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
+
 
 
 #endif // MINISHELL_H
