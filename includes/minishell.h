@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 22:13:13 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/04 03:04:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-#include <sys/stat.h>
+# include <sys/stat.h>
 # include <dirent.h>
 # include <termios.h>
 
@@ -36,7 +36,8 @@
 # define SELF_MERGEABLE_TOKENS "<>|"
 # define PIPE_MAX 2
 
-# define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
+// # define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
+# define MINISHELL_PROMPT "\033[1;31m\e[3mo.g.shell\033[1;31m > $ \033[0m"
 
 struct				s_shell
 {
