@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/09 13:53:36 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/09 19:41:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,18 @@ static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted);
 
 static void	quit_from_heredoc(int __attribute__((unused)) signal)
 {
-	if (signal == SIGQUIT)
-		return;
-	else 
-		exit(130);
+	exit(130);
 }
 
 static void	set_signals_heredoc(void)
 {
 	struct sigaction	act;
-	
+
 	__memset(&act, 0, sizeof(act));
 	act.sa_handler = &quit_from_heredoc;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &act, NULL);
-	sigaction(SIGQUIT, &act, NULL);
 	disable_echoctl();
 }
 
@@ -42,6 +38,7 @@ t_fd	make_heredoc(char *eof, t_shell *shell, bool is_quoted)
 	pid_t pid = __fork();
 	int res = 0;
 
+	ignore_sigquit();
 	if (pid == 0)
 	{
 		exit(make_heredoc_child(eof, shell, is_quoted));
