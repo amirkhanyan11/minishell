@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/30 20:20:15 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:27:43 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,39 @@ t_list	*get_cwd_files(void)
 	return (res);
 }
 
+bool check_node(char *dirname, t_list *reqs)
+{
+	t_node *r = reqs->head;
+
+	while (dirname && r)
+	{
+		if (!string_equal(r->val, "*"))
+		{
+			// dirname =
+		}
+		r = r->next;
+	}
+}
+
+void remove_asterix(char *value)
+{
+	t_list *dir = get_cwd_files();
+	t_list *matcha = make_list();
+	t_list *reqs = make_list_from_string(value, "*", all);
+
+	t_node *current = reqs->head;
+
+	while(current)
+	{
+		find_if(dir->head, dir->tail, )
+	}
+
+	while()
+
+
+	return new_val;
+}
+
 void substitute_args(t_node *wildcard_node, t_list *args)
 {
 	t_list *dir = get_cwd_files();
@@ -40,7 +73,6 @@ void substitute_args(t_node *wildcard_node, t_list *args)
 	{
 		list_insert(args, wildcard_node, w_node->val);
 		w_node = w_node->prev;
-
 	}
 	list_clear(&dir);
 }
