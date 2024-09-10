@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/31 22:36:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:03:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void	_chdir(t_command *cmd, const char *path, int *status)
 		__va_perror("cd: ", path, ": No such file or directory", NULL);
 		return ;
 	}
-	if (cmd->container->size == 1 && errno == ENOENT) // somnitelnaya vesh
+	if (cmd->container->size == 1 && __str_ends_with(cwd, "/../"))
 	{
 		__perror("cd: error retrieving current directory: getcwd:"
 			"cannot access parent directories: No such file or directory");
+		chdir("../");
 	}
 	if (cmd->container->size > 1)
 	{

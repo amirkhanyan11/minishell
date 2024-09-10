@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __string_predicates.c                              :+:      :+:    :+:   */
+/*   __str_ends_with.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 20:14:26 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:01:20 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/10 14:32:11 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/10 15:00:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-bool	string_less(const char *lhv, const char *rhv)
+bool	__str_ends_with(const char *haystack, char *needle)
 {
-	return (__strcmp(lhv, rhv) < 0);
-}
+	size_t	haystack_l;
+	size_t	needle_l;
 
-bool	string_greater(const char *lhv, const char *rhv)
-{
-	return (string_less(rhv, lhv));
-}
-
-bool	string_equal(const char *lhv, const char *rhv)
-{
-	return (__strcmp(lhv, rhv) == 0);
+	if (!haystack || !needle)
+		return (false);
+	haystack_l = __strlen(haystack);
+	needle_l = __strlen(needle);
+	if (haystack_l < needle_l)
+		return (false);
+	return (string_equal(haystack + haystack_l - needle_l, needle));
 }

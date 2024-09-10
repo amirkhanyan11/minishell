@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 21:32:39 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:01:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ char					*__strdup_until(const char *src,
 							const char end) __attribute__((warn_unused_result));
 char					*__strstr(char *haystack, char *needle);
 ssize_t					__strcmp(const char *lhv, const char *rhv);
+bool					__str_ends_with(const char *haystack, char *needle);
+bool					__str_starts_with(const char *haystack, char *needle);
 bool					__strchr(char *s, const char c);
 char					*__strchr_p(char *s, bool (*p)(char));
 bool					__strcmp_weak__(const char *lhv, const char *rhv);
@@ -114,9 +116,9 @@ long long				_process(long long res, char const c);
 bool					_non_digit(char c);
 
 // string predicates
-bool					string_equal(char *lhv, char *rhv);
-bool					string_less(char *lhv, char *rhv);
-bool					string_greater(char *lhv, char *rhv);
+bool					string_equal(const char *lhv, const char *rhv);
+bool					string_less(const char *lhv, const char *rhv);
+bool					string_greater(const char *lhv, const char *rhv);
 
 // matrix
 void					print_matrix(t_matrix arr);
