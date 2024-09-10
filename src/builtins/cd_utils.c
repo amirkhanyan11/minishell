@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/10 15:03:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:00:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	_chdir(t_command *cmd, const char *path, int *status)
 {
 	char *cwd	__attribute__((cleanup(__delete_string)));
 
-	cwd = _getcwd();
+	cwd = _getcwd(cmd->shell);
 	if (chdir(path) == -1)
 	{
 		*status = 1;
@@ -29,7 +29,7 @@ void	_chdir(t_command *cmd, const char *path, int *status)
 	{
 		__perror("cd: error retrieving current directory: getcwd:"
 			"cannot access parent directories: No such file or directory");
-		chdir("../");
+		// chdir("../");
 	}
 	if (cmd->container->size > 1)
 	{
@@ -98,7 +98,7 @@ void	update_pwd(t_shell *shell, char *oldpwd)
 
 	if (!shell || !oldpwd)
 		return ;
-	pwd = _getcwd();
+	pwd = _getcwd(shell);
 	export_update(shell, "OLDPWD", oldpwd);
 	export_update(shell, "PWD", pwd);
 }

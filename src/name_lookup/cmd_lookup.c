@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:25:51 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:59:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ bool	__cmd_exists__(const char *path, const char *name)
 	char *guess	__attribute__((cleanup(__delete_string)));
 
 	guess = __make_string(path, "/", name, NULL);
-	return (0 == access(guess, F_OK));
+
+	struct stat buffer;
+
+	stat(guess, &buffer);
+	return (0 == access(guess, F_OK | X_OK) && !S_ISDIR(buffer.st_mode));
 }
 
 static int	builtin_lookup(t_command *cmd)

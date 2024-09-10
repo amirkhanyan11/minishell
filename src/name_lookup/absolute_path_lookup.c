@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   absolute_path_lookup.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:44:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/09 13:36:40 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/10 16:45:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int	absolute_path_lookup(t_command *cmd)
 	while (dp != NULL && !string_equal(dp->d_name, filename))
 		dp = readdir(dir);
 
-	if (dp->d_type == DT_DIR)
+	if (dp && dp->d_type == DT_DIR)
 	{
 		__va_perror(cmd->name, ": is a directory", NULL);
 		set_exit_status(126);
 	}
-	else if (cmd->name[__strlen(cmd->name) - 1] == '/')
+	else if (dp && cmd->name[__strlen(cmd->name) - 1] == '/')
 	{
 		__va_perror(cmd->name, ": Not a directory", NULL);
 		set_exit_status(126);

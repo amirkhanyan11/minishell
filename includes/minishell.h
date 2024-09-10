@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:26:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:38:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void				__eval_prog__(t_command *cmd);
 void				__exit__(t_command *cmd);
 
 // other
-char				*_getcwd(void) __attribute__((warn_unused_result));
+char				*_getcwd(t_shell *shell) __attribute__((warn_unused_result));
 int					set_eval_to_prog_i_love_norminette(t_command *cmd);
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);
