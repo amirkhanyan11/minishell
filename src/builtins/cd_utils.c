@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/10 17:00:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:07:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	_chdir(t_command *cmd, const char *path, int *status)
 		__va_perror("cd: ", path, ": No such file or directory", NULL);
 		return ;
 	}
-	if (cmd->container->size == 1 && __str_ends_with(cwd, "/../"))
-	{
-		__perror("cd: error retrieving current directory: getcwd:"
-			"cannot access parent directories: No such file or directory");
-		// chdir("../");
-	}
+	// if (cmd->container->size == 1 && __str_ends_with(cwd, "/../"))
+	// {
+	// 	__perror("cd: error retrieving current directory: getcwd:"
+	// 		"cannot access parent directories: No such file or directory");
+	// 	// chdir("../");
+	// }
 	if (cmd->container->size > 1)
 	{
 		chdir(cwd);
@@ -101,5 +101,9 @@ void	update_pwd(t_shell *shell, char *oldpwd)
 	pwd = _getcwd(shell);
 	export_update(shell, "OLDPWD", oldpwd);
 	export_update(shell, "PWD", pwd);
+
+	if (__str_ends_with(pwd, "/../"))
+		__perror("cd: error retrieving current directory: getcwd:"
+				"cannot access parent directories: No such file or directory");
 }
 
