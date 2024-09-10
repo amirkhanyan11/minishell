@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/09 13:35:10 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/10 15:26:01 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ int					redirect(t_node *token, t_cmd_container *container);
 void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
 
 // find predicates
-bool				__cmd_exists__(t_list_value path, t_list_value name);
+bool				__cmd_exists__(const char *path, const char *name);
 
 // name predicates
 bool				is_quote(char *s);
 bool				is_single_redirection(char *val);
-bool				is_redirection(char *val);
+bool				is_redirection(const char *val);
 bool				is_name(char *s);
 bool				is_alpha(const char c);
 bool				is_digit(const char c);

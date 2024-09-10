@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:01:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:28:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_node	t_node;
 
 typedef void			(*t_printf_option)(const char *const);
 
-typedef bool			(*t_str_binary_predicate)(char *, char *);
+typedef bool			(*t_str_binary_predicate)(const char *, const char *);
 
 typedef char			**t_matrix;
 
@@ -81,7 +81,7 @@ char					*__strappend(char *s,
 						__attribute__((warn_unused_result));
 void					__va_perror(char *s, ...) __attribute__((sentinel));
 
-char					*__make_string(char *s,
+char					*__make_string(const char *s,
 							...) __attribute__((sentinel))
 						__attribute__((warn_unused_result));
 char					*__single_strappend__(char *lhv,

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 19:53:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:25:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	replace_cmd_name(t_command *cmd, t_node *node)
 	return (0);
 }
 
-bool	__cmd_exists__(t_list_value path, t_list_value name)
+bool	__cmd_exists__(const char *path, const char *name)
 {
 	char *guess	__attribute__((cleanup(__delete_string)));
 

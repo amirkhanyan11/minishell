@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:25:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:27:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct s_list	t_list;
 typedef char			*t_list_value;
 typedef void			(*t_list_Upredicate)(t_node *const);
 typedef bool			(*t_list_Upredicate_b)(t_node *const);
-typedef bool			(*t_list_Countpredicate)(t_list_value);
-typedef bool			(*t_list_Bpredicate_val)(t_list_value, t_list_value);
-typedef void			(*t_list_Apredicate_val)(size_t *, t_list_value);
+typedef bool			(*t_list_Countpredicate)(const char *);
+typedef bool			(*t_list_Bpredicate_val)(const char *, const char *);
+typedef void			(*t_list_Apredicate_val)(size_t *, const char *);
 typedef t_list_value	(*t_value_mutate)(t_list_value);
 
 typedef enum e_opcode	t_opcode;
@@ -126,7 +126,7 @@ void					reverse_postorder_traverse(t_node *head,
 							t_list_Upredicate f);
 
 // predicates
-bool					list_value_same(t_list_value lhv, t_list_value rhv);
+bool					list_value_same(const char *lhv, const char *rhv);
 bool					list_value_contains(t_list_value lhv, t_list_value rhv);
 
 #endif // LIST_H

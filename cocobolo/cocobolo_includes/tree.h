@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 22:30:52 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:08:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:23:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_tree		t_tree;
 typedef char				*t_treeval;
 
 typedef void				(*t_fptr)(t_tree_node *);
-typedef bool				(*t_cmp)(t_treeval, t_treeval);
+typedef bool				(*t_cmp)(const char *, const char *);
 
 typedef enum e_color
 {

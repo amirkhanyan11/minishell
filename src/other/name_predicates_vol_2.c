@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 18:26:29 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/31 21:01:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:25:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	is_redirection(char *val)
+bool	is_redirection(const char *val)
 {
 	return (string_equal(val, "<") || string_equal(val, ">")
 		|| string_equal(val, "<<") || string_equal(val, ">>"));
