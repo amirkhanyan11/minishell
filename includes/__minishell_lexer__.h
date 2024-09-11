@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   __minishell_lexer__.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:47:09 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/22 19:32:39 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/30 14:40:14 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define __MINISHELL_LEXER___H
 
 # include "minishell.h"
+
+// wildcards
+bool is_wildcard(t_node *node);
 
 // parsing
 t_list	*tokenize(char *raw_cmd) __attribute__((warn_unused_result));

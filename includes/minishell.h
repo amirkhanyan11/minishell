@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
 /*   Updated: 2024/09/10 16:38:24 by aamirkha         ###   ########.fr       */
@@ -176,6 +176,10 @@ void				ignore_sigquit(void);
 void				signal_print_newline(int __attribute__((unused)) signal);
 void				signal_reset_prompt(int __attribute__((unused)) sig);
 
+// wildcard
+t_list	*get_cwd_files(void);
+void arg_eval(t_command *cmd);
+void substitute_args(t_node *wildcard_node, t_list *args);
 
 int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
 int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_node *token);
@@ -190,3 +194,4 @@ t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
 
 
 #endif // MINISHELL_H
+
