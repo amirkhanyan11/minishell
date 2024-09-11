@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 17:10:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/09 19:41:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	set_signals_heredoc(void)
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &act, NULL);
-	sigaction(SIGQUIT, &act, NULL);
 	disable_echoctl();
 }
 
@@ -39,7 +38,7 @@ t_fd	make_heredoc(char *eof, t_shell *shell, bool is_quoted)
 	pid_t pid = __fork();
 	int res = 0;
 
-
+	ignore_sigquit();
 	if (pid == 0)
 	{
 		exit(make_heredoc_child(eof, shell, is_quoted));

@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/11 18:49:30 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:38:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 # define SELF_MERGEABLE_TOKENS "<>|"
 # define PIPE_MAX 2
 
-# define MINISHELL_PROMPT "\033[1;35m\e[3mminishell\033[1;32m > $ \033[0m"
-// # define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
+# define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
+// # define MINISHELL_PROMPT "\033[1;31m\e[3mo.g.shell\033[1;31m > $ \033[0m"
 
 struct				s_shell
 {
@@ -78,12 +78,12 @@ int					redirect(t_node *token, t_cmd_container *container);
 void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
 
 // find predicates
-bool				__cmd_exists__(t_list_value path, t_list_value name);
+bool				__cmd_exists__(const char *path, const char *name);
 
 // name predicates
 bool				is_quote(char *s);
 bool				is_single_redirection(char *val);
-bool				is_redirection(char *val);
+bool				is_redirection(const char *val);
 bool				is_name(char *s);
 bool				is_alpha(const char c);
 bool				is_digit(const char c);
@@ -128,7 +128,7 @@ void				__eval_prog__(t_command *cmd);
 void				__exit__(t_command *cmd);
 
 // other
-char				*_getcwd(void) __attribute__((warn_unused_result));
+char				*_getcwd(t_shell *shell) __attribute__((warn_unused_result));
 int					set_eval_to_prog_i_love_norminette(t_command *cmd);
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);

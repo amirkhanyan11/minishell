@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 00:30:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:36:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:27:28 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-bool	list_value_same(t_list_value lhv, t_list_value rhv)
+bool	list_value_same(const char *lhv, const char *rhv)
 {
 	if (!lhv || !rhv)
 		return (!lhv && !rhv);
