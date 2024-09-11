@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/26 16:24:11 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:38:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,29 @@ void	__pwd__(t_command *cmd)
 	}
 	else
 	{
-		path = _getcwd();
+		path = __strdup(get_val(cmd->shell->export, "PWD"));
+		if (!path || !(*path))
+		{
+			__delete_string(&path);
+			path = _getcwd(cmd->shell);
+		}
 		printf("%s\n", path);
 		__delete_string(&path);
 	}
 	set_exit_status(status);
 }
 
-char	*_getcwd(void)
+char	*_getcwd(t_shell *shell)
 {
 	char	*path;
 
 	path = __malloc(SIZE + 1);
 	if (NULL == getcwd(path, SIZE))
-		path = __strappend(path, "/../", NULL);
+	{
+		__delete_string(&path);
+		path = __make_string(get_val(shell->export, "PWD"), "/../", NULL);
+
+	}
 	return (path);
 }
 

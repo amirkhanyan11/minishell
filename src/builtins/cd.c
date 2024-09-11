@@ -6,14 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:30:39 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 20:08:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:23:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void	cd(t_command *cmd)
 {
@@ -45,5 +42,3 @@ void	__cd__(t_command *cmd)
 		__cd_one_arg__(cmd);
 	update_pwd(cmd->shell, oldpwd);
 }
-
-#pragma GCC diagnostic pop
