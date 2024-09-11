@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/11 18:46:13 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:48:57 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_list	*get_cwd_files(void)
 bool check_node(char *dirname, t_list *reqs)
 {
 	t_node *cur = reqs->head;
-	
+
 	while (cur)
 	{
 		if (string_equal(cur->val, "*"))
@@ -103,4 +103,4 @@ void arg_eval(t_command *cmd)
 		wild = save;
 		wild = find_if(wild, cmd->args->tail, is_wildcard);
 	}
-}
+c}
