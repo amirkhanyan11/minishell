@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 21:02:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:27:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*set_val(char *s, size_t i, t_shell *shell,
 				char **_val) __attribute__((warn_unused_result));
 static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell);
 
-char	*resolve(char *t_val, t_shell *shell)
+char	*resolve(char *t_val, t_shell *shell) // echo $notexist: --> ::
 {
 	size_t	i;
 	char	*s;
@@ -53,7 +53,8 @@ static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell)
 	val = set_val((*s), (*i), shell, &_val);
 	(*s)[k] = c;
 	if (!val)
-		val = data->second;
+		val = "";
+		// val = data->second;
 	(*i) += __strlen(val) - 1;
 	data->first = __strappend(data->first, val, (*s) + k, NULL);
 	free((*s));

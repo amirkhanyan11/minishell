@@ -6,17 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:20:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 20:17:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:53:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 static int	builtin_lookup(t_command *cmd);
 static int	replace_cmd_name(t_command *cmd, t_node *node);
-static int	set_eval_to_prog_i_love_norminette(t_command *cmd);
 
 int	cmd_lookup(t_command *cmd)
 {
@@ -36,15 +33,15 @@ int	cmd_lookup(t_command *cmd)
 				return (replace_cmd_name(cmd, find_range(path,
 							cmd->name, __cmd_exists__)));
 		}
-		else if (0 == access(cmd->name, F_OK))
-			return (set_eval_to_prog_i_love_norminette(cmd));
+		else
+			return absolute_path_lookup(cmd);
 	}
 	__va_perror(cmd->name, ": command not found", NULL);
 	set_exit_status(127);
 	return (-1);
 }
 
-static int	set_eval_to_prog_i_love_norminette(t_command *cmd)
+int	set_eval_to_prog_i_love_norminette(t_command *cmd)
 {
 	cmd->eval = eval_prog;
 	return (0);
@@ -91,5 +88,3 @@ static int	builtin_lookup(t_command *cmd)
 		return (-1);
 	return (0);
 }
-
-#pragma GCC diagnostic pop

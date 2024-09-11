@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/30 16:02:21 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:50:45 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ struct				s_command
 	t_list *options					__attribute__((deprecated));
 	t_list *args		;		//here was an attribute deprecated
 
-	t_cmd_container *container		__attribute__((deprecated));
+	t_cmd_container *container;
 
-	t_eval eval						__attribute__((deprecated));
+	t_eval eval				;
 
-	int redirection					__attribute__((deprecated));
-	t_descriptor *descriptors		__attribute__((deprecated));
+	int redirection			;
+	pid_t pid;
+	t_descriptor *descriptors;
 };
 
 struct				s_cmd_container
@@ -38,6 +39,7 @@ struct				s_cmd_container
 	t_command		**arr;
 	size_t			size;
 	size_t			current_cmd_index;
+	t_fd			*fds;
 };
 
 t_command			*make_command(t_list *tokens, t_cmd_container *container,

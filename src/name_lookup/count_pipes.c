@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __malloc.c                                         :+:      :+:    :+:   */
+/*   count_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 20:03:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:19:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/01 22:09:54 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/01 22:11:07 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "minishell.h"
 
-void	*__malloc(size_t n)
+static size_t __count_pipes__(t_node *token, t_shell *shell)
 {
-	void	*ptr;
+	if (!token) return 0;
 
-	ptr = malloc(n);
-	if (NULL == ptr)
-		__exit("Bad alloc");
-	return (ptr);
+	return (!is_quoted_token(shell->quoted_tokens, token) && string_equal(token->val, "|")) + __count_pipes__(token->next, shell);
+}
+
+size_t count_pipes(t_list *tokens, t_shell *shell)
+{
+	if (!tokens || !shell) return 0;
+
+	return __count_pipes__(tokens->head, shell);
 }

@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/30 20:24:04 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:49:30 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <dirent.h>
 # include <termios.h>
 
@@ -73,7 +74,7 @@ char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
 int					cmd_lookup(t_command *cmd);
 t_fd				open_file(char *filenae, int options);
-int					redirect(t_node *token, t_command *cmd);
+int					redirect(t_node *token, t_cmd_container *container);
 void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
 
 // find predicates
@@ -128,6 +129,7 @@ void				__exit__(t_command *cmd);
 
 // other
 char				*_getcwd(void) __attribute__((warn_unused_result));
+int					set_eval_to_prog_i_love_norminette(t_command *cmd);
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
@@ -139,8 +141,8 @@ int					invalid_option(t_command *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);
 
-int					pipe_parse(t_list *tokens);
-int					redirection_parse(t_list *tokens);
+int					pipe_parse(t_list *tokens, t_shell *shell);
+int					redirection_parse(t_list *tokens, t_shell *shell);
 void				save_token(t_shell *shell, t_node *address);
 
 // builtin utils
@@ -158,6 +160,7 @@ char				*get_pid(t_shell *shell)
 
 // name_lookup utils
 t_list				*get_cwd_files();
+int					absolute_path_lookup(t_command *cmd);
 int					quote_parse(t_list *tokens);
 bool				not_space(t_node *node);
 bool				is_redir(t_node *node);
@@ -177,6 +180,18 @@ void				signal_reset_prompt(int __attribute__((unused)) sig);
 t_list	*get_cwd_files(void);
 void arg_eval(t_command *cmd);
 void substitute_args(t_node *wildcard_node, t_list *args);
+
+int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
+int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_node *token);
+
+t_fd				get_next_fd(t_cmd_container *container);
+size_t				get_next_fd_idx(t_cmd_container *container);
+
+int					pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container);
+size_t				count_pipes(t_list *tokens, t_shell *shell);
+t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
+
+
 
 #endif // MINISHELL_H
 

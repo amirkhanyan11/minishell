@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __malloc.c                                         :+:      :+:    :+:   */
+/*   get_next_fd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 20:03:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:19:18 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/08/31 21:03:45 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/08/31 21:25:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "minishell.h"
 
-void	*__malloc(size_t n)
+t_fd	get_next_fd(t_cmd_container *container)
 {
-	void	*ptr;
+	static int	i = 0;
 
-	ptr = malloc(n);
-	if (NULL == ptr)
-		__exit("Bad alloc");
-	return (ptr);
+	if (!container)
+	{
+		i = 0;
+		return (-1);
+	}
+	return (container->fds[i++]);
+}
+size_t	get_next_fd_idx(t_cmd_container *container)
+{
+	static int	i = 0;
+
+	if (!container)
+	{
+		i = 0;
+		return (-1);
+	}
+	return (i++);
 }

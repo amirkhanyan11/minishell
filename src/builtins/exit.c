@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/08/26 17:29:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:17:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	__exit__(t_command *cmd)
 			__exit_nb_wrapper(cmd, value_or(&val, -1), err);
 	}
 	else
-		__exit_nb_wrapper(cmd, 0, err);
+		__exit_nb_wrapper(cmd, get_exit_status(), err);
 	__delete_string(&err);
 }
 
