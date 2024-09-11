@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/09 20:27:43 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:46:13 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,26 @@ t_list	*get_cwd_files(void)
 
 bool check_node(char *dirname, t_list *reqs)
 {
-	t_node *r = reqs->head;
-
-	while (dirname && r)
+	t_node *cur = reqs->head;
+	
+	while (cur)
 	{
-		if (!string_equal(r->val, "*"))
+		if (string_equal(cur->val, "*"))
 		{
-			// dirname =
+			cur = cur->next;
+			continue;
 		}
-		r = r->next;
+		if(__strstr(cur->val, dirname))
+		{
+			starts_with(cur->val, dirname);
+		}
+		else
+		{
+			ends_with(dirname, cur->val);
+		}
+		cur = cur->next;
 	}
+	return true;
 }
 
 void remove_asterix(char *value)
@@ -60,6 +70,7 @@ void remove_asterix(char *value)
 	}
 
 	while()
+
 
 
 	return new_val;
