@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/11 18:50:45 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/11 19:42:45 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 struct				s_command
 {
-	t_shell *shell					__attribute__((deprecated));
-	char *name						__attribute__((deprecated));
-	t_list *options					__attribute__((deprecated));
+	t_shell *shell	;
+	char *name		;
+	t_list *options	;
 	t_list *args		;		//here was an attribute deprecated
 
 	t_cmd_container *container;
