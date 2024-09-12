@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/11 18:51:28 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/12 21:11:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,30 @@ int	main(int ac, char **av, char **env)
 	{
 		line = read_line(MINISHELL_PROMPT);
 		cmds = make_cmd_container(line, shell);
-		if (!line)
+		if (line)
 		{
-			__exit_nb__(get_exit_status(), NULL);
+			eval(cmds);
+			if (__strlen(line) > 0)
+			{
+				push_back(shell->history, line, NULL);
+				add_history(line);
+			}
 		}
-		eval(cmds);
-		if (__strlen(line) > 0)
-		{
-			push_back(shell->history, line, NULL);
-			add_history(line);
-		}
-		__delete_string(&line);
 		__t_cmd_container__(&cmds);
+		if (!line)
+			break;
+		__delete_string(&line);
 	}
 	__t_shell__(shell);
 	return (get_exit_status());
 }
 
-// #ifdef __APPLE__
-// void	__attribute__((destructor)) moid(void)
-// {
-// 	// printf(GREEN);
-// 	printf("\n\nLeaks report\n");
-// 	system("leaks minishell");
-// 	// printf(RESET);
-// }
-// #endif // __APPLE__
+#ifdef __APPLE__
+void	__attribute__((destructor)) moid(void)
+{
+	// printf(GREEN);
+	printf("\n\nLeaks report\n");
+	system("leaks minishell");
+	// printf(RESET);
+}
+#endif // __APPLE__

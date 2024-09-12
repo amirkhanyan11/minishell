@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 23:05:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/12 21:18:58 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	__t_cmd_container__(t_cmd_container **cmdsptr)
 	get_next_fd(NULL);
 	cmds->shell = NULL;
 	free(cmds->arr);
+	free(cmds->fds);
 	free(cmds);
 	*cmdsptr = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/09 19:41:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:24:24 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted);
 
 static void	quit_from_heredoc(int __attribute__((unused)) signal)
 {
-	exit(130);
+	set_exit_status(1);
+	// exit(130);
 }
 
 static void	set_signals_heredoc(void)
@@ -60,10 +61,11 @@ static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted)
 
 	if (!eof || !shell)
 		return (-1);
+	set_exit_status(0);
 	fd = open_file(HEREDOC, O_CREAT | O_RDWR);
 	set_signals_heredoc();
 	line = readline(HEREDOC_PROMPT);
-	while (!string_equal(line, eof))
+	while (!string_equal(line, eof) && get_exit_status() == 0)
 	{
 		line = __strappend(line, "\n", NULL);
 		if (!is_quoted && __strchr(line, '$'))
@@ -76,5 +78,5 @@ static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted)
 	}
 	free(line);
 	close(fd);
-	return (0);
+	return (get_exit_status());
 }
