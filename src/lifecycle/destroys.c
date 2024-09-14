@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/12 21:18:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:52:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,8 @@ void	__t_shell__(t_shell *shell)
 	shell = NULL;
 }
 
-void	__t_command__(t_command **cmdptr)
+void	__t_command__(t_command *cmd)
 {
-	t_command	*cmd;
-
-	if (NULL == cmdptr)
-		return ;
-	cmd = *cmdptr;
 	if (NULL == cmd)
 		return ;
 	list_clear(&cmd->args);
@@ -43,7 +38,6 @@ void	__t_command__(t_command **cmdptr)
 	free(cmd->descriptors);
 	free(cmd->name);
 	free(cmd);
-	*cmdptr = NULL;
 }
 
 void	__t_cmd_container__(t_cmd_container **cmdsptr)
@@ -59,7 +53,7 @@ void	__t_cmd_container__(t_cmd_container **cmdsptr)
 	i = 0;
 	while (i < cmds->size)
 	{
-		__t_command__(&(cmds->arr[i]));
+		__t_command__(cmds->arr[i]);
 		i++;
 	}
 	set_clear(&cmds->shell->quoted_tokens);
@@ -70,7 +64,7 @@ void	__t_cmd_container__(t_cmd_container **cmdsptr)
 	free(cmds->arr);
 	free(cmds->fds);
 	free(cmds);
-	*cmdsptr = NULL;
+	// *cmdsptr = NULL;
 }
 
 #pragma GCC diagnostic pop

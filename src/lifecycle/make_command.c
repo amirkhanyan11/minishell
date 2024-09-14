@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 17:47:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 00:01:35 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 		{
 			unlink(HEREDOC);
 		}
-		__t_command__(&cmd);
+		__t_command__(cmd);
+		cmd = NULL;
 	}
 	return (cmd);
 }

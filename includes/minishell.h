@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 16:38:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:53:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,6 @@ void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
 int					get_exit_status(void);
 void				set_exit_status_no_of(int status);
-void				__exit_nb__(const int status,
-						char *err) __attribute__((noreturn));
 int					invalid_option(t_command *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/12 16:00:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:28:05 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_command			*make_command(t_list *tokens, t_cmd_container *container,
 						t_shell *shell) __attribute__((warn_unused_result));
 t_cmd_container		*make_cmd_container(char *raw_cmd,
 						t_shell *shell) __attribute__((warn_unused_result));
-void				__t_command__(t_command **cmdptr);
+void				__t_command__(t_command *cmd);
 void				__t_cmd_container__(t_cmd_container **cmdsptr);
 
 #endif // __MINISHELL_COMMANDS___H
