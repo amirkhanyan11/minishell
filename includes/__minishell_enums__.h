@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:00:33 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/19 17:22:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:50:49 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ enum	e_eval_opcode
 	_unset,
 	_program,
 	_msh_exit
+};
+
+enum e_cleanup_option
+{
+	asg,
+	delete
 };
 
 #endif // __MINISHELL_ENUMS___H
