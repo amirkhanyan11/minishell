@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 01:54:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:04:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void __cleanup__(const int _fd, t_shell *_shell, enum e_cleanup_option op
 	else
 	{
 		close(fd);
-		__t_cmd_container__(&shell->container);
 		__t_shell__(shell);	
 	}
 }
@@ -82,8 +81,8 @@ static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted)
 		return (-1);
 	fd = open_file(HEREDOC, O_CREAT | O_RDWR);
 	set_signals_heredoc();
-	line = readline(HEREDOC_PROMPT);
 	__cleanup__(fd, shell, asg);
+	line = readline(HEREDOC_PROMPT);
 	while (!string_equal(line, eof))
 	{
 		line = __strappend(line, "\n", NULL);
