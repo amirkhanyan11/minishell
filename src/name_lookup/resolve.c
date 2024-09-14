@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 00:17:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 00:20:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ char	*resolve(char *t_val, t_shell *shell)
 	while (s[i] && s[i + 1])
 	{
 		if (s[i] == '$')
+		{
 			foo(&s, &i, &data, shell);
+		}
 		i++;
 	}
 	free(t_val);
