@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 00:46:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 01:05:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 		return (NULL);
 	}
 	container = __malloc(sizeof(t_cmd_container));
+	container->tokens = tokens;
 	container->current_cmd_index = 0;
 	container->shell = shell;
 	container->fds = __calloc(count_if(tokens->head, tokens->tail, is_redirection) * sizeof(int)); // what if malloc 0?
@@ -36,7 +37,8 @@ t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 	container->shell->container = container;
 	preprocess_redirections(tokens, container);
 	make_cmds(container, shell, tokens);
-	list_clear(&tokens);
+	list_clear(&container->tokens);
+	container->tokens = NULL;
 	return (container);
 }
 
