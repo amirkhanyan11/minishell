@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 00:01:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 00:45:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 
 	if (empty(tokens) || !shell)
 		return (NULL);
-	cmd = __malloc(sizeof(t_command));
+	cmd = __calloc(sizeof(t_command));
 	cmd->descriptors = make_stddesc();
 	cmd->shell = shell;
 	cmd->pid = -1337;

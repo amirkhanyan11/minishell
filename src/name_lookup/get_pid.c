@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:45:58 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/15 00:29:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 00:37:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ static void	exec_ps(t_shell *shell)
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		execve(cmd[0], cmd, t_env);
+		unlink(PS_);
+		__t_cmd_container__(&shell->container);
+		__t_shell__(shell);
+		matrix_clear(&t_env);
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, NULL, 0);

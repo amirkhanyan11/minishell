@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:28:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 00:45:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void					__perror(char *err);
 void					__exit(char const *const err)
 						__attribute__((__noreturn__));
 void					*__malloc(size_t n)
+						__attribute__((malloc))
+						__attribute__((warn_unused_result));
+void					*__calloc(size_t n)
 						__attribute__((malloc))
 						__attribute__((warn_unused_result));
 pid_t					__fork(void);
