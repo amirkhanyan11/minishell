@@ -1,0 +1,6 @@
+  PID TTY          TIME CMD
+ 1867 pts/0    00:00:02 bash
+ 7015 pts/0    00:00:00 make
+ 7911 pts/0    00:00:00 memcheck-amd64-
+ 7918 pts/0    00:00:00 ps
+__EOF__

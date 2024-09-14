@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:45:58 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/01 17:44:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 00:29:21 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*get_pid(t_shell *shell)
 		free(val);
 		val = get_next_line(fd);
 	}
+	
+	free(val);
 	get_next_line(-1);
 
 	t_node *node = list->tail;
