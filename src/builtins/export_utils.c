@@ -30,14 +30,14 @@ int	__export_from_string__(char *expr, t_shell *shell)
 
 	tokens = NULL;
 	if (!expr || !shell)
-		return (foo(-1, tokens));
+		return (-1);
 	tokens = make_list_from_string(expr, "=", all);
 	if (empty(tokens))
-		return (foo(-1, tokens));
+		return (-1);
 	if (______i_a_g_t_c_i_m_p_f_n_________(expr, tokens, shell) == -1)
-		return (foo(-1, tokens));
+		return (-1);
 	if (shell->container && shell->container->size > 1)
-		return (foo(0, tokens));
+		return (0);
 	if (size(tokens) >= 2)
 		return (size_2(shell, tokens));
 	else
@@ -45,13 +45,7 @@ int	__export_from_string__(char *expr, t_shell *shell)
 		unset_var(shell, tokens->head->val);
 		tree_update(shell->export, tokens->head->val, NULL);
 	}
-	return (foo(0, tokens));
-}
-
-static int	foo(int x, t_list *tokens)
-{
-	list_clear(&tokens);
-	return (x);
+	return (0);
 }
 
 static int	size_2(t_shell *shell, t_list *tokens)
