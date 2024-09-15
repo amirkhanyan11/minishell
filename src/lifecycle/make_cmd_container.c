@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 18:03:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:05:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 	}
 	if (count_range(tokens, "<<") > HEREDOC_MAX)
 	{
+		list_clear(&tokens);
 		__t_shell__(shell);
 		__perror("maximum here-document count exceeded");
 		exit(2);
