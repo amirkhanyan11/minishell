@@ -93,7 +93,7 @@ oda :
 leaks : all
 	valgrind --leak-check=full --show-leak-kinds=all --suppressions=.vlgignore ./${NAME}
 
-#  
+#
 
 config:
 	mkdir -p readline_local

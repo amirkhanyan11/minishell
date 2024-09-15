@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 01:22:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:21:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # include <signal.h>
 # include <dirent.h>
 # include <termios.h>
+
+#ifdef __linux__
+# include <bits/sigaction.h>
+#endif // __linux__
 
 # define DECLAREX "declare -x "
 # define HEREDOC ".__heredoc__.txt"
