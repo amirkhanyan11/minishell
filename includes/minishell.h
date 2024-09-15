@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 14:21:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 18:03:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define SPECIAL_SYMBOLS "<>| \'\""
 # define SELF_MERGEABLE_TOKENS "<>|"
 # define PIPE_MAX 2
+# define HEREDOC_MAX 16
+
 
 # define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
 // # define MINISHELL_PROMPT "\033[1;31m\e[3mo.g.shell\033[1;31m > $ \033[0m"
