@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 13:47:01 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:05:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int ac, char **av, char **env)
 		__delete_string(&line);
 	}
 	__t_shell__(shell);
+	printf("exit\n");
 	return (get_exit_status());
 }
 

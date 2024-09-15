@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 12:09:36 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:04:56 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	__t_shell__(t_shell *shell)
 	tree_clear(&shell->export);
 	__t_cmd_container__(&shell->container);
 	set_clear(&shell->quoted_tokens);
+	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout, &shell->stddesc->stderr, NULL);
 	free(shell->stddesc);
 	free(shell);
 	shell = NULL;

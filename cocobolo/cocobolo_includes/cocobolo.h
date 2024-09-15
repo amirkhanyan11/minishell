@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 00:45:27 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:01:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char					*__strappend(char *s,
 							...) __attribute__((sentinel))
 						__attribute__((warn_unused_result));
 void					__va_perror(char *s, ...) __attribute__((sentinel));
+void					__va_close(int *s, ...) __attribute__((sentinel));
 
 char					*__make_string(const char *s,
 							...) __attribute__((sentinel))
