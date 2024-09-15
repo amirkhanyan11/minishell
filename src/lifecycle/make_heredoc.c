@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 02:04:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:32:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted)
 	set_signals_heredoc();
 	__cleanup__(fd, shell, asg);
 	line = readline(HEREDOC_PROMPT);
-	while (!string_equal(line, eof))
+	while (line && !string_equal(line, eof))
 	{
 		line = __strappend(line, "\n", NULL);
 		if (!is_quoted && __strchr(line, '$'))
