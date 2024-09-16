@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 19:50:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:22:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,9 @@ void				signal_print_newline(int __attribute__((unused)) signal);
 void				signal_reset_prompt(int __attribute__((unused)) sig);
 
 // wildcard
+char				*contains_it(char *dirname, char *req);
+char				*starts_with(char *dirname, char *req);
+char				*ends_with(char *dirname, char *req);
 t_list				*get_cwd_files(void);
 void				wildcard_resolve(t_list *tokens, t_shell *shell);
 void				substitute_args(t_node *wildcard_node, t_list *args, t_list *survived);

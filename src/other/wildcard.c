@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 19:59:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:23:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,19 @@ t_list	*get_cwd_files(void)
 	dp = readdir(dir);
 	while (dp != NULL)
 	{
-		push_back(res, dp->d_name, NULL);
+		if (dp->d_name && !starts_with(dp->d_name, "."))
+			push_back(res, dp->d_name, NULL);
 		dp = readdir(dir);
 	}
 	closedir(dir);
-	return (res);
+
+	t_matrix tmp __attribute__((cleanup(matrix_clear))) = make_matrix_from_list(res);
+
+	matrix_sort(tmp, string_less);
+
+	list_clear(&res);
+
+	return (make_list_from_matrix(tmp));
 }
 
 char *contains_it(char *dirname, char *req)
@@ -56,7 +64,7 @@ char *ends_with(char *dirname, char *req)
 }
 
 
-bool check_node(char *dirname, t_list *reqs)
+static bool check_node(char *dirname, t_list *reqs)
 {
 	char *(*fptr)(char *, char *);
 	t_node *cur = reqs->head;
@@ -87,7 +95,7 @@ bool check_node(char *dirname, t_list *reqs)
 	return true;
 }
 
-t_list *check_all_dirs(t_list *dir, t_list *reqs)
+static t_list *check_all_dirs(t_list *dir, t_list *reqs)
 {
 	t_list *res = make_list();
 
