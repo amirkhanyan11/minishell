@@ -6,31 +6,31 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/12 16:00:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:08:52 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*get_cwd_files(void)
-{
-	DIR				*dir;
-	struct dirent	*dp;
-	t_list			*res;
+// t_list	*get_cwd_files(void)
+// {
+// 	DIR				*dir;
+// 	struct dirent	*dp;
+// 	t_list			*res;
 
-	res = make_list();
-	dir = opendir(".");
-	if (dir == NULL)
-		return (NULL);
-	dp = readdir(dir);
-	while (dp != NULL)
-	{
-		push_back(res, dp->d_name, NULL);
-		dp = readdir(dir);
-	}
-	closedir(dir);
-	return (res);
-}
+// 	res = make_list();
+// 	dir = opendir(".");
+// 	if (dir == NULL)
+// 		return (NULL);
+// 	dp = readdir(dir);
+// 	while (dp != NULL)
+// 	{
+// 		push_back(res, dp->d_name, NULL);
+// 		dp = readdir(dir);
+// 	}
+// 	closedir(dir);
+// 	return (res);
+// }
 
 // bool check_node(char *dirname, t_list *reqs)
 // {
@@ -54,26 +54,6 @@ t_list	*get_cwd_files(void)
 // 		cur = cur->next;
 // 	}
 // 	return true;
-// }
-
-// void remove_asterix(char *value)
-// {
-// 	t_list *dir = get_cwd_files();
-// 	t_list *matcha = make_list();
-// 	t_list *reqs = make_list_from_string(value, "*", all);
-
-// 	t_node *current = reqs->head;
-
-// 	while(current)
-// 	{
-// 		find_if(dir->head, dir->tail, )
-// 	}
-
-// 	while()
-
-
-
-// 	return new_val;
 // }
 
 // void substitute_args(t_node *wildcard_node, t_list *args)
@@ -103,4 +83,4 @@ t_list	*get_cwd_files(void)
 // 		wild = save;
 // 		wild = find_if(wild, cmd->args->tail, is_wildcard);
 // 	}
-// c}
+// }

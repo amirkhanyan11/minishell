@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 18:05:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:13:43 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static void	make_cmds(t_cmd_container *container, t_shell *shell,
 	t_list	*partition;
 
 	i = 0;
-	first = front(tokens);
+	first = tokens->head;
+
 	while (i < container->size)
 	{
 		pipe = find_next_pipe(first, tokens, shell);
