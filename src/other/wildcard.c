@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 19:07:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:37:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,13 +130,16 @@ void wildcard_resolve(t_command *cmd)
 
 		t_list *survived = check_all_dirs(dir, reqs);
 
-		substitute_args(wild, cmd->args, survived);
-
-		pop(cmd->args, wild);
+		if (!empty(survived))
+		{
+			substitute_args(wild, cmd->args, survived);
+			pop(cmd->args, wild);
+		}
+		
 		wild = save;
 		wild = find_if(wild, cmd->args->tail, is_wildcard);
-
 		list_clear(&reqs);
 		list_clear(&survived);
 	}
+	list_clear(&dir);
 }
