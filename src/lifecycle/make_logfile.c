@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:43:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 14:48:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:59:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ t_fd make_logfile(t_shell *shell)
 
 	wait(NULL);
 
-	__putstr_fd("\n\n", res);
+	char *username __attribute__((cleanup(__delete_string))) =
+
+		__make_string("\n", get_val(shell->export, "USER"), "\n\n\n", NULL);
+
+	__putendl_fd(username, res);
+
 
 	return res;
 }
