@@ -774,3 +774,35 @@ aamirkha
 10. echo $pW'd'
 11. export ash=w
 12. p"$ash"d
+13. make oda
+14. clear
+15. eixt
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 22:36:25 +04 2024
+
+aamirkha
+
+1. clear
+2. rm -rf a
+3. mkdir -p a/b
+4. cd a/b
+5. owd
+6. pwd
+7. rm -rf ../../a
+8. cd ../
+9. pwd
+10. cd ../
+11. pwd
+12. ls
+13. pwd
+
+
+
+-------------------------------------------------
+
+
