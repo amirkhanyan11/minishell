@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __putstr_fd.c                                      :+:      :+:    :+:   */
+/*   __putendl_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 21:17:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 14:25:27 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/16 14:23:17 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/16 14:25:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-ssize_t	__putstr_fd(char *s, int fd)
+ssize_t	__putendl_fd(char *s, int fd)
 {
 	if (!s || fd < 0)
 		return (-1);
-	return (write(fd, s, __strlen(s)));
+
+	return (write(fd, s, __strlen(s)) + write(fd, "\n", 1));
 }

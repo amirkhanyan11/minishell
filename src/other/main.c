@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 14:05:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:40:29 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,23 @@
 // pipe parse has to be formatted for || OR operator
 //  add & as a special symbol
 
+static void logcmd(const char * line, t_fd logfile)
+{
+	static size_t x = 1;
+
+	char *out __attribute__((cleanup(__delete_string))) = __itoa((int)x++);
+
+	out = __strappend(out, ". ", line, NULL);
+
+	__putendl_fd(out, logfile);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_shell			*shell;
 	char			*line;
 	t_cmd_container	*cmds;
+
 
 	shell = make_shell(env);
 	while (true)
@@ -33,6 +45,9 @@ int	main(int ac, char **av, char **env)
 			{
 				push_back(shell->history, line, NULL);
 				add_history(line);
+
+				logcmd(line, shell->logfile);
+
 			}
 		}
 		__t_cmd_container__(&cmds);

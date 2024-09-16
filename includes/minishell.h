@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 18:03:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:47:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define HEREDOC_MAX 16
 
 
+# define LOG_SEPARATOR "\n\n\n-------------------------------------------------\n\n\n"
+
 # define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
 // # define MINISHELL_PROMPT "\033[1;31m\e[3mo.g.shell\033[1;31m > $ \033[0m"
 
@@ -55,6 +57,8 @@ struct				s_shell
 	t_descriptor	*stddesc;
 	t_cmd_container	*container;
 	t_set			*quoted_tokens;
+
+	t_fd			logfile;
 };
 
 struct				s_descriptor
@@ -80,7 +84,7 @@ int					export_update(t_shell *shell, t_list_value key,
 char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
 int					cmd_lookup(t_command *cmd);
-t_fd				open_file(char *filenae, int options);
+t_fd				open_file(char *filename, int options);
 int					redirect(t_node *token, t_cmd_container *container);
 void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
 
@@ -111,6 +115,8 @@ t_list				*get_path(t_shell *shell)
 t_descriptor		*make_descriptors(void) __attribute__((warn_unused_result));
 t_descriptor		*make_stddesc(void) __attribute__((warn_unused_result));
 void				__t_shell__(t_shell *shell);
+
+t_fd 				make_logfile(t_shell *shell) __attribute__((warn_unused_result));
 
 // matrix
 

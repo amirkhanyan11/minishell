@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   __putstr_fd.c                                      :+:      :+:    :+:   */
+/*   make_logfile.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 21:17:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 14:25:27 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/16 14:43:38 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/16 14:48:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cocobolo.h>
+#include "minishell.h"
 
-ssize_t	__putstr_fd(char *s, int fd)
+t_fd make_logfile(t_shell *shell)
 {
-	if (!s || fd < 0)
-		return (-1);
-	return (write(fd, s, __strlen(s)));
+	t_fd res =  open_file("log.txt", O_WRONLY | O_APPEND | O_CREAT);
+
+	char		*cmd[2];
+
+	cmd[0] = "/usr/bin/date";
+	cmd[1] = NULL;
+	pid_t pid = __fork();
+	if (pid == 0)
+	{
+		dup2(res, STDOUT_FILENO);
+		close(res);
+		execve(cmd[0], cmd, NULL);
+		__t_shell__(shell);
+		exit(EXIT_FAILURE);
+	}
+
+	wait(NULL);
+
+	__putstr_fd("\n\n", res);
+
+	return res;
 }

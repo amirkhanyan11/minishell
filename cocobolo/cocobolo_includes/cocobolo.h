@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 14:01:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:25:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void					*__calloc(size_t n)
 						__attribute__((warn_unused_result));
 pid_t					__fork(void);
 void					__pipe(int *p);
-void					__putstr_fd(char *s, int fd);
+ssize_t					__putstr_fd(char *s, int fd);
+ssize_t					__putendl_fd(char *s, int fd);
 void					*__memset(void *b, int c, size_t len);
 
 // string
