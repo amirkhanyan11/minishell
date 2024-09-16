@@ -52,3 +52,22 @@ aamirkha
 -------------------------------------------------
 
 
+Mon Sep 16 17:21:14 +04 2024
+
+aamirkha
+
+1. clear
+2. echo ''$USER''
+3. CLEAR
+4. clear
+5. < Makefile > a cat -e
+6. cat a
+7. clear
+8. rm -rf a
+9. clear
+
+
+
+-------------------------------------------------
+
+
