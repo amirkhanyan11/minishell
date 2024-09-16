@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 19:37:25 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:54:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,32 +114,34 @@ void substitute_args(t_node *wildcard_node, t_list *args, t_list *survived)
 	}
 }
 
-void wildcard_resolve(t_command *cmd)
+void wildcard_resolve(t_list *tokens, t_shell *shell)
 {
 	t_list *dir = get_cwd_files();
 	int i = 0;
-	t_node *wild = cmd->args->head;
+	t_node *wild = tokens->head;
 	t_list *reqs = NULL;
 
-	wild = find_if(cmd->args->head, cmd->args->tail, is_wildcard);
+	wild = find_if(tokens->head, tokens->tail, is_wildcard);
 
 	while(wild)
 	{
 		t_node *save = wild->next;
-		reqs = make_list_from_string(wild->val, "*", all);
-
-		t_list *survived = check_all_dirs(dir, reqs);
-
-		if (!empty(survived))
+		if (!is_quoted_token(shell->quoted_tokens, wild))
 		{
-			substitute_args(wild, cmd->args, survived);
-			pop(cmd->args, wild);
+			reqs = make_list_from_string(wild->val, "*", all);
+
+			t_list *survived = check_all_dirs(dir, reqs);
+
+			if (!empty(survived))
+			{
+				substitute_args(wild, tokens, survived);
+				pop(tokens, wild);
+			}
+			list_clear(&survived);
+			list_clear(&reqs);
 		}
-		
 		wild = save;
-		wild = find_if(wild, cmd->args->tail, is_wildcard);
-		list_clear(&reqs);
-		list_clear(&survived);
+		wild = find_if(wild, tokens->tail, is_wildcard);
 	}
 	list_clear(&dir);
 }
