@@ -746,3 +746,31 @@ aamirkha
 -------------------------------------------------
 
 
+Mon Sep 16 22:24:53 +04 2024
+
+aamirkha
+
+1. clear
+2. echo "''"$$$""
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 22:27:08 +04 2024
+
+aamirkha
+
+1. clear
+2. echo $$
+3. echo "'"'
+4. echo a s d f
+5. echo a s d f $$ $ "$" "$$" '$'
+6. echo $PWD
+7. echo $PWDaaa
+8. echo $PW
+9. echo a"s"df
+10. echo $pW'd'
+11. export ash=w
+12. p"$ash"d
