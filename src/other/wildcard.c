@@ -6,81 +6,137 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 17:08:52 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:07:25 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// t_list	*get_cwd_files(void)
-// {
-// 	DIR				*dir;
-// 	struct dirent	*dp;
-// 	t_list			*res;
+t_list	*get_cwd_files(void)
+{
+	DIR				*dir;
+	struct dirent	*dp;
+	t_list			*res;
 
-// 	res = make_list();
-// 	dir = opendir(".");
-// 	if (dir == NULL)
-// 		return (NULL);
-// 	dp = readdir(dir);
-// 	while (dp != NULL)
-// 	{
-// 		push_back(res, dp->d_name, NULL);
-// 		dp = readdir(dir);
-// 	}
-// 	closedir(dir);
-// 	return (res);
-// }
+	res = make_list();
+	dir = opendir(".");
+	if (dir == NULL)
+		return (NULL);
+	dp = readdir(dir);
+	while (dp != NULL)
+	{
+		push_back(res, dp->d_name, NULL);
+		dp = readdir(dir);
+	}
+	closedir(dir);
+	return (res);
+}
 
-// bool check_node(char *dirname, t_list *reqs)
-// {
-// 	t_node *cur = reqs->head;
+char *contains_it(char *dirname, char *req)
+{
+	char *guess = __strstr(dirname, req);
 
-// 	while (cur)
-// 	{
-// 		if (string_equal(cur->val, "*"))
-// 		{
-// 			cur = cur->next;
-// 			continue;
-// 		}
-// 		if(__strstr(cur->val, dirname))
-// 		{
-// 			starts_with(cur->val, dirname);
-// 		}
-// 		else
-// 		{
-// 			ends_with(dirname, cur->val);
-// 		}
-// 		cur = cur->next;
-// 	}
-// 	return true;
-// }
+	if (guess) return guess + __strlen(req);
 
-// void substitute_args(t_node *wildcard_node, t_list *args)
-// {
-// 	t_list *dir = get_cwd_files();
-// 	t_node *w_node = dir->tail;
-// 	while(w_node)
-// 	{
-// 		list_insert(args, wildcard_node, w_node->val);
-// 		w_node = w_node->prev;
-// 	}
-// 	list_clear(&dir);
-// }
+	return NULL;
+}
 
-// void arg_eval(t_command *cmd)
-// {
-// 	int i = 0;
-// 	t_node *wild = cmd->args->head;
+char *starts_with(char *dirname, char *req)
+{
+	if(__str_starts_with(dirname, req))
+		return (dirname + __strlen(req));
+	return (NULL);
+}
 
-// 	wild = find_if(cmd->args->head, cmd->args->tail, is_wildcard);
+char *ends_with(char *dirname, char *req)
+{
+	if(__str_ends_with(dirname, req))
+		return (dirname + __strlen(dirname - 1));
+	return(NULL);
+}
 
-// 	while(wild)
-// 	{
-// 		t_node *save = wild->next;
-// 		substitute_args(wild, cmd->args);
-// 		pop(cmd->args, wild);
-// 		wild = save;
-// 		wild = find_if(wild, cmd->args->tail, is_wildcard);
-// 	}
-// }
+
+bool check_node(char *dirname, t_list *reqs)
+{
+	char *(*fptr)(char *, char *);
+	t_node *cur = reqs->head;
+
+	fptr = contains_it;
+	while (cur)
+	{
+		if (string_equal(cur->val, "*"))
+		{
+			cur = cur->next;
+			continue;
+		}
+		if(cur == reqs->head)
+		{
+			fptr = starts_with;
+		}
+		else if(cur == reqs->tail)
+		{
+			fptr = ends_with;
+		}
+		else
+			fptr = contains_it;
+		dirname = fptr(dirname, cur->val);
+		if(!dirname)
+			return false;
+		cur = cur->next;
+	}
+	return true;
+}
+
+t_list *check_all_dirs(t_list *dir, t_list *reqs)
+{
+	t_list *res = make_list();
+
+	if (empty(dir))
+		return (res);
+
+	t_node *dir_node = dir->head;
+	while(dir_node)
+	{
+		if (check_node(dir_node->val, reqs))
+			push_back(res, dir_node->val, NULL);
+		dir_node = dir_node->next;
+	}
+	return res;
+}
+
+void substitute_args(t_node *wildcard_node, t_list *args, t_list *survived)
+{
+	t_node *w_node = survived->tail;
+	while(w_node)
+	{
+		list_insert(args, wildcard_node, w_node->val);
+		w_node = w_node->prev;
+	}
+}
+
+void wildcard_resolve(t_command *cmd)
+{
+	t_list *dir = get_cwd_files();
+	int i = 0;
+	t_node *wild = cmd->args->head;
+	t_list *reqs = NULL;
+
+	wild = find_if(cmd->args->head, cmd->args->tail, is_wildcard);
+
+	while(wild)
+	{
+		t_node *save = wild->next;
+		reqs = make_list_from_string(wild->val, "*", all);
+
+		t_list *survived = check_all_dirs(dir, reqs);
+
+		substitute_args(wild, cmd->args, survived);
+
+		pop(cmd->args, wild);
+		wild = save;
+		wild = find_if(wild, cmd->args->tail, is_wildcard);
+
+		list_clear(&reqs);
+		list_clear(&survived);
+	}
+}

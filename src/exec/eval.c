@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:29:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/12 16:00:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:09:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	eval(t_cmd_container *cmds)
 		cmd = cmds->arr[cmds->current_cmd_index];
 		if (cmd)
 		{
-			// arg_eval(cmd);
+			wildcard_resolve(cmd);
 			cmd->eval(cmd);
 			if (cmd->redirection & redirect_heredoc)
 				unlink(HEREDOC);

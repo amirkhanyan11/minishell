@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 14:47:12 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:09:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,8 +189,8 @@ void				signal_reset_prompt(int __attribute__((unused)) sig);
 
 // wildcard
 t_list	*get_cwd_files(void);
-void arg_eval(t_command *cmd);
-void substitute_args(t_node *wildcard_node, t_list *args);
+void wildcard_resolve(t_command *cmd);
+void substitute_args(t_node *wildcard_node, t_list *args, t_list *survived);
 
 int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
 int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_node *token);
