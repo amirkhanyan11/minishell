@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 14:40:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:15:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	__t_command__(t_command *cmd)
 {
 	if (NULL == cmd)
 		return ;
+	if (cmd->redirection & redirect_heredoc)
+		unlink(HEREDOC);
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
 	reset_descriptors(cmd);

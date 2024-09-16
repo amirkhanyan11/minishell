@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:20:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:16:17 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,21 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 		possible_name = possible_name->next->next;
 	}
 
+	if (possible_name == NULL)
+	{
+		__t_command__(cmd);
+		cmd = NULL;
+		return (NULL);
+	}
+
 	cmd->name = __strdup(possible_name->val);
 
 	if (pop_redirections(cmd, tokens, container) == -1 || empty(tokens) || sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
 	{
-		if (cmd->redirection & redirect_heredoc)
-		{
-			unlink(HEREDOC);
-		}
 		__t_command__(cmd);
 		cmd = NULL;
 	}
+
+
 	return (cmd);
 }
