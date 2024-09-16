@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/11 18:48:57 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:45:06 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,27 @@ t_list	*get_cwd_files(void)
 	return (res);
 }
 
+void starts_with(char *dir_p, char *req)
+{
+	if(__str_starts_with(dir_p, req))
+
+		// dir_p change pointer to the poin
+}
+
+void ends_with(char *dir_p, char *req)
+{
+	if(__str_ends_with(dir_p, req))
+
+	maybe should return
+}
+
 bool check_node(char *dirname, t_list *reqs)
 {
+	void(*fptr)(char *, char *);
 	t_node *cur = reqs->head;
+	char *dir_p = dirname;
 
+	fptr = contain;
 	while (cur)
 	{
 		if (string_equal(cur->val, "*"))
@@ -44,12 +61,14 @@ bool check_node(char *dirname, t_list *reqs)
 			continue;
 		}
 		if(__strstr(cur->val, dirname))
-		{
-			starts_with(cur->val, dirname);
-		}
-		else
+			starts_with(dirname, cur->val);
+		else if()
 		{
 			ends_with(dirname, cur->val);
+		}
+		if(!cur)
+		{
+			return false;
 		}
 		cur = cur->next;
 	}
@@ -68,11 +87,6 @@ void remove_asterix(char *value)
 	{
 		find_if(dir->head, dir->tail, )
 	}
-
-	while()
-
-
-
 	return new_val;
 }
 
