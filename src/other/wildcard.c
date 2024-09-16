@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 19:54:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:59:18 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char *starts_with(char *dirname, char *req)
 char *ends_with(char *dirname, char *req)
 {
 	if(__str_ends_with(dirname, req))
-		return (dirname + __strlen(dirname - 1));
+		return (dirname + __strlen(dirname) - 1);
 	return(NULL);
 }
 
