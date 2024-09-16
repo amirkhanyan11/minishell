@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:57:53 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/10 17:07:50 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 22:07:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	update_pwd(t_shell *shell, char *oldpwd)
 {
 	char *pwd	__attribute__((cleanup(__delete_string)));
 
+	pwd = NULL;
 	if (!shell || !oldpwd)
 		return ;
 	pwd = _getcwd(shell);
@@ -106,4 +107,3 @@ void	update_pwd(t_shell *shell, char *oldpwd)
 		__perror("cd: error retrieving current directory: getcwd:"
 				"cannot access parent directories: No such file or directory");
 }
-

@@ -469,3 +469,280 @@ aamirkha
 -------------------------------------------------
 
 
+Mon Sep 16 21:01:58 +04 2024
+
+aamirkha
+
+1. pwd
+2. date
+3. clera
+4. clear
+5. ls *
+6. clear
+7. echo *
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:10:52 +04 2024
+
+aamirkha
+
+1. clear
+2. < Makefile cat -e
+3. < Makefile > a cat -e
+4. cat a
+5. rm -rf a
+6. clear
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:12:02 +04 2024
+
+aamirkha
+
+1. clear
+2. clear
+3. < a
+4. *
+5. clear
+6. cat *
+7. clear
+8. cat *
+9. cat * > out
+10. clear
+11. rm -rf aout
+12. rm -rf out
+13. cat *
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:14:10 +04 2024
+
+aamirkha
+
+1. cat * > out
+2. cat out | grep function
+3. rm out
+4. clear
+5. cat *
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:15:00 +04 2024
+
+aamirkha
+
+1. cat *
+2. cat *
+3. cat *
+4. cat *
+5. cat *
+6. cat *
+7. cat *
+8. ls
+9. ls
+10. cat *
+11. ls *
+12. clear
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:15:42 +04 2024
+
+aamirkha
+
+1. clear
+2. clear
+3. < a
+4. *
+5. clear
+6. cat *
+7. clear
+8. cat *
+9. cat *
+10. clear
+11. clear
+12. export
+13. clear
+14. top
+15. clear
+16. export $?
+17. export $?
+18. export $$
+19. clear
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:17:40 +04 2024
+
+aamirkha
+
+1. clear
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:20:27 +04 2024
+
+aamirkha
+
+1. clear
+2. "<"
+3. <
+4. > ">"
+5. rm -rf ">"
+6. clear
+7. ps
+8. pstree
+9. clear
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:29:44 +04 2024
+
+aamirkha
+
+1. clear
+2. ls src/*
+3. clear
+4. mkdir -p a/b
+5. cd a/b
+6. rm -rf ../../a
+7. cd ../
+8. pwd
+9. cd ../
+10. pwd
+11. clear
+12. pwd
+13. clear
+14. curl parrot.live
+15. clear
+16. sudo apt install telnet
+Mon Sep 16 21:55:05 +04 2024
+
+aamirkha
+
+1. clear
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:56:15 +04 2024
+
+aamirkha
+
+1. clear
+2. pwd
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 21:58:13 +04 2024
+
+aamirkha
+
+1. clear
+2. pwd
+Mon Sep 16 21:58:25 +04 2024
+
+aamirkha
+
+1. pwd
+2. cd ..
+3. pwd
+
+
+
+-------------------------------------------------
+
+
+3. ./minishell 
+4. pwd
+5. env | grep PWD
+6. env
+7. clear
+8. env | grep PWD
+9. unset PWD
+10. env | grep PWD
+11. unset OLDPWD
+12. env | grep PWD
+Mon Sep 16 22:00:31 +04 2024
+
+aamirkha
+
+1. unset PWD
+2. unset OLDPWD
+Mon Sep 16 22:01:56 +04 2024
+
+aamirkha
+
+1. " "
+2. ""
+3. clear
+4. clear
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 22:04:53 +04 2024
+
+aamirkha
+
+1. clear
+2. cd -
+3. unset OLDPWD
+4. cd -
+5. unset PWD
+6. cd -
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 22:08:06 +04 2024
+
+aamirkha
+
+1. clear
+2. unset PWD
+3. unset OLDPWD
+4. cd ../
+5. cd -
+6. clear
+7. eixt
+
+
+
+-------------------------------------------------
+
+
