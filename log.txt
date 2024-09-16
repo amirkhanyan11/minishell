@@ -316,3 +316,80 @@ aamirkha
 -------------------------------------------------
 
 
+Mon Sep 16 19:59:36 +04 2024
+
+aamirkha
+
+1. *s Makefile
+2. clear
+3. *buba
+4. a*
+5. a*a
+6. clear
+7. ls * | cat -e | cat -e
+8. clear
+9. ls * | cat -e | cat -e | grep Makefile
+10. clear
+11. ls * * *
+12. ls
+13. clear
+Mon Sep 16 20:01:44 +04 2024
+
+aamirkha
+
+1. clear
+Mon Sep 16 20:03:13 +04 2024
+
+aamirkha
+
+Mon Sep 16 20:03:22 +04 2024
+
+aamirkha
+
+Mon Sep 16 20:03:30 +04 2024
+
+aamirkha
+
+Mon Sep 16 20:05:04 +04 2024
+
+aamirkha
+
+1. clear
+2. | a
+3. | *
+4. clear
+5. a | *
+6. a | b
+
+
+
+-------------------------------------------------
+
+
+7. a | cat <<BOB
+8. clear
+9. < a b
+10. exi
+
+
+
+-------------------------------------------------
+
+
+Mon Sep 16 20:08:54 +04 2024
+
+aamirkha
+
+1. < a b
+Mon Sep 16 20:10:25 +04 2024
+
+aamirkha
+
+1. < a b
+2. clear
+
+
+
+-------------------------------------------------
+
+
