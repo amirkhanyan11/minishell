@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 20:22:37 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:37:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 
 # define LOG_SEPARATOR "\n\n\n-------------------------------------------------\n\n\n"
 
-# define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
-// # define MINISHELL_PROMPT "\033[1;31m\e[3mo.g.shell\033[1;31m > $ \033[0m"
+# define MINISHELL_PROMPT "\033[1;35m\e[3mminishell\033[1;32m > $ \033[0m"
+// # define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
 
 struct				s_shell
 {
