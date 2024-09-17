@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:53:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 17:42:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/17 19:51:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	preprocess_redirections_the_good_part(t_cmd_container *container, t_list *to
 		}
 		else
 			__perror("syntax error");
+		container->fds[get_next_fd_idx(container)] = -1;
 		set_exit_status_no_of(258);
 		return (-1);
 	}
