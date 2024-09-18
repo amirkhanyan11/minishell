@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 20:17:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:52:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 	{
 		possible_name = possible_name->next->next;
 	}
-	if (possible_name == NULL)
-	{
-		__t_command__(cmd);
-		cmd = NULL;
-		return (NULL);
-	}
-	cmd->name = __strdup(possible_name->val);
-	if (pop_redirections(cmd, tokens, container) == -1 || empty(tokens)
+
+	bool no_name = (possible_name == NULL);
+
+	if (!no_name)
+		cmd->name = __strdup(possible_name->val);
+
+	if (pop_redirections(cmd, tokens, container) == -1 || no_name || empty(tokens)
 		|| sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
 	{
 		__t_command__(cmd);

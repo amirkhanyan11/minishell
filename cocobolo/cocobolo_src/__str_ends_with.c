@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 14:32:11 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:00:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:46:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-bool	__str_ends_with(const char *haystack, char *needle)
+bool	__str_ends_with(const char *haystack, const char *needle)
 {
 	size_t	haystack_l;
 	size_t	needle_l;
