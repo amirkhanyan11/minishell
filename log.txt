@@ -3,9 +3,9 @@ Mon Sep 16 17:03:06 +04 2024
 aamirkha
 
 1. clear
-2. ls 
+2. ls
 3. mls
-4. cat -e 
+4. cat -e
 
 
 
@@ -142,7 +142,7 @@ aamirkha
 -------------------------------------------------
 
 
-1. ./minishell 
+1. ./minishell
 2. ls *
 
 
@@ -683,7 +683,7 @@ aamirkha
 -------------------------------------------------
 
 
-3. ./minishell 
+3. ./minishell
 4. pwd
 5. env | grep PWD
 6. env
@@ -856,7 +856,7 @@ aamirkha
 2. < src/other/wildcard.c cat -e |  > out.txt cat -e
 3. cat out*
 4. clear
-5. rm -rf out.txt 
+5. rm -rf out.txt
 6. clear
 7. ls -t
 8. ls -Rs
@@ -867,7 +867,7 @@ aamirkha
 13. ls -R
 14. ls -R | grep .o
 15. ls -R | grep *.o
-16. ls -R | grep * 
+16. ls -R | grep *
 17. cear
 18. clear
 19. ls $$
@@ -920,11 +920,11 @@ aamirkha
 1. clear
 2. pwd
 3. ls
-4. cat Makefile 
+4. cat Makefile
 5. clear
 6. ls
 7. ls -all
-8. cat log.txt 
+8. cat log.txt
 9. clear
 10. ls
 11. cd cocobolo/
@@ -979,7 +979,7 @@ aamirkha
 -------------------------------------------------
 
 
-3. ./minishell 
+3. ./minishell
 4. echo $SHLVL
 5. clear
 Tue Sep 17 15:57:39 +04 2024
@@ -1229,7 +1229,7 @@ aamirkha
 -------------------------------------------------
 
 
-4. ./minishell 
+4. ./minishell
 Tue Sep 17 19:44:22 +04 2024
 
 aamirkha
@@ -1240,7 +1240,7 @@ aamirkha
 -------------------------------------------------
 
 
-5. ./minishell 
+5. ./minishell
 6. bash
 7. echo $?
 8. clear
@@ -1278,7 +1278,7 @@ aamirkha
 7. which ls
 8. whatis ls
 9. clear
-10. vim 
+10. vim
 11. clear
 12. ls | vim | ls | cat -e
 13. clear
@@ -1351,7 +1351,7 @@ Tue Sep 17 19:51:53 +04 2024
 aamirkha
 
 1. clear
-2. cat < 
+2. cat <
 3. cat < oooooooo
 4. echo $?
 5. cat < $HEHEH
@@ -1366,7 +1366,7 @@ aamirkha
 -------------------------------------------------
 
 
-7. ./minishell 
+7. ./minishell
 8. clear
 9. cat << ""
 
@@ -1584,13 +1584,13 @@ aamirkha
 2. yes | head
 3. clear
 4. lsof -p $$ -a -d 0-256
-5. lsof -p $$ -a 
+5. lsof -p $$ -a
 6. clear
 7. lsof -p $$ -a -d 0-256
 8. lsof -p $$ -a -d 0-256
 9. lsof -p $$ -a -d 0-256
 10. lsof -p $$ -a -d
-11. lsof -p $$ -a 
+11. lsof -p $$ -a
 12. clear
 13. lsof -p $$ -a -d 0-256
 14. lsof -p $$ -a -d 0-10000
@@ -1713,7 +1713,7 @@ aamirkha
 -------------------------------------------------
 
 
-34. ./minishell 
+34. ./minishell
 35. clear
 36. pwd
 37. ls
@@ -1739,10 +1739,6 @@ aamirkha
 
 
 5. cat << *
-6. ls
-7. rm ds*c.c/
-8. rmdir ds*c.c/
-9. ls
 
 
 
@@ -1755,7 +1751,7 @@ aamirkha
 
 1. ls
 2. ls *
-3. bash 
+3. bash
 4. bash
 
 

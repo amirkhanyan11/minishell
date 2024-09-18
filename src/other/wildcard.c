@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 20:23:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:47:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*get_cwd_files(void)
 	dp = readdir(dir);
 	while (dp != NULL)
 	{
-		if (dp->d_name && !starts_with(dp->d_name, "."))
+		if (dp->d_name)
 			push_back(res, dp->d_name, NULL);
 		dp = readdir(dir);
 	}
@@ -102,13 +102,20 @@ static t_list *check_all_dirs(t_list *dir, t_list *reqs)
 	if (empty(dir))
 		return (res);
 
-	t_node *dir_node = dir->head;
+	t_list *dir_cpy = make_list_copy_range(dir, NULL);
+
+	if (!__str_starts_with(reqs->head->val, "."))
+		list_remove_if(dir_cpy, ".", __str_starts_with);
+
+	t_node *dir_node = dir_cpy->head;
 	while(dir_node)
 	{
 		if (check_node(dir_node->val, reqs))
 			push_back(res, dir_node->val, NULL);
 		dir_node = dir_node->next;
 	}
+
+	list_clear(&dir_cpy);
 	return res;
 }
 
@@ -134,7 +141,7 @@ void wildcard_resolve(t_list *tokens, t_shell *shell)
 	while(wild)
 	{
 		t_node *save = wild->next;
-		if (!is_quoted_token(shell->quoted_tokens, wild))
+		if (!is_quoted_token(shell->quoted_tokens, wild) && (wild != tokens->head && !string_equal(wild->prev->val, "<<")))
 		{
 			reqs = make_list_from_string(wild->val, "*", all);
 

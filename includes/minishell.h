@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 20:06:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:09:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ struct				s_shell
 	t_set			*quoted_tokens;
 
 	t_fd			logfile;
+	char			*prompt;
 };
 
 struct				s_descriptor

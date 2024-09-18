@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/17 16:51:42 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:08:31 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **env)
 	shell = make_shell(env);
 	while (true)
 	{
-		line = read_line(MINISHELL_PROMPT);
+		line = read_line(shell->prompt);
 		cmds = make_cmd_container(line, shell);
 		if (line)
 		{
