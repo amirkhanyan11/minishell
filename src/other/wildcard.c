@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 20:23:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 18:25:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void wildcard_resolve(t_list *tokens, t_shell *shell)
 	while(wild)
 	{
 		t_node *save = wild->next;
-		if (!is_quoted_token(shell->quoted_tokens, wild))
+		if (!is_quoted_token(shell->quoted_tokens, wild) && (wild != tokens->head && !string_equal(wild->prev->val, "<<")))
 		{
 			reqs = make_list_from_string(wild->val, "*", all);
 

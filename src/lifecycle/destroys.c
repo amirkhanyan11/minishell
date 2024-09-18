@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/17 16:50:59 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:09:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	__t_shell__(t_shell *shell)
 
 	__putstr_fd(LOG_SEPARATOR, shell->logfile);
 	close(shell->logfile);
+	__delete_string(&shell->prompt);
 
 	free(shell);
 	shell = NULL;
