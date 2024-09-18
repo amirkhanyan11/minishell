@@ -6,15 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:17:21 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/18 21:32:02 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:25:27 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cocobolo.h>
 
-void	__putstr_fd(char *s, int fd)
+ssize_t	__putstr_fd(char *s, int fd)
 {
 	if (!s || fd < 0)
-		return ;
-	write(fd, s, __strlen(s));
+		return (-1);
+	return (write(fd, s, __strlen(s)));
 }

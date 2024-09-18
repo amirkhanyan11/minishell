@@ -66,6 +66,11 @@ int	pipe_parse(t_list *tokens, t_shell *shell)
 		return (0);
 	pipe = NULL;
 	pipe = find_next_pipe(tokens->head, tokens, shell);
+	if (pipe == tokens->head)
+	{
+		__perror("parse error near token `|\'");
+		return (-1);
+	}
 	while (pipe)
 	{
 		pair = find_next_pipe(pipe->next, tokens, shell);

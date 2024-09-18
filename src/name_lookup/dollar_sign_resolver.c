@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 21:40:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:56:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 	if (!tokens || !shell)
 		return ;
 	queue = make_list();
-	token = front(tokens);
+	token = tokens->head;
 	while (token)
 	{
 		next = token->next;
@@ -29,12 +29,17 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		{
 			if (empty(queue))
 				push_back(queue, token->val, NULL);
-			else if (string_equal(front(queue)->val, token->val))
+			else if (string_equal(queue->head->val, token->val))
 				pop_front(queue);
 		}
-		if ((empty(queue) || string_equal(front(queue)->val, "\""))
+		if ((empty(queue) || string_equal(queue->head->val, "\""))
 			&& __strchr(token->val, '$'))
+		{
 			token->val = resolve(token->val, shell);
+			// if (string_equal(token->val, "$") && token->next && !string_equal(token->next->val, " ")) // echo $""USER
+			// 	pop(tokens, token);
+
+		}
 		token = next;
 	}
 	list_clear(&queue);

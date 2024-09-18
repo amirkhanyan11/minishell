@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:27:27 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 18:27:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 00:20:37 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*set_val(char *s, size_t i, t_shell *shell,
 				char **_val) __attribute__((warn_unused_result));
 static void	foo(char **s, size_t *i, t_pair *data, t_shell *shell);
 
-char	*resolve(char *t_val, t_shell *shell) // echo $notexist: --> ::
+char	*resolve(char *t_val, t_shell *shell)
 {
 	size_t	i;
 	char	*s;
@@ -29,7 +29,9 @@ char	*resolve(char *t_val, t_shell *shell) // echo $notexist: --> ::
 	while (s[i] && s[i + 1])
 	{
 		if (s[i] == '$')
+		{
 			foo(&s, &i, &data, shell);
+		}
 		i++;
 	}
 	free(t_val);

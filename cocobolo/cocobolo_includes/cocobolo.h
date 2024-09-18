@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 11:27:08 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/11 19:53:57 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:12:57 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,13 @@ void					__exit(char const *const err)
 void					*__malloc(size_t n)
 						__attribute__((malloc))
 						__attribute__((warn_unused_result));
+void					*__calloc(size_t n)
+						__attribute__((malloc))
+						__attribute__((warn_unused_result));
 pid_t					__fork(void);
 void					__pipe(int *p);
-void					__putstr_fd(char *s, int fd);
+ssize_t					__putstr_fd(char *s, int fd);
+ssize_t					__putendl_fd(char *s, int fd);
 void					*__memset(void *b, int c, size_t len);
 
 // string
@@ -80,6 +84,7 @@ char					*__strappend(char *s,
 							...) __attribute__((sentinel))
 						__attribute__((warn_unused_result));
 void					__va_perror(char *s, ...) __attribute__((sentinel));
+void					__va_close(int *s, ...) __attribute__((sentinel));
 
 char					*__make_string(const char *s,
 							...) __attribute__((sentinel))
@@ -93,8 +98,8 @@ char					*__strdup_until(const char *src,
 							const char end) __attribute__((warn_unused_result));
 char					*__strstr(char *haystack, char *needle);
 ssize_t					__strcmp(const char *lhv, const char *rhv);
-bool					__str_ends_with(const char *haystack, char *needle);
-bool					__str_starts_with(const char *haystack, char *needle);
+bool					__str_ends_with(const char *haystack, const char *needle);
+bool					__str_starts_with(const char *haystack, const char *needle);
 bool					__strchr(char *s, const char c);
 char					*__strchr_p(char *s, bool (*p)(char));
 bool					__strcmp_weak__(const char *lhv, const char *rhv);

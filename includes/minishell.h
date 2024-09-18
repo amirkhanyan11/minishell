@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 16:38:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:09:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,26 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <signal.h>
 # include <dirent.h>
 # include <termios.h>
 
+#ifdef __linux__
+# include <bits/sigaction.h>
+#endif // __linux__
+
 # define DECLAREX "declare -x "
 # define HEREDOC ".__heredoc__.txt"
-# define SPECIAL_SYMBOLS "<>| \'\""
+# define SPECIAL_SYMBOLS "<>| \'\"&"
 # define SELF_MERGEABLE_TOKENS "<>|"
 # define PIPE_MAX 2
+# define HEREDOC_MAX 16
 
-# define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
-// # define MINISHELL_PROMPT "\033[1;31m\e[3mo.g.shell\033[1;31m > $ \033[0m"
+
+# define LOG_SEPARATOR "\n\n\n-------------------------------------------------\n\n\n"
+
+# define MINISHELL_PROMPT "\033[1;35m\e[3mminishell\033[1;32m > $ \033[0m"
+// # define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
 
 struct				s_shell
 {
@@ -48,6 +57,9 @@ struct				s_shell
 	t_descriptor	*stddesc;
 	t_cmd_container	*container;
 	t_set			*quoted_tokens;
+
+	t_fd			logfile;
+	char			*prompt;
 };
 
 struct				s_descriptor
@@ -73,7 +85,7 @@ int					export_update(t_shell *shell, t_list_value key,
 char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
 int					cmd_lookup(t_command *cmd);
-t_fd				open_file(char *filenae, int options);
+t_fd				open_file(char *filename, int options);
 int					redirect(t_node *token, t_cmd_container *container);
 void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
 
@@ -105,6 +117,8 @@ t_descriptor		*make_descriptors(void) __attribute__((warn_unused_result));
 t_descriptor		*make_stddesc(void) __attribute__((warn_unused_result));
 void				__t_shell__(t_shell *shell);
 
+t_fd 				make_logfile(t_shell *shell) __attribute__((warn_unused_result));
+
 // matrix
 
 // builtins
@@ -135,8 +149,6 @@ void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
 int					get_exit_status(void);
 void				set_exit_status_no_of(int status);
-void				__exit_nb__(const int status,
-						char *err) __attribute__((noreturn));
 int					invalid_option(t_command *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);
@@ -177,9 +189,12 @@ void				signal_print_newline(int __attribute__((unused)) signal);
 void				signal_reset_prompt(int __attribute__((unused)) sig);
 
 // wildcard
-t_list	*get_cwd_files(void);
-void arg_eval(t_command *cmd);
-void substitute_args(t_node *wildcard_node, t_list *args);
+char				*contains_it(char *dirname, char *req);
+char				*starts_with(char *dirname, char *req);
+char				*ends_with(char *dirname, char *req);
+t_list				*get_cwd_files(void);
+void				wildcard_resolve(t_list *tokens, t_shell *shell);
+void				substitute_args(t_node *wildcard_node, t_list *args, t_list *survived);
 
 int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
 int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_node *token);

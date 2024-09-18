@@ -90,8 +90,10 @@ oda :
 	git commit -m "."
 	git push ${BRANCH}
 
-leaks : re
-	valgrind --leak-check=full --show-leak-kinds=all ./${NAME}
+leaks : all
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=.vlgignore ./${NAME}
+
+#
 
 config:
 	mkdir -p readline_local

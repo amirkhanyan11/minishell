@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:29:11 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/09 16:23:21 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:09:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ bool	not_space(t_node *node)
 bool	is_redir(t_node *node)
 {
 	return (node && is_redirection(node->val));
-} 
+}
 
 bool is_wildcard(t_node *node)
 {
 	// return(__strchr(node->val, '*'));
-	return(string_equal(node->val, "*"));
+	return(__strchr(node->val, '*'));
 }
 
 bool is_not_wildcard(t_node *node)

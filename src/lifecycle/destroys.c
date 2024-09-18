@@ -6,14 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 23:05:29 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:29:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void	__t_shell__(t_shell *shell)
 {
@@ -22,28 +19,32 @@ void	__t_shell__(t_shell *shell)
 	list_clear(&shell->history);
 	tree_clear(&shell->env);
 	tree_clear(&shell->export);
+	__t_cmd_container__(&shell->container);
 	set_clear(&shell->quoted_tokens);
+	__va_close(&shell->stddesc->stdin, &shell->stddesc->stdout, &shell->stddesc->stderr, NULL);
 	free(shell->stddesc);
+
+
+	__putstr_fd(LOG_SEPARATOR, shell->logfile);
+	close(shell->logfile);
+	__delete_string(&shell->prompt);
+
 	free(shell);
 	shell = NULL;
 }
 
-void	__t_command__(t_command **cmdptr)
+void	__t_command__(t_command *cmd)
 {
-	t_command	*cmd;
-
-	if (NULL == cmdptr)
-		return ;
-	cmd = *cmdptr;
 	if (NULL == cmd)
 		return ;
+	if (cmd->redirection & redirect_heredoc)
+		unlink(HEREDOC);
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
 	reset_descriptors(cmd);
 	free(cmd->descriptors);
 	free(cmd->name);
 	free(cmd);
-	*cmdptr = NULL;
 }
 
 void	__t_cmd_container__(t_cmd_container **cmdsptr)
@@ -59,17 +60,18 @@ void	__t_cmd_container__(t_cmd_container **cmdsptr)
 	i = 0;
 	while (i < cmds->size)
 	{
-		__t_command__(&(cmds->arr[i]));
+		__t_command__(cmds->arr[i]);
 		i++;
 	}
 	set_clear(&cmds->shell->quoted_tokens);
 	cmds->shell->quoted_tokens = make_set();
 	cmds->shell->container = NULL;
+	list_clear(&cmds->tokens);
 	get_next_fd(NULL);
+	get_next_fd_idx(NULL);
 	cmds->shell = NULL;
 	free(cmds->arr);
+	free(cmds->fds);
 	free(cmds);
-	*cmdsptr = NULL;
+	// *cmdsptr = NULL;
 }
-
-#pragma GCC diagnostic pop

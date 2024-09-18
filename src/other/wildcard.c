@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/16 14:45:06 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:12:48 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,52 @@ t_list	*get_cwd_files(void)
 	dp = readdir(dir);
 	while (dp != NULL)
 	{
-		push_back(res, dp->d_name, NULL);
+		if (dp->d_name)
+			push_back(res, dp->d_name, NULL);
 		dp = readdir(dir);
 	}
 	closedir(dir);
-	return (res);
+
+	t_matrix tmp __attribute__((cleanup(matrix_clear))) = make_matrix_from_list(res);
+
+	matrix_sort(tmp, string_less);
+
+	list_clear(&res);
+
+	return (make_list_from_matrix(tmp));
 }
 
-void starts_with(char *dir_p, char *req)
+char *contains_it(char *dirname, char *req)
 {
-	if(__str_starts_with(dir_p, req))
+	char *guess = __strstr(dirname, req);
 
-		// dir_p change pointer to the poin
+	if (guess) return guess + __strlen(req);
+
+	return NULL;
 }
 
-void ends_with(char *dir_p, char *req)
+char *starts_with(char *dirname, char *req)
 {
-	if(__str_ends_with(dir_p, req))
-
-	maybe should return
+	if(__str_starts_with(dirname, req))
+		return (dirname + __strlen(req));
+	return (NULL);
 }
 
-bool check_node(char *dirname, t_list *reqs)
+char *ends_with(char *dirname, char *req)
 {
-	void(*fptr)(char *, char *);
+	if(__str_ends_with(dirname, req))
+		return (dirname + __strlen(dirname) - 1);
+	return(NULL);
+}
+
+
+static bool check_node(char *dirname, t_list *reqs)
+{
+	char *(*fptr)(char *, char *);
 	t_node *cur = reqs->head;
 	char *dir_p = dirname;
 
-	fptr = contain;
+	fptr = contains_it;
 	while (cur)
 	{
 		if (string_equal(cur->val, "*"))
@@ -60,61 +78,86 @@ bool check_node(char *dirname, t_list *reqs)
 			cur = cur->next;
 			continue;
 		}
-		if(__strstr(cur->val, dirname))
-			starts_with(dirname, cur->val);
-		else if()
+		if(cur == reqs->head)
 		{
-			ends_with(dirname, cur->val);
+			fptr = starts_with;
 		}
-		if(!cur)
+		else if(cur == reqs->tail)
 		{
+			fptr = ends_with;
+		}
+		else
+			fptr = contains_it;
+		dirname = fptr(dirname, cur->val);
+		if(!dirname)
 			return false;
-		}
 		cur = cur->next;
 	}
 	return true;
 }
 
-void remove_asterix(char *value)
+static t_list *check_all_dirs(t_list *dir, t_list *reqs)
 {
-	t_list *dir = get_cwd_files();
-	t_list *matcha = make_list();
-	t_list *reqs = make_list_from_string(value, "*", all);
+	t_list *res = make_list();
 
-	t_node *current = reqs->head;
+	if (empty(dir))
+		return (res);
 
-	while(current)
+	t_list *dir_cpy = make_list_copy_range(dir, NULL);
+
+	if (!__str_starts_with(reqs->head->val, "."))
+		list_remove_if(dir_cpy, ".", __str_starts_with);
+
+	t_node *dir_node = dir_cpy->head;
+	while(dir_node)
 	{
-		find_if(dir->head, dir->tail, )
+		if (check_node(dir_node->val, reqs))
+			push_back(res, dir_node->val, NULL);
+		dir_node = dir_node->next;
 	}
-	return new_val;
+
+	list_clear(&dir_cpy);
+	return res;
 }
 
-void substitute_args(t_node *wildcard_node, t_list *args)
+void substitute_args(t_node *wildcard_node, t_list *args, t_list *survived)
 {
-	t_list *dir = get_cwd_files();
-	t_node *w_node = dir->tail;
+	t_node *w_node = survived->tail;
 	while(w_node)
 	{
 		list_insert(args, wildcard_node, w_node->val);
 		w_node = w_node->prev;
 	}
-	list_clear(&dir);
 }
 
-void arg_eval(t_command *cmd)
+void wildcard_resolve(t_list *tokens, t_shell *shell)
 {
+	t_list *dir = get_cwd_files();
 	int i = 0;
-	t_node *wild = cmd->args->head;
+	t_node *wild = tokens->head;
+	t_list *reqs = NULL;
 
-	wild = find_if(cmd->args->head, cmd->args->tail, is_wildcard);
+	wild = find_if(tokens->head, tokens->tail, is_wildcard);
 
 	while(wild)
 	{
 		t_node *save = wild->next;
-		substitute_args(wild, cmd->args);
-		pop(cmd->args, wild);
+		if (!is_quoted_token(shell->quoted_tokens, wild) && (wild != tokens->head && !string_equal(wild->prev->val, "<<")))
+		{
+			reqs = make_list_from_string(wild->val, "*", all);
+
+			t_list *survived = check_all_dirs(dir, reqs);
+
+			if (!empty(survived))
+			{
+				substitute_args(wild, tokens, survived);
+				pop(tokens, wild);
+			}
+			list_clear(&survived);
+			list_clear(&reqs);
+		}
 		wild = save;
-		wild = find_if(wild, cmd->args->tail, is_wildcard);
+		wild = find_if(wild, tokens->tail, is_wildcard);
 	}
-c}
+	list_clear(&dir);
+}

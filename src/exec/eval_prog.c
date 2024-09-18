@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_prog.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 16:50:00 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/15 02:00:23 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	__eval_prog__(t_command *cmd)
 	_env = make_matrix_from_tree(cmd->shell->env);
 	
 	execve(cmd->name, _args, _env);
+	__t_shell__(cmd->shell);
 	__exit(NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 17:47:46 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:52:04 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 		t_shell *shell)
 {
 	t_command	*cmd;
+	t_node		*possible_name;
 
 	if (empty(tokens) || !shell)
 		return (NULL);
-	cmd = __malloc(sizeof(t_command));
+	cmd = __calloc(sizeof(t_command));
 	cmd->descriptors = make_stddesc();
 	cmd->shell = shell;
 	cmd->pid = -1337;
@@ -28,15 +29,22 @@ t_command	*make_command(t_list *tokens, t_cmd_container *container,
 	cmd->args = make_list();
 	cmd->eval = NULL;
 	cmd->redirection = 0;
-	cmd->name = __strdup(tokens->head->val);
-
-	if (pop_redirections(cmd, tokens, container) == -1 || empty(tokens) || sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
+	possible_name = tokens->head;
+	while (possible_name && possible_name->next && is_redir(possible_name))
 	{
-		if (cmd->redirection & redirect_heredoc)
-		{
-			unlink(HEREDOC);
-		}
-		__t_command__(&cmd);
+		possible_name = possible_name->next->next;
+	}
+
+	bool no_name = (possible_name == NULL);
+
+	if (!no_name)
+		cmd->name = __strdup(possible_name->val);
+
+	if (pop_redirections(cmd, tokens, container) == -1 || no_name || empty(tokens)
+		|| sort_tokens(cmd, tokens) == -1 || cmd_lookup(cmd) == -1)
+	{
+		__t_command__(cmd);
+		cmd = NULL;
 	}
 	return (cmd);
 }

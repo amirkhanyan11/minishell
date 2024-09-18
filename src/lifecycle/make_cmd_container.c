@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/01 22:14:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:08:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,28 @@ t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 		list_clear(&tokens);
 		return (NULL);
 	}
+	if (count_range(tokens, "<<") > HEREDOC_MAX)
+	{
+		list_clear(&tokens);
+		__t_shell__(shell);
+		__perror("maximum here-document count exceeded");
+		exit(2);
+	}
 	container = __malloc(sizeof(t_cmd_container));
+	container->tokens = tokens;
 	container->current_cmd_index = 0;
 	container->shell = shell;
-	container->fds = __malloc(count_if(tokens->head, tokens->tail, is_redirection) * sizeof(int)); // what if malloc 0?
+	container->fds = __calloc(count_if(tokens->head, tokens->tail, is_redirection) * sizeof(int)); // what if malloc 0?
 	container->size = count_pipes(tokens, shell) + 1;
-	container->arr = __malloc(sizeof(t_command) * container->size);
+	container->arr = __calloc(sizeof(t_command) * container->size);
 	container->shell->container = container;
 	preprocess_redirections(tokens, container);
+
+	wildcard_resolve(tokens, shell);
+
 	make_cmds(container, shell, tokens);
-	list_clear(&tokens);
+	list_clear(&container->tokens);
+	container->tokens = NULL;
 	return (container);
 }
 
@@ -49,7 +61,8 @@ static void	make_cmds(t_cmd_container *container, t_shell *shell,
 	t_list	*partition;
 
 	i = 0;
-	first = front(tokens);
+	first = tokens->head;
+
 	while (i < container->size)
 	{
 		pipe = find_next_pipe(first, tokens, shell);

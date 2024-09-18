@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pop_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:37:08 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/01 18:46:39 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/18 19:30:19 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container)
 			if (string_equal(token->val, ">") || string_equal(token->val, ">>"))
 				fd = take_outfile(cmd, tokens);
 			if (fd == -1)
+			{
+				get_next_fd_idx(NULL);
 				return (-1);
+			}
 			erase(tokens, token, token->next);
 		}
 		token = next;

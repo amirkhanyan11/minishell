@@ -6,7 +6,7 @@
 /*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/11 19:42:45 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:13:06 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 struct				s_command
 {
-	t_shell *shell	;
-	char *name		;
-	t_list *options	;
+	t_shell *shell		;
+	char *name			;
+	t_list *options		;
 	t_list *args		;		//here was an attribute deprecated
 
 	t_cmd_container *container;
@@ -40,13 +40,14 @@ struct				s_cmd_container
 	size_t			size;
 	size_t			current_cmd_index;
 	t_fd			*fds;
+	t_list 		 	*tokens;
 };
 
 t_command			*make_command(t_list *tokens, t_cmd_container *container,
 						t_shell *shell) __attribute__((warn_unused_result));
 t_cmd_container		*make_cmd_container(char *raw_cmd,
 						t_shell *shell) __attribute__((warn_unused_result));
-void				__t_command__(t_command **cmdptr);
+void				__t_command__(t_command *cmd);
 void				__t_cmd_container__(t_cmd_container **cmdsptr);
 
 #endif // __MINISHELL_COMMANDS___H
