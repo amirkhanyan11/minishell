@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   name_predicates_vol_1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:41:51 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 18:26:54 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:31:16 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,24 @@ bool	is_name_part(const char c)
 bool	is_single_redirection(char *val)
 {
 	return (string_equal(val, "<") || string_equal(val, ">"));
+}
+
+bool is_opening_parenthesis(const char * val)
+{
+	return (val && string_equal(val, "("));
+}
+
+bool is_closing_parenthesis(const char * val)
+{
+	return (val && string_equal(val, ")"));
+}
+
+bool is_opening_parenthesis_node(t_node * const node)
+{
+	return (node && is_opening_parenthesis(node->val));
+}
+
+bool is_closing_parenthesis_node(t_node * const node)
+{
+	return (node && is_closing_parenthesis(node->val));
 }

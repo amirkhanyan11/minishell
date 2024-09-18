@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 19:51:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 15:27:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 23:27:50 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ size_t					list_remove_if(t_list *list, t_list_value val,
 							t_list_Bpredicate_val p);
 bool					empty(t_list *list);
 t_node					*list_insert(t_list *list, t_node *pos, char *val);
+void					list_compress(t_list *list, t_node *first, t_node *last);
+t_node					*rfind_if(t_node *first, t_node *last, t_list_Upredicate_b p);
 
 //	assumes each node's value is a malloced string
 void					list_clear(t_list **list);

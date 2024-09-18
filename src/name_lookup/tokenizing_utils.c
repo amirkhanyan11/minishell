@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:29:11 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/18 22:04:38 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:19:47 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	parenthesis_parse(t_list *tokens)
 	token = tokens->head;
 	while (token)
 	{
-		if (string_equal(token->val, "("))
+		if (is_opening_parenthesis(token->val))
 			push_back(stack, token->val, NULL);
-		if (string_equal(token->val, ")"))
+		if (is_closing_parenthesis(token->val))
 		{
 			if (empty(stack))
 			{

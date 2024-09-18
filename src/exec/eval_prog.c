@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:37:44 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 02:00:23 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:39:12 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	__eval_prog__(t_command *cmd)
 	list_move_back(args_copy, options_copy);
 	_args = make_matrix_from_list(options_copy);
 	_env = make_matrix_from_tree(cmd->shell->env);
-	
+
 	execve(cmd->name, _args, _env);
 	__t_shell__(cmd->shell);
 	__exit(NULL);

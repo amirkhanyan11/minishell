@@ -57,6 +57,8 @@ SRC_COUNT_TOT := $(shell expr $(shell find ./src/ ./cocobolo/ -name "*.c" | wc -
 SRC_COUNT := 0
 SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
 
+BIN = ./src/subshell/__minishell_binaries__.a
+SUBSHELL = ./src/subshell/subshell
 
 all : ${OBJSPATH} ${NAME}
 
@@ -73,6 +75,10 @@ ${OBJSPATH}%.o : %.c Makefile
 	@printf "\r%18s\r$(PURPLE)             [ %d/%d (%d%%) ]$(RESET)" "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
 	@${CC} ${CFLAGS} -c $< -o $@
 
+subshell : all
+	rm -rf objs/main.o
+	ar -rcs  ${BIN} objs/*.o
+	@${CC} -fsanitize=address ${CFLAGS} ${SUBSHELL}.c ${BIN} ${LREADLINE} -o ${SUBSHELL}
 
 clean :
 	@rm -rf ${OBJSPATH} ${OPTIONALOBJS}
