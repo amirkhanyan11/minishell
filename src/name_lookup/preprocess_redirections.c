@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 20:53:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/17 19:51:10 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:08:10 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	preprocess_redirections(t_list *tokens, t_cmd_container *container)
 int	preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens,
 		t_node *token)
 {
-	if (!token->next || string_equal(token->next->val, ""))
+	if (!token->next || string_equal(token->next->val, "") || string_equal(token->next->val,  "*"))
 	{
 		if (token->next)
 		{

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 17:35:09 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:13:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:08:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ t_cmd_container	*make_cmd_container(char *raw_cmd, t_shell *shell)
 	container->arr = __calloc(sizeof(t_command) * container->size);
 	container->shell->container = container;
 	preprocess_redirections(tokens, container);
+
+	wildcard_resolve(tokens, shell);
+
 	make_cmds(container, shell, tokens);
 	list_clear(&container->tokens);
 	container->tokens = NULL;
