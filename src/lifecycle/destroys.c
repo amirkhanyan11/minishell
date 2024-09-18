@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 17:09:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 19:29:22 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	__t_cmd_container__(t_cmd_container **cmdsptr)
 	cmds->shell->container = NULL;
 	list_clear(&cmds->tokens);
 	get_next_fd(NULL);
+	get_next_fd_idx(NULL);
 	cmds->shell = NULL;
 	free(cmds->arr);
 	free(cmds->fds);

@@ -1,0 +1,2 @@
+clear
+kali/.vscode-server/extensions/vadimcn.vscoe-lldb-1.10.0/adapter/codelldb terminal-agent --cnnect=35711 
