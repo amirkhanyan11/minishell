@@ -2679,3 +2679,104 @@ aamirkha
 10. echo | echo
 11. echo || echo
 12. clear
+13. make oda
+Wed Sep 18 21:14:21 +04 2024
+
+aamirkha
+
+1. clear
+2. pwd
+3. clear
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 21:15:13 +04 2024
+
+aamirkha
+
+1. clear
+2. pwd
+3. ls
+4. clear
+5. pwd
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 21:15:45 +04 2024
+
+aamirkha
+
+1. clear
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 21:15:57 +04 2024
+
+aamirkha
+
+1. clear
+2. pwd
+3. lsof -p $$ -a -d 0-256
+4. clear
+5. pwd
+6. clear
+7. ls
+8. top
+9. clear
+10. pstree
+11. clear
+12. find . -name "*.c"
+13. clear
+14. find . -name "*.c"
+15. find . -name "*.c" "*.h"
+16. find . -name "*.c"
+17. echo $(find . -name "*.c")
+18. clear
+19. echo "echo $(find . -name "*.c")" > todo.txt
+20. echo "echo $(find . -name "*.c")" > todo.txt
+21. echo "echo $(find . -name "*.c")" 
+22. echo "echo $(find . -name "*.c")" > a
+23. > a echo "echo $(find . -name "*.c")" 
+24. cat a
+25. echo a > b
+26. echo "a" > b
+Wed Sep 18 21:20:33 +04 2024
+
+aamirkha
+
+Wed Sep 18 21:20:59 +04 2024
+
+aamirkha
+
+Wed Sep 18 21:21:46 +04 2024
+
+aamirkha
+
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 21:28:23 +04 2024
+
+aamirkha
+
+1. echo a > b
+2. clear
+3. echo ">"a
+4. echo a ">" b
+5. clear
+6. clear
+7. pwd
+8. clear
+9. makeo da
