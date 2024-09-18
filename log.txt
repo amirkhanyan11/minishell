@@ -2780,3 +2780,133 @@ aamirkha
 7. pwd
 8. clear
 9. makeo da
+10. make oda
+11. clear
+12. git checkout -b subshell
+13. git remote add subshell git@github.com:amirkhanyan11/minishell.git
+14. ls
+15. git rm -rf b
+16. git commit -m "b"
+17. git push subshell
+18. clear
+19. pwd
+20. clear
+21. pwd
+22. clear
+23. find . ! -name ".c"
+24. clear
+25. find . \(name ".c" \)
+26. find . \(name ".c" !name "main.c" \)
+27. find . \(-name "main.c" \)
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 21:40:57 +04 2024
+
+aamirkha
+
+1. find ./src \( -name "*.c" -a ! -name "main.c" \)
+2. find ./src \( -name "*.c" -a ! -name "main.c" \)
+3. find ./src ( -name "*.c" -a ! -name "main.c" )
+4. clear
+5. find ./src ( -name "*.c" -a ! -name "main.c" )
+6. clear
+7. expr $(ls -l | wc -l) + 7
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 21:45:54 +04 2024
+
+aamirkha
+
+1. clear
+2. ls
+3. clear
+4. ls ./src/*.o
+5. ls ./src/ | grep *.0
+6. ls ./src/ | grep *.o
+7. ls ./src/ | grep .o
+8. ls ./src/ 
+9. ls -R ./src/ | grep .o
+10. find src -name "*.o"
+11. find objs -name "*.o"
+12. clear
+13. rm -rf objs/main.o
+14. ar -rcs ./archive.a objs/*.o
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 21:54:55 +04 2024
+
+aamirkha
+
+Wed Sep 18 22:01:19 +04 2024
+
+aamirkha
+
+1. )
+2. ()
+3. clear
+4. $()
+5. clear
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 22:02:17 +04 2024
+
+aamirkha
+
+1. clear
+2. ()
+3. )(
+4. clear
+5. ((()))
+6. ((
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 22:04:07 +04 2024
+
+aamirkha
+
+1. (
+2. make
+
+
+
+-------------------------------------------------
+
+
+Wed Sep 18 22:04:41 +04 2024
+
+aamirkha
+
+1. clear
+2. (
+3. clear
+4. ()
+5. clear
+6. )
+7. clear
+8. eit
+
+
+
+-------------------------------------------------
+
+

@@ -1,1 +1,2 @@
 echo $(find . -name *.c) 
+find ./src \( -name *.c -a ! -name main.c \)

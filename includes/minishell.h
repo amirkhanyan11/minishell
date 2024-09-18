@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 17:06:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 22:02:03 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 # define DECLAREX "declare -x "
 # define HEREDOC ".__heredoc__.txt"
-# define SPECIAL_SYMBOLS "<>| \'\""
+# define SPECIAL_SYMBOLS "<>| \'\"()"
 # define SELF_MERGEABLE_TOKENS "<>|"
 # define PIPE_MAX 2
 # define HEREDOC_MAX 16
@@ -205,6 +205,7 @@ size_t				get_next_fd_idx(t_cmd_container *container);
 int					pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container);
 size_t				count_pipes(t_list *tokens, t_shell *shell);
 t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
+int					parenthesis_parse(t_list *tokens);
 
 
 
