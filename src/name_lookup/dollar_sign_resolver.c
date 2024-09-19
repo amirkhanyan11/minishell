@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:08:55 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 23:27:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:54:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	dollar_sign_resolver(t_list *tokens, t_shell *shell)
 		if ((empty(queue) || string_equal(queue->head->val, "\""))
 			&& __strchr(token->val, '$'))
 		{
-			if (token->next && is_opening_parenthesis(token->next->val))
+			if (string_equal(token->val, "$") && token->next && is_opening_parenthesis(token->next->val))
 			{
 				list_compress(tokens, token, rfind_if(token, tokens->tail, is_closing_parenthesis_node));
 				subshell_eval(tokens, token, shell);

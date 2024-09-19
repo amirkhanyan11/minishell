@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 22:32:18 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 23:28:30 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:57:14 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void subshell_eval(t_list *tokens, t_node *token, t_shell *shell)
 	pid = __fork();
 
 	fd = open_file(SUBSHELL_FILE, O_CREAT | O_RDWR | O_TRUNC);
+	dup2(fd, STDOUT_FILENO);
 	if (pid == 0)
 	{
 		t_env = make_matrix_from_tree(shell->env);
-		dup2(fd, STDOUT_FILENO);
 		close(fd);
 		execve(cmd[0], cmd, t_env);
 		list_clear(&tokens);
@@ -44,22 +44,24 @@ void subshell_eval(t_list *tokens, t_node *token, t_shell *shell)
 		__delete_string(&cmd[1]);
 		exit(EXIT_FAILURE);
 	}
-	wait(NULL);
+	while (-1 != wait(NULL))
+		;
+	dup2(shell->stddesc->stdout, STDOUT_FILENO);
 	matrix_clear(&t_env);
 
-	char *line = get_next_line(fd);
+	char *line = get_next_line_no_nl(fd);
 	__delete_string(&token->val);
 	token->val = __make_string_empty();
 	while (line)
 	{
 		token->val = __strappend(token->val, line, NULL);
 		__delete_string(&line);
-		line = get_next_line(fd);
+		line = get_next_line_no_nl(fd);
 	}
-	token->val[__strlen(token->val) - 1] = '\0';
+
 	__delete_string(&line);
 	__delete_string(&cmd[1]);
 	get_next_line(-1);
 	close(fd);
-	unlink(SUBSHELL_FILE);
+	// unlink(SUBSHELL_FILE);
 }

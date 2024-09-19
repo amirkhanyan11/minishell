@@ -76,9 +76,9 @@ ${OBJSPATH}%.o : %.c Makefile
 	@${CC} ${CFLAGS} -c $< -o $@
 
 subshell : all
-	rm -rf objs/main.o
+	rm -rf objs/main.o ${BIN} ${SUBSHELL}
 	ar -rcs  ${BIN} objs/*.o
-	@${CC} -fsanitize=address ${CFLAGS} ${SUBSHELL}.c ${BIN} ${LREADLINE} -o ${SUBSHELL}
+	@${CC} -g ${CFLAGS} ${SUBSHELL}.c ${BIN} ${LREADLINE} -o ${SUBSHELL}
 
 clean :
 	@rm -rf ${OBJSPATH} ${OPTIONALOBJS}
