@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   name_predicates_vol_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 18:26:29 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/10 15:25:16 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:11:07 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,25 @@ bool	is_name(char *s)
 	}
 	return (true);
 }
-
 bool	not_name_part(char c)
 {
 	return (!is_name_part(c));
+}
+
+bool	is_opening_parenthesis_token(t_node * token, t_shell * shell)
+{
+	return (!is_quoted_token(shell->quoted_tokens, token) && is_opening_parenthesis(token->val));
+}
+bool	is_closing_parenthesis_token(t_node * token, t_shell * shell)
+{
+	return (!is_quoted_token(shell->quoted_tokens, token) && is_closing_parenthesis(token->val));
+}
+
+bool	is_opening_parenthesis(char *text)
+{
+	return(string_equal(text, "("));
+}
+bool	is_closing_parenthesis(char *text)
+{
+	return(string_equal(text, ")"));
 }

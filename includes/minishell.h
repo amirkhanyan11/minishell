@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 20:09:55 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:23:40 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,11 @@ bool				is_alpha(const char c);
 bool				is_digit(const char c);
 bool				is_name_part(const char c);
 bool				not_name_part(char c);
-
 bool				is_quoted_token(t_set *set, t_node *token);
+bool	is_closing_parenthesis(char *text);
+bool	is_opening_parenthesis(char *text);
+bool	is_opening_parenthesis_token(t_node * token, t_shell * shell);
+bool	is_closing_parenthesis_token(t_node * token, t_shell * shell);
 
 // lifecycle
 t_tree				*make_export(t_shell *shell)
@@ -205,8 +208,7 @@ size_t				get_next_fd_idx(t_cmd_container *container);
 int					pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container);
 size_t				count_pipes(t_list *tokens, t_shell *shell);
 t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
-int					parenthesis_parse(t_list *tokens);
-
+int					parenthesis_parse(t_list *tokens, t_shell *shell);
 
 
 #endif // MINISHELL_H
