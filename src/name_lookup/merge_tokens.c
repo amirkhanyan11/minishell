@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 18:33:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:27:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	merge_inside_quotes(t_list *tokens);
 static bool	is_self_mergeable(t_node *token);
-static bool	is_mergeable(t_node *token);
+static bool	is_mergeable(t_node *token, t_set *quoted_tokens);
 
 static void	merge_inside_quotes_the_good_part(t_list *tokens, t_node **t,
 				t_node **next);
@@ -37,8 +37,8 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 			token = next;
 			continue ;
 		}
-		if (is_quoted_token(shell->quoted_tokens, token) || (is_self_mergeable(token) && string_equal(next->val, token->val) && !is_quoted_token(shell->quoted_tokens, next))
-			|| (is_mergeable(token) && (is_mergeable(next) || is_quoted_token(shell->quoted_tokens, next))))
+		if ((is_quoted_token(shell->quoted_tokens, token) && is_quoted_token(shell->quoted_tokens, token->next)) || (is_self_mergeable(token) && string_equal(next->val, token->val) && !is_quoted_token(shell->quoted_tokens, next))
+			|| (is_mergeable(token, shell->quoted_tokens) && (is_mergeable(next, shell->quoted_tokens) || is_quoted_token(shell->quoted_tokens, next))))
 		{
 			token->val = __strappend(token->val, next->val, NULL);
 			pop(tokens, next);
@@ -100,7 +100,7 @@ static bool	is_self_mergeable(t_node *token)
 		&& __strchr(SELF_MERGEABLE_TOKENS, token->val[0]));
 }
 
-static bool	is_mergeable(t_node *token)
+static bool	is_mergeable(t_node *token, t_set *quoted_tokens)
 {
-	return (!is_self_mergeable(token) && !string_equal(token->val, " "));
+	return (is_quoted_token(quoted_tokens, token) || (!is_self_mergeable(token) && (!string_equal(token->val, " "))));
 }

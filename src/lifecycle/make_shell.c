@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:27:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 20:04:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 21:15:54 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_shell	*make_shell(char **env)
 
 	username = (username) ? __strappend(username, "@", NULL) : __make_string_empty();
 
-	shell->prompt = __make_string("\033[0;35m\e[3m", username, "minishell\033[0;32m\e[3m > $ \033[0m", NULL);
+	shell->prompt = __make_string("\033[0;35m\e[3m", username, "minishell\033[0;32m\e[3m>$ \033[0m", NULL);
 
 	return (shell);
 }
