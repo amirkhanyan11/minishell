@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:48:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/18 19:47:22 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:15:49 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ t_list	*get_cwd_files(void)
 	dp = readdir(dir);
 	while (dp != NULL)
 	{
-		if (dp->d_name)
-			push_back(res, dp->d_name, NULL);
+		push_back(res, dp->d_name, NULL);
 		dp = readdir(dir);
 	}
 	closedir(dir);
@@ -68,6 +67,7 @@ static bool check_node(char *dirname, t_list *reqs)
 {
 	char *(*fptr)(char *, char *);
 	t_node *cur = reqs->head;
+	char *dir_p = dirname;
 
 	fptr = contains_it;
 	while (cur)
