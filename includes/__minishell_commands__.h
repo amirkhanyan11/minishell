@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:35:34 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:49:59 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct				s_cmd
 
 	int redirection;
 	pid_t pid;
-	t_descriptor *descriptors;
+	// t_descriptor *descriptors;
 };
 
 struct				s_cmd_container
