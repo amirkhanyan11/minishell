@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:20:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:32:26 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:09:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 		exit(2);
 	}
 
-	cmd->tokens = tokens;
 	cmd = __calloc(sizeof(t_cmd));
-	cmd->descriptors = make_stddesc();
+	cmd->tokens = tokens;
+	// cmd->descriptors = make_stddesc();
 	cmd->shell = shell;
 	cmd->pid = -1337;
 	cmd->options = make_list();
@@ -50,7 +50,10 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 	bool no_name = (possible_name == NULL);
 
 	if (!no_name)
+	{
 		cmd->name = __strdup(possible_name->val);
+		cmd->orig_name = __strdup(possible_name->val);
+	}
 
 	wildcard_resolve(tokens, shell);
 
@@ -61,6 +64,6 @@ t_cmd	*make_command(char *raw_cmd, t_shell *shell)
 		__t_command__(cmd);
 		cmd = NULL;
 	}
-	list_clear(&cmd->tokens);
+	list_clear(&tokens);
 	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/23 15:42:58 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:45:34 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	__exit_nb__(t_cmd *cmd, const int status, char *err)
 	__delete_string(&err);
 	t_shell *shell = cmd->shell;
 	__t_shell__(shell);
+	__t_command__(cmd);
 	exit(get_exit_status());
 }
 

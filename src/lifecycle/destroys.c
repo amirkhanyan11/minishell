@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:30:45 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:48:57 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 18:50:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	__t_shell__(t_shell *shell)
 	__putstr_fd(LOG_SEPARATOR, shell->logfile);
 	close(shell->logfile);
 	__delete_string(&shell->prompt);
-
 	free(shell);
 	shell = NULL;
 }
@@ -38,9 +37,9 @@ void	__t_command__(t_cmd *cmd)
 		unlink(HEREDOC);
 	list_clear(&cmd->args);
 	list_clear(&cmd->options);
-	list_clear(&cmd->tokens);
-	reset_descriptors(cmd);
-	free(cmd->descriptors);
+	// list_clear(&cmd->tokens);
+	// reset_descriptors(cmd);
+	// free(cmd->descriptors);
 	free(cmd->name);
 	free(cmd);
 }
