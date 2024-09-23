@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 17:21:34 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 19:08:49 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:26:54 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*preprocess(t_list *tokens, t_shell *shell)
 		return (NULL);
 	dollar_sign_resolver(tokens, shell);
 	merge_tokens(shell, tokens);
-	if (pipe_parse(tokens, shell) == -1 || redirection_parse(tokens, shell) == -1)
+	if (parenthesis_parse(tokens, shell) == -1 || pipe_parse(tokens, shell) == -1 || redirection_parse(tokens, shell) == -1)
 	{
 		set_exit_status_no_of(258);
 		list_clear(&tokens);

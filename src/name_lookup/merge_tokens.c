@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 21:27:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:26:32 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 	while (token && token->next)
 	{
 		next = token->next;
-		if (string_equal(token->val, "<<") || string_equal(token->val, ">>"))
+		if (string_equal(token->val, "<<") || string_equal(token->val, ">>") || is_opening_parenthesis_token(token, shell) ||
+		is_closing_parenthesis_token(token, shell))
 		{
 			token = next;
 			continue ;

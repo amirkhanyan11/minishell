@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 22:00:45 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/21 21:19:23 by marikhac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*tokenize(char *raw_cmd)
 	if (!raw_cmd)
 		return (NULL);
 	tokens = make_list_from_string(raw_cmd, SPECIAL_SYMBOLS, all);
-	if (!tokens || quote_parse(tokens) == -1 || parenthesis_parse(tokens) == -1)
+	if (!tokens || quote_parse(tokens) == -1)
 	{
 		set_exit_status(2);
 		list_clear(&tokens);

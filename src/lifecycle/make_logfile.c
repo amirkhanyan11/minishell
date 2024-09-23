@@ -6,11 +6,17 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:43:38 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 17:07:05 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:12:51 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+#ifdef __linux__
+#define DATE "/usr/bin/date"
+#elif defined __APPLE__
+#define DATE "/bin/date"
+#endif
 
 t_fd make_logfile(t_shell *shell)
 {
@@ -18,7 +24,7 @@ t_fd make_logfile(t_shell *shell)
 
 	char		*cmd[2];
 
-	cmd[0] = "/usr/bin/date";
+	cmd[0] = DATE;
 	cmd[1] = NULL;
 	pid_t pid = __fork();
 	if (pid == 0)
