@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:24:30 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/16 20:10:18 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	reset_descriptors(t_command *cmd)
+void	reset_descriptors(t_cmd *cmd)
 {
 	if (!cmd || !cmd->shell)
 		return ;

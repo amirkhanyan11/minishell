@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:50:58 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/22 21:40:35 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-void	echo(t_command *cmd)
+void	echo(t_cmd *cmd)
 {
 	eval_wrapper(cmd, _echo);
 }
 
-void	__echo__(t_command *cmd)
+void	__echo__(t_cmd *cmd)
 {
 	bool	newline;
 

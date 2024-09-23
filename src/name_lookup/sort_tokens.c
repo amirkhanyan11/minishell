@@ -6,13 +6,13 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/08/31 21:57:33 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	sort_tokens(t_command *cmd, t_list *tokens)
+int	sort_tokens(t_cmd *cmd, t_list *tokens)
 {
 	t_node	*token;
 
