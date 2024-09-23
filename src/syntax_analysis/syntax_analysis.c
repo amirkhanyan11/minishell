@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   syntax_analysis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 16:26:27 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/23 16:16:22 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/23 16:57:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*tokenize(char *raw_cmd)
-{
-	t_list	*tokens;
+	// parenthesis_parse(tokens, shell) == -1 || pipe_parse(tokens, shell) == -1 || redirection_parse(tokens, shell) == -1
 
-	if (!raw_cmd)
-		return (NULL);
-	tokens = make_list_from_string(raw_cmd, SPECIAL_SYMBOLS, all);
-	if (!tokens || quote_parse(tokens) == -1)
-	{
-		set_exit_status(2);
-		list_clear(&tokens);
-	}
-	return (tokens);
+bool syntax_analysis(t_list *tokens, t_shell *shell)
+{
+	return (
+
+		parenthesis_parse(tokens, shell) && keyword_parse(tokens, shell)  && redirection_parse(tokens, shell)
+
+	);
 }

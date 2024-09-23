@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:43:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:57:26 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,9 +156,9 @@ int					invalid_option(t_cmd *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);
 
-int					pipe_parse(t_list *tokens, t_shell *shell);
-int					redirection_parse(t_list *tokens, t_shell *shell);
-void				save_token(t_shell *shell, t_node *address);
+bool					keyword_parse(t_list *tokens, t_shell *shell);
+bool					redirection_parse(t_list *tokens, t_shell *shell);
+void					save_token(t_shell *shell, t_node *address);
 
 // builtin utils
 void				update_pwd(t_shell *shell, char *oldpwd);
@@ -208,8 +208,15 @@ size_t				get_next_fd_idx(t_cmd_container *container);
 int					pop_redirections(t_cmd *cmd, t_list *tokens, t_cmd_container *container);
 size_t				count_pipes(t_list *tokens, t_shell *shell);
 t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
-int					parenthesis_parse(t_list *tokens, t_shell *shell);
+bool				parenthesis_parse(t_list *tokens, t_shell *shell);
 
+bool				syntax_analysis(t_list *tokens, t_shell *shell);
+
+
+
+// list extensions
+t_node				*shfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
+t_node				*shrfind_if(t_node *first, t_node *last, bool (*p)(t_node *, t_shell*), t_shell *shell);
 
 #endif // MINISHELL_H
 

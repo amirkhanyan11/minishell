@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   parenthesis_parse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 16:26:27 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/23 16:23:05 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/23 16:23:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*tokenize(char *raw_cmd)
+bool	parenthesis_parse(t_list *tokens, t_shell *shell)
 {
-	t_list	*tokens;
-
-	if (!raw_cmd)
-		return (NULL);
-	tokens = make_list_from_string(raw_cmd, SPECIAL_SYMBOLS, all);
-	if (!tokens || quote_parse(tokens) == -1)
+	int count = 0;
+	t_node *token = tokens->head;
+ 	while(token)
 	{
-		set_exit_status(2);
-		list_clear(&tokens);
+		if(is_opening_parenthesis_token(token, shell))
+			count++;
+		else if(is_closing_parenthesis_token(token, shell))
+			count--;
+		if(count <= -1)
+			return (false);
+		token = token->next;
 	}
-	return (tokens);
+	return (count == 0);
 }

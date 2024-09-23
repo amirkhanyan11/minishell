@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   quote_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 23:08:53 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 16:26:27 by aamirkha         ###   ########.fr       */
+/*   Created: 2024/09/23 16:27:37 by aamirkha          #+#    #+#             */
+/*   Updated: 2024/09/23 16:28:02 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*tokenize(char *raw_cmd)
+int	quote_parse(t_list *tokens)
 {
-	t_list	*tokens;
+	bool	d;
+	bool	s;
+	t_node	*token;
 
-	if (!raw_cmd)
-		return (NULL);
-	tokens = make_list_from_string(raw_cmd, SPECIAL_SYMBOLS, all);
-	if (!tokens || quote_parse(tokens) == -1)
+	d = false;
+	s = false;
+	token = tokens->head;
+	while (token)
 	{
-		set_exit_status(2);
-		list_clear(&tokens);
+		if (!d && string_equal(token->val, "\'"))
+			s = !s;
+		if (!s && string_equal(token->val, "\""))
+			d = !d;
+		token = token->next;
 	}
-	return (tokens);
+	if (d || s)
+	{
+		if (d)
+			__perror("parse error near token \"");
+		else
+			__perror("parse error near token \'");
+		return (-1);
+	}
+	return (0);
 }

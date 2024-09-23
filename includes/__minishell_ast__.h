@@ -6,15 +6,15 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:20:23 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/23 15:55:43 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:07:45 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __MINISHEL_AST___H
 #define __MINISHEL_AST___H
 
-#include "minishell.h"
 #include "cocobolo.h"
+#include "minishell.h"
 
 typedef s_ast t_ast;
 typedef s_ast_node t_ast_node;
@@ -37,7 +37,7 @@ struct s_ast
 struct s_ast_node
 {
 	t_ast_node_type type;
-	t_command 		*cmd_ptr;
+	t_cmd			*cmd_ptr;
 	t_node 			*right;
 	t_node 			*left;
 	t_node 			*root;
