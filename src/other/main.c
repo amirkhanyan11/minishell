@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marikhac <marikhac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:20:07 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 20:17:14 by marikhac         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:37:00 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ int	main(int ac, char **av, char **env)
 {
 	t_shell			*shell;
 	char			*line;
-	t_cmd_container	*cmds;
+	t_cmd			*cmd;
 
 
 	shell = make_shell(env);
 	while (true)
 	{
 		line = read_line(shell->prompt);
-		cmds = make_cmd_container(line, shell);
+		cmd = make_command(line, shell);
 		if (line)
 		{
-			eval(cmds);
+			eval(cmd);
 			if (__strlen(line) > 0)
 			{
 				push_back(shell->history, line, NULL);
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **env)
 
 			}
 		}
-		__t_cmd_container__(&cmds);
+		__t_command__(cmd);
 		if (!line)
 			break;
 		__delete_string(&line);

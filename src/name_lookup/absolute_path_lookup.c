@@ -6,14 +6,14 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:44:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 00:11:21 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:25:33 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-int	absolute_path_lookup(t_command *cmd)
+int	absolute_path_lookup(t_cmd *cmd)
 {
 	struct stat buffer;
 
