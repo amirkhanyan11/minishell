@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:54:25 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/21 19:59:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:06:38 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	sort_tokens(t_cmd *cmd, t_list *tokens)
 	token = tokens->head->next;
 	if (!token)
 		return (0);
-	while (__str_starts_with(token->val, "-") && !find_addr(cmd->shell->quoted_tokens, token))
+	while (token && __str_starts_with(token->val, "-") && !find_addr(cmd->shell->quoted_tokens, token))
 	{
 		push_back(cmd->options, token->val);
 		token = token->next;

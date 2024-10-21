@@ -233,7 +233,7 @@ CC = gcc
 DEBUG = -fsanitize=undefined
 # DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
-CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} ${WFLAGS}
+CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Darwin)

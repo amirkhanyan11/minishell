@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_tokens_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:26:06 by marikhac          #+#    #+#             */
-/*   Updated: 2024/10/06 14:42:17 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/21 20:54:41 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	mark_quoted_tokens(t_shell *shell, t_list *tokens)
 
 	if (empty(tokens))
 		return ;
-	left_quote = find_if(front(tokens), back(tokens), is_quote_node);
+	left_quote = find_if(tokens->head, tokens->tail, is_quote_node);
 	if (!left_quote)
 		return ;
 	while (left_quote)
 	{
-		right_quote = find(left_quote->next, back(tokens), left_quote->val,
+		right_quote = find(left_quote->next, tokens->tail, left_quote->val,
 				string_equal);
 		token = left_quote->next;
 		while (token && token != right_quote)
@@ -48,7 +48,7 @@ void	mark_quoted_tokens(t_shell *shell, t_list *tokens)
 			token = token->next;
 		}
 		pop(tokens, left_quote);
-		left_quote = find_if(right_quote->next, back(tokens), is_quote_node);
+		left_quote = find_if(right_quote->next, tokens->tail, is_quote_node);
 		pop(tokens, right_quote);
 	}
 }
