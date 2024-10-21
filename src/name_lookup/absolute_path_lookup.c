@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:44:46 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/21 19:38:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:06:39 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	absolute_end(t_cmd *cmd)
 	else
 	{
 		cmd->exit_status = 127;
-		cmd->err = __make_string(cmd->name, ": aaaNo such file or directory",
+		cmd->err = __make_string(cmd->name, ": No such file or directory",
 				NULL);
 	}
 	return (-1);

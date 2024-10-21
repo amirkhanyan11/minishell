@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/21 20:59:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:06:32 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 		}
 		if (__scary_condition__(token, next, shell))
 		{
-			printf("merging `%s` with `%s`\n", token->val, next->val);
 			token->val = __strappend(token->val, next->val, NULL);
 			pop(tokens, next);
 			next = token;
