@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:04:32 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 01:03:53 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:42:53 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,35 @@
 # include "minishell.h"
 # include <cocobolo.h>
 
-struct				s_command
+# define NOT_FOUND 127
+
+struct		s_cmd
 {
-	t_shell *shell		;
-	char *name			;
-	t_list *options		;
-	t_list *args		;		//here was an attribute deprecated
+	t_shell	*shell;
+	char	*name;
+	char	*orig_name;
+	t_list	*options;
+	t_list	*args;
 
-	t_cmd_container *container;
+	int		exit_status;
 
-	t_eval eval				;
+	char	*err;
+	bool	invokable;
+	bool	forkable;
 
-	int redirection			;
-	pid_t pid;
-	t_descriptor *descriptors;
+	t_eval	eval;
+	t_eval	eval_core;
+
+	t_list	*tokens;
+
+	int		redirection;
+	pid_t	pid;
 };
 
-struct				s_cmd_container
-{
-	t_shell			*shell;
-	t_command		**arr;
-	size_t			size;
-	size_t			current_cmd_index;
-	t_fd			*fds;
-	t_list 		 	*tokens;
-};
+t_cmd		*make_command(t_list *tokens,
+				t_shell *shell) __attribute__((warn_unused_result));
+void		__t_cmd__(t_cmd *cmd);
 
-t_command			*make_command(t_list *tokens, t_cmd_container *container,
-						t_shell *shell) __attribute__((warn_unused_result));
-t_cmd_container		*make_cmd_container(char *raw_cmd,
-						t_shell *shell) __attribute__((warn_unused_result));
-void				__t_command__(t_command *cmd);
-void				__t_cmd_container__(t_cmd_container **cmdsptr);
+void		cmd_runtime_init(t_cmd *cmd);
 
 #endif // __MINISHELL_COMMANDS___H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:01:15 by marikhac          #+#    #+#             */
-/*   Updated: 2024/09/15 12:24:28 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:08:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ static int	______i_a_g_t_c_i_m_p_f_n_________(char *expr,
 
 static int	size_2(t_shell *shell, t_list *tokens);
 
-static int	foo(int x, t_list *tokens);
-
-static bool	not_equal_sign(t_node *const node)
+static bool	not_equal_sign(t_listnode *const node)
 {
 	return (node && !string_equal(node->val, "="));
 }
@@ -36,8 +34,6 @@ int	__export_from_string__(char *expr, t_shell *shell)
 		return (-1);
 	if (______i_a_g_t_c_i_m_p_f_n_________(expr, tokens, shell) == -1)
 		return (-1);
-	if (shell->container && shell->container->size > 1)
-		return (0);
 	if (size(tokens) >= 2)
 		return (size_2(shell, tokens));
 	else
@@ -71,7 +67,8 @@ static int	______i_a_g_t_c_i_m_p_f_n_________(char *expr,
 			old_val = "";
 		list_insert(tokens, tokens->head->next, old_val);
 	}
-	if (!is_name(tokens->head->val) || NULL == find_if(tokens->head, back(tokens),
+	if (!is_name(tokens->head->val)
+		|| NULL == find_if(tokens->head, back(tokens),
 			not_equal_sign))
 	{
 		__va_perror("export: `", expr, "\': not a valid identifier", NULL);

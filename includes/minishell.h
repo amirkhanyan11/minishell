@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/18 22:46:03 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 16:04:11 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "__minishell_commands__.h"
 # include "__minishell_enums__.h"
+# include "__minishell_ast__.h"
 # include "__minishell_lexer__.h"
 # include "__minishell_typedefs__.h"
 # include <cocobolo.h>
@@ -31,34 +32,31 @@
 # include <dirent.h>
 # include <termios.h>
 
-#ifdef __linux__
-# include <bits/sigaction.h>
-#endif // __linux__
+// # ifdef __linux__
+// # include <bits/sigaction.h>
+// # endif // __linux__
 
 # define DECLAREX "declare -x "
 # define HEREDOC ".__heredoc__.txt"
-# define SPECIAL_SYMBOLS "<>| \'\"()"
+# define SPECIAL_SYMBOLS "<>| \'\"&()"
 # define SELF_MERGEABLE_TOKENS "<>|"
 # define PIPE_MAX 2
 # define HEREDOC_MAX 16
 
-
-# define LOG_SEPARATOR "\n\n\n-------------------------------------------------\n\n\n"
-
 # define MINISHELL_PROMPT "\033[1;35m\e[3mminishell\033[1;32m > $ \033[0m"
-// # define MINISHELL_PROMPT "\033[1;32m\e[3mmox\033[1;32m > $ \033[0m"
 
 struct				s_shell
 {
 	t_tree			*env;
 	t_tree			*export;
-	t_list			*history;
 
 	t_descriptor	*stddesc;
-	t_cmd_container	*container;
 	t_set			*quoted_tokens;
+	t_set			*dollar_tokens;
+	t_tree			*orig_values;
 
-	t_fd			logfile;
+	t_ast			*ast;
+
 	char			*prompt;
 };
 
@@ -72,37 +70,37 @@ struct				s_descriptor
 //	reading input
 char				*read_line(char *s);
 
+void				__minishell__(int ac, char **av, char **env);
+
+void				__redirect_out__(t_authorized_fds *newfds, t_ast_node *r);
+void				__redirect_in__(t_authorized_fds *newfds, t_ast_node *r);
 // execution
-void				eval(t_cmd_container *cmds);
-void				set_descriptors(t_command *cmd);
-void				reset_descriptors(t_command *cmd);
-void				eval_prog(t_command *cmd);
-// void 			__eval_prog__deprecated__(t_fd *pipe, t_command * cmd);
+void				eval(t_cmd *cmd);
+void				eval_prog_core(t_cmd *cmd);
 
 // execution helpers
 int					export_update(t_shell *shell, t_list_value key,
 						t_list_value val);
 char				*resolve(char *t_val,
 						t_shell *shell) __attribute__((warn_unused_result));
-int					cmd_lookup(t_command *cmd);
+int					cmd_lookup(t_cmd *cmd);
 t_fd				open_file(char *filename, int options);
-int					redirect(t_node *token, t_cmd_container *container);
-void				eval_wrapper(t_command *cmd, t_eval_opcode opcode);
+t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds);
 
 // find predicates
 bool				__cmd_exists__(const char *path, const char *name);
 
-// name predicates
-bool				is_quote(char *s);
-bool				is_single_redirection(char *val);
-bool				is_redirection(const char *val);
-bool				is_name(char *s);
-bool				is_alpha(const char c);
-bool				is_digit(const char c);
-bool				is_name_part(const char c);
-bool				not_name_part(char c);
+int					killall(t_ast *ast);
 
-bool				is_quoted_token(t_set *set, t_node *token);
+// name predicates
+bool				find_addr(t_set *set, t_listnode *token);
+char				*get_orig_val(t_listnode *token, t_shell *shell);
+void				save_orig_value(t_listnode *address, t_shell *shell);
+
+int					process_infile(t_ast_node *r);
+int					process_outfile(t_ast_node *r);
+int					process_append(t_ast_node *r);
+int					process_heredoc(t_ast_node *r, t_shell *shell);
 
 // lifecycle
 t_tree				*make_export(t_shell *shell)
@@ -116,53 +114,50 @@ t_list				*get_path(t_shell *shell)
 t_descriptor		*make_descriptors(void) __attribute__((warn_unused_result));
 t_descriptor		*make_stddesc(void) __attribute__((warn_unused_result));
 void				__t_shell__(t_shell *shell);
+void				__cmd_arr__(t_cmd **arr);
 
-t_fd 				make_logfile(t_shell *shell) __attribute__((warn_unused_result));
-
-// matrix
+t_fd				make_logfile(t_shell *shell)
+					__attribute__((warn_unused_result));
+void				waitcmd(pid_t pid, int *x);
 
 // builtins
-void				cd(t_command *cmd);
-void				pwd(t_command *cmd);
-void				env(t_command *cmd);
-void				unset(t_command *cmd);
-void				export(t_command *cmd);
-void				echo(t_command *cmd);
-void				history(t_command *cmd);
-void				msh_exit(t_command *cmd);
+void				cd(t_cmd *cmd);
+void				pwd(t_cmd *cmd);
+void				env(t_cmd *cmd);
+void				unset(t_cmd *cmd);
+void				export(t_cmd *cmd);
+void				echo(t_cmd *cmd);
+void				msh_exit(t_cmd *cmd);
+void				errcmd(t_cmd *cmd);
 
-void				__cd__(t_command *cmd);
-void				__pwd__(t_command *cmd);
-void				__env__(t_command *cmd);
-void				__unset__(t_command *cmd);
-void				__export__(t_command *cmd);
-void				__echo__(t_command *cmd);
-void				__history__(t_command *cmd);
-void				__eval_prog__(t_command *cmd);
-void				__exit__(t_command *cmd);
+void				eval_prog(t_cmd *cmd);
 
 // other
-char				*_getcwd(t_shell *shell) __attribute__((warn_unused_result));
-int					set_eval_to_prog_i_love_norminette(t_command *cmd);
+char				*_getcwd(t_shell *shell)
+					__attribute__((warn_unused_result));
+int					set_eval_to_prog_i_love_norminette(t_cmd *cmd);
 int					__unset_var__(t_shell *shell, t_list_value val);
 void				unset_var(t_shell *shell, t_list_value key);
 void				set_exit_status(int status);
 int					get_exit_status(void);
 void				set_exit_status_no_of(int status);
-int					invalid_option(t_command *cmd);
+int					invalid_option(t_cmd *cmd);
 
 void				remove_spaces(t_shell *shell, t_list *tokens);
 
-int					pipe_parse(t_list *tokens, t_shell *shell);
-int					redirection_parse(t_list *tokens, t_shell *shell);
-void				save_token(t_shell *shell, t_node *address);
+bool				keyword_parse(t_list *tokens, t_shell *shell);
+bool				redirection_parse(t_list *tokens, t_shell *shell);
+void				save_token(t_set *set, t_listnode *address);
+void				recover_variables(t_list *tokens, t_shell *shell);
 
 // builtin utils
+void				builtin_preeval(t_cmd *cmd);
+
 void				update_pwd(t_shell *shell, char *oldpwd);
-void				__cd_one_arg__(t_command *cmd);
-void				_chdir(t_command *cmd, const char *path, int *status);
-void				__cd_no_arg__(t_command *cmd);
-bool				last_nl(t_node *const node);
+void				__cd_one_arg__(t_cmd *cmd);
+void				_chdir(t_cmd *cmd, const char *path, int *status);
+void				__cd_no_arg__(t_cmd *cmd);
+bool				last_nl(t_listnode *const node);
 void				echo_arglist(t_list *arglist);
 bool				not_n_predicate(char c);
 bool				is_n(char *opt);
@@ -171,18 +166,17 @@ char				*get_pid(t_shell *shell)
 					__attribute__((warn_unused_result));
 
 // name_lookup utils
-t_list				*get_cwd_files();
-int					absolute_path_lookup(t_command *cmd);
+t_list				*get_cwd_files(void);
+int					absolute_path_lookup(t_cmd *cmd);
 int					quote_parse(t_list *tokens);
-bool				not_space(t_node *node);
-bool				is_redir(t_node *node);
+bool				not_space(t_listnode *node);
+
 void				erase_quotes(t_list *tokens);
-bool				is_quote_node(t_node *const node);
 void				mark_quoted_tokens(t_shell *shell, t_list *tokens);
 
 // signals
-void				set_signals_interactive(void);
-void				set_signals_noninteractive(void);
+void				signals_enable(void);
+void				signals_disable(void);
 void				disable_echoctl(void);
 void				ignore_sigquit(void);
 void				signal_print_newline(int __attribute__((unused)) signal);
@@ -194,24 +188,27 @@ char				*starts_with(char *dirname, char *req);
 char				*ends_with(char *dirname, char *req);
 t_list				*get_cwd_files(void);
 void				wildcard_resolve(t_list *tokens, t_shell *shell);
-void				substitute_args(t_node *wildcard_node, t_list *args, t_list *survived);
+void				substitute_args(t_listnode *wildcard_node, t_list *args,
+						t_list *survived);
 
-int					preprocess_redirections(t_list *tokens, t_cmd_container *container);
-int					preprocess_redirections_the_good_part(t_cmd_container *container, t_list *tokens, t_node *token);
+int					pop_redirections(t_list *partition, t_shell *shell);
+bool				parenthesis_parse(t_list *tokens, t_shell *shell);
 
-t_fd				get_next_fd(t_cmd_container *container);
-size_t				get_next_fd_idx(t_cmd_container *container);
+bool				syntax_analysis(t_list *tokens, t_shell *shell);
 
-int					pop_redirections(t_command *cmd, t_list *tokens, t_cmd_container *container);
-size_t				count_pipes(t_list *tokens, t_shell *shell);
-t_node				*find_next_pipe(t_node *first, t_list *tokens, t_shell *shell);
-int					parenthesis_parse(t_list *tokens);
+t_list				*make_partition(t_shell *shell, t_listnode *first,
+						t_listnode *last) __attribute__((warn_unused_result));
+t_cmd				**make_cmd_arr(t_list *tokens, t_shell *shell)
+					__attribute__((warn_unused_result));
 
-bool				is_closing_parenthesis(const char * val);
-bool				is_opening_parenthesis(const char * val);
-bool				is_opening_parenthesis_node(t_node * const node);
-bool				is_closing_parenthesis_node(t_node * const node);
-void				subshell_eval(t_list *tokens, t_node *token, t_shell *shell);
+// list extensions
+size_t				shcount_if(t_listnode *first, t_listnode *last,
+						bool (*p)(t_listnode *, t_shell *), t_shell *shell);
+size_t				shremove_if(t_list *list,
+						bool (*p)(t_listnode *, t_shell *), t_shell *shell);
+t_listnode			*shfind_if(t_listnode *first, t_listnode *last,
+						bool (*p)(t_listnode *, t_shell*), t_shell *shell);
+t_listnode			*shrfind_if(t_listnode *first, t_listnode *last,
+						bool (*p)(t_listnode *, t_shell*), t_shell *shell);
 
 #endif // MINISHELL_H
-

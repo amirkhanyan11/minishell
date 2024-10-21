@@ -3,25 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 16:19:13 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/10 16:38:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:41:13 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define SIZE 4096
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-void	pwd(t_command *cmd)
-{
-	eval_wrapper(cmd, _pwd);
-}
-
-void	__pwd__(t_command *cmd)
+void	pwd(t_cmd *cmd)
 {
 	int		status;
 	char	*path;
@@ -33,12 +25,7 @@ void	__pwd__(t_command *cmd)
 	}
 	else
 	{
-		path = __strdup(get_val(cmd->shell->export, "PWD"));
-		if (!path || !(*path))
-		{
-			__delete_string(&path);
-			path = _getcwd(cmd->shell);
-		}
+		path = _getcwd(cmd->shell);
 		printf("%s\n", path);
 		__delete_string(&path);
 	}
@@ -53,10 +40,10 @@ char	*_getcwd(t_shell *shell)
 	if (NULL == getcwd(path, SIZE))
 	{
 		__delete_string(&path);
-		path = __make_string(get_val(shell->export, "PWD"), "/../", NULL);
-
+		if (!ends_with(get_val(shell->export, "PWD"), "/../"))
+			path = __make_string(get_val(shell->export, "PWD"), "/../", NULL);
+		else
+			path = __strdup(get_val(shell->export, "PWD"));
 	}
 	return (path);
 }
-
-#pragma GCC diagnostic pop

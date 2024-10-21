@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 02:49:56 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/09/15 13:32:17 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/10 22:08:44 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 #define HEREDOC_PROMPT "heredoc> "
 
-static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted);
-static void __cleanup__(const int _fd, t_shell *_shell, enum e_cleanup_option opt);
+static t_fd	make_heredoc_child(char *eof, t_shell *shell, bool is_quoted);
+static void	__cleanup__(const int _fd, t_shell *_shell,
+				enum e_cleanup_option opt);
 
 static void	quit_from_heredoc(int __attribute__((unused)) signal)
 {
@@ -37,9 +38,11 @@ static void	set_signals_heredoc(void)
 
 t_fd	make_heredoc(char *eof, t_shell *shell, bool is_quoted)
 {
-	pid_t pid = __fork();
-	int res = 0;
+	pid_t	pid;
+	int		res;
 
+	pid = __fork();
+	res = 0;
 	ignore_sigquit();
 	if (pid == 0)
 	{
@@ -52,13 +55,14 @@ t_fd	make_heredoc(char *eof, t_shell *shell, bool is_quoted)
 		set_exit_status(1);
 		return (-1);
 	}
-	return open_file(HEREDOC, O_RDONLY);
+	return (open_file(HEREDOC, O_RDONLY));
 }
 
-static void __cleanup__(const int _fd, t_shell *_shell, enum e_cleanup_option opt)
+static void	__cleanup__(const int _fd, t_shell *_shell,
+		enum e_cleanup_option opt)
 {
-	static int fd;
-	static t_shell *shell;
+	static int		fd;
+	static t_shell	*shell;
 
 	if (opt == asg)
 	{
@@ -68,20 +72,21 @@ static void __cleanup__(const int _fd, t_shell *_shell, enum e_cleanup_option op
 	else
 	{
 		close(fd);
-		__t_shell__(shell);	
+		__t_shell__(shell);
 	}
 }
 
-static t_fd make_heredoc_child(char *eof, t_shell *shell, bool is_quoted)
+static t_fd	make_heredoc_child(char *eof, t_shell *shell, bool is_quoted)
 {
 	t_fd	fd;
 	char	*line;
 
 	if (!eof || !shell)
 		return (-1);
-	fd = open_file(HEREDOC, O_CREAT | O_RDWR);
+	fd = open_file(HEREDOC, O_CREAT | O_TRUNC | O_RDWR);
 	set_signals_heredoc();
 	__cleanup__(fd, shell, asg);
+	rl_clear_history();
 	line = readline(HEREDOC_PROMPT);
 	while (line && !string_equal(line, eof))
 	{
