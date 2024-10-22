@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:17:54 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/21 21:06:32 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/22 19:18:06 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,4 @@ void	merge_tokens(t_shell *shell, t_list *tokens)
 		}
 		token = next;
 	}
-	print_list_enumerate(tokens);
 }

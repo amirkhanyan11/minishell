@@ -275,5 +275,9 @@ print_info:
 	@printf "%b" "$(WHITE)      Authors : aamirkha, marikhac $(RESET)\n"
 	@printf "\n"
 
+leaks : all
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=.vlgignore ./${NAME}
+
+
 .PHONY : all clean fclean re print_info
 
