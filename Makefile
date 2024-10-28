@@ -230,8 +230,8 @@ UNDERLINE = \033[4m
 REVERSE  = \033[7m
 
 CC = gcc
-DEBUG = -fsanitize=undefined
-# DEBUG = -g
+# DEBUG = -fsanitize=undefined
+DEBUG = -g
 WFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(foreach H, $(INCPATH), -I$(H)) ${DEBUG} #${WFLAGS}
 

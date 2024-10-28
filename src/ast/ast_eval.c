@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/13 17:58:24 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:41:11 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 
 	if (!root)
 		return (1);
+
+
 	if (root->type == AND)
 		return (dfs(root->left, ast, fds) && dfs(root->right, ast, fds));
 	else if (root->type == OR)
@@ -50,7 +52,16 @@ static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	else if (root->type == PIPE)
 		return (ast_handle_pipe(root, ast, fds));
 	else if (root->type == CMD)
+	{
+		if (root->p && (root->p->type == AND || root->p->type == OR))
+		{
+
+			wait(NULL);
+			dup2(fds.stdin.fd, STDIN_FILENO);
+			dup2(fds.stdout.fd, STDOUT_FILENO);
+		}
 		return (ast_handle_cmd(root));
+	}
 	else
 	{
 		newfds = redirect(root, fds);
