@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:21:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/28 18:41:41 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/28 19:26:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,23 @@ t_ast	*make_ast(char *line, t_shell *shell)
 		insert_cmd_node(ast, make_cmd_node(arr[i]));
 		i--;
 	}
+
+	t_ast_node *node = ast->root;
+
+	while (node && node->left)
+	{
+		if (node->type == REDIRECTION && node->left->type == AND || node->left->type == OR )
+		{
+			ast_rrotate(ast, node, node->left);
+			node = node->p;
+		}
+		node = node->left;
+	}
+
 	ast_balance(ast, tokens);
 	ast->last_process_cmd = find_last_process_cmd(ast->root);
 	ast->last_cmd = find_last_cmd(ast);
 	free(arr);
 	list_clear(&tokens);
-
-	// if (ast->root->type == REDIRECTION && ast->root->left->type == AND)
-	// {
-	// 	ast_rrotate(ast, ast->root, ast->root->left);
-	// }
-
 	return (ast);
 }

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 22:19:35 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/10 22:20:14 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:45:08 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	__redirect_out__(t_authorized_fds *newfds, t_ast_node *r)
 	else
 		newfds->stdout.fd = (process_append(r));
 	newfds->stdout.author = r;
-	dup2(newfds->stdout.fd, STDOUT_FILENO);
+	// dup2(newfds->stdout.fd, STDOUT_FILENO);
 	if (newfds->stdout.fd == -1)
 	{
 		if (find_addr(r->ast->shell->dollar_tokens, r->right->orig_token))
@@ -39,7 +39,7 @@ void	__redirect_in__(t_authorized_fds *newfds, t_ast_node *r)
 	else
 		newfds->stdin.fd = (process_heredoc(r, r->ast->shell));
 	newfds->stdin.author = r;
-	dup2(newfds->stdin.fd, STDIN_FILENO);
+	// dup2(newfds->stdin.fd, STDIN_FILENO);
 	if (newfds->stdin.fd == -1 && (r->redirection_type & redirect_in))
 	{
 		if (find_addr(r->ast->shell->dollar_tokens, r->right->orig_token))

@@ -6,7 +6,7 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/28 18:41:11 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/10/28 19:26:30 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@ static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 static int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 static int	ast_handle_cmd(t_ast_node *root);
 static bool	__that_damn_condition__(t_ast_node *root);
+
+
+
+void set_descriptors(t_authorized_fds fds)
+{
+	dup2(fds.stdin.fd, STDIN_FILENO);
+	dup2(fds.stdout.fd, STDOUT_FILENO);
+}
+
+
+void reset_descriptors(t_shell *shell)
+{
+	dup2(shell->stddesc->stdin, STDIN_FILENO);
+	dup2(shell->stddesc->stdout, STDOUT_FILENO);
+	dup2(shell->stddesc->stderr, STDERR_FILENO);
+}
+
 
 void	ast_eval(t_ast *ast)
 {
@@ -53,14 +70,29 @@ static int	dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 		return (ast_handle_pipe(root, ast, fds));
 	else if (root->type == CMD)
 	{
-		if (root->p && (root->p->type == AND || root->p->type == OR))
+		t_ast_node *par = root->p;
+		bool has_pipe_parent = false; //closest binary op parent
+		while (par)
 		{
-
-			wait(NULL);
-			dup2(fds.stdin.fd, STDIN_FILENO);
-			dup2(fds.stdout.fd, STDOUT_FILENO);
+			if (par->type == PIPE)
+			{
+				has_pipe_parent = true;
+				break;
+			}
+			else if (par->type == OR || par->type == AND)
+				break;
+			par = par->p;
 		}
-		return (ast_handle_cmd(root));
+		if (!has_pipe_parent)
+		{
+			wait(NULL);
+		}
+		if (root->p && root->p->type != PIPE)
+			set_descriptors(fds);
+		int x = (ast_handle_cmd(root));
+		if (root->p && root->p->type != PIPE)
+			reset_descriptors(ast->shell);
+		return x;
 	}
 	else
 	{
@@ -104,6 +136,7 @@ static int	ast_handle_cmd(t_ast_node *root)
 {
 	pid_t	x;
 
+
 	if (root->p && root->p->type == PIPE)
 		root->cmd_ptr->forkable = true;
 	cmd_runtime_init(root->cmd_ptr);
@@ -122,3 +155,5 @@ static bool	__that_damn_condition__(t_ast_node *root)
 	return (!root->p || root->p->type != REDIRECTION
 		|| root->p->redirection_type != redirect_in);
 }
+
+
