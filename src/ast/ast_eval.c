@@ -6,12 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 01:43:14 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/11/03 16:40:08 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:41:55 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ast_eval(t_ast *ast)
 {
@@ -40,9 +39,11 @@ int	eval_dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 	if (!root)
 		return (1);
 	if (root->type == AND)
-		return (eval_dfs(root->left, ast, fds) && eval_dfs(root->right, ast, fds));
+		return (eval_dfs(root->left, ast, fds) && eval_dfs(root->right, ast,
+				fds));
 	else if (root->type == OR)
-		return (eval_dfs(root->left, ast, fds) || eval_dfs(root->right, ast, fds));
+		return (eval_dfs(root->left, ast, fds) || eval_dfs(root->right, ast,
+				fds));
 	else if (root->type == PIPE)
 		return (ast_handle_pipe(root, ast, fds));
 	else if (root->type == CMD)
@@ -55,7 +56,6 @@ int	eval_dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 		return (1);
 	}
 }
-
 
 bool	__that_damn_condition__(t_ast_node *root)
 {

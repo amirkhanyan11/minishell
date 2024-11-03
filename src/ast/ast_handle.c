@@ -6,12 +6,11 @@
 /*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 16:31:59 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/11/03 16:40:09 by aamirkha         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:41:42 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	ast_prehandle_cmd(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 {
@@ -73,7 +72,7 @@ int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds)
 
 int	ast_handle_cmd(t_ast_node *root)
 {
-	pid_t x;
+	pid_t	x;
 
 	if (root->p && root->p->type == PIPE)
 		root->cmd_ptr->forkable = true;
