@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamirkha <aamirkha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 15:12:03 by aamirkha          #+#    #+#             */
-/*   Updated: 2024/10/11 16:04:11 by kali             ###   ########.fr       */
+/*   Updated: 2024/11/03 16:40:09 by aamirkha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ int					cmd_lookup(t_cmd *cmd);
 t_fd				open_file(char *filename, int options);
 t_authorized_fds	redirect(t_ast_node *r, t_authorized_fds oldfds);
 
+
+int	eval_dfs(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
+bool	__that_damn_condition__(t_ast_node *root);
+
 // find predicates
 bool				__cmd_exists__(const char *path, const char *name);
 
@@ -101,6 +105,13 @@ int					process_infile(t_ast_node *r);
 int					process_outfile(t_ast_node *r);
 int					process_append(t_ast_node *r);
 int					process_heredoc(t_ast_node *r, t_shell *shell);
+
+void set_descriptors(t_authorized_fds fds);
+void reset_descriptors(t_shell *shell);
+
+int	ast_handle_pipe(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
+int	ast_handle_cmd(t_ast_node *root);
+int	ast_prehandle_cmd(t_ast_node *root, t_ast *ast, t_authorized_fds fds);
 
 // lifecycle
 t_tree				*make_export(t_shell *shell)

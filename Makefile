@@ -48,8 +48,10 @@ SRCS = ./src/syntax_analysis/parenthesis_parse.c \
 ./src/ast/find_last_process_cmd.c \
 ./src/ast/ast_clear.c \
 ./src/ast/ast_lrotate.c \
+./src/ast/ast_handle.c \
 ./src/ast/node_gettype.c \
 ./src/ast/ast_eval.c \
+./src/ast/ast_descriptors.c \
 ./src/ast/make_ast_skeleton.c \
 ./src/ast/ast_rrotate.c \
 ./src/predicates/name_predicates_vol_4.c \
