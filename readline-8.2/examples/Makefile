@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/aamirkha/Desktop/minishell/readline_local
+prefix = /Users/aamirkha/Desktop/minishell_old/readline_local
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/aamirkha/Desktop/minishell/readline-8.2
+BUILD_DIR = /Users/aamirkha/Desktop/minishell_old/readline-8.2
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c
@@ -46,7 +46,7 @@ OBJEXT = o
 DESTDIR =
 
 DEFS = -DHAVE_CONFIG_H
-CC = /usr/bin/gcc
+CC = gcc
 CFLAGS = -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
 LOCAL_CFLAGS =  -DREADLINE_LIBRARY -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"'
 CPPFLAGS = 

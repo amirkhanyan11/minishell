@@ -1,9 +1,0 @@
-Makefile
-a
-cocobolo
-includes
-minishell
-objs
-readline-8.2
-readline_local
-src

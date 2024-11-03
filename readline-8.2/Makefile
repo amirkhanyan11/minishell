@@ -31,13 +31,13 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/aamirkha/Desktop/minishell/readline-8.2
+BUILD_DIR = /Users/aamirkha/Desktop/minishell_old/readline-8.2
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 
-CC = /usr/bin/gcc
+CC = gcc
 RANLIB = ranlib
 AR = ar
 ARFLAGS = cr
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/aamirkha/Desktop/minishell/readline_local
+prefix = /Users/aamirkha/Desktop/minishell_old/readline_local
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

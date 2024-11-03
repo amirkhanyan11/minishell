@@ -32,13 +32,13 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
-BUILD_DIR = /Users/aamirkha/Desktop/minishell/readline-8.2
+BUILD_DIR = /Users/aamirkha/Desktop/minishell_old/readline-8.2
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 
-CC = /usr/bin/gcc
+CC = gcc
 RANLIB = ranlib
 AR = ar
 ARFLAGS = cr
@@ -52,7 +52,7 @@ SHELL = /bin/sh
 host_os = darwin18.7.0
 host_vendor = apple
 
-prefix = /Users/aamirkha/Desktop/minishell/readline_local
+prefix = /Users/aamirkha/Desktop/minishell_old/readline_local
 exec_prefix = ${prefix}
 includedir = ${prefix}/include
 bindir = ${exec_prefix}/bin
@@ -77,7 +77,7 @@ LOCAL_DEFS =
 # dynamic loading of shared objects, please update the script and send the
 # changes to bash-maintainers@gnu.org.
 #
-SHOBJ_CC = /usr/bin/gcc
+SHOBJ_CC = gcc
 SHOBJ_CFLAGS = -fno-common
 SHOBJ_LD = ${CC}
 
