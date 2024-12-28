@@ -3,7 +3,7 @@
 
 Minishell is a minimalist yet powerful shell, built to replicate and expand upon the basic functionalities of bash. With a focus on simplicity, speed, and adherence to UNIX principles, Minishell offers a streamlined interactive shell experience.
 
-## Features  
+## Features 🧩
 - **Interactive Command Line**  
   - Display a customizable prompt.  
   - Persistent command history for efficient navigation.  
@@ -38,7 +38,7 @@ Minishell is a minimalist yet powerful shell, built to replicate and expand upon
   - `env` to display the current environment.  
   - `exit` to terminate the shell.
 
-## Installation  
+## Installation 🛠️
 
 ### Requirements  
 - GCC or Clang compiler  
@@ -70,7 +70,7 @@ make clean
 ## Usage  
 Once inside Minishell, type your commands just as you would in bash. Enjoy a clean, efficient command line interface with full control over your system.  
 
-## Contributing  
+## Contributing 💡
 Contributions are welcome!  
 - Fork the repository.  
 - Create a new branch: `git checkout -b feature-name`.  
