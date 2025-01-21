@@ -38,6 +38,8 @@ Minishell is a minimalist yet powerful shell, built to replicate and expand upon
   - `env` to display the current environment.  
   - `exit` to terminate the shell.
 
+![Alt text](https://github.com/amirkhanyan11/minishell/blob/master/img/img1.png)
+
 ## Installation 🛠️
 
 ### Requirements  
